@@ -1,0 +1,211 @@
+﻿@model EPCWeb.Models.EPCModel
+@{
+    ViewBag.Title = "EPCModule";
+}
+
+<div class="panel panel-primary" id="content">
+   
+    <div class="panel-heading"> EPC Management</div>
+
+    <div class="row" style="margin:10px;">
+        <div class="col-md-12 subTab">
+            <div id="myTabContent" class="tab-content">
+
+                @using (Html.BeginForm("GetResponse", "EPCModule", FormMethod.Post, new { @class = "form -horizontal", @id = "contactForm" }))
+                {
+                    <div class="active" id="costHead">
+                        <br />
+
+
+                        <div class="row form-group" style="margin:10px;">
+
+
+                            <div class="col-md-5">
+                                <label>Request</label>
+                                @Html.TextAreaFor(Model => Model.Request, new { @class = "form-control", @style = "margin: 0px 27.25px 0px 0px; height: 148px; width: 540px; max-width:100% !important" })
+                            </div>
+
+                            <div class="col-md-1">
+
+                                <label>   </label>
+                                <input type="submit" class="btn btn-primary red" id="btnSearch" value="Submit">
+
+
+                            </div>
+                            <div class="col-md-5">
+                                <label>Response</label>
+
+
+                                @Html.TextArea("name", (string)ViewBag.Response, new { @class = "form-control", @style = "margin: 0px 27.25px 0px 0px; height: 148px; width: 540px; max-width:100% !important", })
+                            </div>
+                        </div>
+
+                        <div class="row" id="tbldata2">
+                            <div class="col-md-12">
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+    <div class="panel-heading">EPC Serial</div>
+    <div class="row" style="margin:10px;">
+        <div class="col-md-12 subTab">
+            <div id="myTabContent" class="tab-content">
+
+                <div id="costHead">
+                    <table id="tblEPCSrial" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>GTIN</th>
+                                <th>Serial No Last Used</th>
+                                <th>Maximum Serial</th>
+
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="panel-heading"> EPC Log</div>
+    <div class="row" style="margin:10px;">
+        <div class="col-md-12 subTab">
+            <div id="myTabContent" class="tab-content">
+                <div id="costHead">
+                    <table id="tblEPC" class="display" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>GTIN</th>
+                                <th>Serial Start</th>
+                                <th>Serial End</th>
+                                <th>EPCStart</th>
+                                <th>EPCEnd</th>
+                                <th>Schema</th>
+                                <th>CustomerName</th>
+                                <th>Remark</th>
+
+
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+
+                    var _URL = 'http://' + window.location.host + '/' + window.location.pathname.split('/')[1];
+
+                    if (window.location.host == "13.71.7.63" || window.location.host == "rtractest.r-pac.com" || window.location.host == "localhost:27265") {
+                        _URL = 'http://' + window.location.host;
+                    }
+
+
+                    $(document).ready(function () {
+
+                        $('table#tblEPCSrial').DataTable(
+                                {
+                                    "scrollY": "200px",
+                                    "scrollCollapse": true,
+                                    "proccessing": true,
+                                    "serverSide": true,
+                                    "paging": false,
+                                    "ordering": false,
+                                    "ajax": {
+                                        url: "" + _URL + "/EPCModule/LoadEPCSrialData",
+
+                                        type: "GET",
+                                    },
+                                    "columns": [
+
+                                                { "data": "Id" },
+                                                { "data": "GTIN" },
+                                                { "data": "SerialStart" },
+                                                //{ "data": "MaximumSerial" }
+                                                {
+                                                    "data": "MaximumSerial",
+                                                    "render": function (data, type, full, meta) {
+
+                                                        if (full.MaximumSerial == 0) {
+                                                            return '<span>NA</span>';
+                                                        }
+                                                        else {
+                                                            return '<span>' + full.MaximumSerial + '</span>';
+                                                        }
+                                                    }
+                                                }
+                                                    ,
+                                                // {
+                                                //     "data": "Id",
+                                                //     "render": function (data, type, full, meta) {
+                                                //         return '<span class="icon-space" Onclick="EditClick(' + data + ');"><span class="btn btn-default btn-xs"><span class="glyphicon glyphicon glyphicon-pencil"></span></span></span>';
+                                                //     }
+                                                // },
+
+                                    ],
+
+
+                                });
+
+                        $("div").remove("#tblEPCSrial_filter");
+                        $("div").remove("#tblEPCSrial_info");
+
+
+                    });
+
+                    $(document).ready(function () {
+
+                        $('table#tblEPC').DataTable(
+                                {
+                                    "scrollY": "200px",
+                                    "scrollCollapse": true,
+                                    "proccessing": true,
+                                    "serverSide": true,
+                                    "paging": false,
+                                    "ordering": false,
+                                    "ajax": {
+                                        url: "" + _URL + "/EPCModule/LoadData",
+
+                                        type: "GET",
+                                    },
+                                    "columns": [
+                                                { "data": "Id" },
+                                                { "data": "GTIN" },
+                                                { "data": "SerialStart" },
+                                                { "data": "SerialEnd" },
+                                                { "data": "EPCStart" },
+                                                { "data": "EPCEnd" },
+                                                { "data": "Schema" },
+                                                { "data": "CustomerName" },
+                                                { "data": "Remark" },
+
+
+                                    ],
+
+
+                                });
+
+                        $("div").remove("#tblEPC_filter");
+                        $("div").remove("#tblEPC_info");
+
+
+                    });
+
+</script>
+
