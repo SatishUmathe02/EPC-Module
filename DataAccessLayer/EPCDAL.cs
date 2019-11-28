@@ -19,36 +19,6 @@ namespace DataAccessLayer
             return lst;
 
         }
-        public static usp_GetSerialNoGTIN_Result  GetSerialNoOfGTIN(string GTIN, long UserId)
-        {
-            usp_GetSerialNoGTIN_Result Obj = new usp_GetSerialNoGTIN_Result();
-            using (EPC_DBEntities db = new EPC_DBEntities())
-            {
-                Obj = (from lst1 in db.usp_GetSerialNoGTIN(GTIN, UserId) select lst1).ToList().FirstOrDefault();
-            }
-
-            return Obj;
-
-        }
-        public static usp_GetInsertGTIN_Result GetSerialNoOfGTIN(string GTIN, long SerialNo, long UserId)
-        {
-            usp_GetInsertGTIN_Result Obj = new usp_GetInsertGTIN_Result();
-            using (EPC_DBEntities db = new EPC_DBEntities())
-            {
-                Obj = (from lst1 in db.usp_GetInsertGTIN(GTIN, SerialNo, UserId) select lst1).ToList().FirstOrDefault();
-            }
-
-            return Obj;
-
-        }
-
-        public void InsertEPCLog(string GTIN, long SerialStart, long SerialEnd, string EPCStart, string EPCEnd,string Schema, string CustomerName,string Remark,long UserId)
-        {
-            using (EPC_DBEntities db = new EPC_DBEntities())
-            {
-                db.usp_InsertEPCLog(GTIN, SerialStart, SerialEnd, EPCStart, EPCEnd, Schema, CustomerName, Remark, UserId);
-            }
-        }
 
         public static List<usp_GetEPCSerial_Result> GetEPCSerial()
         {
@@ -61,5 +31,59 @@ namespace DataAccessLayer
             return lst;
 
         }
+
+
+        #region GET EPC VIA STORE PROCEDURE
+        public static usp_GTIN_GetEPC_Result GetEPC(string gtin14, long qty, string transaction, string schema, string customerId, string customerName, string Event, long UserId, long SerialStart, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2)
+        {
+            usp_GTIN_GetEPC_Result Obj = new usp_GTIN_GetEPC_Result();
+            using (EPC_DBEntities db = new EPC_DBEntities())
+            {
+                Obj = (from lst1 in db.usp_GTIN_GetEPC(gtin14, qty, transaction, schema, customerId, customerName, Event, UserId, SerialStart, EPC, RPO, DetailLineNo, CustomPara1, CustomPara2) select lst1).ToList().FirstOrDefault();
+            }
+            return Obj;
+        }
+
+
+        #endregion
+
+
+        #region ADD ERROR LOG
+        public static int InsertLog(System.Exception objException, string FileName)
+        {
+            using (EPC_DBEntities db = new EPC_DBEntities())
+            {
+                int i = Convert.ToInt32(db.usp_AddErrorLog(Convert.ToString(objException.Source), Convert.ToString(objException.Message), Convert.ToString(System.Net.Dns.GetHostName()), Convert.ToString(objException.TargetSite), ("StackTrace : " + Convert.ToString(objException.StackTrace)), Convert.ToDateTime(System.DateTime.Now.ToString("yyyy/MM/dd HH:mm")), FileName));
+            }
+
+            return 0;
+        }
+        #endregion
+
+        #region GET ECP COUNTER DATA
+
+        public static List<usp_GetEPCCounter_Result> GetEPCCounter(long RPO)
+        {
+            List<usp_GetEPCCounter_Result> Obj = new List<usp_GetEPCCounter_Result>();
+            using (EPC_DBEntities db = new EPC_DBEntities())
+            {
+                Obj = (from lst1 in db.usp_GetEPCCounter(RPO) select lst1).ToList();
+            }
+            return Obj;
+        }
+        #endregion
+
+        #region GET ECP CUSTOMER COUNT
+
+        public static string GetEPCCustomerCount()
+        {
+            string xml = "";
+            using (EPC_DBEntities db = new EPC_DBEntities())
+            {
+                xml = (from lst1 in db.usp_GetCustomerCount() select lst1).FirstOrDefault();
+            }
+            return xml;
+        }
+        #endregion
     }
 }
