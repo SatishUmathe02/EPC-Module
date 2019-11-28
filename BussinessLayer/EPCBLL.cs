@@ -9,100 +9,113 @@ using DataAccessLayer;
 
 namespace BussinessLayer
 {
+
+
     public class EPCBLL
     {
-
-        public static EPCResponse GTIN(EPCRequest EPC_Req)
+        
+        public static EPCResponse GetError(int Code)
         {
             EPCResponse EPC_Res = new EPCResponse();
-            EPC_Res.Quantity = EPC_Req.Quantity;
-            EPCLog ObjEPCLog = new EPCLog();
+            EPC_Res.EPCStart = "";
+            EPC_Res.EPCEnd = "";
+            EPC_Res.SerialStart = "";
+            EPC_Res.SerialEnd = "";
+            EPC_Res.GTIN = "";
 
-            // Check Schema 
-            GTINDO Objgtin = GTINBLL.GetSchemaDetails(EPC_Req.Schema);
-            if (Objgtin == null)
+            switch (Code)
             {
-                return GetError(101);
-            }
-            //
-            // Check GTIN 
-            Int64 result;
-            if (!Int64.TryParse(EPC_Req.GTIN, out result))
-            {
-                return GetError(102);
-            }
-            else
-            {
-                int GTINLen = EPC_Req.GTIN.Length;
-                if (GTINLen < 14)
-                {
-                    int atuallen = 14 - GTINLen;
-                    string _gtin = "";
-                    for (int i = 0; i < atuallen; i++)
-                    {
-                        _gtin = _gtin + "0";
-                    }
+                //case 101:
+                //    EPC_Res.Remark = "Error: This schema is not found.";
+                //    break;
+                //case 102:
+                //    EPC_Res.Remark = "Error: GTIN must be a numeric.";
+                //    break;
+                //case 103:
+                //    EPC_Res.Remark = "Error: Quantity must be a numeric.";
+                //    break;
+                case 104:
+                    EPC_Res.Remark = "EPC Error Occurred: Quantity must be greater than 0";
+                    break;
+                //case 105:
+                //    EPC_Res.Remark = "Error: The quantity exceed maximum Serial.";
+                //    break;
+                //case 106:
+                //    EPC_Res.Remark = "Error: Log data did not insert";
+                //    break;
+                case 107:
+                    EPC_Res.Remark = "EPC Error Occurred: Invalid request.";
+                    break;
+                case 108:
+                    EPC_Res.Remark = "EPC Error Occurred: Serial number must be numeric.";
+                    break;
+                case 109:
+                    EPC_Res.Remark = "EPC Error Occurred: EPC field cannot be empty.";
+                    break;
 
-                    EPC_Req.GTIN = _gtin + EPC_Req.GTIN;
-                }
-            }
-            // Check Quantity 
-            if (!Int64.TryParse(EPC_Req.Quantity.ToString(), out result))
-            {
+                //case 110:
+                //    EPC_Res.Remark = "Error: Transaction not found";
+                //    break;
 
-                return GetError(103);
-            }
-            if (EPC_Req.Quantity == 0)
-            {
-                return GetError(104);
-
-            }
-
-
-            ObjEPCLog.GTIN = EPC_Req.GTIN;
-
-            //Get EPC Serial  
-            EPCSerial ObjEPCSerial = GetSerialNoOfGIN(EPC_Req.GTIN, EPC_Req.UserId);
-            long SerialStart = ObjEPCSerial.SerialLastNo + 1;
-            long SerialEnd = (ObjEPCSerial.SerialLastNo + EPC_Req.Quantity);
-            //*****
-            //bool MaximumSerial = GTINBLL.GetGTIN(EPC_Req);
-            // CHECK Maximum Serial
-            if ((SerialEnd <= ObjEPCSerial.MaximumSerial) || (ObjEPCSerial.MaximumSerial == 0))
-            {
-
-                EPC_Res.EPCStart = GTINBLL.GetGTIN(EPC_Req.Schema, EPC_Req.GTIN, SerialStart);
-
-                EPC_Res.SerialNumberStart = ObjEPCLog.SerialStart = SerialStart;
-                ObjEPCLog.EPCStart = EPC_Res.EPCStart;
-
-                ObjEPCSerial = GetSerialNoOfGIN(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.UserId);
+                //case 112:
+                //    EPC_Res.Remark = "Error: Cust/Encoding Schema doesn’t exist";
+                //    break;
+                //case 113:
+                //    EPC_Res.Remark = "Error: Schema not found";
+                //    break;
+                //case 114:
+                //    EPC_Res.Remark = "Error: Customer not found";
+                //    break;
+                //case 115:
+                //    EPC_Res.Remark = "Error: GTIN must be a 14 digit.";
+                //    break;
+                //case 116:
+                //    EPC_Res.Remark = "Error: GTIN must be start with 0 digit.";
+                //    break;
 
 
-                EPC_Res.EPCEnd = GTINBLL.GetGTIN(EPC_Req.Schema, EPC_Req.GTIN, SerialEnd);
-
-                EPC_Res.SerialNumberEnd = ObjEPCLog.SerialEnd = SerialEnd;
-                ObjEPCLog.EPCEnd = EPC_Res.EPCEnd;
-                ObjEPCLog.CustomerName = EPC_Req.CustomerName;
-                ObjEPCLog.Schema = EPC_Req.Schema;
-
-                if (!string.IsNullOrEmpty(ObjEPCLog.EPCStart))
-                {
-                    EPC_Res.Remark = "Success";
-                }
-
-                ObjEPCLog.Remark = EPC_Res.Remark;
-                ObjEPCLog.UserId = EPC_Req.UserId;
-                InsertEPCLog(ObjEPCLog);
-            }
-            else
-            {
-                return GetError(105);
+                default:
+                    EPC_Res.Remark = "Error: Invalid request";
+                    break;
             }
 
+            
             return EPC_Res;
         }
 
+        public static int InsertLog(Exception ex, string FileName)
+        {
+           return EPCDAL.InsertLog(ex, FileName);
+        }
+    }
+    
+    public class EPCGTIN
+    {
+        public static List<EPCLog> GetEPCSerialDetails()
+        {
+            List<EPCLog> Obj = new List<EPCLog>();
+            var log = EPCDAL.GetEPCSerial();
+
+            if (log != null)
+            {
+                if (log.Count > 0)
+                {
+                    Obj = (from c in log
+                           select new EPCLog()
+                           {
+
+                               GTIN = c.varGTIN.ToString(),
+                               Id = c.bigIntId,
+                               SerialStart = c.bigIntSerialNoLastUsed,
+                               MaximumSerial = (long)c.bigIntMaximumSerial
+
+
+                           }).ToList();
+                }
+            }
+
+            return Obj;
+        }
 
         public static List<EPCLog> GetEPCLog()
         {
@@ -134,53 +147,32 @@ namespace BussinessLayer
             return Obj;
         }
 
-        public static EPCSerial GetSerialNoOfGIN(string GTIN, long UserId)
+        public static List<EPCCounter> GetEPCCounter(long RPO)
         {
-            var obj = EPCDAL.GetSerialNoOfGTIN(GTIN, UserId);
+            List<EPCCounter> Obj = new List<EPCCounter>();
+            var epclist = EPCDAL.GetEPCCounter(RPO);
 
-            EPCSerial Objgtin = new EPCSerial();
-
-            Objgtin.GTIN = obj.VARGTIN;
-            Objgtin.SerialLastNo = obj.bigIntSerialNoLastUsed;
-            Objgtin.MaximumSerial = (long)obj.bigIntMaximumSerial;
-            return Objgtin;
-
-        }
-        public static EPCSerial GetSerialNoOfGIN(string GTIN, long SerialNo, long UserId)
-        {
-            var obj = EPCDAL.GetSerialNoOfGTIN(GTIN, SerialNo, UserId);
-
-            EPCSerial Objgtin = new EPCSerial();
-
-            Objgtin.GTIN = obj.varGTIN.ToString();
-            Objgtin.SerialLastNo = obj.bigIntSerialNoLastUsed;
-            Objgtin.MaximumSerial = (long)obj.bigIntMaximumSerial;
-            return Objgtin;
-
-        }
-        public static string InsertEPCLog(EPCLog Obj)
-        {
-            new EPCDAL().InsertEPCLog(Obj.GTIN, Obj.SerialStart, Obj.SerialEnd, Obj.EPCStart, Obj.EPCEnd, Obj.Schema, Obj.CustomerName, Obj.Remark, Obj.UserId);
-
-            return "";
-        }
-        public static List<EPCLog> GetEPCSerial()
-        {
-            List<EPCLog> Obj = new List<EPCLog>();
-            var log = EPCDAL.GetEPCSerial();
-
-            if (log != null)
+            if (epclist != null)
             {
-                if (log.Count > 0)
+                if (epclist.Count > 0)
                 {
-                    Obj = (from c in log
-                           select new EPCLog()
+                    Obj = (from c in epclist
+                           select new EPCCounter()
                            {
-
-                               GTIN = c.varGTIN.ToString(),
-                               Id = c.bigIntId,
-                               SerialStart = c.bigIntSerialNoLastUsed,
-                               MaximumSerial = (long)c.bigIntMaximumSerial
+                               Id = c.bigintId,
+                               RPO = c.bigIntRPO,
+                               DetailLineID = c.bigIntDetailLineID,
+                               LineNo = c.bigIntLineNo,
+                               GTIN = c.varGTIN,
+                               EPC = c.EPC,
+                               UserMemory = c.varUserMemory,
+                               Password = c.varPassword,
+                               LockID = c.varLockID,
+                               SerialNo =Convert.ToInt64(c.bigIntSerialNo),
+                               Custom1 = c.varCustom1,
+                               Custom2 = c.varCustom2,
+                               Status = c.varStatus,
+                               CreatedOn =Convert.ToDateTime(c.dtCreatedOn),
 
 
                            }).ToList();
@@ -189,34 +181,11 @@ namespace BussinessLayer
 
             return Obj;
         }
-        private static EPCResponse GetError(int Code)
+
+        public static string GetCustomerCount()
         {
-            EPCResponse EPC_Res = new EPCResponse();
-            EPC_Res.EPCStart = "";
-            EPC_Res.EPCEnd = "";
-
-            switch (Code)
-            {
-                case 101:
-                    EPC_Res.Remark = "This schema is not found.";
-                    break;
-                case 102:
-                    EPC_Res.Remark = "GTIN must be a numeric.";
-                    break;
-                case 103:
-                    EPC_Res.Remark = "Quantity must be a numeric.";
-                    break;
-                case 104:
-                    EPC_Res.Remark = "Quantity must be greater than 0.";
-                    break;
-                case 105:
-                    EPC_Res.Remark = "The quantity exceed maximum Serial.";
-                    break;
-                default:
-                    break;
-            }
-
-            return EPC_Res;
+            return EPCDAL.GetEPCCustomerCount();
         }
+
     }
 }
