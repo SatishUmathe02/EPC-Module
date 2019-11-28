@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace WebApi
 {
@@ -11,6 +12,10 @@ namespace WebApi
         {
             // Web API configuration and services
 
+            //var cors = new EnableCorsAttribute("*", "*", "*");
+            //cors.ExposedHeaders.Add("x-filename");
+            config.EnableCors();
+            
             // Web API routes
             config.MapHttpAttributeRoutes();
 
