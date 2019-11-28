@@ -1,10 +1,21 @@
 ﻿
 namespace EPCWeb.Models
 {
-    public class EPC
+    public class EPCDO
     {
         public long UserId { get; set; }
-        public long CustomerID { get; set; }
+        public string CustomerID { get; set; }
+        public string CustomerName { get; set; }
+        public string EPC { get; set; }
+        public long Serial { get; set; }
+        public string TransactionType { get; set; }
+        public string Event { get; set; }
+        public long Quantity { get; set; }
+        public long RPO { get; set; }
+        public long DetailLineID { get; set; }
+        public string CustomPara1 { get; set; }
+        public string CustomPara2 { get; set; }
+
     }
 
     public class EPCModel
@@ -16,26 +27,28 @@ namespace EPCWeb.Models
 
     }
 
-    public class EPCRequest:EPC
+    public class EPCRequest : EPCDO
     {
-        public string CustomerName { get; set; }
+
         public string Schema { get; set; }
         public string GTIN { get; set; }
-        public long Quantity { get; set; }
-        //public long UserId { get; set; }
-        //public long CustomerID { get; set; }
+       
+       
 
     }
-    public class EPCResponse: EPC
+    public class EPCResponse
     {
         public string EPCStart { get; set; }
         public string EPCEnd { get; set; }
-        public string Remark { get; set; }
-       
-        public long SerialNumberStart { get; set; }
-        public long SerialNumberEnd { get; set; }
+        public string SerialStart { get; set; }
+        public string SerialEnd { get; set; }
+        public string CustomerID { get; set; }
+        public string GTIN { get; set; }
         public long Quantity { get; set; }
-        
+        public string Remark { get; set; }
+        //public string TransactionType { get; set; }
+
+
     }
 
     public class GTINDO
@@ -47,7 +60,7 @@ namespace EPCWeb.Models
         public long TagLength { get; set; }
     }
 
-    public class EPCLog: EPC
+    public class EPCLog : EPCDO
     {
         public long Id { get; set; }
         public string GTIN { get; set; }
@@ -56,7 +69,6 @@ namespace EPCWeb.Models
         public string EPCStart { get; set; }
         public string EPCEnd { get; set; }
         public string Schema { get; set; }
-        public string CustomerName { get; set; }
         public string Remark { get; set; }
         public long MaximumSerial { get; set; }
 
