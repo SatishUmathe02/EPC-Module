@@ -17,34 +17,7 @@ namespace BussinessLayer
 
                 // Check GTIN 
                 Int64 result;
-                //if (!Int64.TryParse(EPC_Req.GTIN, out result))
-                //{
-                //    return GetError(102);
-                //}
-                //else
-                //{
-                //    int GTINLen = EPC_Req.GTIN.Length;
-
-                //    if(GTINLen != 14)
-                //    {
-                //        return GetError(115);
-                //    }
-                //    else if(EPC_Req.GTIN.Substring(0, 1) != "0")
-                //    {
-                //        return GetError(116);
-                //    }
-                //    //if (GTINLen < 14)
-                //    //{
-                //    //    int atuallen = 14 - GTINLen;
-                //    //    string _gtin = "";
-                //    //    for (int i = 0; i < atuallen; i++)
-                //    //    {
-                //    //        _gtin = _gtin + "0";
-                //    //    }
-
-                //    //    EPC_Req.GTIN = _gtin + EPC_Req.GTIN;
-                //    //}
-                //}
+                
                 // Check Quantity 
                 if (!Int64.TryParse(EPC_Req.Quantity.ToString(), out result))
                 {
