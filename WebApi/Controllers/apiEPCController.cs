@@ -66,6 +66,11 @@ namespace WebApi.Controllers
             {
                 EPCResponse ObjRes = Transaction_New.GetEPC_New(Request);
 
+                if (Request.CustomerID == "EncuentroModa")
+                {
+                    await EPCPasswordBLL.UpdatePassword(Request.RPO, Request.DetailLineID);
+                }
+
                 return ObjRes;
             }
             else
@@ -108,7 +113,7 @@ namespace WebApi.Controllers
             }
             else
             {
-                
+
                 return EPCBLL.GetError(107);
             }
         }
