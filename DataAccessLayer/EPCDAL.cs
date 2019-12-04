@@ -85,5 +85,18 @@ namespace DataAccessLayer
             return xml;
         }
         #endregion
+
+        #region GET ECP COUNTER DATA FRO MODA PASSWORD
+
+        public static List<usp_GetEPCCounterForModaPWD_Result> GetEPCCounterForModaPWD(long RPO, long DetailNo)
+        {
+            List<usp_GetEPCCounterForModaPWD_Result> Obj = new List<usp_GetEPCCounterForModaPWD_Result>();
+            using (EPC_DBEntities db = new EPC_DBEntities())
+            {
+                Obj = (from lst1 in db.usp_GetEPCCounterForModaPWD(RPO, DetailNo) select lst1).ToList();
+            }
+            return Obj;
+        }
+        #endregion
     }
 }
