@@ -27,5 +27,7 @@ namespace DataAccessLayer
         public string varCustom2 { get; set; }
         public string varStatus { get; set; }
         public Nullable<System.DateTime> dtCreatedOn { get; set; }
+        public string varKillPassword { get; set; }
+        public Nullable<long> bigintPrintLogId { get; set; }
     }
 }

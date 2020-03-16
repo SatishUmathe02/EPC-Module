@@ -173,6 +173,7 @@ namespace BussinessLayer
                                Custom2 = c.varCustom2,
                                Status = c.varStatus,
                                CreatedOn =Convert.ToDateTime(c.dtCreatedOn),
+                               KillPassword =c.varKillPassword,
 
 
                            }).ToList();

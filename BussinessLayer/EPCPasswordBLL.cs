@@ -28,8 +28,8 @@ namespace BussinessLayer
                         xml.Append("<Password>");
                         xml.Append("<RPO>" + epclist[i].bigIntRPO + "</RPO>");
                         xml.Append("<EPC>" + epclist[i].EPC + "</EPC>");
-                        xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(epclist[i].EPC, "29a976d78fa6a01478504b07f0ff4ec7") + "</AccesPwd>");
-                        xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(epclist[i].EPC, "b2143c7e2f2709507a0a9e6c54d97a34") + "</KillPwd>");
+                        xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(epclist[i].EPC, epclist[i].AccHexKey) + "</AccesPwd>");
+                        xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(epclist[i].EPC, epclist[i].KillHexKey) + "</KillPwd>");
                         xml.Append("</Password>");
                     }
                     xml.Append("</EPC>");

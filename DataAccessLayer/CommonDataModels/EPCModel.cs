@@ -109,6 +109,7 @@ namespace DataAccessLayer.CommonDataModels
         public string Custom2 { get; set; }
         public string Status { get; set; }
         public DateTime CreatedOn { get; set; }
+        public string KillPassword { get; set; }
     }
 
     public class EPCISDO

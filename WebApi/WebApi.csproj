@@ -52,6 +52,17 @@
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="Documents\EPC Document link.docx" />
+    <Content Include="Documents\EPC Module Create Process.docx" />
+    <Content Include="Documents\EPC Module Flow Chart.pdf" />
+    <Content Include="Documents\EPC Module Meg Workflow.docx" />
+    <Content Include="Documents\EPC Module SQL Process.docx" />
+    <Content Include="Documents\EPC Module SQL Process.pdf" />
+    <Content Include="Documents\EPC Module Web API Work Folw.docx" />
+    <Content Include="Documents\EPC Module.docx" />
+    <Content Include="Documents\EPC Module_v1.0.docx" />
+    <Content Include="Documents\EPC Module_v1.1.docx" />
+    <Content Include="Documents\EPC Module_v1.2.docx" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
