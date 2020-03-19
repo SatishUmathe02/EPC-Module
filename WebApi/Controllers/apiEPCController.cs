@@ -10,6 +10,7 @@ using BussinessLayer;
 using System.Web.Script.Serialization;
 using System.Web.Http.Cors;
 using System.Threading.Tasks;
+using EPCGerryWeber;
 
 namespace WebApi.Controllers
 {
@@ -64,14 +65,23 @@ namespace WebApi.Controllers
 
             if (Request != null)
             {
-                EPCResponse ObjRes = Transaction_New.GetEPC_New(Request);
-
-                if (Request.CustomerID == "EncuentroModa")
+                if (Request.CustomerID == "GerryWeber")
                 {
-                    await EPCPasswordBLL.UpdatePassword(Request.RPO, Request.DetailLineID);
+                    EPCResponse ObjRes = Transaction_New_GWEPC.GetEPC_New(Request);
+                    return ObjRes;
+                }
+                else
+                {
+                    EPCResponse ObjRes = Transaction_New.GetEPC_New(Request);
+
+                    if (Request.CustomerID == "EncuentroModa")
+                    {
+                        await EPCPasswordBLL.UpdatePassword(Request.RPO, Request.DetailLineID);
+                    }
+                    return ObjRes;
                 }
 
-                return ObjRes;
+                
             }
             else
             {

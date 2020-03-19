@@ -98,5 +98,23 @@ namespace DataAccessLayer
             return Obj;
         }
         #endregion
+
+        #region INSERT FOR EMAIL
+        public static void InsertEmail(string varRecipient, string varCC, string varBCC, string varReplyTo, string varSubject, string varBody, long bigIntCreatedById, DateTime dtCreatedOn)
+        {
+            try
+            {
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+                    db.usp_InsertEmailTrigger("RT", varRecipient, varCC, varBCC, varReplyTo, varSubject, varBody, "", bigIntCreatedById, dtCreatedOn);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                
+            }
+        }
+        #endregion
     }
 }

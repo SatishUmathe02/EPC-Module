@@ -31,9 +31,9 @@ namespace BussinessLayer
                 //case 102:
                 //    EPC_Res.Remark = "Error: GTIN must be a numeric.";
                 //    break;
-                //case 103:
-                //    EPC_Res.Remark = "Error: Quantity must be a numeric.";
-                //    break;
+                case 103:
+                    EPC_Res.Remark = "EPC Error Occurred: Quantity must be a numeric.";
+                    break;
                 case 104:
                     EPC_Res.Remark = "EPC Error Occurred: Quantity must be greater than 0";
                     break;
@@ -72,6 +72,21 @@ namespace BussinessLayer
                 //case 116:
                 //    EPC_Res.Remark = "Error: GTIN must be start with 0 digit.";
                 //    break;
+                case 117:
+                    EPC_Res.Remark = "EPC Error Occurred: CustomPara1 field cannot be empty.";
+                    break;
+                case 118:
+                    EPC_Res.Remark = "EPC Error Occurred: CustomPara1 field values have missing.";
+                    break;
+                case 119:
+                    EPC_Res.Remark = "EPC Error Occurred: CustomPara1 field value must be a numeric.";
+                    break;
+                case 120:
+                    EPC_Res.Remark = "EPC Error Occurred: CustomPara1 field value cannot be empty.";
+                    break;
+                case 121:
+                    EPC_Res.Remark = "EPC Error Occurred: RPO or DetailLineID field value cannot be empty or zero.";
+                    break;
 
 
                 default:

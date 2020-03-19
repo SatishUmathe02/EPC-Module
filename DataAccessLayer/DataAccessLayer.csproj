@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="CommonDataModels\EPCModel.cs" />
     <Compile Include="EPCDAL.cs" />
+    <Compile Include="EPCGerryWeberDAL.cs" />
     <Compile Include="EPCISDAL.cs" />
     <Compile Include="EPCPasswordDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -91,6 +92,9 @@
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_GetSerialNoGTIN_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_GerryWeber_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_GTIN_GetEPC_Result.cs">
