@@ -89,7 +89,7 @@ namespace EPCGerryWeber
                     Obj.po_pos = Convert.ToInt32(GWParamList[2]);// 1; // true
                     Obj.po_size = GWParamList[3];//  "34"; // true
                     Obj.po_number = Convert.ToInt32(GWParamList[4]);// 8776;// true
-                    Obj.datref = Convert.ToInt32(GWParamList[5]);// GWParamList[5] == "" ? 0 : Convert.ToInt32(GWParamList[5]);// 2645; // false
+                    Obj.datref = GWParamList[5] == "" ? 0 : Convert.ToInt32(GWParamList[5]);// 2645; // false
                     Obj.pro_location = GWParamList[6];//  "IS1"; // false
                     Obj.season = Convert.ToInt32(GWParamList[7]);// 2181;// true
 
