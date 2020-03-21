@@ -32,6 +32,23 @@ namespace EPCGerryWeber
                     return GetError(104);
 
                 }
+                else
+                {
+                    int GTINLen = EPC_Req.GTIN.Length;
+                    if (GTINLen < 14)
+                    {
+                        int atuallen = 14 - GTINLen;
+                        string _gtin = "";
+                        for (int i = 0; i < atuallen; i++)
+                        {
+                            _gtin = _gtin + "0";
+                        }
+
+                        EPC_Req.GTIN = _gtin + EPC_Req.GTIN;
+                    }
+                }
+
+
                 if (string.IsNullOrEmpty(EPC_Req.CustomPara1))
                 {
                     return GetError(117);
@@ -77,7 +94,7 @@ namespace EPCGerryWeber
                     RequestPrintOrderDO Obj = new RequestPrintOrderDO();
 
                     //Obj.datref = 2645; // false
-                    //Obj.pos = 1; // false
+                    Obj.pos = 1; // false
                     //Obj.pro_location = "";// "IS1"; // false
                     //Obj.prr_id = "";// "1";// false
 
