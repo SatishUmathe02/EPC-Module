@@ -163,9 +163,16 @@ namespace EPCGerryWeber
                     else
                     {
                         string Error = string.Empty;
-                        foreach (XmlNode item in document.SelectNodes("//detail/faultData"))
+                        try
                         {
-                            Error = document.SelectSingleNode("//err_message") == null ? "" : document.SelectSingleNode("//err_message").InnerText;
+                            foreach (XmlNode item in document.SelectNodes("//detail/faultData"))
+                            {
+                                Error = document.SelectSingleNode("//err_message") == null ? "" : document.SelectSingleNode("//err_message").InnerText;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Error = "";
                         }
                         if (string.IsNullOrEmpty(Error))
                         {
@@ -201,7 +208,7 @@ namespace EPCGerryWeber
                 case 5:
                 case 4:
                     varCC = "Satish.umathe@r-pac.com,Namrata.bhagat@r-pac.com,Jacco.Vandingstee@r-pac.com";
-                    Subject = "r-pac: Gerry Weber web service not reachable " + StatusCode + "("+ DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssZ") + ")";
+                    Subject = "r-pac: Gerry Weber web service not reachable " + StatusCode + "(" + DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssZ") + ")";
                     Body.Append(Response);
                     EPCDAL.InsertEmail(Recipient, varCC, varBCC, varReplyTo, Subject, Body.ToString(), 1, DateTime.Now);
                     break;
@@ -224,8 +231,8 @@ namespace EPCGerryWeber
         public int po_number { get; set; }
         public string pro_location { get; set; }
         public string prr_id { get; set; }
-       // public int prr_prio { get; set; }
-       // public int prr_type { get; set; }
+        // public int prr_prio { get; set; }
+        // public int prr_type { get; set; }
         public int season { get; set; }
 
         public long RPO { get; set; }
