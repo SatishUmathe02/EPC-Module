@@ -162,7 +162,17 @@ namespace EPCGerryWeber
                     }
                     else
                     {
-                        Obj.Remark = document.SelectSingleNode("//faultcode") == null ? "" : document.SelectSingleNode("//faultcode").InnerText;
+                        string Error = string.Empty;
+                        foreach (XmlNode item in document.SelectNodes("//detail/faultData"))
+                        {
+                            Error = document.SelectSingleNode("//err_message") == null ? "" : document.SelectSingleNode("//err_message").InnerText;
+                        }
+                        if (string.IsNullOrEmpty(Error))
+                        {
+                            Error = document.SelectSingleNode("//faultcode") == null ? "" : document.SelectSingleNode("//faultcode").InnerText;
+                        }
+                        Obj.Remark = Error;
+
 
                     }
                 }
