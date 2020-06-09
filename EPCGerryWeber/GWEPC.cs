@@ -20,9 +20,10 @@ namespace EPCGerryWeber
             string Req = string.Empty;
             string Res = string.Empty;
             Req = Request_requestPrintOrder(Obj);
-            Res = HttpResponse(Req, "requestPrintOrder");
+            Res = HttpResponse(Req, "requestPrintOrder", Obj.ProdOrDevEndPoint);
 
-            string endPoint = ConfigurationManager.AppSettings["endPoint"].ToString();
+
+            string endPoint = ConfigurationManager.AppSettings["" + Obj.ProdOrDevEndPoint + "_endPoint"].ToString();
             EPCGerryWeberDAL.InsertReqRes(Obj.CustomerId, Obj.RPO, Obj.DetailNo, Req, Res, endPoint, Obj.UserId);
 
             ResponsePrintOrderDO ObjResponse = ReadResponse(Res);
@@ -75,13 +76,13 @@ namespace EPCGerryWeber
 
             return str.ToString();
         }
-        private static string HttpResponse(string Request, string Action)
+        private static string HttpResponse(string Request, string Action, string ProdOrDev)
         {
             string response = string.Empty;
 
-            string endPoint = ConfigurationManager.AppSettings["endPoint"].ToString();
-            string User = ConfigurationManager.AppSettings["User"].ToString();
-            string Password = ConfigurationManager.AppSettings["Password"].ToString();
+            string endPoint = Convert.ToString(ConfigurationManager.AppSettings["" + ProdOrDev + "_endPoint"]);
+            string User = Convert.ToString(ConfigurationManager.AppSettings["" + ProdOrDev + "_User"]);
+            string Password = Convert.ToString(ConfigurationManager.AppSettings["" + ProdOrDev + "_Password"]);
 
 
             WebRequest request = (HttpWebRequest)WebRequest.Create(endPoint);
@@ -117,6 +118,7 @@ namespace EPCGerryWeber
                 response = new StreamReader(ex.Response.GetResponseStream()).ReadToEnd();
                 SendEmail(StatusCode, response);
             }
+
 
             return response;
         }
@@ -239,6 +241,8 @@ namespace EPCGerryWeber
         public long DetailNo { get; set; }
         public string CustomerId { get; set; }
         public long UserId { get; set; }
+
+        public string ProdOrDevEndPoint { get; set; }
 
 
 
