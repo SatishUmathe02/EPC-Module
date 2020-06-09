@@ -68,7 +68,7 @@ namespace EPCGerryWeber
                 {
                     for (int i = 0; i < GWParamList.Count(); i++)
                     {
-                        if (i != 5 && i != 6)
+                        if (i != 5 && i != 6 && i != 8)
                         {
                             if (i != 1 && i != 3)
                             {
@@ -88,10 +88,20 @@ namespace EPCGerryWeber
                     }
                 }
 
+                string ProdOrDev = Convert.ToString((from c in GWParamList
+                                                     where c.ToString() == "Prod" || c.ToString() == "Dev"
+                                                     select c).FirstOrDefault());
+
+                if (string.IsNullOrEmpty(ProdOrDev))
+                {
+                    return GetError(118);
+                }
+
                 try
                 {
 
                     RequestPrintOrderDO Obj = new RequestPrintOrderDO();
+
 
                     //Obj.datref = 2645; // false
                     Obj.pos = 1; // false
@@ -110,17 +120,19 @@ namespace EPCGerryWeber
                     Obj.pro_location = GWParamList[6];//  "IS1"; // false
                     Obj.season = Convert.ToInt32(GWParamList[7]);// 2181;// true
 
+                    Obj.ProdOrDevEndPoint = ProdOrDev; // for endpoint & logging criteria
 
                     Obj.RPO = EPC_Req.RPO;
                     Obj.DetailNo = EPC_Req.DetailLineID;
                     Obj.CustomerId = EPC_Req.CustomerID;
                     Obj.UserId = EPC_Req.UserId;
 
+
                     ResponsePrintOrderDO Objres = GWEPC.GetEPC(Obj);
 
 
                     usp_GTIN_GetEPC_GerryWeber_Result ObjResult = EPCGerryWeberDAL.GetEPC(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID,
-                       EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, Objres.epc_start, Objres.epc_end, Objres.Remark);
+                   EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, Objres.epc_start, Objres.epc_end, Objres.Remark);
 
                     EPC_Res.EPCStart = ObjResult.EpcStart;
                     EPC_Res.EPCEnd = ObjResult.EpcEnd;
