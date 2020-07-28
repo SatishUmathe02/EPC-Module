@@ -12,6 +12,7 @@ using System.Web.Http.Cors;
 using System.Threading.Tasks;
 using EPCGerryWeber;
 
+
 namespace WebApi.Controllers
 {
 
@@ -45,13 +46,20 @@ namespace WebApi.Controllers
 
             try
             {
-                ObjRes = await Run_GetEPC(Request);
+                if (Request.TransactionType == "New" || Request.TransactionType == "Encode")
+                {
+                    ObjRes = await Run_GetEPC(Request);
+                }
+                else if (Request.TransactionType == "Decode")
+                {
+                    ObjRes = await Run_GetEPCDecode(Request);
+                }
 
                 return Ok(ObjRes);
             }
             catch (Exception Ex)
             {
-                EPCBLL.InsertLog(Ex, "api/apiEPC/GetEPC");
+                //EPCBLL.InsertLog(Ex, "api/apiEPC/GetEPC");
                 return Ok(Ex.ToString());
             }
 
@@ -72,16 +80,63 @@ namespace WebApi.Controllers
                 }
                 else
                 {
-                    EPCResponse ObjRes = Transaction_New.GetEPC_New(Request);
+                    //**
+                    Request = GS1_IntergrationBLL.IsCustomerGS1(Request);
 
-                    if (Request.CustomerID == "EncuentroModa")
+                    if (Request.GS1Customer) //the customer is GS1
                     {
-                        await EPCPasswordBLL.UpdatePassword(Request.RPO, Request.DetailLineID);
+                        if (Request.GS1apiRequired)
+                        {
+                            try
+                            {
+                                string GS1_Response = GS1_IntergrationBLL.GS1_apiResponse_Restapi(Request);
+                                List<GS1> ObjGS1 = JsonConvert.DeserializeObject<List<GS1>>(GS1_Response);
+                                string GS1JSON = JsonConvert.SerializeObject(ObjGS1);
+                                Request = GS1_IntergrationBLL.GS1_Details(Request, ObjGS1, GS1JSON);
+                            }
+                            catch
+                            {
+                                Request.GS1Prefix = "";
+                            }
+                        }
+
                     }
-                    return ObjRes;
+                    //***
+                    if ((Request.GS1Customer && Request.GS1apiRequired) && (string.IsNullOrEmpty(Request.GS1Prefix)))
+                    {
+                        // show the error
+                        EPCResponse EPC_Res = new EPCResponse();
+                        EPC_Res.EPCStart = "";
+                        EPC_Res.EPCEnd = "";
+                        EPC_Res.SerialStart = "";
+                        EPC_Res.SerialEnd = "";
+                        EPC_Res.GTIN = "";
+                        EPC_Res.CustomerID = Request.CustomerID;
+                        EPC_Res.Remark = "The GTIN " + Request.GTIN + " included in this order does not exist in GS1 database. Please contact Customer Service to confirm GTIN:" + Request.GTIN;
+
+                        return EPC_Res;
+                    }
+                    else
+                    {
+                        EPCResponse ObjRes = Transaction_New.GetEPC_New(Request);
+
+                        switch (Request.CustomerID)
+                        {
+                            case "EncuentroModa":
+                                await EPCPasswordBLL.UpdatePassword_MODA(Request.RPO, Request.DetailLineID);
+                                break;
+                            case "MANGO":
+                                await EPCPasswordBLL.UpdatePassword_MANGO(Request.RPO, Request.DetailLineID);
+                                break;
+                            default:
+                                break;
+                        }
+
+                        return ObjRes;
+                    }
                 }
 
-                
+
             }
             else
             {
@@ -166,6 +221,9 @@ namespace WebApi.Controllers
                 return EPCBLL.GetError(107);
             }
         }
+
+
+
 
     }
 
