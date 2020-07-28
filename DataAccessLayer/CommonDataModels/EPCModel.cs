@@ -42,6 +42,10 @@ namespace DataAccessLayer.CommonDataModels
         public string GTIN { get; set; }
         //public long Quantity { get; set; }
 
+        public string GS1Prefix { get; set; }
+        public bool GS1Customer { get; set; }
+        public bool GS1apiRequired { get; set; }
+        public int PartitionValue { get; set; }
 
     }
     public class EPCResponse
@@ -54,7 +58,7 @@ namespace DataAccessLayer.CommonDataModels
         public string GTIN { get; set; }
         public long Quantity { get; set; }
         public string Remark { get; set; }
-       // public string TransactionType { get; set; }
+        // public string TransactionType { get; set; }
 
     }
 
@@ -96,7 +100,7 @@ namespace DataAccessLayer.CommonDataModels
     public class EPCCounter
     {
         public long Id { get; set; }
-        public long  RPO { get; set; }
+        public long RPO { get; set; }
         public long DetailLineID { get; set; }
         public long LineNo { get; set; }
         public string GTIN { get; set; }
@@ -132,5 +136,36 @@ namespace DataAccessLayer.CommonDataModels
         public string Remark { get; set; }
         public string eventId { get; set; }
         public string URL { get; set; }
+    }
+    public class GS1
+    {
+
+        public string Source { get; set; }
+        public string EntityGLN { get; set; }
+        public string CompanyName { get; set; }
+        public string StreetAddress1 { get; set; }
+        public string StreetAddress2 { get; set; }
+        public string StreetAddress3 { get; set; }
+        public string City { get; set; }
+        public string StateProvince { get; set; }
+        public string ZipCode { get; set; }
+        public string Country { get; set; }
+        public string GSRN { get; set; }
+        public string ModifiedDate { get; set; }
+        public Prefixes Prefixes { get; set; }
+    }
+    public class Prefixes
+    {
+        public string UPCPrefix { get; set; }
+        public string GS1Prefix { get; set; }
+        public string PrefixStatus { get; set; }
+        public string ModifiedDate { get; set; }
+    }
+
+    public class EPCCustomer
+    {
+        public string CustomerId { get; set; }
+        public string CustomerName { get; set; }
+        public string IsGS1 { get; set; }
     }
 }
