@@ -136,6 +136,11 @@ namespace DataAccessLayer.CommonDataModels
         public string eventId { get; set; }
         public string URL { get; set; }
     }
+    public class GS1Response
+    {
+        public List<GS1> GS1List { get; set; }
+        public string Error { get; set; }
+    }
     public class GS1
     {
 
