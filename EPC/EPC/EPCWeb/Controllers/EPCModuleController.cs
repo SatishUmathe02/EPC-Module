@@ -133,17 +133,25 @@ namespace EPCWeb.Controllers
             Obj.CustomerList = GetCustomerList();
             Obj.EPCRequest = JsonConvert.DeserializeObject<EPCRequest>(Obj.Request);
             Obj.EPCResponse = JsonConvert.DeserializeObject<EPCResponse>(Obj.Response);
-
+            Obj.EPCCounterList = new List<EPCCounter>();
+            Obj.GS1_Info = new List<GS1>();
             if (Obj.EPCResponse.Remark == "Success")
             {
-                Obj.EPCCounterList = GetEPCCounter_RPO_SerialNum(Obj.EPCRequest.GTIN, Obj.EPCRequest.RPO, Obj.EPCRequest.DetailLineID, Convert.ToInt64(Obj.EPCResponse.SerialStart), Convert.ToInt64(Obj.EPCResponse.SerialEnd));
-                Obj.GS1_Info = GetGS1_Service(Obj.EPCRequest.GTIN, Obj.EPCRequest.CustomerID);
+                if (Obj.EPCResponse.EPCStart == "EPCCounter")
+                {
+                    Obj.EPCCounterList = GetEPCCounter_RPO_SerialNum(Obj.EPCRequest.GTIN, Obj.EPCRequest.RPO, Obj.EPCRequest.DetailLineID, Convert.ToInt64(Obj.EPCResponse.SerialStart), Convert.ToInt64(Obj.EPCResponse.SerialEnd));
+                }
+
+               GS1Response GS1Res  = GetGS1_Service(Obj.EPCRequest.GTIN, Obj.EPCRequest.CustomerID);
+
+                Obj.GS1_Info = GS1Res.GS1List;
+                int len = GS1Res.Error == null ? 0 : GS1Res.Error.Length;
+                if (Obj.GS1_Info.Count == 0 & len > 5)
+                {
+                    Obj.GS1_Error = GS1Res.Error;
+                }
             }
-            else
-            {
-                Obj.EPCCounterList = new List<EPCCounter>();
-                Obj.GS1_Info = new List<GS1>();
-            }
+           
 
             return View("EPCModule", Obj);
         }
@@ -366,14 +374,14 @@ namespace EPCWeb.Controllers
         #endregion
 
         #region GS1 SERVICE
-        public List<GS1> GetGS1_Service(string GTIN, string CustomerId)
+        public GS1Response GetGS1_Service(string GTIN, string CustomerId)
         {
-            List<GS1> Objlist = new List<GS1>();
+            GS1Response Objlist = new GS1Response();
             HttpResponseMessage Res = GlobalVariables.WebApiClient.GetAsync("api/apiEPC/Get_GS1_Service?GTIN=" + GTIN + "&CustomerId="+ CustomerId + "").Result;
             if (Res.IsSuccessStatusCode)
             {
                 var result = Res.Content.ReadAsStringAsync().Result;
-                Objlist = JsonConvert.DeserializeObject<List<GS1>>(result);
+                Objlist = JsonConvert.DeserializeObject<GS1Response>(result);
             }
 
             return Objlist;
