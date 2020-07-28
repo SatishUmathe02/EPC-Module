@@ -123,7 +123,7 @@ namespace EPC_GS1
         private static void SendEmail(int StatusCode, string Response, string GTIN)
         {
             int code = Convert.ToInt32(StatusCode.ToString().Substring(0, 1));
-            string Recipient = ConfigurationManager.AppSettings["ITEmailID"].ToString();
+            string Recipient = "Satish.umathe@r-pac.com";
             string Subject = string.Empty;
             string varCC = "";
             string varBCC = ""; string varReplyTo = "";
@@ -135,7 +135,7 @@ namespace EPC_GS1
             {
                 case 5:
                 case 4:
-                    varCC = "Satish.umathe@r-pac.com,Namrata.bhagat@r-pac.com";
+                    //varCC = "Satish.umathe@r-pac.com,Namrata.bhagat@r-pac.com";
                     Subject = "r-pac: GS1 hub web service not reachable " + StatusCode + " for GTIN:" + GTIN + "";
                     Body.Append(Response);
                     EPCDAL.InsertEmail(Recipient, varCC, varBCC, varReplyTo, Subject, Body.ToString(), 1, DateTime.Now);
