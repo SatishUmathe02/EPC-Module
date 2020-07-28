@@ -30,9 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPC_GS1">
+      <HintPath>..\EPC_GS1\bin\Debug\EPC_GS1.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +54,7 @@
     <Compile Include="EPCBLL.cs" />
     <Compile Include="EPCISBLL.cs" />
     <Compile Include="EPCPasswordBLL.cs" />
+    <Compile Include="GS1_IntergrationBLL.cs" />
     <Compile Include="GTINBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransactionBLL.cs" />

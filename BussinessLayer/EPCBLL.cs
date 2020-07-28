@@ -13,7 +13,7 @@ namespace BussinessLayer
 
     public class EPCBLL
     {
-        
+
         public static EPCResponse GetError(int Code)
         {
             EPCResponse EPC_Res = new EPCResponse();
@@ -94,16 +94,32 @@ namespace BussinessLayer
                     break;
             }
 
-            
+
             return EPC_Res;
         }
 
         public static int InsertLog(Exception ex, string FileName)
         {
-           return EPCDAL.InsertLog(ex, FileName);
+            return EPCDAL.InsertLog(ex, FileName);
+        }
+
+        public static List<EPCCustomer> GetEPCCustomer()
+        {
+            var q = EPCDAL.EPC_Customer();
+
+            List<EPCCustomer> Objlist = (from c in q
+                                         select new EPCCustomer()
+                                         {
+                                             CustomerId = c.CustomerId,
+                                             CustomerName = c.CustomerName,
+                                             IsGS1 = c.IsGS1
+                                         }).ToList();
+
+            return Objlist;
+
         }
     }
-    
+
     public class EPCGTIN
     {
         public static List<EPCLog> GetEPCSerialDetails()
@@ -165,36 +181,43 @@ namespace BussinessLayer
         public static List<EPCCounter> GetEPCCounter(long RPO)
         {
             List<EPCCounter> Obj = new List<EPCCounter>();
-            var epclist = EPCDAL.GetEPCCounter(RPO);
 
-            if (epclist != null)
+            try
             {
-                if (epclist.Count > 0)
+                var epclist = EPCDAL.GetEPCCounter(RPO);
+
+                if (epclist != null)
                 {
-                    Obj = (from c in epclist
-                           select new EPCCounter()
-                           {
-                               Id = c.bigintId,
-                               RPO = c.bigIntRPO,
-                               DetailLineID = c.bigIntDetailLineID,
-                               LineNo = c.bigIntLineNo,
-                               GTIN = c.varGTIN,
-                               EPC = c.EPC,
-                               UserMemory = c.varUserMemory,
-                               Password = c.varPassword,
-                               LockID = c.varLockID,
-                               SerialNo =Convert.ToInt64(c.bigIntSerialNo),
-                               Custom1 = c.varCustom1,
-                               Custom2 = c.varCustom2,
-                               Status = c.varStatus,
-                               CreatedOn =Convert.ToDateTime(c.dtCreatedOn),
-                               KillPassword =c.varKillPassword,
+                    if (epclist.Count > 0)
+                    {
+                        Obj = (from c in epclist
+                               select new EPCCounter()
+                               {
+                                   Id = c.bigintId,
+                                   RPO = c.bigIntRPO,
+                                   DetailLineID = c.bigIntDetailLineID,
+                                   LineNo = c.bigIntLineNo,
+                                   GTIN = c.varGTIN,
+                                   EPC = c.EPC,
+                                   UserMemory = c.varUserMemory,
+                                   Password = c.varPassword,
+                                   LockID = c.varLockID,
+                                   SerialNo = Convert.ToInt64(c.bigIntSerialNo),
+                                   Custom1 = c.varCustom1,
+                                   Custom2 = c.varCustom2,
+                                   Status = c.varStatus,
+                                   CreatedOn = Convert.ToDateTime(c.dtCreatedOn),
+                                   KillPassword = c.varKillPassword,
 
 
-                           }).ToList();
+                               }).ToList();
+                    }
                 }
             }
-
+            catch (Exception eX)
+            {
+                EPCDAL.InsertLog(eX, "GetEPCCounter");
+            }
             return Obj;
         }
 
@@ -203,5 +226,47 @@ namespace BussinessLayer
             return EPCDAL.GetEPCCustomerCount();
         }
 
+        public static List<EPCCounter> GetEPCCounter_RPO_SerialNum(string GTIN, long RPO, long DetailNo, long SerialStart, long SerialEnd)
+        {
+            List<EPCCounter> Obj = new List<EPCCounter>();
+
+            try
+            {
+                var epclist = EPCDAL.GetEPCCounter_RPO_SerialNum(GTIN, RPO, DetailNo, SerialStart, SerialEnd);
+
+                if (epclist != null)
+                {
+                    if (epclist.Count > 0)
+                    {
+                        Obj = (from c in epclist
+                               select new EPCCounter()
+                               {
+                                   Id = c.bigintId,
+                                   RPO = c.bigIntRPO,
+                                   DetailLineID = c.bigIntDetailLineID,
+                                   LineNo = c.bigIntLineNo,
+                                   GTIN = c.varGTIN,
+                                   EPC = c.EPC,
+                                   UserMemory = c.varUserMemory,
+                                   Password = c.varPassword,
+                                   LockID = c.varLockID,
+                                   SerialNo = Convert.ToInt64(c.bigIntSerialNo),
+                                   Custom1 = c.varCustom1,
+                                   Custom2 = c.varCustom2,
+                                   Status = c.varStatus,
+                                   CreatedOn = Convert.ToDateTime(c.dtCreatedOn),
+                                   KillPassword = c.varKillPassword,
+
+
+                               }).ToList();
+                    }
+                }
+            }
+            catch (Exception eX)
+            {
+                EPCDAL.InsertLog(eX, "GetEPCCounter");
+            }
+            return Obj;
+        }
     }
 }

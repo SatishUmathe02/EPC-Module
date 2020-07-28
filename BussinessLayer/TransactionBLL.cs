@@ -17,7 +17,7 @@ namespace BussinessLayer
 
                 // Check GTIN 
                 Int64 result;
-                
+
                 // Check Quantity 
                 if (!Int64.TryParse(EPC_Req.Quantity.ToString(), out result))
                 {
@@ -34,7 +34,7 @@ namespace BussinessLayer
                     EPC_Req.Schema = EPC_Req.Schema == null ? "" : EPC_Req.Schema;
                     EPC_Req.CustomerID = EPC_Req.CustomerID == null ? "" : EPC_Req.CustomerID;
 
-                    usp_GTIN_GetEPC_Result Obj = EPCDAL.GetEPC(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2);
+                    usp_GTIN_GetEPC_Result Obj = EPCDAL.GetEPC(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue);
 
                     EPC_Res.EPCStart = Obj.EpcStart;
                     EPC_Res.EPCEnd = Obj.EpcEnd;
@@ -97,7 +97,7 @@ namespace BussinessLayer
                 // Check Serial Number
 
                 //if (!Int64.TryParse(EPC_Req.Serial, out result))
-                if (!(EPC_Req.Serial>0))
+                if (!(EPC_Req.Serial > 0))
                 {
                     return GetError(108);
                 }
@@ -111,7 +111,7 @@ namespace BussinessLayer
                     EPC_Req.Schema = EPC_Req.Schema == null ? "" : EPC_Req.Schema;
                     EPC_Req.CustomerID = EPC_Req.CustomerID == null ? "" : EPC_Req.CustomerID;
 
-                    usp_GTIN_GetEPC_Result Obj = EPCDAL.GetEPC(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2);
+                    usp_GTIN_GetEPC_Result Obj = EPCDAL.GetEPC(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue);
 
                     EPC_Res.EPCStart = Obj.EpcStart;
                     EPC_Res.EPCEnd = Obj.EpcEnd;
@@ -124,15 +124,15 @@ namespace BussinessLayer
                 }
                 catch (Exception Ex)
                 {
-                    InsertLog(Ex, "usp_GTIN_GetEPC_Result");
-                    GetError(107);
+                    //InsertLog(Ex, "usp_GTIN_GetEPC_Result");
+                    EPC_Res = GetError(107);
                 }
-
+                    
             }
             catch (Exception Ex)
             {
-                InsertLog(Ex, "GetEPC_Encode");
-                return GetError(107);
+                //InsertLog(Ex, "GetEPC_Encode");
+                EPC_Res = GetError(107);
             }
 
             return EPC_Res;
@@ -155,7 +155,7 @@ namespace BussinessLayer
                 EPC_Req.Schema = EPC_Req.Schema == null ? "" : EPC_Req.Schema;
                 EPC_Req.CustomerID = EPC_Req.CustomerID == null ? "" : EPC_Req.CustomerID;
 
-                usp_GTIN_GetEPC_Result Obj = EPCDAL.GetEPC(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2);
+                usp_GTIN_GetEPC_Result Obj = EPCDAL.GetEPC(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue);
 
                 EPC_Res.EPCStart = Obj.EpcStart;
                 EPC_Res.EPCEnd = Obj.EpcEnd;

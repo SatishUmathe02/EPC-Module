@@ -11,12 +11,13 @@ namespace BussinessLayer
     public class EPCPasswordBLL
     {
 
-        public static async Task UpdatePassword(long RPO , long DetailNo)
+        public static async Task UpdatePassword_MODA(long RPO , long DetailNo)
         {
 
             try
             {
-                var epclist = EPCDAL.GetEPCCounterForModaPWD(RPO, DetailNo);
+                var epclist = EPCDAL.GetEPCCounterFor_Moda_PWD(RPO, DetailNo);
+
                 StringBuilder xml = new StringBuilder();
                               
 
@@ -44,6 +45,43 @@ namespace BussinessLayer
             }
 
             
+
+        }
+
+        public static async Task UpdatePassword_MANGO(long RPO, long DetailNo)
+        {
+
+            try
+            {
+                var epclist = EPCDAL.GetEPCCounterFor_MANGO_PWD(RPO, DetailNo);
+
+                StringBuilder xml = new StringBuilder();
+
+
+                if (epclist.Count > 0)
+                {
+                    xml.Append("<EPC>");
+                    for (int i = 0; i < epclist.Count(); i++)
+                    {
+                        xml.Append("<Password>");
+                        xml.Append("<RPO>" + epclist[i].bigIntRPO + "</RPO>");
+                        xml.Append("<EPC>" + epclist[i].EPC + "</EPC>");
+                        xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(epclist[i].EPC, epclist[i].AccHexKey) + "</AccesPwd>");
+                        xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(epclist[i].EPC, epclist[i].KillHexKey) + "</KillPwd>");
+                        xml.Append("</Password>");
+                    }
+                    xml.Append("</EPC>");
+                    EPCPasswordDAL.UpdatePassword(xml.ToString());
+
+
+                }
+            }
+            catch (Exception Ex)
+            {
+                EPCBLL.InsertLog(Ex, "UpdatePassword_Moda");
+            }
+
+
 
         }
 
