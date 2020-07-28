@@ -20,8 +20,7 @@ namespace DataAccessLayer.CommonDataModels
         public long DetailLineID { get; set; }
         public string CustomPara1 { get; set; }
         public string CustomPara2 { get; set; }
-
-
+        
 
 
     }
