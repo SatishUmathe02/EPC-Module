@@ -24,7 +24,7 @@ namespace EPCGerryWeber
 
 
             string endPoint = ConfigurationManager.AppSettings["" + Obj.ProdOrDevEndPoint + "_endPoint"].ToString();
-            EPCGerryWeberDAL.InsertReqRes(Obj.CustomerId, Obj.RPO, Obj.DetailNo, Req, Res, endPoint, Obj.UserId);
+            EPCDAL.InsertReqRes(Obj.CustomerId, Obj.RPO, Obj.DetailNo, Req, Res, endPoint, Obj.UserId);
 
             ResponsePrintOrderDO ObjResponse = ReadResponse(Res);
             return ObjResponse;
