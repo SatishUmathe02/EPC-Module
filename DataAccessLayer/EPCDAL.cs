@@ -34,12 +34,12 @@ namespace DataAccessLayer
 
 
         #region GET EPC VIA STORE PROCEDURE
-        public static usp_GTIN_GetEPC_Result GetEPC(string gtin14, long qty, string transaction, string schema, string customerId, string customerName, string Event, long UserId, long SerialStart, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2)
+        public static usp_GTIN_GetEPC_Result GetEPC(string gtin14, long qty, string transaction, string schema, string customerId, string customerName, string Event, long UserId, long SerialStart, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, string GS1Prefix, int PartionVal)
         {
             usp_GTIN_GetEPC_Result Obj = new usp_GTIN_GetEPC_Result();
             using (EPC_DBEntities db = new EPC_DBEntities())
             {
-                Obj = (from lst1 in db.usp_GTIN_GetEPC(gtin14, qty, transaction, schema, customerId, customerName, Event, UserId, SerialStart, EPC, RPO, DetailLineNo, CustomPara1, CustomPara2) select lst1).ToList().FirstOrDefault();
+                Obj = (from lst1 in db.usp_GTIN_GetEPC(gtin14, qty, transaction, schema, customerId, customerName, Event, UserId, SerialStart, EPC, RPO, DetailLineNo, CustomPara1, CustomPara2, GS1Prefix, PartionVal) select lst1).ToList().FirstOrDefault();
             }
             return Obj;
         }
@@ -88,12 +88,25 @@ namespace DataAccessLayer
 
         #region GET ECP COUNTER DATA FRO MODA PASSWORD
 
-        public static List<usp_GetEPCCounterForModaPWD_Result> GetEPCCounterForModaPWD(long RPO, long DetailNo)
+        public static List<usp_GetEPCCounterForModaPWD_Result> GetEPCCounterFor_Moda_PWD(long RPO, long DetailNo)
         {
             List<usp_GetEPCCounterForModaPWD_Result> Obj = new List<usp_GetEPCCounterForModaPWD_Result>();
             using (EPC_DBEntities db = new EPC_DBEntities())
             {
                 Obj = (from lst1 in db.usp_GetEPCCounterForModaPWD(RPO, DetailNo) select lst1).ToList();
+            }
+            return Obj;
+        }
+        #endregion
+
+        #region GET ECP COUNTER DATA FRO MANGO PASSWORD
+
+        public static List<usp_GetEPCCounterForMANGO_PWD_Result> GetEPCCounterFor_MANGO_PWD(long RPO, long DetailNo)
+        {
+            List<usp_GetEPCCounterForMANGO_PWD_Result> Obj = new List<usp_GetEPCCounterForMANGO_PWD_Result>();
+            using (EPC_DBEntities db = new EPC_DBEntities())
+            {
+                Obj = (from lst1 in db.usp_GetEPCCounterForMANGO_PWD(RPO, DetailNo) select lst1).ToList();
             }
             return Obj;
         }
@@ -108,12 +121,49 @@ namespace DataAccessLayer
                 {
                     db.usp_InsertEmailTrigger("RT", varRecipient, varCC, varBCC, varReplyTo, varSubject, varBody, "", bigIntCreatedById, dtCreatedOn);
                 }
-                
+
             }
             catch (Exception ex)
             {
-                
+
             }
+        }
+        #endregion
+
+        #region INSERT EPC REQUEST AND RESPONSE
+        public static void InsertReqRes(string CustomerId, long RPO, long DetailLineNo, string Request, string Response, string URL, long UserId)
+        {
+            using (EPC_DBEntities db = new EPC_DBEntities())
+            {
+                db.USP_GTIN_InsertEPCReqRes(CustomerId, RPO, DetailLineNo, Request, Response, URL, UserId);
+            }
+        }
+        #endregion
+
+        #region EPC CUSTOMER LIST
+        public static List<usp_GetEPCCustomer_TestingWeb_Result> EPC_Customer()
+        {
+            List<usp_GetEPCCustomer_TestingWeb_Result> lst = null;
+            using (EPC_DBEntities db = new EPC_DBEntities())
+            {
+                lst = (from lst1 in db.usp_GetEPCCustomer_TestingWeb() select lst1).ToList();
+            }
+
+            return lst;
+
+        }
+        #endregion
+
+        #region GET ECP COUNTER DATA BY RPO AND SERIAL NUMBER
+
+        public static List<usp_GetEPCCounter_RPO_SerialNum_Result> GetEPCCounter_RPO_SerialNum(string GTIN, long RPO, long DetailNo, long SerialStart, long SerialEnd)
+        {
+            List<usp_GetEPCCounter_RPO_SerialNum_Result> Obj = new List<usp_GetEPCCounter_RPO_SerialNum_Result>();
+            using (EPC_DBEntities db = new EPC_DBEntities())
+            {
+                Obj = (from lst1 in db.usp_GetEPCCounter_RPO_SerialNum(GTIN, RPO, DetailNo, SerialStart, SerialEnd) select lst1).ToList();
+            }
+            return Obj;
         }
         #endregion
     }

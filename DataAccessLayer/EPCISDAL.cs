@@ -46,5 +46,18 @@ namespace DataAccessLayer
             return "";
         }
         #endregion
+
+        #region GET EPCIS BY RPO
+
+        public static List<usp_EPCIS_GetEPC_URN_RPO_Result> GetEPCIS_URN_RPO(string CustomerId, long RPO)
+        {
+            List<usp_EPCIS_GetEPC_URN_RPO_Result> Obj = new List<usp_EPCIS_GetEPC_URN_RPO_Result>();
+            using (EPC_DBEntities db = new EPC_DBEntities())
+            {
+                Obj = (from lst in db.usp_EPCIS_GetEPC_URN_RPO(CustomerId, RPO) select lst).ToList();
+            }
+            return Obj;
+        }
+        #endregion
     }
 }
