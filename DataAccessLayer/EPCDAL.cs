@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -166,5 +167,31 @@ namespace DataAccessLayer
             return Obj;
         }
         #endregion
+
+        public static void SaveFileResponse(string Meg, string Filename)
+        {
+
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Filename);
+
+            if (System.IO.File.Exists(path))
+            {
+                System.IO.File.Delete(path);
+            }
+
+            if (!File.Exists(path))
+            {
+                File.Create(path).Close();
+
+            }
+            using (StreamWriter w = File.AppendText(path))
+            {
+
+                w.WriteLine(Meg);
+                w.Flush();
+                w.Close();
+
+            }
+
+        }
     }
 }
