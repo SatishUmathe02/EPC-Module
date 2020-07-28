@@ -110,6 +110,12 @@ namespace EPCWeb.Models
         public DateTime CreatedOn { get; set; }
         public string KillPassword { get; set; }
     }
+
+    public class GS1Response
+    {
+        public List<GS1> GS1List { get; set; }
+        public string Error { get; set; }
+    }
     public class GS1
     {
 
