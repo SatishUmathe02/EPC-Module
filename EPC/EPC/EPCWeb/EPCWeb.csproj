@@ -216,6 +216,52 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="alert\css\alert.css" />
+    <Content Include="alert\css\alert.min.css" />
+    <Content Include="alert\js\alert.js" />
+    <Content Include="alert\js\alert.min.js" />
+    <Content Include="alert\themes\dark\img\close.png" />
+    <Content Include="alert\themes\dark\img\confirm.png" />
+    <Content Include="alert\themes\dark\img\error.png" />
+    <Content Include="alert\themes\dark\img\info.png" />
+    <Content Include="alert\themes\dark\img\prompt.png" />
+    <Content Include="alert\themes\dark\img\warning.png" />
+    <Content Include="alert\themes\dark\theme.css" />
+    <Content Include="alert\themes\dark\theme.min.css" />
+    <Content Include="alert\themes\dark\x2\close.png" />
+    <Content Include="alert\themes\dark\x2\confirm.png" />
+    <Content Include="alert\themes\dark\x2\error.png" />
+    <Content Include="alert\themes\dark\x2\info.png" />
+    <Content Include="alert\themes\dark\x2\prompt.png" />
+    <Content Include="alert\themes\dark\x2\warning.png" />
+    <Content Include="alert\themes\default\img\close.png" />
+    <Content Include="alert\themes\default\img\confirm.png" />
+    <Content Include="alert\themes\default\img\error.png" />
+    <Content Include="alert\themes\default\img\info.png" />
+    <Content Include="alert\themes\default\img\prompt.png" />
+    <Content Include="alert\themes\default\img\warning.png" />
+    <Content Include="alert\themes\default\theme.css" />
+    <Content Include="alert\themes\default\theme.min.css" />
+    <Content Include="alert\themes\default\x2\close.png" />
+    <Content Include="alert\themes\default\x2\confirm.png" />
+    <Content Include="alert\themes\default\x2\error.png" />
+    <Content Include="alert\themes\default\x2\info.png" />
+    <Content Include="alert\themes\default\x2\prompt.png" />
+    <Content Include="alert\themes\default\x2\warning.png" />
+    <Content Include="alert\themes\light\img\close.png" />
+    <Content Include="alert\themes\light\img\confirm.png" />
+    <Content Include="alert\themes\light\img\error.png" />
+    <Content Include="alert\themes\light\img\info.png" />
+    <Content Include="alert\themes\light\img\prompt.png" />
+    <Content Include="alert\themes\light\img\warning.png" />
+    <Content Include="alert\themes\light\theme.css" />
+    <Content Include="alert\themes\light\theme.min.css" />
+    <Content Include="alert\themes\light\x2\close.png" />
+    <Content Include="alert\themes\light\x2\confirm.png" />
+    <Content Include="alert\themes\light\x2\error.png" />
+    <Content Include="alert\themes\light\x2\info.png" />
+    <Content Include="alert\themes\light\x2\prompt.png" />
+    <Content Include="alert\themes\light\x2\warning.png" />
     <Content Include="App_Data\EPCSetting.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -237,6 +283,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

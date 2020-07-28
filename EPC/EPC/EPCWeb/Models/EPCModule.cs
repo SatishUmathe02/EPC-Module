@@ -1,4 +1,8 @@
 ﻿
+using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
+
 namespace EPCWeb.Models
 {
     public class EPCDO
@@ -24,6 +28,13 @@ namespace EPCWeb.Models
         public string Response { get; set; }
         public EPCRequest EPCRequest { get; set; }
         public EPCResponse EPCResponse { get; set; }
+
+        public string Request_New { get; set; }
+        public List<SelectListItem> CustomerList { get; set; }
+        public List<EPCCounter> EPCCounterList { get; set; }
+
+        public List<GS1> GS1_Info { get; set; }
+        public string GS1_Error { get; set; }
 
     }
 
@@ -73,5 +84,54 @@ namespace EPCWeb.Models
         public long MaximumSerial { get; set; }
 
 
+    }
+    public class EPCCustomer
+    {
+        public string CustomerId { get; set; }
+        public string CustomerName { get; set; }
+        public string IsGS1 { get; set; }
+    }
+
+    public class EPCCounter
+    {
+        public long Id { get; set; }
+        public long RPO { get; set; }
+        public long DetailLineID { get; set; }
+        public long LineNo { get; set; }
+        public string GTIN { get; set; }
+        public string EPC { get; set; }
+        public string UserMemory { get; set; }
+        public string Password { get; set; }
+        public string LockID { get; set; }
+        public long SerialNo { get; set; }
+        public string Custom1 { get; set; }
+        public string Custom2 { get; set; }
+        public string Status { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public string KillPassword { get; set; }
+    }
+    public class GS1
+    {
+
+        public string Source { get; set; }
+        public string EntityGLN { get; set; }
+        public string CompanyName { get; set; }
+        public string StreetAddress1 { get; set; }
+        public string StreetAddress2 { get; set; }
+        public string StreetAddress3 { get; set; }
+        public string City { get; set; }
+        public string StateProvince { get; set; }
+        public string ZipCode { get; set; }
+        public string Country { get; set; }
+        public string GSRN { get; set; }
+        public string ModifiedDate { get; set; }
+        public Prefixes Prefixes { get; set; }
+    }
+    public class Prefixes
+    {
+        public string UPCPrefix { get; set; }
+        public string GS1Prefix { get; set; }
+        public string PrefixStatus { get; set; }
+        public string ModifiedDate { get; set; }
     }
 }

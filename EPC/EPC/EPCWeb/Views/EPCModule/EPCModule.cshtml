@@ -3,37 +3,271 @@
     ViewBag.Title = "EPCModule";
 }
 
+<style>
+    table#t01 {
+        width: 100%;
+        background-color: #f1f1c1;
+    }
+
+        table#t01 tr:nth-child(even) {
+            background-color: #eee;
+        }
+
+        table#t01 tr:nth-child(odd) {
+            background-color: #fff;
+        }
+
+        table#t01 th {
+            color: white;
+            background-color: #428bca;
+        }
+</style>
+
+
+
 <div class="panel panel-primary" id="content">
-   
-    <div class="panel-heading"> EPC Management</div>
+
+    <div class="panel-heading"> EPC Module Dashbord</div>
 
     <div class="row" style="margin:10px;">
         <div class="col-md-12 subTab">
             <div id="myTabContent" class="tab-content">
+                <br />
 
                 @using (Html.BeginForm("GetResponse", "EPCModule", FormMethod.Post, new { @class = "form -horizontal", @id = "contactForm" }))
+                {
+
+                    <div class="row form-group" style="margin:10px;">
+
+                        <div class="col-md-5">
+                            <table>
+                                <tr><td><label>Schema:</label></td><td></td><td>@Model.EPCRequest.Schema</td></tr>
+                                <tr><td><label>CustomerName:</label></td><td></td><td>@Html.DropDownListFor(Model => Model.EPCRequest.CustomerID, Model.CustomerList, new { @class = "form-control" })</td></tr>
+                                <tr><td><label>GTIN:</label></td><td></td><td>@Html.TextBoxFor(Model => Model.EPCRequest.GTIN, new { @class = "form-control" })</td></tr>
+                                <tr><td><label>Quantity:</label></td><td></td><td>@Html.TextBoxFor(Model => Model.EPCRequest.Quantity, new { @class = "form-control" })</td></tr>
+                                <tr><td><label>RPO:</label></td><td></td><td>@Html.TextBoxFor(Model => Model.EPCRequest.RPO, new { @class = "form-control" })</td></tr>
+                                <tr><td><label>DetailLineID:</label></td><td></td><td>@Html.TextBoxFor(Model => Model.EPCRequest.DetailLineID, new { @class = "form-control", @onchange = "JsonChange();" })</td></tr>
+                            </table>
+                        </div>
+                        <div class="col-md-2">
+
+
+                            <br /><br /><br /><br /><br /><br /><br /><br /><br />
+                            
+                            <input type="submit" class="btn btn-primary red" id="btnSearch" onclick="return SubmitBtnAction();"  value="Submit">
+
+
+                        </div>
+                        <div class="col-md-5">
+                            <table>
+                                <tr><td><label>EPCStart:</label></td><td></td><td>@Model.EPCResponse.EPCStart</td></tr>
+                                <tr><td><label>EPCEnd:</label></td><td></td><td>@Model.EPCResponse.EPCEnd</td></tr>
+                                <tr><td><label>SerialStart:</label></td><td></td><td>@Model.EPCResponse.SerialStart</td></tr>
+                                <tr><td><label>SerialEnd:</label></td><td></td><td>@Model.EPCResponse.SerialEnd</td></tr>
+                                <tr><td><label>CustomerID:</label></td><td></td><td>@Model.EPCResponse.CustomerID</td></tr>
+                                <tr><td><label>GTIN:</label></td><td></td><td>@Model.EPCResponse.GTIN</td></tr>
+                                <tr><td><label>Quantity:</label></td><td></td><td>@Model.EPCResponse.Quantity</td></tr>
+                                <tr><td style="vertical-align:top"><label>Remark:</label></td><td></td><td>@Model.EPCResponse.Remark</td></tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    if (Model.EPCCounterList.Count > 0)
+                    {
+                        <hr style="margin-top: 5px !important ;margin-bottom: 5px !important;">
+                        <div class="row form-group" style="margin:10px;">
+                            <div class="col-md-12">
+                                <h3>EPC Counter Data</h3>
+                                <div>
+                                    <table id="t01">
+                                        <thead>
+                                        <th>Line No</th>
+                                        <th>GTIN</th>
+                                        <th>EPC</th>
+                                        <th>SerialNo</th>
+                                        <th>Access PWD</th>
+                                        <th>Kill PWD</th>
+                                        </thead>
+                                        @foreach (var item in Model.EPCCounterList)
+                                    {
+
+                                        <tr>
+                                            <td>
+                                                @item.LineNo
+                                            </td>
+                                            <td>
+                                                @item.GTIN
+                                            </td>
+                                            <td>
+                                                @item.EPC
+                                            </td>
+                                            <td>
+                                                @item.SerialNo
+                                            </td>
+                                            <td>
+                                                @item.Password
+                                            </td>
+                                            <td>
+                                                @item.KillPassword
+                                            </td>
+                                        </tr>
+
+                                    }
+
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+
+                    if (Model.GS1_Info.Count > 0)
+                    {
+                        <hr style="margin-top: 5px !important ;margin-bottom: 5px !important;">
+                        <div class="row form-group" style="margin:10px;">
+                            <div class="col-md-12">
+                                <h3>GS1 Data</h3>
+
+                                <div class="col-md-5">
+                                    <table>
+                                        <tr><td><label>Source:</label></td><td></td><td>@Model.GS1_Info[0].Source</td></tr>
+                                        <tr><td><label>EntityGLN:</label></td><td></td><td>@Model.GS1_Info[0].EntityGLN</td></tr>
+                                        <tr><td><label>CompanyName:</label></td><td></td><td>@Model.GS1_Info[0].CompanyName</td></tr>
+                                        <tr><td><label>StreetAddress1:</label></td><td></td><td>@Model.GS1_Info[0].StreetAddress1</td></tr>
+                                        <tr><td><label>StreetAddress2:</label></td><td></td><td>@Model.GS1_Info[0].StreetAddress2</td></tr>
+                                        <tr><td><label>StreetAddress3:</label></td><td></td><td>@Model.GS1_Info[0].StreetAddress3</td></tr>
+                                        <tr><td><label>City:</label></td><td></td><td>@Model.GS1_Info[0].City</td></tr>
+                                        <tr><td><label>StateProvince:</label></td><td></td><td>@Model.GS1_Info[0].StateProvince</td></tr>
+                                        <tr><td><label>ZipCode:</label></td><td></td><td>@Model.GS1_Info[0].ZipCode</td></tr>
+                                        <tr><td><label>Country:</label></td><td></td><td>@Model.GS1_Info[0].Country</td></tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-2"></div>
+                                    <div class="col-md-5">
+                                        <table>
+                                            <tr><td><label>GSRN:</label></td><td></td><td>@Model.GS1_Info[0].GSRN</td></tr>
+                                            <tr><td><label>ModifiedDate:</label></td><td></td><td>@Model.GS1_Info[0].ModifiedDate</td></tr>
+                                            <tr><td><label>UPCPrefix:</label></td><td></td><td>@Model.GS1_Info[0].Prefixes.UPCPrefix</td></tr>
+                                            <tr><td><label>GS1Prefix:</label></td><td></td><td>@Model.GS1_Info[0].Prefixes.GS1Prefix</td></tr>
+                                            <tr><td><label>PrefixStatus:</label></td><td></td><td>@Model.GS1_Info[0].Prefixes.PrefixStatus</td></tr>
+                                            <tr><td><label>Prefixes ModifiedDate:</label></td><td></td><td>@Model.GS1_Info[0].Prefixes.ModifiedDate</td></tr>
+
+                                        </table>
+                                    </div>
+                                    <div>
+                                        @*<table id="t01">
+                    <thead>
+                    <th>Source</th>
+                    <th>EntityGLN</th>
+                    <th>CompanyName</th>
+                    <th>StreetAddress1</th>
+                    <th>StreetAddress2</th>
+                    <th>StreetAddress3</th>
+                    <th>City</th>
+                    <th>StateProvince</th>
+                    <th>ZipCode</th>
+                    <th>Country</th>
+                    <th>GSRN</th>
+                    <th>ModifiedDate</th>
+                    <th>UPCPrefix</th>
+                    <th>GS1Prefix</th>
+                    <th>PrefixStatus</th>
+                    <th>Prefix ModifiedDate</th>
+
+
+                    </thead>
+                    @foreach (var item in Model.GS1_Info)
+                    {
+
+                        <tr>
+                            <td>
+                                @item.Source
+                            </td>
+                            <td>
+                                @item.EntityGLN
+                            </td>
+                            <td>
+                                @item.CompanyName
+                            </td>
+                            <td>
+                                @item.StreetAddress1
+                            </td>
+                            <td>
+                                @item.StreetAddress2
+                            </td>
+                            <td>
+                                @item.StreetAddress3
+                            </td>
+                            <td>
+                                @item.City
+                            </td>
+                            <td>
+                                @item.StateProvince
+                            </td>
+                            <td>
+                                @item.ZipCode
+                            </td>
+                            <td>
+                                @item.Country
+                            </td>
+                            <td>
+                                @item.GSRN
+                            </td>
+                            <td>
+                                @item.ModifiedDate
+                            </td>
+                            <td>
+                                @item.Prefixes.UPCPrefix
+                            </td>
+                            <td>
+                                @item.Prefixes.GS1Prefix
+                            </td>
+                            <td>
+                                @item.Prefixes.PrefixStatus
+                            </td>
+                            <td>
+                                @item.Prefixes.ModifiedDate
+                            </td>
+                        </tr>
+
+                    }
+
+                </table>*@
+                                    </div>
+
+
+
+                                </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <label>@Model.GS1_Error</label>
+                    }
+                }
+
+                @using (Html.BeginForm("GetJSONResponse", "EPCModule", FormMethod.Post, new { @class = "form -horizontal", @id = "contactForm" }))
                 {
                     <div class="active" id="costHead">
                         <br />
 
-
-                        <div class="row form-group" style="margin:10px;">
+                        <div class="row form-group" style="margin:10px; display:none">
 
 
                             <div class="col-md-5">
-                                <label>Request</label>
-                                @Html.TextAreaFor(Model => Model.Request, new { @class = "form-control", @style = "margin: 0px 27.25px 0px 0px; height: 331px; width: 540px; max-width:100% !important" })
+                                <label>JSON Request</label>
+                                @Html.TextAreaFor(Model => Model.Request, new { @class = "form-control", @style = "margin: 0px 27.25px 0px 0px; height: 334px; width: 530px; max-width:100% !important" })
                             </div>
 
-                            <div class="col-md-1">
+                            <div class="col-md-2">
 
-                                <label>   </label>
+                                <br /><br /><br /><br /><br /><br /><br /><br /><br />
                                 <input type="submit" class="btn btn-primary red" id="btnSearch" value="Submit">
 
 
                             </div>
                             <div class="col-md-5">
-                                <label>Response</label>
+                                <label>JSON Response</label>
 
 
                                 @Html.TextArea("name", (string)ViewBag.Response, new { @class = "form-control", @style = "margin: 0px 27.25px 0px 0px; height: 331px; width: 540px; max-width:100% !important", })
@@ -50,65 +284,108 @@
                     </div>
                 }
 
-            </div>
-        </div>
-    </div>
-    <div class="panel-heading">EPC Serial</div>
-    @*<div class="row" style="margin:10px;">
-        <div class="col-md-12 subTab">
-            <div id="myTabContent" class="tab-content">
-
-                <div id="costHead">
-                    <table id="tblEPCSrial" class="display" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>GTIN</th>
-                                <th>Serial No Last Used</th>
-                                <th>Maximum Serial</th>
-
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
 
             </div>
         </div>
     </div>
-    <br />
-    <div class="panel-heading"> EPC Log</div>
-    <div class="row" style="margin:10px;">
-        <div class="col-md-12 subTab">
-            <div id="myTabContent" class="tab-content">
-                <div id="costHead">
-                    <table id="tblEPC" class="display" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>GTIN</th>
-                                <th>Serial Start</th>
-                                <th>Serial End</th>
-                                <th>EPCStart</th>
-                                <th>EPCEnd</th>
-                                <th>Schema</th>
-                                <th>CustomerName</th>
-                                <th>Remark</th>
+    @*<div class="panel-heading">EPC Serial</div>
+        <div class="row" style="margin:10px;">
+                 <div class="col-md-12 subTab">
+                     <div id="myTabContent" class="tab-content">
+
+                         <div id="costHead">
+                             <table id="tblEPCSrial" class="display" style="width:100%">
+                                 <thead>
+                                     <tr>
+                                         <th>Id</th>
+                                         <th>GTIN</th>
+                                         <th>Serial No Last Used</th>
+                                         <th>Maximum Serial</th>
+
+                                     </tr>
+                                 </thead>
+                             </table>
+                         </div>
+
+                     </div>
+                 </div>
+             </div>
+             <br />
+             <div class="panel-heading"> EPC Log</div>
+             <div class="row" style="margin:10px;">
+                 <div class="col-md-12 subTab">
+                     <div id="myTabContent" class="tab-content">
+                         <div id="costHead">
+                             <table id="tblEPC" class="display" style="width:100%">
+                                 <thead>
+                                     <tr>
+                                         <th>Id</th>
+                                         <th>GTIN</th>
+                                         <th>Serial Start</th>
+                                         <th>Serial End</th>
+                                         <th>EPCStart</th>
+                                         <th>EPCEnd</th>
+                                         <th>Schema</th>
+                                         <th>CustomerName</th>
+                                         <th>Remark</th>
 
 
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>*@
+                                     </tr>
+                                 </thead>
+                             </table>
+                         </div>
+                     </div>
+                 </div>
+             </div>*@
 
 </div>
 
+@*<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>*@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
 
+<link href="~/alert/css/alert.css" rel="stylesheet" />
+<link href="~/alert/themes/default/theme.css" rel="stylesheet" />
+<script src="~/alert/js/alert.js"></script>
 
 <script type="text/javascript">
+
+    function SubmitBtnAction()
+    {
+        var Meg = "This action will increment the serial number in the EPC module permanently and cannot be reversed. Are you sure you want to proceed?";
+
+        var g = confirm(Meg);
+
+        if (g == true)
+        {
+            return true
+        }else
+        {
+            return false
+        }
+        
+    }
+
+    function JsonChange() {
+
+
+        var CustomerID = $("#EPCRequest_CustomerID").val();
+        var GTIN = $("#EPCRequest_GTIN").val();
+        var Quantity = $("#EPCRequest_Quantity").val();
+        var RPO = $("#EPCRequest_RPO").val();
+        var DetailLineID = $("#EPCRequest_DetailLineID").val();
+
+
+        $.get("r-tracEPC/EPCModule/GetJSON", { CustomerID: CustomerID, GTIN: GTIN, Quantity: Quantity, RPO: RPO, DetailLineID: DetailLineID }, function (data) {
+            $("#Request_New").val() = data
+
+            $("#btn_Response_Cont").click();
+        });
+
+
+        return false;
+    }
+
     /*
                     var _URL = 'http://' + window.location.host + '/' + window.location.pathname.split('/')[1];
 
@@ -208,4 +485,3 @@
                     });
 */
 </script>
-
