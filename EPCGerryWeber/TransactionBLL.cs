@@ -126,7 +126,7 @@ namespace EPCGerryWeber
                     Obj.DetailNo = EPC_Req.DetailLineID;
                     Obj.CustomerId = EPC_Req.CustomerID;
                     Obj.UserId = EPC_Req.UserId;
-
+                    Obj.GTIN = EPC_Req.GTIN;
 
                     ResponsePrintOrderDO Objres = GWEPC.GetEPC(Obj);
 
