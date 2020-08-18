@@ -60,7 +60,7 @@ namespace EPC_GS1
 
 
             //Response =System.IO.File.ReadAllText(@"E:\DEMO Project\DemoApplication\GS1_Int\bin\Debug\GS2.json");
-            EPCDAL.InsertReqRes(ObjEPC.CustomerID, ObjEPC.RPO, ObjEPC.DetailLineID, uri, Response, GS1_api, ObjEPC.UserId);
+            EPCDAL.InsertReqRes(ObjEPC.CustomerID, ObjEPC.RPO, ObjEPC.DetailLineID, uri, Response, GS1_api, ObjEPC.UserId, ObjEPC.GTIN);
 
 
 
@@ -114,7 +114,7 @@ namespace EPC_GS1
             }
             
             //Response =System.IO.File.ReadAllText(@"E:\DEMO Project\DemoApplication\GS1_Int\bin\Debug\GS2.json");
-            EPCDAL.InsertReqRes(ObjEPC.CustomerID, ObjEPC.RPO, ObjEPC.DetailLineID, url, Response, GS1_api, ObjEPC.UserId);
+            EPCDAL.InsertReqRes(ObjEPC.CustomerID, ObjEPC.RPO, ObjEPC.DetailLineID, url, Response, GS1_api, ObjEPC.UserId, ObjEPC.GTIN);
             
             return Response;
 
