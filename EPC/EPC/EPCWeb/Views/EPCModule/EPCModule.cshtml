@@ -37,7 +37,7 @@
                 @using (Html.BeginForm("GetResponse", "EPCModule", FormMethod.Post, new { @class = "form -horizontal", @id = "contactForm" }))
                 {
 
-                    <div class="row form-group" style="margin:10px;">
+                    <div class="row form-group" style="margin:10px; display:none">
 
                         <div class="col-md-5">
                             <table>
@@ -72,7 +72,7 @@
                         </div>
                     </div>
 
-                    if (Model.EPCCounterList.Count > 0)
+                    @*if (Model.EPCCounterList.Count > 0)
                     {
                         <hr style="margin-top: 5px !important ;margin-bottom: 5px !important;">
                         <div class="row form-group" style="margin:10px;">
@@ -155,84 +155,7 @@
                                         </table>
                                     </div>
                                     <div>
-                                        @*<table id="t01">
-                    <thead>
-                    <th>Source</th>
-                    <th>EntityGLN</th>
-                    <th>CompanyName</th>
-                    <th>StreetAddress1</th>
-                    <th>StreetAddress2</th>
-                    <th>StreetAddress3</th>
-                    <th>City</th>
-                    <th>StateProvince</th>
-                    <th>ZipCode</th>
-                    <th>Country</th>
-                    <th>GSRN</th>
-                    <th>ModifiedDate</th>
-                    <th>UPCPrefix</th>
-                    <th>GS1Prefix</th>
-                    <th>PrefixStatus</th>
-                    <th>Prefix ModifiedDate</th>
-
-
-                    </thead>
-                    @foreach (var item in Model.GS1_Info)
-                    {
-
-                        <tr>
-                            <td>
-                                @item.Source
-                            </td>
-                            <td>
-                                @item.EntityGLN
-                            </td>
-                            <td>
-                                @item.CompanyName
-                            </td>
-                            <td>
-                                @item.StreetAddress1
-                            </td>
-                            <td>
-                                @item.StreetAddress2
-                            </td>
-                            <td>
-                                @item.StreetAddress3
-                            </td>
-                            <td>
-                                @item.City
-                            </td>
-                            <td>
-                                @item.StateProvince
-                            </td>
-                            <td>
-                                @item.ZipCode
-                            </td>
-                            <td>
-                                @item.Country
-                            </td>
-                            <td>
-                                @item.GSRN
-                            </td>
-                            <td>
-                                @item.ModifiedDate
-                            </td>
-                            <td>
-                                @item.Prefixes.UPCPrefix
-                            </td>
-                            <td>
-                                @item.Prefixes.GS1Prefix
-                            </td>
-                            <td>
-                                @item.Prefixes.PrefixStatus
-                            </td>
-                            <td>
-                                @item.Prefixes.ModifiedDate
-                            </td>
-                        </tr>
-
-                    }
-
-                </table>*@
+                                       
                                     </div>
 
 
@@ -243,7 +166,7 @@
                     else
                     {
                         <label>@Model.GS1_Error</label>
-                    }
+                    }*@
                 }
 
                 @using (Html.BeginForm("GetJSONResponse", "EPCModule", FormMethod.Post, new { @class = "form -horizontal", @id = "contactForm" }))
@@ -251,7 +174,7 @@
                     <div class="active" id="costHead">
                         <br />
 
-                        <div class="row form-group" style="margin:10px; display:none">
+                        <div class="row form-group" style="margin:10px; display:block">
 
 
                             <div class="col-md-5">
