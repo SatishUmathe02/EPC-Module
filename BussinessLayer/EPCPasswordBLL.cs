@@ -27,7 +27,7 @@ namespace BussinessLayer
                     for (int i = 0; i < epclist.Count(); i++)
                     {
                         xml.Append("<Password>");
-                        xml.Append("<RPO>" + epclist[i].bigIntRPO + "</RPO>");
+                        xml.Append("<RPO>" + Convert.ToString(epclist[i].bigIntRPO) + "</RPO>");
                         xml.Append("<EPC>" + epclist[i].EPC + "</EPC>");
                         xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(epclist[i].EPC, epclist[i].AccHexKey) + "</AccesPwd>");
                         xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(epclist[i].EPC, epclist[i].KillHexKey) + "</KillPwd>");
