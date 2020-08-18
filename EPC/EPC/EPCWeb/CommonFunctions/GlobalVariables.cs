@@ -17,6 +17,7 @@ namespace EPCWeb.CommonFunctions
             EPCSetting Objsetting = GetEPCSetting.GetSetting();
             string publishWebApi = Objsetting.WebApi;
 
+            //"http://192.168.136.185:85/";-- Test
             //http://52.172.135.0:136/ -- Dev
             //http://52.172.187.213/ -- Prod
 
