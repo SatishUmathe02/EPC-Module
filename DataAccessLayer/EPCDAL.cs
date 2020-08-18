@@ -132,11 +132,11 @@ namespace DataAccessLayer
         #endregion
 
         #region INSERT EPC REQUEST AND RESPONSE
-        public static void InsertReqRes(string CustomerId, long RPO, long DetailLineNo, string Request, string Response, string URL, long UserId)
+        public static void InsertReqRes(string CustomerId, long RPO, long DetailLineNo, string Request, string Response, string URL, long UserId, string GTIN)
         {
             using (EPC_DBEntities db = new EPC_DBEntities())
             {
-                db.USP_GTIN_InsertEPCReqRes(CustomerId, RPO, DetailLineNo, Request, Response, URL, UserId);
+                db.USP_GTIN_InsertEPCReqRes(CustomerId, RPO, DetailLineNo, Request, Response, URL, UserId, GTIN);
             }
         }
         #endregion
