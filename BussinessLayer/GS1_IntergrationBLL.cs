@@ -51,6 +51,10 @@ namespace BussinessLayer
                     ObjEPC.GS1Prefix = result.GS1Prefix;
                     ObjEPC.PartitionValue = Convert.ToInt32(result.Partiton);
                 }
+                else
+                {
+                    ObjEPC.GS1Prefix = null;
+                }
             }
 
             return ObjEPC;
@@ -65,6 +69,46 @@ namespace BussinessLayer
         public static string GS1_apiResponse_Restapi(EPCRequest ObjEPC)
         {
             return GS1_http.GS1_apiResponse_Rest(ObjEPC).Result;
+        }
+
+        public static void EmailNotification(string GS1JSON, List<GS1> listGs1, EPCRequest EPCReq)
+        {
+            try
+            {
+                if (listGs1.Count == 0)
+                {
+                    if (!string.IsNullOrEmpty(GS1JSON))
+                    {
+                        if (GS1JSON.Length <= 5)
+                        {
+                            GS1_http.SendEmail(3, GS1JSON, EPCReq.GTIN);
+                        }
+                    }
+                }
+                if (string.IsNullOrEmpty(EPCReq.GS1Prefix))
+                {
+                    if (listGs1.Count > 0)
+                    {
+                        GS1_http.SendEmail(2, GS1JSON, EPCReq.GTIN);
+
+                        // No need to check because we already checked and set EPCReq.GS1Prefix 
+                        //if (listGs1[0].Prefixes != null)
+                        //{
+                        //    int GSPre = Convert.ToString(listGs1[0].Prefixes.GS1Prefix).Length;
+                        //    if (GSPre != 12 && GSPre != 11 && GSPre != 10 && GSPre != 9 && GSPre != 8 && GSPre != 7 && GSPre != 6)
+                        //    {
+                        //        GS1_http.SendEmail(2, GS1JSON, EPCReq.GTIN);
+                        //    }
+                        //}
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+
+
         }
     }
 }
