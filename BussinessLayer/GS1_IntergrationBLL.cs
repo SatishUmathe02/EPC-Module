@@ -61,10 +61,10 @@ namespace BussinessLayer
         }
 
 
-        public static string GS1_apiResponse(EPCRequest ObjEPC)
-        {
-            return GS1_http.GS1_apiResponse(ObjEPC).Result;
-        }
+        //public static string GS1_apiResponse(EPCRequest ObjEPC)
+        //{
+        //    return GS1_http.GS1_apiResponse(ObjEPC).Result;
+        //}
 
         public static string GS1_apiResponse_Restapi(EPCRequest ObjEPC)
         {
