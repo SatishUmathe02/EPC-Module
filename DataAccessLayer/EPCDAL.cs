@@ -38,9 +38,20 @@ namespace DataAccessLayer
         public static usp_GTIN_GetEPC_Result GetEPC(string gtin14, long qty, string transaction, string schema, string customerId, string customerName, string Event, long UserId, long SerialStart, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, string GS1Prefix, int PartionVal)
         {
             usp_GTIN_GetEPC_Result Obj = new usp_GTIN_GetEPC_Result();
-            using (EPC_DBEntities db = new EPC_DBEntities())
+            try
             {
-                Obj = (from lst1 in db.usp_GTIN_GetEPC(gtin14, qty, transaction, schema, customerId, customerName, Event, UserId, SerialStart, EPC, RPO, DetailLineNo, CustomPara1, CustomPara2, GS1Prefix, PartionVal) select lst1).ToList().FirstOrDefault();
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+                    Obj = (from lst1 in db.usp_GTIN_GetEPC(gtin14, qty, transaction, schema, customerId, customerName, Event, UserId, SerialStart, EPC, RPO, DetailLineNo, CustomPara1, CustomPara2, GS1Prefix, PartionVal) select lst1).ToList().FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+                    Obj = (from lst1 in db.usp_GTIN_GetEPC(gtin14, qty, transaction, schema, customerId, customerName, Event, UserId, SerialStart, EPC, RPO, DetailLineNo, CustomPara1, CustomPara2, GS1Prefix, PartionVal) select lst1).ToList().FirstOrDefault();
+                }
             }
             return Obj;
         }
@@ -52,9 +63,10 @@ namespace DataAccessLayer
         #region ADD ERROR LOG
         public static int InsertLog(System.Exception objException, string FileName)
         {
+
             using (EPC_DBEntities db = new EPC_DBEntities())
             {
-                int i = Convert.ToInt32(db.usp_AddErrorLog(Convert.ToString(objException.Source), Convert.ToString(objException.Message), Convert.ToString(System.Net.Dns.GetHostName()), Convert.ToString(objException.TargetSite), ("StackTrace : " + Convert.ToString(objException.StackTrace)), Convert.ToDateTime(System.DateTime.Now.ToString("yyyy/MM/dd HH:mm")), FileName));
+                db.usp_AddErrorLog(Convert.ToString(objException.Source), Convert.ToString(objException.Message), Convert.ToString(System.Net.Dns.GetHostName()), Convert.ToString(objException.TargetSite), ("StackTrace : " + Convert.ToString(objException.StackTrace)), Convert.ToDateTime(System.DateTime.Now.ToString("yyyy/MM/dd HH:mm")), FileName);
             }
 
             return 0;
