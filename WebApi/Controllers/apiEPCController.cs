@@ -11,7 +11,7 @@ using System.Web.Script.Serialization;
 using System.Web.Http.Cors;
 using System.Threading.Tasks;
 using EPCGerryWeber;
-
+using Newtonsoft.Json.Linq;
 
 namespace WebApi.Controllers
 {
@@ -93,11 +93,21 @@ namespace WebApi.Controllers
                                 List<GS1> ObjGS1 = JsonConvert.DeserializeObject<List<GS1>>(GS1_Response);
                                 string GS1JSON = JsonConvert.SerializeObject(ObjGS1);
                                 Request = GS1_IntergrationBLL.GS1_Details(Request, ObjGS1, GS1JSON);
+
+                                if (string.IsNullOrEmpty(Request.GS1Prefix))
+                                {
+                                    JToken GS1Json = JToken.Parse(GS1_Response);
+                                    GS1_Response = GS1Json.ToString(Formatting.Indented);
+                                    GS1_IntergrationBLL.EmailNotification(GS1_Response, ObjGS1, Request);
+                                }
+
                             }
                             catch
                             {
                                 Request.GS1Prefix = "";
                             }
+                            
+
                         }
 
                     }
