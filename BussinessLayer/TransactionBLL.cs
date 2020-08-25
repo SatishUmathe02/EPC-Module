@@ -47,7 +47,7 @@ namespace BussinessLayer
                 }
                 catch (Exception Ex)
                 {
-                    InsertLog(Ex, "usp_GTIN_GetEPC_Result");
+                    InsertLog(Ex, "GetEPC");
                     EPC_Res = GetError(107);
                 }
 
