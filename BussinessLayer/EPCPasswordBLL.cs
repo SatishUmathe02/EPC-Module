@@ -11,19 +11,23 @@ namespace BussinessLayer
     public class EPCPasswordBLL
     {
 
-        public static async Task UpdatePassword_MODA(long RPO , long DetailNo)
+        public static async Task<bool> UpdatePassword_MODA(long RPO, long DetailNo)
         {
-
+            bool flag = false;
             try
             {
                 var epclist = EPCDAL.GetEPCCounterFor_Moda_PWD(RPO, DetailNo);
 
                 StringBuilder xml = new StringBuilder();
-                              
+                if (epclist.Count == 0)
+                {
+                    flag = true;
+                }
 
                 if (epclist.Count > 0)
                 {
                     xml.Append("<EPC>");
+                    /*
                     for (int i = 0; i < epclist.Count(); i++)
                     {
                         xml.Append("<Password>");
@@ -33,23 +37,35 @@ namespace BussinessLayer
                         xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(epclist[i].EPC, epclist[i].KillHexKey) + "</KillPwd>");
                         xml.Append("</Password>");
                     }
+                    */
+                    foreach (var item in epclist)
+                    {
+                        xml.Append("<Password>");
+                        xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
+                        xml.Append("<EPC>" + item.EPC + "</EPC>");
+                        xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.AccHexKey) + "</AccesPwd>");
+                        xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.KillHexKey) + "</KillPwd>");
+                        xml.Append("</Password>");
+                    }
                     xml.Append("</EPC>");
                     EPCPasswordDAL.UpdatePassword(xml.ToString());
-
+                    flag = true;
 
                 }
             }
-            catch(Exception Ex)
+            catch (Exception Ex)
             {
+                EPCDAL.SaveErrorFileResponse(Ex.ToString(), "UpdatePassword_Moda");
+                flag = false;
                 EPCBLL.InsertLog(Ex, "UpdatePassword_Moda");
             }
 
-            
+            return flag;
 
         }
-
-        public static async Task UpdatePassword_MANGO(long RPO, long DetailNo)
+        public static async Task<bool> UpdatePassword_MANGO(long RPO, long DetailNo)
         {
+            bool flag = false;
 
             try
             {
@@ -57,10 +73,14 @@ namespace BussinessLayer
 
                 StringBuilder xml = new StringBuilder();
 
-
+                if (epclist.Count == 0)
+                {
+                    flag = true;
+                }
                 if (epclist.Count > 0)
                 {
                     xml.Append("<EPC>");
+                    /*
                     for (int i = 0; i < epclist.Count(); i++)
                     {
                         xml.Append("<Password>");
@@ -69,19 +89,70 @@ namespace BussinessLayer
                         xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(epclist[i].EPC, epclist[i].AccHexKey) + "</AccesPwd>");
                         xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(epclist[i].EPC, epclist[i].KillHexKey) + "</KillPwd>");
                         xml.Append("</Password>");
+                    }*/
+                    foreach (var item in epclist)
+                    {
+                        xml.Append("<Password>");
+                        xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
+                        xml.Append("<EPC>" + item.EPC + "</EPC>");
+                        xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.AccHexKey) + "</AccesPwd>");
+                        xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.KillHexKey) + "</KillPwd>");
+                        xml.Append("</Password>");
                     }
                     xml.Append("</EPC>");
                     EPCPasswordDAL.UpdatePassword(xml.ToString());
-
+                    flag = true;
 
                 }
             }
             catch (Exception Ex)
             {
+                flag = false;
+                EPCBLL.InsertLog(Ex, "UpdatePassword_MANGO");
+            }
+
+            return flag;
+
+        }
+        public static async Task<bool> UpdatePassword_AlvaroMoreno(long RPO, long DetailNo)
+        {
+            bool flag = false;
+            try
+            {
+                var epclist = EPCDAL.GetEPCCounterFor_AlvaroMoreno_PWD(RPO, DetailNo);
+
+                StringBuilder xml = new StringBuilder();
+                if (epclist.Count == 0)
+                {
+                    flag = true;
+                }
+
+                if (epclist.Count > 0)
+                {
+                    xml.Append("<EPC>");
+                    foreach (var item in epclist)
+                    {
+                        xml.Append("<Password>");
+                        xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
+                        xml.Append("<EPC>" + item.EPC + "</EPC>");
+                        xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.AccHexKey) + "</AccesPwd>");
+                        xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.KillHexKey) + "</KillPwd>");
+                        xml.Append("</Password>");
+                    }
+                    xml.Append("</EPC>");
+                    EPCPasswordDAL.UpdatePassword(xml.ToString());
+                    flag = true;
+
+                }
+            }
+            catch (Exception Ex)
+            {
+                EPCDAL.SaveErrorFileResponse(Ex.ToString(), "UpdatePassword_Moda");
+                flag = false;
                 EPCBLL.InsertLog(Ex, "UpdatePassword_Moda");
             }
 
-
+            return flag;
 
         }
 
