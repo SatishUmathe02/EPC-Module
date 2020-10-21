@@ -11,7 +11,7 @@ using System.Web.Script.Serialization;
 using System.Web.Http.Cors;
 using System.Threading.Tasks;
 using EPCGerryWeber;
-using Newtonsoft.Json.Linq;
+
 
 namespace WebApi.Controllers
 {
@@ -96,8 +96,6 @@ namespace WebApi.Controllers
 
                                 if (string.IsNullOrEmpty(Request.GS1Prefix))
                                 {
-                                    JToken GS1Json = JToken.Parse(GS1_Response);
-                                    GS1_Response = GS1Json.ToString(Formatting.Indented);
                                     GS1_IntergrationBLL.EmailNotification(GS1_Response, ObjGS1, Request);
                                 }
 
@@ -106,7 +104,7 @@ namespace WebApi.Controllers
                             {
                                 Request.GS1Prefix = "";
                             }
-                            
+
 
                         }
 
@@ -130,17 +128,35 @@ namespace WebApi.Controllers
                     {
                         EPCResponse ObjRes = Transaction_New.GetEPC_New(Request);
 
+                        bool flag = false;
                         switch (Request.CustomerID)
                         {
+
                             case "EncuentroModa":
-                                await EPCPasswordBLL.UpdatePassword_MODA(Request.RPO, Request.DetailLineID);
+                                flag = await EPCPasswordBLL.UpdatePassword_MODA(Request.RPO, Request.DetailLineID);
+                                if (!flag)
+                                {
+                                    ObjRes = EPCBLL.GetError(122);
+                                }
                                 break;
                             case "MANGO":
-                                await EPCPasswordBLL.UpdatePassword_MANGO(Request.RPO, Request.DetailLineID);
+                                flag = await EPCPasswordBLL.UpdatePassword_MANGO(Request.RPO, Request.DetailLineID);
+                                if (!flag)
+                                {
+                                    ObjRes = EPCBLL.GetError(122);
+                                }
+                                break;
+                            case "AlvaroMoreno":
+                                flag = await EPCPasswordBLL.UpdatePassword_AlvaroMoreno(Request.RPO, Request.DetailLineID);
+                                if (!flag)
+                                {
+                                    ObjRes = EPCBLL.GetError(122);
+                                }
                                 break;
                             default:
                                 break;
                         }
+
 
                         return ObjRes;
                     }
