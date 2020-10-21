@@ -47,7 +47,7 @@ namespace DataAccessLayer
             }
             catch (Exception ex)
             {
-                
+
                 using (EPC_DBEntities db = new EPC_DBEntities())
                 {
                     Obj = (from lst1 in db.usp_GTIN_GetEPC(gtin14, qty, transaction, schema, customerId, customerName, Event, UserId, SerialStart, EPC, RPO, DetailLineNo, CustomPara1, CustomPara2, GS1Prefix, PartionVal) select lst1).ToList().FirstOrDefault();
@@ -125,6 +125,19 @@ namespace DataAccessLayer
         }
         #endregion
 
+        #region GET ECP COUNTER DATA FRO AlvaroMoreno PASSWORD
+
+        public static List<usp_GetEPCCounterForAlvaroMorenoPWD_Result> GetEPCCounterFor_AlvaroMoreno_PWD(long RPO, long DetailNo)
+        {
+            List<usp_GetEPCCounterForAlvaroMorenoPWD_Result> Obj = new List<usp_GetEPCCounterForAlvaroMorenoPWD_Result>();
+            using (EPC_DBEntities db = new EPC_DBEntities())
+            {
+                Obj = (from lst1 in db.usp_GetEPCCounterForAlvaroMorenoPWD(RPO, DetailNo) select lst1).ToList();
+            }
+            return Obj;
+        }
+        #endregion
+
         #region INSERT FOR EMAIL
         public static void InsertEmail(string varRecipient, string varCC, string varBCC, string varReplyTo, string varSubject, string varBody, long bigIntCreatedById, DateTime dtCreatedOn)
         {
@@ -133,6 +146,24 @@ namespace DataAccessLayer
                 using (EPC_DBEntities db = new EPC_DBEntities())
                 {
                     db.usp_InsertEmailTrigger("RT", varRecipient, varCC, varBCC, varReplyTo, varSubject, varBody, "", bigIntCreatedById, dtCreatedOn);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        #endregion
+
+        #region INSERT FOR EMAIL GS1
+        public static void InsertEmail_GS1(string varRecipient, string varCC, string varBCC, string varReplyTo, string varSubject, string varBody, long bigIntCreatedById, DateTime dtCreatedOn)
+        {
+            try
+            {
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+                    db.usp_InsertEmailTrigger_GS1("RT", varRecipient, varCC, varBCC, varReplyTo, varSubject, varBody, "", bigIntCreatedById, dtCreatedOn);
                 }
 
             }
@@ -180,16 +211,18 @@ namespace DataAccessLayer
         }
         #endregion
 
-        public static void SaveFileResponse(string Meg, string Filename)
+        public static void SaveErrorFileResponse(string Meg, string Filename)
         {
 
-            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Filename);
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ErrorFileBox");
 
-            if (System.IO.File.Exists(path))
+            if (!Directory.Exists(path))
             {
-                System.IO.File.Delete(path);
+                Directory.CreateDirectory(path);
             }
-
+            string file = DateTime.Now.ToString("dd-MMM-yyyy") + ".txt";
+            path = Path.Combine(path, file);
+                        
             if (!File.Exists(path))
             {
                 File.Create(path).Close();
@@ -197,8 +230,11 @@ namespace DataAccessLayer
             }
             using (StreamWriter w = File.AppendText(path))
             {
-
+                string date = System.DateTime.Now.ToString("dd MMM yyyy hh:mm tt");
+                w.WriteLine("Date: " + date);
+                w.WriteLine(Filename + ":");
                 w.WriteLine(Meg);
+                w.WriteLine("");
                 w.Flush();
                 w.Close();
 
