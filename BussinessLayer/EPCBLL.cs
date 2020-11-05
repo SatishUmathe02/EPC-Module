@@ -17,11 +17,12 @@ namespace BussinessLayer
         public static EPCResponse GetError(int Code)
         {
             EPCResponse EPC_Res = new EPCResponse();
-            EPC_Res.EPCStart = "";
-            EPC_Res.EPCEnd = "";
-            EPC_Res.SerialStart = "";
-            EPC_Res.SerialEnd = "";
-            EPC_Res.GTIN = "";
+            EPC_Res.EPCStart = string.Empty;
+            EPC_Res.EPCEnd = string.Empty;
+            EPC_Res.SerialStart = string.Empty;
+            EPC_Res.SerialEnd = string.Empty;
+            EPC_Res.GTIN = string.Empty;
+            EPC_Res.CustomerID = string.Empty;
 
             switch (Code)
             {
@@ -87,6 +88,9 @@ namespace BussinessLayer
                 case 121:
                     EPC_Res.Remark = "EPC Error Occurred: RPO or DetailLineID field value cannot be empty or zero.";
                     break;
+                case 122:
+                    EPC_Res.Remark = "Failed";
+                    break;
 
 
                 default:
@@ -100,7 +104,16 @@ namespace BussinessLayer
 
         public static int InsertLog(Exception ex, string FileName)
         {
-            return EPCDAL.InsertLog(ex, FileName);
+            try
+            {
+                return EPCDAL.InsertLog(ex, FileName);
+            }
+            catch
+            {
+
+            }
+
+            return 0;
         }
 
         public static List<EPCCustomer> GetEPCCustomer()
