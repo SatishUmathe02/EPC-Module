@@ -10,12 +10,31 @@ namespace DataAccessLayer
     {
         public static int UpdatePassword(string xml)
         {
+
             using (EPC_DBEntities db = new EPC_DBEntities())
             {
-                int i = db.usp_UpdateAssPassword_Moda(xml);
+                db.usp_UpdateAssPassword_Moda(xml);
             }
+
+            /*
+            try
+            {
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+                    db.usp_UpdateAssPassword_Moda(xml);
+                }
+            }
+            catch(Exception ex)
+            {
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+                    db.usp_UpdateAssPassword_Moda(xml);
+                }
+            }
+            */
 
             return 0;
         }
+        
     }
 }
