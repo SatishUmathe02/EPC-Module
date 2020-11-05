@@ -43,23 +43,41 @@ namespace BussinessLayer
 
             if (!string.IsNullOrEmpty(ObjEPC.GS1Prefix))
             {
-                //string GS1 = JsonConvert.SerializeObject(ObjGS1);
-                var result = GS1_IntergrationDAL.InsertGS1Details_GetPartitionValue(ObjEPC.GTIN, ObjEPC.CustomerID, GS1JSON);
+                bool chkPrefix = ChkPrefixCorrect(ObjEPC.GTIN, ObjEPC.GS1Prefix);
 
-                if (result != null)
+                ObjEPC.GS1Prefix = null;
+                if (chkPrefix)
                 {
-                    ObjEPC.GS1Prefix = result.GS1Prefix;
-                    ObjEPC.PartitionValue = Convert.ToInt32(result.Partiton);
-                }
-                else
-                {
-                    ObjEPC.GS1Prefix = null;
+                    var result = GS1_IntergrationDAL.InsertGS1Details_GetPartitionValue(ObjEPC.GTIN, ObjEPC.CustomerID, GS1JSON);
+
+                    if (result != null)
+                    {
+                        ObjEPC.GS1Prefix = result.GS1Prefix;
+                        ObjEPC.PartitionValue = Convert.ToInt32(result.Partiton);
+                    }
+
                 }
             }
 
             return ObjEPC;
         }
 
+        private static bool ChkPrefixCorrect(string GTIN, string GSPrefix)
+        {
+            bool chk = false;
+            if (!string.IsNullOrEmpty(GSPrefix))
+            {
+                int GSPrefixLen = GSPrefix.Length;
+                string gtin13 = GTIN.Substring(0, 1) == "0" ? GTIN.Substring(1, 13) : GTIN;
+                string Prefix = gtin13.Substring(0, GSPrefixLen);
+                if (Prefix == GSPrefix)
+                {
+                    chk = true;
+                }
+            }
+
+            return chk;
+        }
 
         //public static string GS1_apiResponse(EPCRequest ObjEPC)
         //{
@@ -81,7 +99,7 @@ namespace BussinessLayer
                     {
                         if (GS1JSON.Length <= 5)
                         {
-                            GS1_http.SendEmail(3, GS1JSON, EPCReq.GTIN);
+                            GS1_http.SendEmail_AfterCheck_GS(1, GS1JSON, EPCReq.GTIN);
                         }
                     }
                 }
@@ -89,17 +107,8 @@ namespace BussinessLayer
                 {
                     if (listGs1.Count > 0)
                     {
-                        GS1_http.SendEmail(2, GS1JSON, EPCReq.GTIN);
-
-                        // No need to check because we already checked and set EPCReq.GS1Prefix 
-                        //if (listGs1[0].Prefixes != null)
-                        //{
-                        //    int GSPre = Convert.ToString(listGs1[0].Prefixes.GS1Prefix).Length;
-                        //    if (GSPre != 12 && GSPre != 11 && GSPre != 10 && GSPre != 9 && GSPre != 8 && GSPre != 7 && GSPre != 6)
-                        //    {
-                        //        GS1_http.SendEmail(2, GS1JSON, EPCReq.GTIN);
-                        //    }
-                        //}
+                        GS1_http.SendEmail_AfterCheck_GS(2, GS1JSON, EPCReq.GTIN);
+                        
                     }
                 }
             }
