@@ -69,7 +69,7 @@ namespace EPC_GS1
         public static void SendEmail(int StatusCode, string Response, string GTIN)
         {
             int code = Convert.ToInt32(StatusCode.ToString().Substring(0, 1));
-            string Recipient = "Satish.umathe@r-pac.com";
+            string Recipient = "ali.mehdi@r-pac.com,ahmad.kabakebi@r-pac.com,Amit.Kadam@r-pac.com,Nayana.Krishnamurthy@r-pac.com,satish.umathe@r-pac.com";
             string Subject = string.Empty;
             string varCC = "";
             string varBCC = ""; string varReplyTo = "";
@@ -84,17 +84,36 @@ namespace EPC_GS1
                     //varCC = "Satish.umathe@r-pac.com,Namrata.bhagat@r-pac.com";
                     Subject = "r-pac: GS1 hub web service not reachable " + StatusCode + " for GTIN:" + GTIN + "";
                     Body.Append(Response);
-                    EPCDAL.InsertEmail(Recipient, varCC, varBCC, varReplyTo, Subject, Body.ToString(), 1, DateTime.Now);
+                    EPCDAL.InsertEmail_GS1(Recipient, varCC, varBCC, varReplyTo, Subject, Body.ToString(), 1, DateTime.Now);
                     break;
-                case 3:
+               
+                default:
+                    break;
+            }
+        }
+
+        public static void SendEmail_AfterCheck_GS(int StatusCode, string Response, string GTIN)
+        {
+
+            string Recipient = "ali.mehdi@r-pac.com,ahmad.kabakebi@r-pac.com,Amit.Kadam@r-pac.com,Nayana.Krishnamurthy@r-pac.com";
+            string Subject = string.Empty;
+            string varCC = "Satish.umathe@r-pac.com";
+            string varBCC = ""; string varReplyTo = "";
+            //string varAttachmentName = "";
+
+            StringBuilder Body = new StringBuilder();
+
+            switch (StatusCode)
+            {
+                case 1:
                     Subject = "r-pac: GS1 Hub web service received an empty response for GTIN:" + GTIN + "";
                     Body.Append(Response);
-                    EPCDAL.InsertEmail(Recipient, varCC, varBCC, varReplyTo, Subject, Body.ToString(), 1, DateTime.Now);
+                    EPCDAL.InsertEmail_GS1(Recipient, varCC, varBCC, varReplyTo, Subject, Body.ToString(), 1, DateTime.Now);
                     break;
                 case 2:
                     Subject = "r-pac: GS1 Hub web service received a wrong Prefix for GTIN:" + GTIN + "";
                     Body.Append(Response);
-                    EPCDAL.InsertEmail(Recipient, varCC, varBCC, varReplyTo, Subject, Body.ToString(), 1, DateTime.Now);
+                    EPCDAL.InsertEmail_GS1(Recipient, varCC, varBCC, varReplyTo, Subject, Body.ToString(), 1, DateTime.Now);
                     break;
                 default:
                     break;
