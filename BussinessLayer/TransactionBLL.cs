@@ -47,15 +47,17 @@ namespace BussinessLayer
                 }
                 catch (Exception Ex)
                 {
+                    EPCDAL.SaveErrorFileResponse(Ex.ToString(), "GetEPC");
                     InsertLog(Ex, "GetEPC");
-                    EPC_Res = GetError(107);
+                    EPC_Res = GetError(122);
                 }
 
             }
             catch (Exception ex)
             {
+                EPCDAL.SaveErrorFileResponse(ex.ToString(), "GetEPC_New");
                 InsertLog(ex, "GetEPC_New");
-                EPC_Res = GetError(107);
+                EPC_Res = GetError(122);
             }
 
             return EPC_Res;
@@ -124,15 +126,17 @@ namespace BussinessLayer
                 }
                 catch (Exception Ex)
                 {
+                    EPCDAL.SaveErrorFileResponse(Ex.ToString(), "usp_GTIN_GetEPC_Result");
                     //InsertLog(Ex, "usp_GTIN_GetEPC_Result");
-                    EPC_Res = GetError(107);
+                    EPC_Res = GetError(122);
                 }
                     
             }
             catch (Exception Ex)
             {
+                EPCDAL.SaveErrorFileResponse(Ex.ToString(), "GetEPC_Encode");
                 //InsertLog(Ex, "GetEPC_Encode");
-                EPC_Res = GetError(107);
+                EPC_Res = GetError(122);
             }
 
             return EPC_Res;
