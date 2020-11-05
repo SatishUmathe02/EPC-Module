@@ -145,15 +145,17 @@ namespace EPCGerryWeber
                 }
                 catch (Exception Ex)
                 {
-                    EPC_Res = GetError(107);
-                    InsertLog(Ex, "usp_GTIN_GetEPC_Result");
+                    EPCDAL.SaveErrorFileResponse(Ex.ToString(), "usp_GTIN_GetEPC_GerryWeber_Result");
+                    EPC_Res = GetError(122);
+                    InsertLog(Ex, "usp_GTIN_GetEPC_GerryWeber_Result");
                 }
 
             }
             catch (Exception ex)
             {
-                EPC_Res = GetError(107);
-                InsertLog(ex, "GetEPC_New");
+                EPCDAL.SaveErrorFileResponse(ex.ToString(), "GerryWeber_GetEPC_New");
+                EPC_Res = GetError(122);
+                InsertLog(ex, "GerryWeber_GetEPC_New");
             }
             return EPC_Res;
         }
