@@ -31,7 +31,7 @@ namespace EPCWeb.Controllers
             ObjReq.EPC = "";
             ObjReq.Serial = 0;
             ObjReq.RPO = 999999910;
-            ObjReq.DetailLineID = 99999910;
+            ObjReq.DetailLineID = 999999910;
             ObjReq.Serial = 0;
 
             ObjReq.Event = "";
