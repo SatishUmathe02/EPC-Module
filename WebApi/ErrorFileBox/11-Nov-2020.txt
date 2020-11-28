@@ -1,0 +1,68 @@
+Date: 11 Nov 2020 04:52 PM
+usp_GTIN_GetEPC_GerryWeber_Result:
+System.Net.WebException: The request was aborted: Could not create SSL/TLS secure channel.
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at EPCGerryWeber.GWEPC.HttpResponse(String Request, String Action, String ProdOrDev) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\GWEPC.cs:line 100
+   at EPCGerryWeber.GWEPC.GetEPC(RequestPrintOrderDO Obj) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\GWEPC.cs:line 23
+   at EPCGerryWeber.Transaction_New_GWEPC.GetEPC_New(EPCRequest EPC_Req) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\TransactionBLL.cs:line 131
+
+Date: 11 Nov 2020 04:54 PM
+usp_GTIN_GetEPC_GerryWeber_Result:
+System.Net.WebException: The request was aborted: Could not create SSL/TLS secure channel.
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at EPCGerryWeber.GWEPC.HttpResponse(String Request, String Action, String ProdOrDev) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\GWEPC.cs:line 100
+   at EPCGerryWeber.GWEPC.GetEPC(RequestPrintOrderDO Obj) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\GWEPC.cs:line 23
+   at EPCGerryWeber.Transaction_New_GWEPC.GetEPC_New(EPCRequest EPC_Req) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\TransactionBLL.cs:line 131
+
+Date: 11 Nov 2020 04:54 PM
+usp_GTIN_GetEPC_GerryWeber_Result:
+System.Net.WebException: The request was aborted: Could not create SSL/TLS secure channel.
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at EPCGerryWeber.GWEPC.HttpResponse(String Request, String Action, String ProdOrDev) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\GWEPC.cs:line 100
+   at EPCGerryWeber.GWEPC.GetEPC(RequestPrintOrderDO Obj) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\GWEPC.cs:line 23
+   at EPCGerryWeber.Transaction_New_GWEPC.GetEPC_New(EPCRequest EPC_Req) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\TransactionBLL.cs:line 131
+
+Date: 11 Nov 2020 04:55 PM
+usp_GTIN_GetEPC_GerryWeber_Result:
+System.Net.WebException: The request was aborted: Could not create SSL/TLS secure channel.
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at EPCGerryWeber.GWEPC.HttpResponse(String Request, String Action, String ProdOrDev) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\GWEPC.cs:line 100
+   at EPCGerryWeber.GWEPC.GetEPC(RequestPrintOrderDO Obj) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\GWEPC.cs:line 23
+   at EPCGerryWeber.Transaction_New_GWEPC.GetEPC_New(EPCRequest EPC_Req) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\TransactionBLL.cs:line 131
+
+Date: 11 Nov 2020 05:04 PM
+usp_GTIN_GetEPC_GerryWeber_Result:
+System.Net.WebException: The request was aborted: Could not create SSL/TLS secure channel.
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at EPCGerryWeber.GWEPC.HttpResponse(String Request, String Action, String ProdOrDev) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\GWEPC.cs:line 100
+   at EPCGerryWeber.GWEPC.GetEPC(RequestPrintOrderDO Obj) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\GWEPC.cs:line 23
+   at EPCGerryWeber.Transaction_New_GWEPC.GetEPC_New(EPCRequest EPC_Req) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\TransactionBLL.cs:line 131
+
+Date: 11 Nov 2020 07:10 PM
+usp_GTIN_GetEPC_GerryWeber_Result:
+System.Net.WebException: The request was aborted: Could not create SSL/TLS secure channel.
+   at System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   at System.Net.HttpWebRequest.GetRequestStream()
+   at EPCGerryWeber.GWEPC.HttpResponse(String Request, String Action, String ProdOrDev) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\GWEPC.cs:line 102
+   at EPCGerryWeber.GWEPC.GetEPC(RequestPrintOrderDO Obj) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\GWEPC.cs:line 23
+   at EPCGerryWeber.Transaction_New_GWEPC.GetEPC_New(EPCRequest EPC_Req) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\TransactionBLL.cs:line 131
+
+Date: 11 Nov 2020 07:11 PM
+usp_GTIN_GetEPC_GerryWeber_Result:
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at EPCGerryWeber.GWEPC.HttpResponse(String Request, String Action, String ProdOrDev) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\GWEPC.cs:line 118
+   at EPCGerryWeber.GWEPC.GetEPC(RequestPrintOrderDO Obj) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\GWEPC.cs:line 23
+   at EPCGerryWeber.Transaction_New_GWEPC.GetEPC_New(EPCRequest EPC_Req) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\TransactionBLL.cs:line 131
+
+Date: 11 Nov 2020 07:12 PM
+usp_GTIN_GetEPC_GerryWeber_Result:
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at EPCGerryWeber.GWEPC.HttpResponse(String Request, String Action, String ProdOrDev) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\GWEPC.cs:line 118
+   at EPCGerryWeber.GWEPC.GetEPC(RequestPrintOrderDO Obj) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\GWEPC.cs:line 23
+   at EPCGerryWeber.Transaction_New_GWEPC.GetEPC_New(EPCRequest EPC_Req) in E:\r-trac\Project\r-trac EPC\EPCGerryWeber\TransactionBLL.cs:line 131
+

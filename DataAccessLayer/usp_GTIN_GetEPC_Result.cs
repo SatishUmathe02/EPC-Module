@@ -20,5 +20,7 @@ namespace DataAccessLayer
         public string CustomerId { get; set; }
         public string GTIN { get; set; }
         public string Remark { get; set; }
+        public string AccessPWD { get; set; }
+        public string KillPWD { get; set; }
     }
 }

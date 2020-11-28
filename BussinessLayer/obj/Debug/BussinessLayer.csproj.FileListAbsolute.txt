@@ -1,0 +1,23 @@
+E:\rtrac BackUp\r-trac EPC_18072020\BussinessLayer\bin\Debug\BussinessLayer.dll
+E:\rtrac BackUp\r-trac EPC_18072020\BussinessLayer\bin\Debug\BussinessLayer.pdb
+E:\rtrac BackUp\r-trac EPC_18072020\BussinessLayer\bin\Debug\DataAccessLayer.dll
+E:\rtrac BackUp\r-trac EPC_18072020\BussinessLayer\bin\Debug\TagDataTranslation-net.dll
+E:\rtrac BackUp\r-trac EPC_18072020\BussinessLayer\bin\Debug\EntityFramework.dll
+E:\rtrac BackUp\r-trac EPC_18072020\BussinessLayer\bin\Debug\DataAccessLayer.pdb
+E:\rtrac BackUp\r-trac EPC_18072020\BussinessLayer\obj\Debug\BussinessLayer.csprojResolveAssemblyReference.cache
+E:\rtrac BackUp\r-trac EPC_18072020\BussinessLayer\obj\Debug\BussinessLayer.dll
+E:\rtrac BackUp\r-trac EPC_18072020\BussinessLayer\obj\Debug\BussinessLayer.pdb
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Debug\BussinessLayer.dll
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Debug\BussinessLayer.pdb
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Debug\DataAccessLayer.dll
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Debug\EPC_GS1.dll
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Debug\TagDataTranslation-net.dll
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Debug\EntityFramework.dll
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Debug\RestSharp.dll
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Debug\DataAccessLayer.pdb
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Debug\EPC_GS1.pdb
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Debug\EntityFramework.xml
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Debug\RestSharp.xml
+E:\r-trac\Project\r-trac EPC\BussinessLayer\obj\Debug\BussinessLayer.csprojResolveAssemblyReference.cache
+E:\r-trac\Project\r-trac EPC\BussinessLayer\obj\Debug\BussinessLayer.dll
+E:\r-trac\Project\r-trac EPC\BussinessLayer\obj\Debug\BussinessLayer.pdb

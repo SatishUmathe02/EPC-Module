@@ -30,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EPC_GS1">
-      <HintPath>..\EPC_GS1\bin\Debug\EPC_GS1.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -68,6 +65,10 @@
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
       <Project>{2a378239-0725-4963-b360-761a94666564}</Project>
       <Name>DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EPC_GS1\EPC_GS1.csproj">
+      <Project>{e99321a1-d52a-4aa6-ba64-6f9aafa85c8c}</Project>
+      <Name>EPC_GS1</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

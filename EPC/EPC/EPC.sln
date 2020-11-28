@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "..\..\Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPCWeb", "EPCWeb\EPCWeb.csproj", "{D04F46CB-6F15-45ED-861F-CA617DAF884A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPCGerryWeber", "..\..\EPCGerryWeber\EPCGerryWeber.csproj", "{35AC52BB-4669-41CA-A9B4-86D05D141010}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPC_GS1", "..\..\EPC_GS1\EPC_GS1.csproj", "{E99321A1-D52A-4AA6-BA64-6F9AAFA85C8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{D04F46CB-6F15-45ED-861F-CA617DAF884A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D04F46CB-6F15-45ED-861F-CA617DAF884A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D04F46CB-6F15-45ED-861F-CA617DAF884A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35AC52BB-4669-41CA-A9B4-86D05D141010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35AC52BB-4669-41CA-A9B4-86D05D141010}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35AC52BB-4669-41CA-A9B4-86D05D141010}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35AC52BB-4669-41CA-A9B4-86D05D141010}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E99321A1-D52A-4AA6-BA64-6F9AAFA85C8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E99321A1-D52A-4AA6-BA64-6F9AAFA85C8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E99321A1-D52A-4AA6-BA64-6F9AAFA85C8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E99321A1-D52A-4AA6-BA64-6F9AAFA85C8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

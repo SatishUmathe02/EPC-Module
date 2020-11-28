@@ -44,6 +44,9 @@ namespace BussinessLayer
                     EPC_Res.CustomerID = EPC_Req.CustomerID;
                     EPC_Res.Quantity = EPC_Req.Quantity;
                     EPC_Res.GTIN = EPC_Req.GTIN;
+                    EPC_Res.AccessPWD = Obj.AccessPWD;
+                    EPC_Res.KillPWD = Obj.KillPWD;
+
                 }
                 catch (Exception Ex)
                 {

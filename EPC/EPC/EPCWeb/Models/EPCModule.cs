@@ -59,6 +59,9 @@ namespace EPCWeb.Models
         public string Remark { get; set; }
         //public string TransactionType { get; set; }
 
+        public string AccessPWD { get; set; }
+        public string KillPWD { get; set; }
+
 
     }
 

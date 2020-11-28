@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<rtracSettings>
+
+  <Client>
+    <Path>http://localhost/r-tracEPC</Path>
+     <WebApi>http://localhost/r-tracEPCapi/r-tracEPCapi</WebApi>
+    <!-- <WebApi>http://192.168.136.185:85</WebApi>
+    <WebApi>http://52.172.135.0:136</WebApi>-->
+    <ClientId></ClientId>
+    <Tenant>r-pac.co</Tenant>
+    <AADInstance>https://login.microsoftonline.com/{0}</AADInstance>
+    <PostLogoutRedirectUri>http://localhost:57310/</PostLogoutRedirectUri>
+  </Client>
+  <Image>
+    <rtracLogo>/NewContents/images/r-pac-logo.png</rtracLogo>
+    <multiLang>/NewContents/images/multi-lang.png</multiLang>
+    <loginIcon>/NewContents/images/ssl-icon-new.png</loginIcon>
+    <xlsIcon>/NewContents/images/excel.png</xlsIcon>
+  </Image>
+</rtracSettings>

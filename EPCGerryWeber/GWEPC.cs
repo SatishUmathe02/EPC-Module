@@ -85,6 +85,8 @@ namespace EPCGerryWeber
             string Password = Convert.ToString(ConfigurationManager.AppSettings["" + ProdOrDev + "_Password"]);
 
 
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             WebRequest request = (HttpWebRequest)WebRequest.Create(endPoint);
             request.Method = "POST";
 

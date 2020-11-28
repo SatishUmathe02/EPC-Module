@@ -1,0 +1,206 @@
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\ApplicationInsights.config
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\WebApi.dll.config
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\WebApi.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\WebApi.pdb
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\csc.exe
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\csc.exe.config
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\csc.rsp
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\csi.exe
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\csi.rsp
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\System.AppContext.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\System.Collections.Immutable.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\System.IO.FileSystem.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\System.Reflection.Metadata.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\vbc.exe
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\vbc.exe.config
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\vbc.rsp
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\VBCSCompiler.exe
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\roslyn\VBCSCompiler.exe.config
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\Antlr3.Runtime.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\BussinessLayer.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\DataAccessLayer.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\EntityFramework.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\EntityFramework.SqlServer.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\EPCGerryWeber.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\Microsoft.Web.Infrastructure.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\Newtonsoft.Json.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\System.Web.Helpers.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\System.Web.Mvc.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\System.Web.Optimization.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\System.Web.Razor.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\System.Web.WebPages.Deployment.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\System.Web.WebPages.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\System.Web.WebPages.Razor.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\WebGrease.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\TagDataTranslation-net.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\BussinessLayer.pdb
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\EPCGerryWeber.pdb
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\Antlr3.Runtime.pdb
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\DataAccessLayer.pdb
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\EntityFramework.xml
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\EntityFramework.SqlServer.xml
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\Newtonsoft.Json.xml
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\System.Web.Helpers.xml
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\System.Web.Mvc.xml
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\System.Web.Optimization.xml
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\System.Web.Razor.xml
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\System.Web.WebPages.xml
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\System.Web.WebPages.Deployment.xml
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\bin\System.Web.WebPages.Razor.xml
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\obj\Debug\WebApi.csprojResolveAssemblyReference.cache
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\obj\Debug\WebApi.dll
+E:\rtrac BackUp\r-trac EPC_18072020\WebApi\obj\Debug\WebApi.pdb
+E:\r-trac\Project\r-trac EPC\WebApi\bin\ApplicationInsights.config
+E:\r-trac\Project\r-trac EPC\WebApi\bin\WebApi.dll.config
+E:\r-trac\Project\r-trac EPC\WebApi\bin\WebApi.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\WebApi.pdb
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\csc.exe
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\csc.exe.config
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\csc.rsp
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\csi.exe
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\csi.rsp
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\System.AppContext.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\System.Collections.Immutable.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\System.IO.FileSystem.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\System.Reflection.Metadata.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\vbc.exe
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\vbc.exe.config
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\vbc.rsp
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\VBCSCompiler.exe
+E:\r-trac\Project\r-trac EPC\WebApi\bin\roslyn\VBCSCompiler.exe.config
+E:\r-trac\Project\r-trac EPC\WebApi\bin\Antlr3.Runtime.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\BussinessLayer.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\DataAccessLayer.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\EntityFramework.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\EntityFramework.SqlServer.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\EPCGerryWeber.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\Microsoft.Web.Infrastructure.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\Newtonsoft.Json.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\System.Web.Helpers.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\System.Web.Mvc.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\System.Web.Optimization.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\System.Web.Razor.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\System.Web.WebPages.Deployment.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\System.Web.WebPages.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\System.Web.WebPages.Razor.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\WebGrease.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\TagDataTranslation-net.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\EPC_GS1.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\RestSharp.dll
+E:\r-trac\Project\r-trac EPC\WebApi\bin\BussinessLayer.pdb
+E:\r-trac\Project\r-trac EPC\WebApi\bin\EPCGerryWeber.pdb
+E:\r-trac\Project\r-trac EPC\WebApi\bin\Antlr3.Runtime.pdb
+E:\r-trac\Project\r-trac EPC\WebApi\bin\DataAccessLayer.pdb
+E:\r-trac\Project\r-trac EPC\WebApi\bin\EntityFramework.xml
+E:\r-trac\Project\r-trac EPC\WebApi\bin\EntityFramework.SqlServer.xml
+E:\r-trac\Project\r-trac EPC\WebApi\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\r-trac\Project\r-trac EPC\WebApi\bin\Newtonsoft.Json.xml
+E:\r-trac\Project\r-trac EPC\WebApi\bin\System.Web.Helpers.xml
+E:\r-trac\Project\r-trac EPC\WebApi\bin\System.Web.Mvc.xml
+E:\r-trac\Project\r-trac EPC\WebApi\bin\System.Web.Optimization.xml
+E:\r-trac\Project\r-trac EPC\WebApi\bin\System.Web.Razor.xml
+E:\r-trac\Project\r-trac EPC\WebApi\bin\System.Web.WebPages.xml
+E:\r-trac\Project\r-trac EPC\WebApi\bin\System.Web.WebPages.Deployment.xml
+E:\r-trac\Project\r-trac EPC\WebApi\bin\System.Web.WebPages.Razor.xml
+E:\r-trac\Project\r-trac EPC\WebApi\bin\EPC_GS1.pdb
+E:\r-trac\Project\r-trac EPC\WebApi\bin\RestSharp.xml
+E:\r-trac\Project\r-trac EPC\WebApi\obj\Debug\WebApi.csprojResolveAssemblyReference.cache
+E:\r-trac\Project\r-trac EPC\WebApi\obj\Debug\WebApi.dll
+E:\r-trac\Project\r-trac EPC\WebApi\obj\Debug\WebApi.pdb
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\ApplicationInsights.config
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\WebApi.dll.config
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\WebApi.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\WebApi.pdb
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\csc.exe
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\csc.exe.config
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\csc.rsp
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\csi.exe
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\csi.rsp
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\System.AppContext.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\System.Collections.Immutable.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\System.IO.FileSystem.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\System.Reflection.Metadata.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\vbc.exe
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\vbc.exe.config
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\vbc.rsp
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\VBCSCompiler.exe
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\roslyn\VBCSCompiler.exe.config
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\Antlr3.Runtime.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\BussinessLayer.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\DataAccessLayer.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\EntityFramework.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\EntityFramework.SqlServer.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\EPCGerryWeber.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\Microsoft.Web.Infrastructure.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\Newtonsoft.Json.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\System.Web.Helpers.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\System.Web.Mvc.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\System.Web.Optimization.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\System.Web.Razor.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\System.Web.WebPages.Deployment.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\System.Web.WebPages.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\System.Web.WebPages.Razor.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\WebGrease.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\TagDataTranslation-net.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\EPC_GS1.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\RestSharp.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\BussinessLayer.pdb
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\EPCGerryWeber.pdb
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\Antlr3.Runtime.pdb
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\DataAccessLayer.pdb
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\EntityFramework.xml
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\EntityFramework.SqlServer.xml
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\Newtonsoft.Json.xml
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\System.Web.Helpers.xml
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\System.Web.Mvc.xml
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\System.Web.Optimization.xml
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\System.Web.Razor.xml
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\System.Web.WebPages.xml
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\System.Web.WebPages.Deployment.xml
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\System.Web.WebPages.Razor.xml
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\EPC_GS1.pdb
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\RestSharp.xml
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\obj\Debug\WebApi.csprojResolveAssemblyReference.cache
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\obj\Debug\WebApi.dll
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\obj\Debug\WebApi.pdb

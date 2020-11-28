@@ -1,0 +1,14 @@
+E:\r-trac\Project\r-trac EPC\BussinessLayer\obj\Release\BussinessLayer.csprojResolveAssemblyReference.cache
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Release\BussinessLayer.dll
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Release\BussinessLayer.pdb
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Release\DataAccessLayer.dll
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Release\EPC_GS1.dll
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Release\TagDataTranslation-net.dll
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Release\EntityFramework.dll
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Release\RestSharp.dll
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Release\DataAccessLayer.pdb
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Release\EPC_GS1.pdb
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Release\EntityFramework.xml
+E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Release\RestSharp.xml
+E:\r-trac\Project\r-trac EPC\BussinessLayer\obj\Release\BussinessLayer.dll
+E:\r-trac\Project\r-trac EPC\BussinessLayer\obj\Release\BussinessLayer.pdb

@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DataAccessLayer">
-      <HintPath>..\DataAccessLayer\bin\Debug\DataAccessLayer.dll</HintPath>
+      <HintPath>..\DataAccessLayer\bin\Release\DataAccessLayer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -53,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BussinessLayer\BussinessLayer.csproj">
-      <Project>{656663B7-E7B1-4534-938D-2F784BB67BB4}</Project>
+      <Project>{656663b7-e7b1-4534-938d-2f784bb67bb4}</Project>
       <Name>BussinessLayer</Name>
     </ProjectReference>
   </ItemGroup>
