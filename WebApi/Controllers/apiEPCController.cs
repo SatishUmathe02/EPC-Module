@@ -73,7 +73,9 @@ namespace WebApi.Controllers
 
             if (Request != null)
             {
-                if (Request.CustomerID == "GerryWeber")
+                //if (Request.CustomerID == "GerryWeber")
+                //Here we are checking the item code for GW which they will get from our EPC (r-trac EPC)
+                if ((Request.CustomerID == "GerryWeber") && (Request.CustomPara1 != "Catalog"))
                 {
                     EPCResponse ObjRes = Transaction_New_GWEPC.GetEPC_New(Request);
                     return ObjRes;
@@ -137,7 +139,7 @@ namespace WebApi.Controllers
                                 if (!flag)
                                 {
                                     ObjRes = EPCBLL.GetError(122);
-                                } 
+                                }
                                 break;
                             case "MANGO":
                                 flag = await EPCPasswordBLL.UpdatePassword_MANGO(Request.RPO, Request.DetailLineID);
@@ -158,7 +160,7 @@ namespace WebApi.Controllers
                         }
 
 
-                        return ObjRes; 
+                        return ObjRes;
                     }
                 }
 
