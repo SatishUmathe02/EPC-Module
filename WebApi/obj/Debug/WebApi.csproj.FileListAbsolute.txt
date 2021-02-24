@@ -185,9 +185,9 @@ E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\TagDataTranslation-net.dll
 E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\EPC_GS1.dll
 E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\RestSharp.dll
 E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\BussinessLayer.pdb
-E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\DataAccessLayer.pdb
 E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\EPCGerryWeber.pdb
 E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\Antlr3.Runtime.pdb
+E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\DataAccessLayer.pdb
 E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\EntityFramework.xml
 E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\EntityFramework.SqlServer.xml
 E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml

@@ -244,6 +244,6 @@ E:\r-trac\Project_GIT\r-trac EPC\EPC\EPC\EPCWeb\bin\Microsoft.Owin.Security.OAut
 E:\r-trac\Project_GIT\r-trac EPC\EPC\EPC\EPCWeb\bin\Microsoft.Owin.Security.Google.xml
 E:\r-trac\Project_GIT\r-trac EPC\EPC\EPC\EPCWeb\bin\Microsoft.Owin.Security.Twitter.xml
 E:\r-trac\Project_GIT\r-trac EPC\EPC\EPC\EPCWeb\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\r-trac\Project_GIT\r-trac EPC\EPC\EPC\EPCWeb\obj\Debug\EPCWeb.csprojResolveAssemblyReference.cache
 E:\r-trac\Project_GIT\r-trac EPC\EPC\EPC\EPCWeb\obj\Debug\EPCWeb.dll
 E:\r-trac\Project_GIT\r-trac EPC\EPC\EPC\EPCWeb\obj\Debug\EPCWeb.pdb
-E:\r-trac\Project_GIT\r-trac EPC\EPC\EPC\EPCWeb\obj\Debug\EPCWeb.csprojResolveAssemblyReference.cache

@@ -106,7 +106,6 @@ namespace DataAccessLayer
             List<usp_GetEPCCounterForModaPWD_Result> Obj = new List<usp_GetEPCCounterForModaPWD_Result>();
             using (EPC_DBEntities db = new EPC_DBEntities())
             {
-                db.Database.CommandTimeout = 0;
                 Obj = (from lst1 in db.usp_GetEPCCounterForModaPWD(RPO, DetailNo) select lst1).ToList();
             }
             return Obj;
@@ -120,8 +119,6 @@ namespace DataAccessLayer
             List<usp_GetEPCCounterForMANGO_PWD_Result> Obj = new List<usp_GetEPCCounterForMANGO_PWD_Result>();
             using (EPC_DBEntities db = new EPC_DBEntities())
             {
-
-                db.Database.CommandTimeout = 0;
                 Obj = (from lst1 in db.usp_GetEPCCounterForMANGO_PWD(RPO, DetailNo) select lst1).ToList();
             }
             return Obj;

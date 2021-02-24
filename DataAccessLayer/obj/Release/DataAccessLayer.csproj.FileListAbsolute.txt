@@ -7,13 +7,3 @@ E:\r-trac\Project\r-trac EPC\DataAccessLayer\bin\Release\EntityFramework.xml
 E:\r-trac\Project\r-trac EPC\DataAccessLayer\bin\Release\EntityFramework.SqlServer.xml
 E:\r-trac\Project\r-trac EPC\DataAccessLayer\obj\Release\DataAccessLayer.dll
 E:\r-trac\Project\r-trac EPC\DataAccessLayer\obj\Release\DataAccessLayer.pdb
-E:\r-trac\Project_GIT\r-trac EPC\DataAccessLayer\bin\Release\DataAccessLayer.dll.config
-E:\r-trac\Project_GIT\r-trac EPC\DataAccessLayer\bin\Release\DataAccessLayer.dll
-E:\r-trac\Project_GIT\r-trac EPC\DataAccessLayer\bin\Release\DataAccessLayer.pdb
-E:\r-trac\Project_GIT\r-trac EPC\DataAccessLayer\bin\Release\EntityFramework.dll
-E:\r-trac\Project_GIT\r-trac EPC\DataAccessLayer\bin\Release\EntityFramework.SqlServer.dll
-E:\r-trac\Project_GIT\r-trac EPC\DataAccessLayer\bin\Release\EntityFramework.xml
-E:\r-trac\Project_GIT\r-trac EPC\DataAccessLayer\bin\Release\EntityFramework.SqlServer.xml
-E:\r-trac\Project_GIT\r-trac EPC\DataAccessLayer\obj\Release\DataAccessLayer.dll
-E:\r-trac\Project_GIT\r-trac EPC\DataAccessLayer\obj\Release\DataAccessLayer.pdb
-E:\r-trac\Project_GIT\r-trac EPC\DataAccessLayer\obj\Release\DataAccessLayer.csprojResolveAssemblyReference.cache
