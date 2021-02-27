@@ -181,19 +181,6 @@ namespace DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_UpdateAssPassword_Moda", xMLParameter);
         }
     
-        public virtual ObjectResult<usp_GetEPCCounterForModaPWD_Result> usp_GetEPCCounterForModaPWD(Nullable<long> rPO, Nullable<long> detailNo)
-        {
-            var rPOParameter = rPO.HasValue ?
-                new ObjectParameter("RPO", rPO) :
-                new ObjectParameter("RPO", typeof(long));
-    
-            var detailNoParameter = detailNo.HasValue ?
-                new ObjectParameter("DetailNo", detailNo) :
-                new ObjectParameter("DetailNo", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetEPCCounterForModaPWD_Result>("usp_GetEPCCounterForModaPWD", rPOParameter, detailNoParameter);
-        }
-    
         public virtual int usp_InsertEmailTrigger(string varProject, string varRecipient, string varCC, string varBCC, string varReplyTo, string varSubject, string varBody, string varAttachmentName, Nullable<long> bigIntCreatedById, Nullable<System.DateTime> dtCreatedOn)
         {
             var varProjectParameter = varProject != null ?
@@ -331,19 +318,6 @@ namespace DataAccessLayer
                 new ObjectParameter("json", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GS1_Insert_Result>("usp_GS1_Insert", gtin14Parameter, customerIdParameter, jsonParameter);
-        }
-    
-        public virtual ObjectResult<usp_GetEPCCounterForMANGO_PWD_Result> usp_GetEPCCounterForMANGO_PWD(Nullable<long> rPO, Nullable<long> detailNo)
-        {
-            var rPOParameter = rPO.HasValue ?
-                new ObjectParameter("RPO", rPO) :
-                new ObjectParameter("RPO", typeof(long));
-    
-            var detailNoParameter = detailNo.HasValue ?
-                new ObjectParameter("DetailNo", detailNo) :
-                new ObjectParameter("DetailNo", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetEPCCounterForMANGO_PWD_Result>("usp_GetEPCCounterForMANGO_PWD", rPOParameter, detailNoParameter);
         }
     
         [DbFunction("EPC_DBEntities", "udf_EPC_Customer")]
@@ -500,19 +474,6 @@ namespace DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_InsertEmailTrigger_GS1", varProjectParameter, varRecipientParameter, varCCParameter, varBCCParameter, varReplyToParameter, varSubjectParameter, varBodyParameter, varAttachmentNameParameter, bigIntCreatedByIdParameter, dtCreatedOnParameter);
         }
     
-        public virtual ObjectResult<usp_GetEPCCounterForAlvaroMorenoPWD_Result> usp_GetEPCCounterForAlvaroMorenoPWD(Nullable<long> rPO, Nullable<long> detailNo)
-        {
-            var rPOParameter = rPO.HasValue ?
-                new ObjectParameter("RPO", rPO) :
-                new ObjectParameter("RPO", typeof(long));
-    
-            var detailNoParameter = detailNo.HasValue ?
-                new ObjectParameter("DetailNo", detailNo) :
-                new ObjectParameter("DetailNo", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetEPCCounterForAlvaroMorenoPWD_Result>("usp_GetEPCCounterForAlvaroMorenoPWD", rPOParameter, detailNoParameter);
-        }
-    
         public virtual ObjectResult<usp_GTIN_GetEPC_Result> usp_GTIN_GetEPC(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue)
         {
             var gtin14Parameter = gtin14 != null ?
@@ -580,6 +541,45 @@ namespace DataAccessLayer
                 new ObjectParameter("PartitionValue", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_Result>("usp_GTIN_GetEPC", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GetEPCCounterForAlvaroMorenoPWD_Result> usp_GetEPCCounterForAlvaroMorenoPWD(Nullable<long> rPO, Nullable<long> detailNo)
+        {
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailNoParameter = detailNo.HasValue ?
+                new ObjectParameter("DetailNo", detailNo) :
+                new ObjectParameter("DetailNo", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetEPCCounterForAlvaroMorenoPWD_Result>("usp_GetEPCCounterForAlvaroMorenoPWD", rPOParameter, detailNoParameter);
+        }
+    
+        public virtual ObjectResult<usp_GetEPCCounterForMANGO_PWD_Result> usp_GetEPCCounterForMANGO_PWD(Nullable<long> rPO, Nullable<long> detailNo)
+        {
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailNoParameter = detailNo.HasValue ?
+                new ObjectParameter("DetailNo", detailNo) :
+                new ObjectParameter("DetailNo", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetEPCCounterForMANGO_PWD_Result>("usp_GetEPCCounterForMANGO_PWD", rPOParameter, detailNoParameter);
+        }
+    
+        public virtual ObjectResult<usp_GetEPCCounterForModaPWD_Result> usp_GetEPCCounterForModaPWD(Nullable<long> rPO, Nullable<long> detailNo)
+        {
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailNoParameter = detailNo.HasValue ?
+                new ObjectParameter("DetailNo", detailNo) :
+                new ObjectParameter("DetailNo", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetEPCCounterForModaPWD_Result>("usp_GetEPCCounterForModaPWD", rPOParameter, detailNoParameter);
         }
     }
 }

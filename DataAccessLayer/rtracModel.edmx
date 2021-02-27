@@ -219,10 +219,6 @@
           <FunctionImport Name="usp_UpdateAssPassword_Moda">
           <Parameter Name="XML" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="usp_GetEPCCounterForModaPWD" ReturnType="Collection(rtracModel.usp_GetEPCCounterForModaPWD_Result)">
-            <Parameter Name="RPO" Mode="In" Type="Int64" />
-            <Parameter Name="DetailNo" Mode="In" Type="Int64" />
-          </FunctionImport>
           <FunctionImport Name="usp_InsertEmailTrigger">
             <Parameter Name="varProject" Mode="In" Type="String" />
             <Parameter Name="varRecipient" Mode="In" Type="String" />
@@ -261,10 +257,6 @@
             <Parameter Name="gtin14" Mode="In" Type="String" />
             <Parameter Name="CustomerId" Mode="In" Type="String" />
             <Parameter Name="json" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="usp_GetEPCCounterForMANGO_PWD" ReturnType="Collection(rtracModel.usp_GetEPCCounterForMANGO_PWD_Result)">
-            <Parameter Name="RPO" Mode="In" Type="Int64" />
-            <Parameter Name="DetailNo" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="udf_EPC_Customer" IsComposable="true" ReturnType="Collection(rtracModel.udf_EPC_Customer_Result)" />
           <FunctionImport Name="usp_GetEPCCustomer_TestingWeb" ReturnType="Collection(rtracModel.usp_GetEPCCustomer_TestingWeb_Result)" />
@@ -306,10 +298,6 @@
             <Parameter Name="bigIntCreatedById" Mode="In" Type="Int64" />
             <Parameter Name="dtCreatedOn" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="usp_GetEPCCounterForAlvaroMorenoPWD" ReturnType="Collection(rtracModel.usp_GetEPCCounterForAlvaroMorenoPWD_Result)">
-            <Parameter Name="RPO" Mode="In" Type="Int64" />
-            <Parameter Name="DetailNo" Mode="In" Type="Int64" />
-          </FunctionImport>
           <FunctionImport Name="usp_GTIN_GetEPC" ReturnType="Collection(rtracModel.usp_GTIN_GetEPC_Result)">
             <Parameter Name="gtin14" Mode="In" Type="String" />
             <Parameter Name="Qty" Mode="In" Type="Int64" />
@@ -327,6 +315,18 @@
             <Parameter Name="CustomPara2" Mode="In" Type="String" />
             <Parameter Name="GS1Prefix" Mode="In" Type="String" />
             <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetEPCCounterForAlvaroMorenoPWD" ReturnType="Collection(rtracModel.usp_GetEPCCounterForAlvaroMorenoPWD_Result)">
+            <Parameter Name="RPO" Mode="In" Type="Int64" />
+            <Parameter Name="DetailNo" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetEPCCounterForMANGO_PWD" ReturnType="Collection(rtracModel.usp_GetEPCCounterForMANGO_PWD_Result)">
+            <Parameter Name="RPO" Mode="In" Type="Int64" />
+            <Parameter Name="DetailNo" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetEPCCounterForModaPWD" ReturnType="Collection(rtracModel.usp_GetEPCCounterForModaPWD_Result)">
+            <Parameter Name="RPO" Mode="In" Type="Int64" />
+            <Parameter Name="DetailNo" Mode="In" Type="Int64" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_EPCIS_GetEP_URN_Result">
@@ -367,13 +367,6 @@
           <Property Type="Int64" Name="bigIntSerialNoLastUsed" Nullable="false" />
           <Property Type="Int64" Name="bigIntMaximumSerial" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="usp_GetEPCCounterForModaPWD_Result">
-          <Property Type="Int64" Name="bigIntRPO" Nullable="false" />
-          <Property Type="Int64" Name="bigIntDetailLineID" Nullable="false" />
-          <Property Type="String" Name="EPC" Nullable="false" />
-          <Property Type="String" Name="AccHexKey" Nullable="false" MaxLength="32" />
-          <Property Type="String" Name="KillHexKey" Nullable="false" MaxLength="32" />
-        </ComplexType>
         <ComplexType Name="usp_EPCIS_GetEPC_URN_RPO_Result">
           <Property Type="String" Name="CustomerId" Nullable="false" MaxLength="50" />
           <Property Type="Int64" Name="RPO" Nullable="true" />
@@ -413,13 +406,6 @@
         <ComplexType Name="usp_GS1_Insert_Result">
           <Property Type="String" Name="GS1Prefix" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="Partiton" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="usp_GetEPCCounterForMANGO_PWD_Result">
-          <Property Type="Int64" Name="bigIntRPO" Nullable="false" />
-          <Property Type="Int64" Name="bigIntDetailLineID" Nullable="false" />
-          <Property Type="String" Name="EPC" Nullable="false" />
-          <Property Type="String" Name="AccHexKey" Nullable="false" MaxLength="32" />
-          <Property Type="String" Name="KillHexKey" Nullable="false" MaxLength="32" />
         </ComplexType>
         <ComplexType Name="udf_EPC_Customer_Result">
           <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="50" />
@@ -464,13 +450,6 @@
           <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
         </ComplexType>
-        <ComplexType Name="usp_GetEPCCounterForAlvaroMorenoPWD_Result">
-          <Property Type="Int64" Name="bigIntRPO" Nullable="false" />
-          <Property Type="Int64" Name="bigIntDetailLineID" Nullable="false" />
-          <Property Type="String" Name="EPC" Nullable="false" />
-          <Property Type="String" Name="AccHexKey" Nullable="false" MaxLength="32" />
-          <Property Type="String" Name="KillHexKey" Nullable="false" MaxLength="32" />
-        </ComplexType>
         <ComplexType Name="usp_GTIN_GetEPC_Result">
           <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
           <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
@@ -481,6 +460,30 @@
           <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="usp_GetEPCCounterForAlvaroMorenoPWD_Result">
+          <Property Type="Int64" Name="bigintId" Nullable="false" />
+          <Property Type="Int64" Name="bigIntRPO" Nullable="false" />
+          <Property Type="Int64" Name="bigIntDetailLineID" Nullable="false" />
+          <Property Type="String" Name="EPC" Nullable="false" />
+          <Property Type="String" Name="AccHexKey" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="KillHexKey" Nullable="false" MaxLength="32" />
+        </ComplexType>
+        <ComplexType Name="usp_GetEPCCounterForMANGO_PWD_Result">
+          <Property Type="Int64" Name="bigintId" Nullable="false" />
+          <Property Type="Int64" Name="bigIntRPO" Nullable="false" />
+          <Property Type="Int64" Name="bigIntDetailLineID" Nullable="false" />
+          <Property Type="String" Name="EPC" Nullable="false" />
+          <Property Type="String" Name="AccHexKey" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="KillHexKey" Nullable="false" MaxLength="32" />
+        </ComplexType>
+        <ComplexType Name="usp_GetEPCCounterForModaPWD_Result">
+          <Property Type="Int64" Name="bigintId" Nullable="false" />
+          <Property Type="Int64" Name="bigIntRPO" Nullable="false" />
+          <Property Type="Int64" Name="bigIntDetailLineID" Nullable="false" />
+          <Property Type="String" Name="EPC" Nullable="false" />
+          <Property Type="String" Name="AccHexKey" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="KillHexKey" Nullable="false" MaxLength="32" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -547,17 +550,6 @@
           <FunctionImportMapping FunctionImportName="usp_GTIN_GetCustEPC" FunctionName="rtracModel.Store.usp_GTIN_GetCustEPC" />
           <FunctionImportMapping FunctionImportName="usp_AddErrorLog" FunctionName="rtracModel.Store.usp_AddErrorLog" />
           <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_Moda" FunctionName="rtracModel.Store.usp_UpdateAssPassword_Moda" />
-          <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForModaPWD" FunctionName="rtracModel.Store.usp_GetEPCCounterForModaPWD">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCounterForModaPWD_Result">
-                <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
-                <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
-                <ScalarProperty Name="EPC" ColumnName="EPC" />
-                <ScalarProperty Name="AccHexKey" ColumnName="AccHexKey" />
-                <ScalarProperty Name="KillHexKey" ColumnName="KillHexKey" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_InsertEmailTrigger" FunctionName="rtracModel.Store.usp_InsertEmailTrigger" />
           <FunctionImportMapping FunctionImportName="USP_GTIN_InsertEPCReqRes" FunctionName="rtracModel.Store.USP_GTIN_InsertEPCReqRes" />
           <FunctionImportMapping FunctionImportName="usp_EPCIS_GetEPC_URN_RPO" FunctionName="rtracModel.Store.usp_EPCIS_GetEPC_URN_RPO">
@@ -617,17 +609,6 @@
               <ComplexTypeMapping TypeName="rtracModel.usp_GS1_Insert_Result">
                 <ScalarProperty Name="GS1Prefix" ColumnName="GS1Prefix" />
                 <ScalarProperty Name="Partiton" ColumnName="Partiton" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForMANGO_PWD" FunctionName="rtracModel.Store.usp_GetEPCCounterForMANGO_PWD">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCounterForMANGO_PWD_Result">
-                <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
-                <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
-                <ScalarProperty Name="EPC" ColumnName="EPC" />
-                <ScalarProperty Name="AccHexKey" ColumnName="AccHexKey" />
-                <ScalarProperty Name="KillHexKey" ColumnName="KillHexKey" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -691,17 +672,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_InsertEmailTrigger_GS1" FunctionName="rtracModel.Store.usp_InsertEmailTrigger_GS1" />
-          <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForAlvaroMorenoPWD" FunctionName="rtracModel.Store.usp_GetEPCCounterForAlvaroMorenoPWD">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCounterForAlvaroMorenoPWD_Result">
-                <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
-                <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
-                <ScalarProperty Name="EPC" ColumnName="EPC" />
-                <ScalarProperty Name="AccHexKey" ColumnName="AccHexKey" />
-                <ScalarProperty Name="KillHexKey" ColumnName="KillHexKey" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC" FunctionName="rtracModel.Store.usp_GTIN_GetEPC">
             <ResultMapping>
               <ComplexTypeMapping TypeName="rtracModel.usp_GTIN_GetEPC_Result">
@@ -714,6 +684,42 @@
                 <ScalarProperty Name="Remark" ColumnName="Remark" />
                 <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
                 <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForAlvaroMorenoPWD" FunctionName="rtracModel.Store.usp_GetEPCCounterForAlvaroMorenoPWD">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCounterForAlvaroMorenoPWD_Result">
+                <ScalarProperty Name="bigintId" ColumnName="bigintId" />
+                <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
+                <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
+                <ScalarProperty Name="EPC" ColumnName="EPC" />
+                <ScalarProperty Name="AccHexKey" ColumnName="AccHexKey" />
+                <ScalarProperty Name="KillHexKey" ColumnName="KillHexKey" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForMANGO_PWD" FunctionName="rtracModel.Store.usp_GetEPCCounterForMANGO_PWD">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCounterForMANGO_PWD_Result">
+                <ScalarProperty Name="bigintId" ColumnName="bigintId" />
+                <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
+                <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
+                <ScalarProperty Name="EPC" ColumnName="EPC" />
+                <ScalarProperty Name="AccHexKey" ColumnName="AccHexKey" />
+                <ScalarProperty Name="KillHexKey" ColumnName="KillHexKey" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForModaPWD" FunctionName="rtracModel.Store.usp_GetEPCCounterForModaPWD">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCounterForModaPWD_Result">
+                <ScalarProperty Name="bigintId" ColumnName="bigintId" />
+                <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
+                <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
+                <ScalarProperty Name="EPC" ColumnName="EPC" />
+                <ScalarProperty Name="AccHexKey" ColumnName="AccHexKey" />
+                <ScalarProperty Name="KillHexKey" ColumnName="KillHexKey" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

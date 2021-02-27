@@ -9,3 +9,14 @@ E:\r-trac\Project\r-trac EPC\EPC_GS1\bin\Debug\EntityFramework.xml
 E:\r-trac\Project\r-trac EPC\EPC_GS1\obj\Debug\EPC_GS1.csprojResolveAssemblyReference.cache
 E:\r-trac\Project\r-trac EPC\EPC_GS1\obj\Debug\EPC_GS1.dll
 E:\r-trac\Project\r-trac EPC\EPC_GS1\obj\Debug\EPC_GS1.pdb
+E:\r-trac\Project_GIT\r-trac EPC\EPC_GS1\bin\Debug\EPC_GS1.dll
+E:\r-trac\Project_GIT\r-trac EPC\EPC_GS1\bin\Debug\EPC_GS1.pdb
+E:\r-trac\Project_GIT\r-trac EPC\EPC_GS1\bin\Debug\DataAccessLayer.dll
+E:\r-trac\Project_GIT\r-trac EPC\EPC_GS1\bin\Debug\RestSharp.dll
+E:\r-trac\Project_GIT\r-trac EPC\EPC_GS1\bin\Debug\EntityFramework.dll
+E:\r-trac\Project_GIT\r-trac EPC\EPC_GS1\bin\Debug\DataAccessLayer.pdb
+E:\r-trac\Project_GIT\r-trac EPC\EPC_GS1\bin\Debug\RestSharp.xml
+E:\r-trac\Project_GIT\r-trac EPC\EPC_GS1\bin\Debug\EntityFramework.xml
+E:\r-trac\Project_GIT\r-trac EPC\EPC_GS1\obj\Debug\EPC_GS1.csprojResolveAssemblyReference.cache
+E:\r-trac\Project_GIT\r-trac EPC\EPC_GS1\obj\Debug\EPC_GS1.dll
+E:\r-trac\Project_GIT\r-trac EPC\EPC_GS1\obj\Debug\EPC_GS1.pdb

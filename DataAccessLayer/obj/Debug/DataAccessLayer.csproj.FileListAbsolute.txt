@@ -10,3 +10,13 @@ E:\r-trac\Project\r-trac EPC\DataAccessLayer\bin\Debug\EntityFramework.xml
 E:\r-trac\Project\r-trac EPC\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml
 E:\r-trac\Project\r-trac EPC\DataAccessLayer\obj\Debug\DataAccessLayer.dll
 E:\r-trac\Project\r-trac EPC\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+E:\r-trac\Project_GIT\r-trac EPC\DataAccessLayer\bin\Debug\DataAccessLayer.dll.config
+E:\r-trac\Project_GIT\r-trac EPC\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+E:\r-trac\Project_GIT\r-trac EPC\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+E:\r-trac\Project_GIT\r-trac EPC\DataAccessLayer\bin\Debug\EntityFramework.dll
+E:\r-trac\Project_GIT\r-trac EPC\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.dll
+E:\r-trac\Project_GIT\r-trac EPC\DataAccessLayer\bin\Debug\EntityFramework.xml
+E:\r-trac\Project_GIT\r-trac EPC\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml
+E:\r-trac\Project_GIT\r-trac EPC\DataAccessLayer\obj\Debug\DataAccessLayer.csprojResolveAssemblyReference.cache
+E:\r-trac\Project_GIT\r-trac EPC\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+E:\r-trac\Project_GIT\r-trac EPC\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
