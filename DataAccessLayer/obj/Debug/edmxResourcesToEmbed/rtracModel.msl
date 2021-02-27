@@ -60,17 +60,6 @@
     <FunctionImportMapping FunctionImportName="usp_GTIN_GetCustEPC" FunctionName="rtracModel.Store.usp_GTIN_GetCustEPC" />
     <FunctionImportMapping FunctionImportName="usp_AddErrorLog" FunctionName="rtracModel.Store.usp_AddErrorLog" />
     <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_Moda" FunctionName="rtracModel.Store.usp_UpdateAssPassword_Moda" />
-    <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForModaPWD" FunctionName="rtracModel.Store.usp_GetEPCCounterForModaPWD">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCounterForModaPWD_Result">
-          <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
-          <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
-          <ScalarProperty Name="EPC" ColumnName="EPC" />
-          <ScalarProperty Name="AccHexKey" ColumnName="AccHexKey" />
-          <ScalarProperty Name="KillHexKey" ColumnName="KillHexKey" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="usp_InsertEmailTrigger" FunctionName="rtracModel.Store.usp_InsertEmailTrigger" />
     <FunctionImportMapping FunctionImportName="USP_GTIN_InsertEPCReqRes" FunctionName="rtracModel.Store.USP_GTIN_InsertEPCReqRes" />
     <FunctionImportMapping FunctionImportName="usp_EPCIS_GetEPC_URN_RPO" FunctionName="rtracModel.Store.usp_EPCIS_GetEPC_URN_RPO">
@@ -130,17 +119,6 @@
         <ComplexTypeMapping TypeName="rtracModel.usp_GS1_Insert_Result">
           <ScalarProperty Name="GS1Prefix" ColumnName="GS1Prefix" />
           <ScalarProperty Name="Partiton" ColumnName="Partiton" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForMANGO_PWD" FunctionName="rtracModel.Store.usp_GetEPCCounterForMANGO_PWD">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCounterForMANGO_PWD_Result">
-          <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
-          <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
-          <ScalarProperty Name="EPC" ColumnName="EPC" />
-          <ScalarProperty Name="AccHexKey" ColumnName="AccHexKey" />
-          <ScalarProperty Name="KillHexKey" ColumnName="KillHexKey" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -204,17 +182,6 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="usp_InsertEmailTrigger_GS1" FunctionName="rtracModel.Store.usp_InsertEmailTrigger_GS1" />
-    <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForAlvaroMorenoPWD" FunctionName="rtracModel.Store.usp_GetEPCCounterForAlvaroMorenoPWD">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCounterForAlvaroMorenoPWD_Result">
-          <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
-          <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
-          <ScalarProperty Name="EPC" ColumnName="EPC" />
-          <ScalarProperty Name="AccHexKey" ColumnName="AccHexKey" />
-          <ScalarProperty Name="KillHexKey" ColumnName="KillHexKey" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC" FunctionName="rtracModel.Store.usp_GTIN_GetEPC">
       <ResultMapping>
         <ComplexTypeMapping TypeName="rtracModel.usp_GTIN_GetEPC_Result">
@@ -227,6 +194,42 @@
           <ScalarProperty Name="Remark" ColumnName="Remark" />
           <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
           <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForAlvaroMorenoPWD" FunctionName="rtracModel.Store.usp_GetEPCCounterForAlvaroMorenoPWD">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCounterForAlvaroMorenoPWD_Result">
+          <ScalarProperty Name="bigintId" ColumnName="bigintId" />
+          <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
+          <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
+          <ScalarProperty Name="EPC" ColumnName="EPC" />
+          <ScalarProperty Name="AccHexKey" ColumnName="AccHexKey" />
+          <ScalarProperty Name="KillHexKey" ColumnName="KillHexKey" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForMANGO_PWD" FunctionName="rtracModel.Store.usp_GetEPCCounterForMANGO_PWD">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCounterForMANGO_PWD_Result">
+          <ScalarProperty Name="bigintId" ColumnName="bigintId" />
+          <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
+          <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
+          <ScalarProperty Name="EPC" ColumnName="EPC" />
+          <ScalarProperty Name="AccHexKey" ColumnName="AccHexKey" />
+          <ScalarProperty Name="KillHexKey" ColumnName="KillHexKey" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForModaPWD" FunctionName="rtracModel.Store.usp_GetEPCCounterForModaPWD">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCounterForModaPWD_Result">
+          <ScalarProperty Name="bigintId" ColumnName="bigintId" />
+          <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
+          <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
+          <ScalarProperty Name="EPC" ColumnName="EPC" />
+          <ScalarProperty Name="AccHexKey" ColumnName="AccHexKey" />
+          <ScalarProperty Name="KillHexKey" ColumnName="KillHexKey" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

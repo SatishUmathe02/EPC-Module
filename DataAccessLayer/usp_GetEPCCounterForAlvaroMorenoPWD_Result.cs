@@ -13,6 +13,7 @@ namespace DataAccessLayer
     
     public partial class usp_GetEPCCounterForAlvaroMorenoPWD_Result
     {
+        public long bigintId { get; set; }
         public long bigIntRPO { get; set; }
         public long bigIntDetailLineID { get; set; }
         public string EPC { get; set; }

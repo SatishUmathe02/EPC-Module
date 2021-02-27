@@ -41,6 +41,7 @@ namespace BussinessLayer
                     foreach (var item in epclist)
                     {
                         xml.Append("<Password>");
+                        xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
                         xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
                         xml.Append("<EPC>" + item.EPC + "</EPC>");
                         xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.AccHexKey) + "</AccesPwd>");
@@ -93,6 +94,7 @@ namespace BussinessLayer
                     foreach (var item in epclist)
                     {
                         xml.Append("<Password>");
+                        xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
                         xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
                         xml.Append("<EPC>" + item.EPC + "</EPC>");
                         xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.AccHexKey) + "</AccesPwd>");
@@ -133,6 +135,7 @@ namespace BussinessLayer
                     foreach (var item in epclist)
                     {
                         xml.Append("<Password>");
+                        xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
                         xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
                         xml.Append("<EPC>" + item.EPC + "</EPC>");
                         xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.AccHexKey) + "</AccesPwd>");
