@@ -42,11 +42,13 @@ namespace DataAccessLayer
             {
                 using (EPC_DBEntities db = new EPC_DBEntities())
                 {
-                    if (qty >= 40000)
+                    // if (qty >= 40000)
+                    if (qty >= 20000)
                     {
                         db.Database.CommandTimeout = 0;
 
                     }
+                    
                     Obj = (from lst1 in db.usp_GTIN_GetEPC(gtin14, qty, transaction, schema, customerId, customerName, Event, UserId, SerialStart, EPC, RPO, DetailLineNo, CustomPara1, CustomPara2, GS1Prefix, PartionVal) select lst1).ToList().FirstOrDefault();
                 }
             }
