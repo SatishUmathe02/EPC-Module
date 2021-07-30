@@ -83,17 +83,17 @@ namespace WebApi.Controllers
         #region GS1 SERVICE
         [HttpGet]
         [Route("api/apiEPC/Get_GS1_Service")]
-        public GS1Response Get_GS1_Service(string GTIN,string CustomerId)
+        public GS1Response Get_GS1_Service(string GTIN, string CustomerId)
         {
             GS1Response ObjGS1 = new GS1Response();
             EPCRequest ObjEPC = new EPCRequest();
             ObjEPC.GTIN = GTIN;
             ObjEPC.CustomerID = CustomerId;
             var GS1_Response = GS1_IntergrationBLL.GS1_apiResponse_Restapi(ObjEPC);
-            
+
             try
             {
-                
+
                 ObjGS1.GS1List = JsonConvert.DeserializeObject<List<GS1>>(GS1_Response);
             }
             catch (Exception ex)
@@ -101,6 +101,15 @@ namespace WebApi.Controllers
                 ObjGS1.Error = GS1_Response;
             }
             return ObjGS1;
+        }
+        #endregion
+
+        #region EPC TEST GTIN PARAMTER
+        [HttpGet]
+        [Route("api/apiEPC/GetEPCTestRequestParam")]
+        public List<EPCRequest> GetEPCTestRequestParam()
+        {
+            return GTINBLL.GetEPCTestRequestParam();
         }
         #endregion
     }

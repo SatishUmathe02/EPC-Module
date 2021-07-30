@@ -46,6 +46,8 @@ namespace DataAccessLayer.CommonDataModels
         public bool GS1apiRequired { get; set; }
         public int PartitionValue { get; set; }
 
+        public string RequestStartTime { get; set; }
+
     }
     public class EPCResponse
     {

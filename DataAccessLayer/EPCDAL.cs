@@ -35,21 +35,21 @@ namespace DataAccessLayer
 
 
         #region GET EPC VIA STORE PROCEDURE
-        public static usp_GTIN_GetEPC_Result GetEPC(string gtin14, long qty, string transaction, string schema, string customerId, string customerName, string Event, long UserId, long SerialStart, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, string GS1Prefix, int PartionVal)
+        public static usp_GTIN_GetEPC_Result GetEPC(string gtin14, long qty, string transaction, string schema, string customerId, string customerName, string Event, long UserId, long SerialStart, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, string GS1Prefix, int PartionVal, DateTime EPCStartDateTime)
         {
             usp_GTIN_GetEPC_Result Obj = new usp_GTIN_GetEPC_Result();
             try
             {
                 using (EPC_DBEntities db = new EPC_DBEntities())
                 {
-                    // if (qty >= 40000)
-                    if (qty >= 20000)
+                    if (qty >= 40000)
                     {
                         db.Database.CommandTimeout = 0;
 
                     }
-                    
-                    Obj = (from lst1 in db.usp_GTIN_GetEPC(gtin14, qty, transaction, schema, customerId, customerName, Event, UserId, SerialStart, EPC, RPO, DetailLineNo, CustomPara1, CustomPara2, GS1Prefix, PartionVal) select lst1).ToList().FirstOrDefault();
+
+                    Obj = (from lst1 in db.usp_GTIN_GetEPC(gtin14, qty, transaction, schema, customerId, customerName, Event, UserId, SerialStart, EPC, RPO, DetailLineNo, CustomPara1, CustomPara2, GS1Prefix, PartionVal, EPCStartDateTime) select lst1).ToList().FirstOrDefault();
+
                 }
             }
             catch (Exception ex)
@@ -251,5 +251,18 @@ namespace DataAccessLayer
             }
 
         }
+
+        #region EPC TEST SERVICE
+        public static List<usp_GetCustomerWithGTIN_Parameters_Result> GetCustomerWithGTINParameter()
+        {
+            List<usp_GetCustomerWithGTIN_Parameters_Result> lst = null;
+            using (EPC_DBEntities db = new EPC_DBEntities())
+            {
+                lst = (from lst1 in db.usp_GetCustomerWithGTIN_Parameters() select lst1).ToList();
+            }
+
+            return lst;
+        }
+        #endregion
     }
 }

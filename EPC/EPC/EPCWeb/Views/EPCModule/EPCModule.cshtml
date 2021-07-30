@@ -53,22 +53,25 @@
 
 
                             <br /><br /><br /><br /><br /><br /><br /><br /><br />
-                            
-                            <input type="submit" class="btn btn-primary red" id="btnSearch" onclick="return SubmitBtnAction();"  value="Submit">
+
+                            <input type="submit" class="btn btn-primary red" id="btnSearch" onclick="return SubmitBtnAction();" value="Submit">
 
 
                         </div>
                         <div class="col-md-5">
-                            <table>
-                                <tr><td><label>EPCStart:</label></td><td></td><td>@Model.EPCResponse.EPCStart</td></tr>
-                                <tr><td><label>EPCEnd:</label></td><td></td><td>@Model.EPCResponse.EPCEnd</td></tr>
-                                <tr><td><label>SerialStart:</label></td><td></td><td>@Model.EPCResponse.SerialStart</td></tr>
-                                <tr><td><label>SerialEnd:</label></td><td></td><td>@Model.EPCResponse.SerialEnd</td></tr>
-                                <tr><td><label>CustomerID:</label></td><td></td><td>@Model.EPCResponse.CustomerID</td></tr>
-                                <tr><td><label>GTIN:</label></td><td></td><td>@Model.EPCResponse.GTIN</td></tr>
-                                <tr><td><label>Quantity:</label></td><td></td><td>@Model.EPCResponse.Quantity</td></tr>
-                                <tr><td style="vertical-align:top"><label>Remark:</label></td><td></td><td>@Model.EPCResponse.Remark</td></tr>
-                            </table>
+                            @if (@Model.EPCResponse != null)
+                            {
+                                <table>
+                                    <tr><td><label>EPCStart:</label></td><td></td><td>@Model.EPCResponse.EPCStart</td></tr>
+                                    <tr><td><label>EPCEnd:</label></td><td></td><td>@Model.EPCResponse.EPCEnd</td></tr>
+                                    <tr><td><label>SerialStart:</label></td><td></td><td>@Model.EPCResponse.SerialStart</td></tr>
+                                    <tr><td><label>SerialEnd:</label></td><td></td><td>@Model.EPCResponse.SerialEnd</td></tr>
+                                    <tr><td><label>CustomerID:</label></td><td></td><td>@Model.EPCResponse.CustomerID</td></tr>
+                                    <tr><td><label>GTIN:</label></td><td></td><td>@Model.EPCResponse.GTIN</td></tr>
+                                    <tr><td><label>Quantity:</label></td><td></td><td>@Model.EPCResponse.Quantity</td></tr>
+                                    <tr><td style="vertical-align:top"><label>Remark:</label></td><td></td><td>@Model.EPCResponse.Remark</td></tr>
+                                </table>
+                            }
                         </div>
                     </div>
 
@@ -89,30 +92,30 @@
                                         <th>Kill PWD</th>
                                         </thead>
                                         @foreach (var item in Model.EPCCounterList)
-                                    {
+                                        {
 
-                                        <tr>
-                                            <td>
-                                                @item.LineNo
-                                            </td>
-                                            <td>
-                                                @item.GTIN
-                                            </td>
-                                            <td>
-                                                @item.EPC
-                                            </td>
-                                            <td>
-                                                @item.SerialNo
-                                            </td>
-                                            <td>
-                                                @item.Password
-                                            </td>
-                                            <td>
-                                                @item.KillPassword
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>
+                                                    @item.LineNo
+                                                </td>
+                                                <td>
+                                                    @item.GTIN
+                                                </td>
+                                                <td>
+                                                    @item.EPC
+                                                </td>
+                                                <td>
+                                                    @item.SerialNo
+                                                </td>
+                                                <td>
+                                                    @item.Password
+                                                </td>
+                                                <td>
+                                                    @item.KillPassword
+                                                </td>
+                                            </tr>
 
-                                    }
+                                        }
 
                                     </table>
                                 </div>
@@ -156,7 +159,7 @@
                                         </table>
                                     </div>
                                     <div>
-                                       
+
                                     </div>
 
 
@@ -204,6 +207,94 @@
                             </div>
                         </div>
 
+
+                    </div>
+                    @*}
+
+                        @using (Html.BeginForm("GetEPCTestReport", "EPCModule", FormMethod.Post, new { @class = "form -horizontal", @id = "contactForm" }))
+                        {*@
+                    <div class="active" id="costHead">
+                        <br />
+
+
+
+                        <div class="row form-group" style="margin:10px; display:block">
+
+                            <div class="col-md-5">
+                                <label>EPC Module Test Respot</label>
+
+                            </div>
+
+                            <div class="col-md-2">
+
+
+                                <input type="submit" class="btn btn-primary red" id="btnSearch" name="TestReport" value="TestReport">
+
+
+                            </div>
+
+                        </div>
+
+                        @if (Model.ListEPCResponse != null)
+                        {
+                            if (Model.ListEPCResponse.Count > 0)
+                            {
+                                <hr style="margin-top: 5px !important ;margin-bottom: 5px !important;">
+                                <div class="row form-group" style="margin:10px;">
+                                    <div class="col-md-12">
+                                        <h3>EPC Customer Report Data</h3>
+                                        <div>
+                                            <table id="t01">
+                                                <thead>
+                                                <th>CustomerId</th>
+                                                <th>GTIN</th>
+                                                <th>EPC Start</th>
+                                                <th>EPC End</th>
+                                                <th>Qty</th>
+                                                <th>Serial Start</th>
+                                                <th>Serial End</th>
+                                                <th>Remark</th>
+                                                </thead>
+                                                @foreach (var item in Model.ListEPCResponse)
+                                                {
+
+                                                    <tr>
+                                                        <td>
+                                                            @item.CustomerID
+                                                        </td>
+                                                        <td>
+                                                            @item.GTIN
+                                                        </td>
+                                                        <td>
+                                                            @item.EPCStart
+                                                        </td>
+                                                        <td>
+                                                            @item.EPCEnd
+                                                        </td>
+                                                        <td>
+                                                            @item.Quantity
+                                                        </td>
+                                                        <td>
+                                                            @item.SerialStart
+                                                        </td>
+                                                        <td>
+                                                            @item.SerialEnd
+                                                        </td>
+                                                        <td>
+                                                            @item.Remark
+
+                                                        </td>
+                                                    </tr>
+
+                                                }
+
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            }
+                        }
 
                     </div>
                 }
@@ -274,20 +365,17 @@
 
 <script type="text/javascript">
 
-    function SubmitBtnAction()
-    {
+    function SubmitBtnAction() {
         var Meg = "This action will increment the serial number in the EPC module permanently and cannot be reversed. Are you sure you want to proceed?";
 
         var g = confirm(Meg);
 
-        if (g == true)
-        {
+        if (g == true) {
             return true
-        }else
-        {
+        } else {
             return false
         }
-        
+
     }
 
     function JsonChange() {

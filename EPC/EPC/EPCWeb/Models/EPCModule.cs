@@ -36,6 +36,8 @@ namespace EPCWeb.Models
         public List<GS1> GS1_Info { get; set; }
         public string GS1_Error { get; set; }
 
+        public List<EPCResponse> ListEPCResponse { get; set; }
+
     }
 
     public class EPCRequest : EPCDO

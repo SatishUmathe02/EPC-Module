@@ -86,29 +86,51 @@ namespace EPCWeb.Controllers
             }
         }
 
-        public ActionResult GetJSONResponse(EPCModel Obj)
+        public ActionResult GetJSONResponse(EPCModel Obj, string TestReport)
         {
             try
             {
+                Obj.EPCRequest = JsonConvert.DeserializeObject<EPCRequest>(Obj.Request);
+
+                if (string.IsNullOrEmpty(TestReport))
+                {
+                    GetEPC(Obj);
+                                                            
+                    if (Obj.EPCResponse.Remark == "Success")
+                    {
+                        Obj.EPCCounterList = GetEPCCounter_RPO_SerialNum(Obj.EPCResponse.GTIN, Obj.EPCRequest.RPO, Obj.EPCRequest.DetailLineID, Convert.ToInt64(Obj.EPCResponse.SerialStart), Convert.ToInt64(Obj.EPCResponse.SerialEnd));
+                    }
+                    else
+                    {
+                        Obj.EPCCounterList = new List<EPCCounter>();
+                        Obj.GS1_Info = new List<GS1>();
+                    }
+                    Obj.EPCResponse = JsonConvert.DeserializeObject<EPCResponse>(Obj.Response);
+                }
+                else
+                {
+                    Obj.ListEPCResponse = EPCTestReport(Obj);
+                    
+                    Obj.EPCResponse = Obj.ListEPCResponse.FirstOrDefault();
+                    Obj.EPCCounterList = new List<EPCCounter>();
+                    Obj.GS1_Info = new List<GS1>();
+
+                    var jsonReq = new JavaScriptSerializer().Serialize(Obj.ListEPCResponse);
+                    JToken parsedJson = JToken.Parse(jsonReq);
+                    Obj.Response = parsedJson.ToString(Formatting.Indented);
+                    ViewBag.Response = Obj.Response;
+                }
                 
-                GetEPC(Obj);
+                
+                Obj.CustomerList = GetCustomerList();
+
             }
             catch (Exception ex)
             {
                 Obj.Response = ex.ToString();
                 ViewBag.Response = ex.ToString();
             }
-            Obj.CustomerList = GetCustomerList();
-            Obj.EPCRequest = JsonConvert.DeserializeObject<EPCRequest>(Obj.Request);
-            Obj.EPCResponse = JsonConvert.DeserializeObject<EPCResponse>(Obj.Response);
-            if (Obj.EPCResponse.Remark == "Success")
-            {
-                Obj.EPCCounterList = GetEPCCounter_RPO_SerialNum(Obj.EPCResponse.GTIN, Obj.EPCRequest.RPO, Obj.EPCRequest.DetailLineID, Convert.ToInt64(Obj.EPCResponse.SerialStart), Convert.ToInt64(Obj.EPCResponse.SerialEnd));
-            }else
-            {
-                Obj.EPCCounterList = new List<EPCCounter>();
-                Obj.GS1_Info = new List<GS1>();
-            }
+           
             
             return View("EPCModule", Obj);
         }
@@ -385,6 +407,67 @@ namespace EPCWeb.Controllers
             }
 
             return Objlist;
+        }
+        #endregion
+
+        #region EPC TEST REPORT
+        //public ActionResult GetEPCTestReport(EPCModel Obj)
+        //{
+            
+        //    try
+        //    {
+
+        //        Obj.ListEPCResponse = EPCTestReport(Obj);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Obj.Response = ex.ToString();
+        //        ViewBag.Response = ex.ToString();
+        //    }
+        //    Obj.CustomerList = GetCustomerList();
+        //    Obj.EPCRequest = JsonConvert.DeserializeObject<EPCRequest>(Obj.Request);
+        //    Obj.EPCResponse = JsonConvert.DeserializeObject<EPCResponse>(Obj.Response);
+
+        //    var jsonReq = new JavaScriptSerializer().Serialize(Obj.ListEPCResponse);
+        //    JToken parsedJson = JToken.Parse(jsonReq);
+        //    Obj.Response = parsedJson.ToString(Formatting.Indented);
+        //    ViewBag.Response = Obj.Response;
+
+        //    return View("EPCModule", Obj);
+        //}
+        private List<EPCResponse> EPCTestReport(EPCModel Obj)
+        {
+            EPCRequest ReqObj = JsonConvert.DeserializeObject<EPCRequest>(Obj.Request);
+
+            List<EPCRequest> ObjReq = new List<EPCRequest>();
+            List<EPCResponse> ObjRes = new List<EPCResponse>();
+
+
+            HttpResponseMessage Res = GlobalVariables.WebApiClient.GetAsync("api/apiEPC/GetEPCTestRequestParam").Result;
+            if (Res.IsSuccessStatusCode)
+            {
+                var result = Res.Content.ReadAsStringAsync().Result;
+                ObjReq = JsonConvert.DeserializeObject<List<EPCRequest>>(result);
+            }
+
+            for (int i = 0; i < ObjReq.Count(); i++)
+            {
+                
+                ReqObj.GTIN = ObjReq[i].GTIN;
+                ReqObj.CustomerID = ObjReq[i].CustomerID;
+                ReqObj.CustomerName = ObjReq[i].CustomerName;
+                ReqObj.CustomPara1 = ObjReq[i].CustomPara1;
+                ReqObj.CustomPara2 = "Test EPC";
+                                
+                
+                HttpResponseMessage Res_EPC = new HttpResponseMessage();
+                Res_EPC = GlobalVariables.WebApiClient.PostAsJsonAsync("api/apiEPC/GetEPC", ReqObj).Result;
+                var result = Res_EPC.Content.ReadAsStringAsync().Result;
+                ObjRes.Add(JsonConvert.DeserializeObject<EPCResponse>(result));
+            }
+
+            return ObjRes;
+
         }
         #endregion
     }

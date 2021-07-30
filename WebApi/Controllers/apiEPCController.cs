@@ -46,6 +46,8 @@ namespace WebApi.Controllers
 
             try
             {
+                Request.RequestStartTime = System.DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss.fff");
+
                 if (Request.TransactionType == "New" || Request.TransactionType == "Encode")
                 {
                     ObjRes = await Run_GetEPC(Request);
@@ -180,6 +182,7 @@ namespace WebApi.Controllers
 
             try
             {
+                Request.RequestStartTime = System.DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss.fff");
                 ObjRes = await Run_GetEPCEncode(Request);
 
                 return Ok(ObjRes);
@@ -220,6 +223,7 @@ namespace WebApi.Controllers
 
             try
             {
+                Request.RequestStartTime = System.DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss.fff");
                 ObjRes = await Run_GetEPCDecode(Request);
 
                 return Ok(ObjRes);
@@ -249,7 +253,6 @@ namespace WebApi.Controllers
                 return EPCBLL.GetError(107);
             }
         }
-
 
 
 

@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.CommonDataModels;
+﻿using DataAccessLayer;
+using DataAccessLayer.CommonDataModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,6 +84,23 @@ namespace BussinessLayer
             }
 
             return Obj;
+        }
+
+        public static List<EPCRequest> GetEPCTestRequestParam()
+        {
+            List<EPCRequest> ObjRes = new List<EPCRequest>();
+
+            ObjRes = (from c in EPCDAL.GetCustomerWithGTINParameter()
+                      select new EPCRequest()
+                      {
+                          CustomerID=c.CustomerId,
+                          CustomerName=c.CustomerName,
+                          GTIN=c.GTIN,
+                          CustomPara1=c.CustomePara
+                      }).ToList();
+
+            
+            return ObjRes;
         }
     }
 

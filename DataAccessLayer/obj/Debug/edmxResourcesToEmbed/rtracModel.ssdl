@@ -38,6 +38,7 @@
     <Parameter Name="URL" Type="varchar" Mode="In" />
   </Function>
   <Function Name="usp_GetCustomerCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_GetCustomerWithGTIN_Parameters" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="usp_GetEPCCounter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="RPO" Type="bigint" Mode="In" />
   </Function>
@@ -89,6 +90,7 @@
     <Parameter Name="CustomPara1" Type="varchar" Mode="In" />
     <Parameter Name="CustomPara2" Type="varchar" Mode="In" />
     <Parameter Name="Partition" Type="int" Mode="In" />
+    <Parameter Name="Event" Type="varchar" Mode="In" />
     <Parameter Name="Result" Type="varchar" Mode="InOut" />
   </Function>
   <Function Name="usp_GTIN_GetEPC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -108,6 +110,7 @@
     <Parameter Name="CustomPara2" Type="varchar" Mode="In" />
     <Parameter Name="GS1Prefix" Type="varchar" Mode="In" />
     <Parameter Name="PartitionValue" Type="int" Mode="In" />
+    <Parameter Name="EPCStartDateTime" Type="datetime" Mode="In" />
   </Function>
   <Function Name="usp_GTIN_GetEPC_GerryWeber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="gtin14" Type="varchar" Mode="In" />
