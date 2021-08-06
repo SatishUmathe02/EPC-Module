@@ -46,7 +46,9 @@ namespace WebApi.Controllers
 
             try
             {
-                Request.RequestStartTime = System.DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss.fff");
+                                
+                Request.RequestStartTime = System.DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff");
+                              
 
                 if (Request.TransactionType == "New" || Request.TransactionType == "Encode")
                 {
