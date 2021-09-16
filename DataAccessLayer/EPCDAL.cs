@@ -43,7 +43,7 @@ namespace DataAccessLayer
                 using (EPC_DBEntities db = new EPC_DBEntities())
                 {
                     //if (qty >= 40000)
-                    if (qty >= 10000)
+                    if (qty >= 8000)
                     {
                         db.Database.CommandTimeout = 0;
 
