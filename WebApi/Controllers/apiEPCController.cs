@@ -75,6 +75,13 @@ namespace WebApi.Controllers
 
             //Obj = JsonConvert.DeserializeObject<EPCRequest>(Request);
 
+            if (Request.Quantity <= 0)
+            {
+                EPCResponse ObjRes = new EPCResponse();
+                return ObjRes = EPCBLL.GetError(123);
+            }
+
+
             if (Request != null)
             {
                 //if (Request.CustomerID == "GerryWeber")
