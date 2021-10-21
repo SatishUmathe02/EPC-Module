@@ -264,5 +264,28 @@ namespace DataAccessLayer
             return lst;
         }
         #endregion
+
+        #region GET EPC DETAILS VIA STORE PROCEDURE
+        public static usp_GetEPCDetails_Result GetEPCDetail(string Gtin, int Qty, string CustomerId, long RPO, long DetailLineNo)
+        {
+            usp_GetEPCDetails_Result Obj = new usp_GetEPCDetails_Result();
+            try
+            {
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+                   
+                    Obj = (from lst1 in db.usp_GetEPCDetails(CustomerId, Gtin, Qty, RPO, DetailLineNo) select lst1).ToList().FirstOrDefault();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            return Obj;
+        }
+
+
+        #endregion
     }
 }

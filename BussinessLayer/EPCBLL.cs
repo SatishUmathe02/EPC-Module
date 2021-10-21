@@ -91,7 +91,9 @@ namespace BussinessLayer
                 case 122:
                     EPC_Res.Remark = "Failed";
                     break;
-
+                case 123:
+                    EPC_Res.Remark = "EPC Error Occurred: Quantity must be greater than 0";
+                    break;
 
                 default:
                     EPC_Res.Remark = "Error: Invalid request";

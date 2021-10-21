@@ -594,5 +594,30 @@ namespace DataAccessLayer
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetCustomerWithGTIN_Parameters_Result>("usp_GetCustomerWithGTIN_Parameters");
         }
+    
+        public virtual ObjectResult<usp_GetEPCDetails_Result> usp_GetEPCDetails(string customerId, string gTIN, Nullable<int> qty, Nullable<long> rPO, Nullable<long> detailNo)
+        {
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var gTINParameter = gTIN != null ?
+                new ObjectParameter("GTIN", gTIN) :
+                new ObjectParameter("GTIN", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(int));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailNoParameter = detailNo.HasValue ?
+                new ObjectParameter("DetailNo", detailNo) :
+                new ObjectParameter("DetailNo", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetEPCDetails_Result>("usp_GetEPCDetails", customerIdParameter, gTINParameter, qtyParameter, rPOParameter, detailNoParameter);
+        }
     }
 }

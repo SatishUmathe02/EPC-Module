@@ -67,6 +67,13 @@
           <Parameter Name="DetailNo" Type="bigint" Mode="In" />
         </Function>
         <Function Name="usp_GetEPCCustomer_TestingWeb" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_GetEPCDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerId" Type="varchar" Mode="In" />
+          <Parameter Name="GTIN" Type="varchar" Mode="In" />
+          <Parameter Name="Qty" Type="int" Mode="In" />
+          <Parameter Name="RPO" Type="bigint" Mode="In" />
+          <Parameter Name="DetailNo" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="usp_GetEPCLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_GetEPCSerial" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_GetSerialNoGTIN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -334,6 +341,13 @@
             <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="usp_GetCustomerWithGTIN_Parameters" ReturnType="Collection(rtracModel.usp_GetCustomerWithGTIN_Parameters_Result)" />
+          <FunctionImport Name="usp_GetEPCDetails" ReturnType="Collection(rtracModel.usp_GetEPCDetails_Result)">
+            <Parameter Name="CustomerId" Mode="In" Type="String" />
+            <Parameter Name="GTIN" Mode="In" Type="String" />
+            <Parameter Name="Qty" Mode="In" Type="Int32" />
+            <Parameter Name="RPO" Mode="In" Type="Int64" />
+            <Parameter Name="DetailNo" Mode="In" Type="Int64" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_EPCIS_GetEP_URN_Result">
           <Property Type="String" Name="CustomerId" Nullable="false" MaxLength="50" />
@@ -497,6 +511,25 @@
           <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="CustomePara" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="usp_GetEPCDetails_Result">
+          <Property Type="Int64" Name="ID" Nullable="false" />
+          <Property Type="String" Name="GTIN" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="SerialStart" Nullable="false" />
+          <Property Type="Int64" Name="SerialEnd" Nullable="false" />
+          <Property Type="String" Name="EPCStart" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="EPCEnd" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="varSchema" Nullable="false" MaxLength="500" />
+          <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="varCustomerId" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="bigIntQuantity" Nullable="false" />
+          <Property Type="String" Name="varTransaction" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="varEvent" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="varRemark" Nullable="true" />
+          <Property Type="Int64" Name="bigIntRPO" Nullable="true" />
+          <Property Type="Int64" Name="bigIntDetailLineNo" Nullable="true" />
+          <Property Type="String" Name="varCustom1" Nullable="true" />
+          <Property Type="String" Name="varCustom2" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -744,6 +777,29 @@
                 <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
                 <ScalarProperty Name="GTIN" ColumnName="GTIN" />
                 <ScalarProperty Name="CustomePara" ColumnName="CustomePara" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetEPCDetails" FunctionName="rtracModel.Store.usp_GetEPCDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCDetails_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="GTIN" ColumnName="GTIN" />
+                <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
+                <ScalarProperty Name="SerialEnd" ColumnName="SerialEnd" />
+                <ScalarProperty Name="EPCStart" ColumnName="EPCStart" />
+                <ScalarProperty Name="EPCEnd" ColumnName="EPCEnd" />
+                <ScalarProperty Name="varSchema" ColumnName="varSchema" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="varCustomerId" ColumnName="varCustomerId" />
+                <ScalarProperty Name="bigIntQuantity" ColumnName="bigIntQuantity" />
+                <ScalarProperty Name="varTransaction" ColumnName="varTransaction" />
+                <ScalarProperty Name="varEvent" ColumnName="varEvent" />
+                <ScalarProperty Name="varRemark" ColumnName="varRemark" />
+                <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
+                <ScalarProperty Name="bigIntDetailLineNo" ColumnName="bigIntDetailLineNo" />
+                <ScalarProperty Name="varCustom1" ColumnName="varCustom1" />
+                <ScalarProperty Name="varCustom2" ColumnName="varCustom2" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

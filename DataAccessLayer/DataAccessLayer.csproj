@@ -110,6 +110,9 @@
     <Compile Include="usp_GetEPCCustomer_TestingWeb_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="usp_GetEPCDetails_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="usp_GetEPCLog_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>

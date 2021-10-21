@@ -139,7 +139,18 @@ namespace WebApi.Controllers
                     }
                     else
                     {
-                        EPCResponse ObjRes = Transaction_New.GetEPC_New(Request);
+
+                        EPCResponse ObjRes = null;
+                        if (Request.CustomerID == "StoneIsland")
+                        {
+                            ObjRes = Transaction_New.GetEPCDetail(Request);
+                        }
+                        if (ObjRes == null)
+                        {
+                            ObjRes = Transaction_New.GetEPC_New(Request);
+                        }
+
+                        //EPCResponse ObjRes = Transaction_New.GetEPC_New(Request);
 
                         bool flag = false;
                         switch (Request.CustomerID)

@@ -66,6 +66,53 @@ namespace BussinessLayer
             return EPC_Res;
         }
 
+        public static EPCResponse GetEPCDetail(EPCRequest EPC_Req)
+        {
+            EPCResponse EPC_Res = new EPCResponse();
+            try
+            {
+               
+                try
+                {
+                    
+                    usp_GetEPCDetails_Result Obj = EPCDAL.GetEPCDetail(EPC_Req.GTIN, (int)EPC_Req.Quantity, EPC_Req.CustomerID,EPC_Req.RPO, EPC_Req.DetailLineID);
+
+                    if (Obj != null)
+                    {
+                        EPC_Res.EPCStart = Obj.EPCStart;
+                        EPC_Res.EPCEnd = Obj.EPCEnd;
+                        EPC_Res.SerialStart = Convert.ToString(Obj.SerialStart);
+                        EPC_Res.SerialEnd = Convert.ToString(Obj.SerialEnd);
+                        EPC_Res.Remark = Convert.ToString(Obj.varRemark);
+                        EPC_Res.CustomerID = Obj.varCustomerId;
+                        EPC_Res.Quantity = Obj.bigIntQuantity;
+                        EPC_Res.GTIN = Obj.GTIN;
+                        EPC_Res.AccessPWD = "";
+                        EPC_Res.KillPWD = "";
+                    }else
+                    {
+                        EPC_Res = null;
+                    }
+
+                }
+                catch (Exception Ex)
+                {
+                    EPCDAL.SaveErrorFileResponse(Ex.ToString(), "GetEPCDetail");
+                    InsertLog(Ex, "GetEPCDetail");
+                    EPC_Res = null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                EPCDAL.SaveErrorFileResponse(ex.ToString(), "GetEPCDetail");
+                InsertLog(ex, "GetEPCDetail");
+                EPC_Res = null;
+            }
+
+            return EPC_Res;
+        }
+
     }
 
     public class Transaction_Encode : EPCBLL
