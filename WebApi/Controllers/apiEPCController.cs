@@ -141,7 +141,7 @@ namespace WebApi.Controllers
                     {
 
                         EPCResponse ObjRes = null;
-                        if (Request.CustomerID == "StoneIsland")
+                        if (Request.CustomerID == "StoneIsland" && (Request.Event== "Print_CP" || Request.Event == "Print_TH"))
                         {
                             ObjRes = Transaction_New.GetEPCDetail(Request);
                         }
