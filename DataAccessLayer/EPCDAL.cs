@@ -148,6 +148,20 @@ namespace DataAccessLayer
         }
         #endregion
 
+        #region GET ECP COUNTER DATA FRO Charanga PASSWORD
+
+        public static List<usp_GetEPCCounterForCharangaPWD_Result> GetEPCCounterFor_Charanga_PWD(long RPO, long DetailNo)
+        {
+            List<usp_GetEPCCounterForCharangaPWD_Result> Obj = new List<usp_GetEPCCounterForCharangaPWD_Result>();
+            using (EPC_DBEntities db = new EPC_DBEntities())
+            {
+                //db.Database.CommandTimeout = 0;
+                Obj = (from lst1 in db.usp_GetEPCCounterForCharangaPWD(RPO, DetailNo) select lst1).ToList();
+            }
+            return Obj;
+        }
+        #endregion
+
         #region INSERT FOR EMAIL
         public static void InsertEmail(string varRecipient, string varCC, string varBCC, string varReplyTo, string varSubject, string varBody, long bigIntCreatedById, DateTime dtCreatedOn)
         {

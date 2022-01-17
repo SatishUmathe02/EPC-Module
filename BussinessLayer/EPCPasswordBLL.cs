@@ -159,6 +159,49 @@ namespace BussinessLayer
 
         }
 
+        public static async Task<bool> UpdatePassword_Charanga(long RPO, long DetailNo)
+        {
+            bool flag = false;
+            try
+            {
+                var epclist = EPCDAL.GetEPCCounterFor_Charanga_PWD(RPO, DetailNo);
+
+                StringBuilder xml = new StringBuilder();
+                if (epclist.Count == 0)
+                {
+                    flag = true;
+                }
+
+                if (epclist.Count > 0)
+                {
+                    xml.Append("<EPC>");
+                    foreach (var item in epclist)
+                    {
+                        xml.Append("<Password>");
+                        xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
+                        xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
+                        xml.Append("<EPC>" + item.EPC + "</EPC>");
+                        xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.AccHexKey) + "</AccesPwd>");
+                        xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.KillHexKey) + "</KillPwd>");
+                        xml.Append("</Password>");
+                    }
+                    xml.Append("</EPC>");
+                    EPCPasswordDAL.UpdatePassword(xml.ToString());
+                    flag = true;
+
+                }
+            }
+            catch (Exception Ex)
+            {
+                EPCDAL.SaveErrorFileResponse(Ex.ToString(), "UpdatePassword_Charanga");
+                flag = false;
+                EPCBLL.InsertLog(Ex, "UpdatePassword_Charanga");
+            }
+
+            return flag;
+
+        }
+
         private static string HMACSHA256ToHexStringL8(string stEpc, string stHexKey)
         {
             // password is (hex) F6B5013C f6b5013c for stEpc "303400000400004000000001" and stHexKey "000102030405060708090a0b0c0d0e0f"

@@ -58,6 +58,10 @@
           <Parameter Name="RPO" Type="bigint" Mode="In" />
           <Parameter Name="DetailNo" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="usp_GetEPCCounterForCharangaPWD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RPO" Type="bigint" Mode="In" />
+          <Parameter Name="DetailNo" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="usp_GetEPCCounterForMANGO_PWD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RPO" Type="bigint" Mode="In" />
           <Parameter Name="DetailNo" Type="bigint" Mode="In" />
@@ -348,6 +352,10 @@
             <Parameter Name="RPO" Mode="In" Type="Int64" />
             <Parameter Name="DetailNo" Mode="In" Type="Int64" />
           </FunctionImport>
+          <FunctionImport Name="usp_GetEPCCounterForCharangaPWD" ReturnType="Collection(rtracModel.usp_GetEPCCounterForCharangaPWD_Result)">
+            <Parameter Name="RPO" Mode="In" Type="Int64" />
+            <Parameter Name="DetailNo" Mode="In" Type="Int64" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_EPCIS_GetEP_URN_Result">
           <Property Type="String" Name="CustomerId" Nullable="false" MaxLength="50" />
@@ -530,6 +538,14 @@
           <Property Type="Int64" Name="bigIntDetailLineNo" Nullable="true" />
           <Property Type="String" Name="varCustom1" Nullable="true" />
           <Property Type="String" Name="varCustom2" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_GetEPCCounterForCharangaPWD_Result">
+          <Property Type="Int64" Name="bigintId" Nullable="false" />
+          <Property Type="Int64" Name="bigIntRPO" Nullable="false" />
+          <Property Type="Int64" Name="bigIntDetailLineID" Nullable="false" />
+          <Property Type="String" Name="EPC" Nullable="false" />
+          <Property Type="String" Name="AccHexKey" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="KillHexKey" Nullable="false" MaxLength="32" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -800,6 +816,18 @@
                 <ScalarProperty Name="bigIntDetailLineNo" ColumnName="bigIntDetailLineNo" />
                 <ScalarProperty Name="varCustom1" ColumnName="varCustom1" />
                 <ScalarProperty Name="varCustom2" ColumnName="varCustom2" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForCharangaPWD" FunctionName="rtracModel.Store.usp_GetEPCCounterForCharangaPWD">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCounterForCharangaPWD_Result">
+                <ScalarProperty Name="bigintId" ColumnName="bigintId" />
+                <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
+                <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
+                <ScalarProperty Name="EPC" ColumnName="EPC" />
+                <ScalarProperty Name="AccHexKey" ColumnName="AccHexKey" />
+                <ScalarProperty Name="KillHexKey" ColumnName="KillHexKey" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

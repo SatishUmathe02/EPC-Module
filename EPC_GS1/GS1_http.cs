@@ -15,7 +15,8 @@ namespace EPC_GS1
 {
     public class GS1_http
     {
-               
+       static string GS1_EmailIds = ConfigurationManager.AppSettings["GS1_EmailIds"].ToString();
+
         public static async Task<string> GS1_apiResponse_Rest(EPCRequest ObjEPC)
         {
             string Response = string.Empty;
@@ -24,8 +25,7 @@ namespace EPC_GS1
 
             string GS1_api = ConfigurationManager.AppSettings["GS1_api"].ToString();
             string GS1_apiKey = ConfigurationManager.AppSettings["GS1_apiKey"].ToString();
-
-
+            
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 
@@ -69,7 +69,7 @@ namespace EPC_GS1
         public static void SendEmail(int StatusCode, string Response, string GTIN)
         {
             int code = Convert.ToInt32(StatusCode.ToString().Substring(0, 1));
-            string Recipient = "ali.mehdi@r-pac.com,ahmad.kabakebi@r-pac.com,Amit.Kadam@r-pac.com,Nayana.Krishnamurthy@r-pac.com,satish.umathe@r-pac.com";
+            string Recipient = GS1_EmailIds;
             string Subject = string.Empty;
             string varCC = "";
             string varBCC = ""; string varReplyTo = "";
@@ -95,7 +95,7 @@ namespace EPC_GS1
         public static void SendEmail_AfterCheck_GS(int StatusCode, string Response, string GTIN)
         {
 
-            string Recipient = "ali.mehdi@r-pac.com,ahmad.kabakebi@r-pac.com,Amit.Kadam@r-pac.com,Nayana.Krishnamurthy@r-pac.com";
+            string Recipient = GS1_EmailIds;
             string Subject = string.Empty;
             string varCC = "Satish.umathe@r-pac.com";
             string varBCC = ""; string varReplyTo = "";

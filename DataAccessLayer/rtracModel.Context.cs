@@ -619,5 +619,18 @@ namespace DataAccessLayer
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetEPCDetails_Result>("usp_GetEPCDetails", customerIdParameter, gTINParameter, qtyParameter, rPOParameter, detailNoParameter);
         }
+    
+        public virtual ObjectResult<usp_GetEPCCounterForCharangaPWD_Result> usp_GetEPCCounterForCharangaPWD(Nullable<long> rPO, Nullable<long> detailNo)
+        {
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailNoParameter = detailNo.HasValue ?
+                new ObjectParameter("DetailNo", detailNo) :
+                new ObjectParameter("DetailNo", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetEPCCounterForCharangaPWD_Result>("usp_GetEPCCounterForCharangaPWD", rPOParameter, detailNoParameter);
+        }
     }
 }

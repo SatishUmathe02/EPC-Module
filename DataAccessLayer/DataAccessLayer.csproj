@@ -95,6 +95,9 @@
     <Compile Include="usp_GetEPCCounterForAlvaroMorenoPWD_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="usp_GetEPCCounterForCharangaPWD_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="usp_GetEPCCounterForMANGO_PWD_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
