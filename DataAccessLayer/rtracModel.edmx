@@ -181,6 +181,9 @@
           <Parameter Name="bigIntCreatedById" Type="bigint" Mode="In" />
           <Parameter Name="dtCreatedOn" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="usp_UpdateAssPassword_MANGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="XML" Type="xml" Mode="In" />
+        </Function>
         <Function Name="usp_UpdateAssPassword_Moda" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="XML" Type="xml" Mode="In" />
         </Function>
@@ -355,6 +358,9 @@
           <FunctionImport Name="usp_GetEPCCounterForCharangaPWD" ReturnType="Collection(rtracModel.usp_GetEPCCounterForCharangaPWD_Result)">
             <Parameter Name="RPO" Mode="In" Type="Int64" />
             <Parameter Name="DetailNo" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="usp_UpdateAssPassword_MANGO">
+            <Parameter Name="XML" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_EPCIS_GetEP_URN_Result">
@@ -831,6 +837,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_MANGO" FunctionName="rtracModel.Store.usp_UpdateAssPassword_MANGO" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

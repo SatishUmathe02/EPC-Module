@@ -632,5 +632,14 @@ namespace DataAccessLayer
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetEPCCounterForCharangaPWD_Result>("usp_GetEPCCounterForCharangaPWD", rPOParameter, detailNoParameter);
         }
+    
+        public virtual int usp_UpdateAssPassword_MANGO(string xML)
+        {
+            var xMLParameter = xML != null ?
+                new ObjectParameter("XML", xML) :
+                new ObjectParameter("XML", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_UpdateAssPassword_MANGO", xMLParameter);
+        }
     }
 }

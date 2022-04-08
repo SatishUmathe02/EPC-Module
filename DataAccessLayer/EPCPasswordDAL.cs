@@ -36,6 +36,19 @@ namespace DataAccessLayer
 
             return 0;
         }
-        
+
+        public static int UpdatePassword_MANGO(string xml)
+        {
+
+            using (EPC_DBEntities db = new EPC_DBEntities())
+            {
+                //db.Database.CommandTimeout = 0;
+                db.usp_UpdateAssPassword_Moda(xml);
+            }
+            
+
+            return 0;
+        }
+
     }
 }

@@ -102,7 +102,7 @@ namespace BussinessLayer
                         xml.Append("</Password>");
                     }
                     xml.Append("</EPC>");
-                    EPCPasswordDAL.UpdatePassword(xml.ToString());
+                    EPCPasswordDAL.UpdatePassword_MANGO(xml.ToString());
                     flag = true;
 
                 }
