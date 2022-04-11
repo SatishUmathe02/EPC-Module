@@ -43,7 +43,7 @@ namespace DataAccessLayer
             using (EPC_DBEntities db = new EPC_DBEntities())
             {
                 //db.Database.CommandTimeout = 0;
-                db.usp_UpdateAssPassword_Moda(xml);
+                db.usp_UpdateAssPassword_MANGO(xml);
             }
             
 
