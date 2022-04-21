@@ -128,6 +128,25 @@
           <Parameter Name="PartitionValue" Type="int" Mode="In" />
           <Parameter Name="EPCStartDateTime" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="usp_GTIN_GetEPC_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="gtin14" Type="varchar" Mode="In" />
+          <Parameter Name="Qty" Type="bigint" Mode="In" />
+          <Parameter Name="Transaction" Type="varchar" Mode="In" />
+          <Parameter Name="Schema" Type="varchar" Mode="In" />
+          <Parameter Name="CustomerId" Type="varchar" Mode="In" />
+          <Parameter Name="CustomerName" Type="varchar" Mode="In" />
+          <Parameter Name="Event" Type="varchar" Mode="In" />
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+          <Parameter Name="Serail" Type="bigint" Mode="In" />
+          <Parameter Name="EPC" Type="varchar" Mode="In" />
+          <Parameter Name="RPO" Type="bigint" Mode="In" />
+          <Parameter Name="DetailLineNo" Type="bigint" Mode="In" />
+          <Parameter Name="CustomPara1" Type="varchar" Mode="In" />
+          <Parameter Name="CustomPara2" Type="varchar" Mode="In" />
+          <Parameter Name="GS1Prefix" Type="varchar" Mode="In" />
+          <Parameter Name="PartitionValue" Type="int" Mode="In" />
+          <Parameter Name="EPCStartDateTime" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="usp_GTIN_GetEPC_GerryWeber" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="gtin14" Type="varchar" Mode="In" />
           <Parameter Name="Qty" Type="bigint" Mode="In" />
@@ -360,7 +379,26 @@
             <Parameter Name="DetailNo" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="usp_UpdateAssPassword_MANGO">
-            <Parameter Name="XML" Mode="In" Type="String" />
+          <Parameter Name="XML" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GTIN_GetEPC_Customer" ReturnType="Collection(rtracModel.usp_GTIN_GetEPC_Customer_Result)">
+            <Parameter Name="gtin14" Mode="In" Type="String" />
+            <Parameter Name="Qty" Mode="In" Type="Int64" />
+            <Parameter Name="Transaction" Mode="In" Type="String" />
+            <Parameter Name="Schema" Mode="In" Type="String" />
+            <Parameter Name="CustomerId" Mode="In" Type="String" />
+            <Parameter Name="CustomerName" Mode="In" Type="String" />
+            <Parameter Name="Event" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+            <Parameter Name="Serail" Mode="In" Type="Int64" />
+            <Parameter Name="EPC" Mode="In" Type="String" />
+            <Parameter Name="RPO" Mode="In" Type="Int64" />
+            <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+            <Parameter Name="CustomPara1" Mode="In" Type="String" />
+            <Parameter Name="CustomPara2" Mode="In" Type="String" />
+            <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+            <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+            <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_EPCIS_GetEP_URN_Result">
@@ -552,6 +590,17 @@
           <Property Type="String" Name="EPC" Nullable="false" />
           <Property Type="String" Name="AccHexKey" Nullable="false" MaxLength="32" />
           <Property Type="String" Name="KillHexKey" Nullable="false" MaxLength="32" />
+        </ComplexType>
+        <ComplexType Name="usp_GTIN_GetEPC_Customer_Result">
+          <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+          <Property Type="Int64" Name="SerialStart" Nullable="true" />
+          <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+          <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+          <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -838,6 +887,21 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_MANGO" FunctionName="rtracModel.Store.usp_UpdateAssPassword_MANGO" />
+          <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_Customer" FunctionName="rtracModel.Store.usp_GTIN_GetEPC_Customer">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="rtracModel.usp_GTIN_GetEPC_Customer_Result">
+                <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
+                <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
+                <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
+                <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="GTIN" ColumnName="GTIN" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
+                <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

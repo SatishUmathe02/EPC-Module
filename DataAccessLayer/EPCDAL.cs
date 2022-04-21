@@ -301,5 +301,37 @@ namespace DataAccessLayer
 
 
         #endregion
+
+        #region GET EPC VIA CUSTOMER
+        public static usp_GTIN_GetEPC_Customer_Result GetEPC_Customer(string gtin14, long qty, string transaction, string schema, string customerId, string customerName, string Event, long UserId, long SerialStart, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, string GS1Prefix, int PartionVal, DateTime EPCStartDateTime)
+        {
+            usp_GTIN_GetEPC_Customer_Result Obj = new usp_GTIN_GetEPC_Customer_Result();
+            try
+            {
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+                    //if (qty >= 40000)
+                    {
+                        db.Database.CommandTimeout = 0;
+
+                    }
+
+                    Obj = (from lst1 in db.usp_GTIN_GetEPC_Customer(gtin14, qty, transaction, schema, customerId, customerName, Event, UserId, SerialStart, EPC, RPO, DetailLineNo, CustomPara1, CustomPara2, GS1Prefix, PartionVal, EPCStartDateTime) select lst1).ToList().FirstOrDefault();
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                //using (EPC_DBEntities db = new EPC_DBEntities())
+                //{
+                //    Obj = (from lst1 in db.usp_GTIN_GetEPC(gtin14, qty, transaction, schema, customerId, customerName, Event, UserId, SerialStart, EPC, RPO, DetailLineNo, CustomPara1, CustomPara2, GS1Prefix, PartionVal) select lst1).ToList().FirstOrDefault();
+                //}
+            }
+            return Obj;
+        }
+
+
+        #endregion
     }
 }

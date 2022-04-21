@@ -131,6 +131,9 @@
     <Compile Include="usp_GS1_Insert_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="usp_GTIN_GetEPC_Customer_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="usp_GTIN_GetEPC_GerryWeber_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>

@@ -2,8 +2,8 @@
 <rtracSettings>
 
   <Client>
-    <Path>http://localhost/r-tracEPC</Path>
-     <WebApi>http://localhost/r-tracEPCapi/r-tracEPCapi</WebApi>
+    <Path>http://localhost:52237/</Path>
+     <WebApi>http://localhost:57358/</WebApi>
     <!-- <WebApi>http://192.168.136.185:85</WebApi>
     <WebApi>http://52.172.135.0:136</WebApi>-->
     <ClientId></ClientId>

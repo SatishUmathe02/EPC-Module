@@ -46,9 +46,9 @@ namespace WebApi.Controllers
 
             try
             {
-                                
+
                 Request.RequestStartTime = System.DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff");
-                              
+
 
                 if (Request.TransactionType == "New" || Request.TransactionType == "Encode")
                 {
@@ -74,6 +74,19 @@ namespace WebApi.Controllers
             //EPCRequest Obj = new EPCRequest();
 
             //Obj = JsonConvert.DeserializeObject<EPCRequest>(Request);
+
+            if (Request.CustomerID == "InditexBershka")
+            {
+                if (!string.IsNullOrEmpty(Request.CustomPara1))
+                {
+                    string Val = Request.CustomPara1.Split("#".ToArray()).LastOrDefault();
+                    if ((Val == "N1") || (Val == "N2"))
+                    {
+                        return Transaction_New.GetEPC_Customer(Request);
+                    }
+                }
+
+            }
 
             if (Request.Quantity <= 0)
             {
@@ -141,7 +154,7 @@ namespace WebApi.Controllers
                     {
 
                         EPCResponse ObjRes = null;
-                        if (Request.CustomerID == "StoneIsland" && (Request.Event== "Print_CP" || Request.Event == "Print_TH"))
+                        if (Request.CustomerID == "StoneIsland" && (Request.Event == "Print_CP" || Request.Event == "Print_TH"))
                         {
                             ObjRes = Transaction_New.GetEPCDetail(Request);
                         }

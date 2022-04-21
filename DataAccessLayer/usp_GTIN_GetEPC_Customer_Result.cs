@@ -11,13 +11,16 @@ namespace DataAccessLayer
 {
     using System;
     
-    public partial class usp_GetEPCCounterForCharangaPWD_Result
+    public partial class usp_GTIN_GetEPC_Customer_Result
     {
-        public long bigintId { get; set; }
-        public long bigIntRPO { get; set; }
-        public long bigIntDetailLineID { get; set; }
-        public string EPC { get; set; }
-        public string AccHexKey { get; set; }
-        public string KillHexKey { get; set; }
+        public string EpcStart { get; set; }
+        public string EpcEnd { get; set; }
+        public Nullable<long> SerialStart { get; set; }
+        public Nullable<long> SerailEnd { get; set; }
+        public string CustomerId { get; set; }
+        public string GTIN { get; set; }
+        public string Remark { get; set; }
+        public string AccessPWD { get; set; }
+        public string KillPWD { get; set; }
     }
 }
