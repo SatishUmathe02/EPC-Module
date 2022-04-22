@@ -49,6 +49,18 @@ namespace DataAccessLayer
 
             return 0;
         }
+        public static int UpdatePassword_TENDAM(string xml)
+        {
+
+            using (EPC_DBEntities db = new EPC_DBEntities())
+            {
+                //db.Database.CommandTimeout = 0;
+                db.usp_UpdateAssPassword_TENDAM(xml);
+            }
+
+
+            return 0;
+        }
 
     }
 }

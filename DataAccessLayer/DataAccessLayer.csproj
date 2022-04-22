@@ -104,6 +104,9 @@
     <Compile Include="usp_GetEPCCounterForModaPWD_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="usp_GetEPCCounterForTENDAM_PWD_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="usp_GetEPCCounter_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>

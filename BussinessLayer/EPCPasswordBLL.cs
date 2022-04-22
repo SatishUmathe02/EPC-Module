@@ -158,7 +158,6 @@ namespace BussinessLayer
             return flag;
 
         }
-
         public static async Task<bool> UpdatePassword_Charanga(long RPO, long DetailNo)
         {
             bool flag = false;
@@ -196,6 +195,48 @@ namespace BussinessLayer
                 EPCDAL.SaveErrorFileResponse(Ex.ToString(), "UpdatePassword_Charanga");
                 flag = false;
                 EPCBLL.InsertLog(Ex, "UpdatePassword_Charanga");
+            }
+
+            return flag;
+
+        }
+        public static async Task<bool> UpdatePassword_TENDAM(long RPO, long DetailNo)
+        {
+            bool flag = false;
+
+            try
+            {
+                var epclist = EPCDAL.GetEPCCounterFor_TENDAM_PWD(RPO, DetailNo);
+
+                StringBuilder xml = new StringBuilder();
+
+                if (epclist.Count == 0)
+                {
+                    flag = true;
+                }
+                if (epclist.Count > 0)
+                {
+                    xml.Append("<EPC>");
+                    foreach (var item in epclist)
+                    {
+                        xml.Append("<Password>");
+                        xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
+                        xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
+                        xml.Append("<EPC>" + item.EPC + "</EPC>");
+                        xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.AccHexKey) + "</AccesPwd>");
+                        xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.KillHexKey) + "</KillPwd>");
+                        xml.Append("</Password>");
+                    }
+                    xml.Append("</EPC>");
+                    EPCPasswordDAL.UpdatePassword_TENDAM(xml.ToString());
+                    flag = true;
+
+                }
+            }
+            catch (Exception Ex)
+            {
+                flag = false;
+                EPCBLL.InsertLog(Ex, "UpdatePassword_TENDAM");
             }
 
             return flag;

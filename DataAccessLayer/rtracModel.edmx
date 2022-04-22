@@ -9,12 +9,14 @@
           <ReturnType>
             <CollectionType>
               <RowType>
+                <Property Name="Id" Type="int" />
                 <Property Name="CustomerId" Type="varchar" MaxLength="50" />
                 <Property Name="CustomerName" Type="varchar" MaxLength="200" />
                 <Property Name="Schema" Type="varchar" MaxLength="50" />
                 <Property Name="NCZORE" Type="varchar" MaxLength="10" />
                 <Property Name="IsGS1" Type="varchar" MaxLength="10" />
                 <Property Name="IsCustParam1" Type="varchar" MaxLength="10" />
+                <Property Name="Ver" Type="int" />
               </RowType>
             </CollectionType>
           </ReturnType>
@@ -67,6 +69,10 @@
           <Parameter Name="DetailNo" Type="bigint" Mode="In" />
         </Function>
         <Function Name="usp_GetEPCCounterForModaPWD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RPO" Type="bigint" Mode="In" />
+          <Parameter Name="DetailNo" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="usp_GetEPCCounterForTENDAM_PWD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RPO" Type="bigint" Mode="In" />
           <Parameter Name="DetailNo" Type="bigint" Mode="In" />
         </Function>
@@ -204,6 +210,9 @@
           <Parameter Name="XML" Type="xml" Mode="In" />
         </Function>
         <Function Name="usp_UpdateAssPassword_Moda" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="XML" Type="xml" Mode="In" />
+        </Function>
+        <Function Name="usp_UpdateAssPassword_TENDAM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="XML" Type="xml" Mode="In" />
         </Function>
         <EntityContainer Name="rtracModelStoreContainer" />
@@ -399,6 +408,13 @@
             <Parameter Name="GS1Prefix" Mode="In" Type="String" />
             <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
             <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetEPCCounterForTENDAM_PWD" ReturnType="Collection(rtracModel.usp_GetEPCCounterForTENDAM_PWD_Result)">
+            <Parameter Name="RPO" Mode="In" Type="Int64" />
+            <Parameter Name="DetailNo" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="usp_UpdateAssPassword_TENDAM">
+            <Parameter Name="XML" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_EPCIS_GetEP_URN_Result">
@@ -601,6 +617,14 @@
           <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="usp_GetEPCCounterForTENDAM_PWD_Result">
+          <Property Type="Int64" Name="bigintId" Nullable="false" />
+          <Property Type="Int64" Name="bigIntRPO" Nullable="false" />
+          <Property Type="Int64" Name="bigIntDetailLineID" Nullable="false" />
+          <Property Type="String" Name="EPC" Nullable="false" />
+          <Property Type="String" Name="AccHexKey" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="KillHexKey" Nullable="false" MaxLength="32" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -902,6 +926,19 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForTENDAM_PWD" FunctionName="rtracModel.Store.usp_GetEPCCounterForTENDAM_PWD">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCounterForTENDAM_PWD_Result">
+                <ScalarProperty Name="bigintId" ColumnName="bigintId" />
+                <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
+                <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
+                <ScalarProperty Name="EPC" ColumnName="EPC" />
+                <ScalarProperty Name="AccHexKey" ColumnName="AccHexKey" />
+                <ScalarProperty Name="KillHexKey" ColumnName="KillHexKey" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_TENDAM" FunctionName="rtracModel.Store.usp_UpdateAssPassword_TENDAM" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

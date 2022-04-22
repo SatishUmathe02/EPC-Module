@@ -333,5 +333,19 @@ namespace DataAccessLayer
 
 
         #endregion
+
+        #region GET ECP COUNTER DATA FRO TENDAM PASSWORD
+
+        public static List<usp_GetEPCCounterForTENDAM_PWD_Result> GetEPCCounterFor_TENDAM_PWD(long RPO, long DetailNo)
+        {
+            List<usp_GetEPCCounterForTENDAM_PWD_Result> Obj = new List<usp_GetEPCCounterForTENDAM_PWD_Result>();
+            using (EPC_DBEntities db = new EPC_DBEntities())
+            {
+                //db.Database.CommandTimeout = 0;
+                Obj = (from lst1 in db.usp_GetEPCCounterForTENDAM_PWD(RPO, DetailNo) select lst1).ToList();
+            }
+            return Obj;
+        }
+        #endregion
     }
 }

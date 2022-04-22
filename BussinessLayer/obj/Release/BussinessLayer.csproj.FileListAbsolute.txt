@@ -12,3 +12,17 @@ E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Release\EntityFramework.xml
 E:\r-trac\Project\r-trac EPC\BussinessLayer\bin\Release\RestSharp.xml
 E:\r-trac\Project\r-trac EPC\BussinessLayer\obj\Release\BussinessLayer.dll
 E:\r-trac\Project\r-trac EPC\BussinessLayer\obj\Release\BussinessLayer.pdb
+C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Release\BussinessLayer.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Release\BussinessLayer.pdb
+C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Release\DataAccessLayer.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Release\EPC_GS1.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Release\TagDataTranslation-net.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Release\EntityFramework.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Release\RestSharp.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Release\DataAccessLayer.pdb
+C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Release\EPC_GS1.pdb
+C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Release\EntityFramework.xml
+C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Release\RestSharp.xml
+C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\obj\Release\BussinessLayer.csprojResolveAssemblyReference.cache
+C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\obj\Release\BussinessLayer.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\obj\Release\BussinessLayer.pdb

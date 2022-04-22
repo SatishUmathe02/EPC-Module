@@ -18,8 +18,8 @@ namespace EPCWeb.CommonFunctions
             string publishWebApi = Objsetting.WebApi;
 
             //"http://192.168.136.185:85/";-- Test
-            //http://52.172.135.0:136/ -- Dev
-            //http://52.172.187.213/ -- Prod
+            //https://devepc.r-pac.com/ -- Dev
+            //https://epc.r-pac.com/ -- Prod
 
             WebApiClient.BaseAddress = new Uri(publishWebApi);
             WebApiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
