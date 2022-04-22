@@ -197,7 +197,7 @@ namespace WebApi.Controllers
                                     ObjRes = EPCBLL.GetError(122);
                                 }
                                 break;
-                            case "Tendom":
+                            case "Tendam":
                                 flag = await EPCPasswordBLL.UpdatePassword_TENDAM(Request.RPO, Request.DetailLineID);
                                 if (!flag)
                                 {
