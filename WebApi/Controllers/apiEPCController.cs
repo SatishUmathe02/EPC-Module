@@ -80,7 +80,7 @@ namespace WebApi.Controllers
                 if (!string.IsNullOrEmpty(Request.CustomPara1))
                 {
                     string Val = Request.CustomPara1.Split("#".ToArray()).LastOrDefault();
-                    if ((Val == "N1") || (Val == "N2"))
+                    if ((Val == "N1") || (Val == "N2") || (Val == "N3"))
                     {
                         return Transaction_New.GetEPC_Customer(Request);
                     }
