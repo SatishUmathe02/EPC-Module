@@ -80,6 +80,9 @@
     <Compile Include="udf_EPC_Customer_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ups_GetEPC_Customer_ADL_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="USP_EPCIS_Customer_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
@@ -87,6 +90,9 @@
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_EPCIS_GetEP_URN_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_EPC_Cust_ADL_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_GetCustomerWithGTIN_Parameters_Result.cs">

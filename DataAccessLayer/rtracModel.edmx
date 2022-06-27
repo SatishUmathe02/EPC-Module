@@ -21,6 +21,18 @@
             </CollectionType>
           </ReturnType>
         </Function>
+        <Function Name="ups_GetEPC_Customer_ADL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GTIN" Type="varchar" Mode="In" />
+          <Parameter Name="RPO" Type="bigint" Mode="In" />
+          <Parameter Name="DetailLineNo" Type="bigint" Mode="In" />
+          <Parameter Name="Qty" Type="bigint" Mode="In" />
+          <Parameter Name="CustomerId" Type="varchar" Mode="In" />
+          <Parameter Name="CustomerName" Type="varchar" Mode="In" />
+          <Parameter Name="Event" Type="varchar" Mode="In" />
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+          <Parameter Name="CustomPara1" Type="varchar" Mode="In" />
+          <Parameter Name="CustomPara2" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="usp_AddErrorLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="logSourceName" Type="nvarchar" Mode="In" />
           <Parameter Name="logDescription" Type="nvarchar" Mode="In" />
@@ -29,6 +41,48 @@
           <Parameter Name="logStackTrace" Type="nvarchar" Mode="In" />
           <Parameter Name="logDate" Type="datetime" Mode="In" />
           <Parameter Name="FileName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_EPC_Cust_ADL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="gtin14" Type="varchar" Mode="In" />
+          <Parameter Name="SerialStart" Type="bigint" Mode="In" />
+          <Parameter Name="SerialEnd" Type="bigint" Mode="In" />
+          <Parameter Name="Schema" Type="varchar" Mode="In" />
+          <Parameter Name="Transaction" Type="varchar" Mode="In" />
+          <Parameter Name="EPCStart" Type="varchar" Mode="In" />
+          <Parameter Name="EPCEnd" Type="varchar" Mode="In" />
+          <Parameter Name="RPO" Type="bigint" Mode="In" />
+          <Parameter Name="DetailLineNo" Type="bigint" Mode="In" />
+          <Parameter Name="CustomPara1" Type="varchar" Mode="In" />
+          <Parameter Name="CustomPara2" Type="varchar" Mode="In" />
+          <Parameter Name="Qty" Type="bigint" Mode="In" />
+          <Parameter Name="CustomerId" Type="varchar" Mode="In" />
+          <Parameter Name="CustomerName" Type="varchar" Mode="In" />
+          <Parameter Name="Event" Type="varchar" Mode="In" />
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+          <Parameter Name="EPCStartDateTime" Type="datetime" Mode="In" />
+          <Parameter Name="Id" Type="bigint" Mode="In" />
+          <Parameter Name="NextEPC" Type="varchar" Mode="In" />
+          <Parameter Name="NextEPCSerial" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="usp_EPC_InsertEPCLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="gtin14" Type="varchar" Mode="In" />
+          <Parameter Name="SerialStart" Type="bigint" Mode="In" />
+          <Parameter Name="SerialEnd" Type="bigint" Mode="In" />
+          <Parameter Name="Schema" Type="varchar" Mode="In" />
+          <Parameter Name="Transaction" Type="varchar" Mode="In" />
+          <Parameter Name="EPCStart" Type="varchar" Mode="In" />
+          <Parameter Name="EPCEnd" Type="varchar" Mode="In" />
+          <Parameter Name="RPO" Type="bigint" Mode="In" />
+          <Parameter Name="DetailLineNo" Type="bigint" Mode="In" />
+          <Parameter Name="CustomPara1" Type="varchar" Mode="In" />
+          <Parameter Name="CustomPara2" Type="varchar" Mode="In" />
+          <Parameter Name="Qty" Type="bigint" Mode="In" />
+          <Parameter Name="CustomerId" Type="varchar" Mode="In" />
+          <Parameter Name="CustomerName" Type="varchar" Mode="In" />
+          <Parameter Name="Event" Type="varchar" Mode="In" />
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+          <Parameter Name="EPCStartDateTime" Type="datetime" Mode="In" />
+          <Parameter Name="Remark" Type="varchar" Mode="In" />
         </Function>
         <Function Name="USP_EPCIS_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_EPCIS_GetEP_URN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -414,7 +468,61 @@
             <Parameter Name="DetailNo" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="usp_UpdateAssPassword_TENDAM">
-            <Parameter Name="XML" Mode="In" Type="String" />
+          <Parameter Name="XML" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ups_GetEPC_Customer_ADL" ReturnType="Collection(rtracModel.ups_GetEPC_Customer_ADL_Result)">
+            <Parameter Name="GTIN" Mode="In" Type="String" />
+            <Parameter Name="RPO" Mode="In" Type="Int64" />
+            <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+            <Parameter Name="Qty" Mode="In" Type="Int64" />
+            <Parameter Name="CustomerId" Mode="In" Type="String" />
+            <Parameter Name="CustomerName" Mode="In" Type="String" />
+            <Parameter Name="Event" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+            <Parameter Name="CustomPara1" Mode="In" Type="String" />
+            <Parameter Name="CustomPara2" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_EPC_Cust_ADL" ReturnType="Collection(rtracModel.usp_EPC_Cust_ADL_Result)">
+            <Parameter Name="gtin14" Mode="In" Type="String" />
+            <Parameter Name="SerialStart" Mode="In" Type="Int64" />
+            <Parameter Name="SerialEnd" Mode="In" Type="Int64" />
+            <Parameter Name="Schema" Mode="In" Type="String" />
+            <Parameter Name="Transaction" Mode="In" Type="String" />
+            <Parameter Name="EPCStart" Mode="In" Type="String" />
+            <Parameter Name="EPCEnd" Mode="In" Type="String" />
+            <Parameter Name="RPO" Mode="In" Type="Int64" />
+            <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+            <Parameter Name="CustomPara1" Mode="In" Type="String" />
+            <Parameter Name="CustomPara2" Mode="In" Type="String" />
+            <Parameter Name="Qty" Mode="In" Type="Int64" />
+            <Parameter Name="CustomerId" Mode="In" Type="String" />
+            <Parameter Name="CustomerName" Mode="In" Type="String" />
+            <Parameter Name="Event" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+            <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+            <Parameter Name="Id" Mode="In" Type="Int64" />
+            <Parameter Name="NextEPC" Mode="In" Type="String" />
+            <Parameter Name="NextEPCSerial" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="usp_EPC_InsertEPCLog">
+            <Parameter Name="gtin14" Mode="In" Type="String" />
+            <Parameter Name="SerialStart" Mode="In" Type="Int64" />
+            <Parameter Name="SerialEnd" Mode="In" Type="Int64" />
+            <Parameter Name="Schema" Mode="In" Type="String" />
+            <Parameter Name="Transaction" Mode="In" Type="String" />
+            <Parameter Name="EPCStart" Mode="In" Type="String" />
+            <Parameter Name="EPCEnd" Mode="In" Type="String" />
+            <Parameter Name="RPO" Mode="In" Type="Int64" />
+            <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+            <Parameter Name="CustomPara1" Mode="In" Type="String" />
+            <Parameter Name="CustomPara2" Mode="In" Type="String" />
+            <Parameter Name="Qty" Mode="In" Type="Int64" />
+            <Parameter Name="CustomerId" Mode="In" Type="String" />
+            <Parameter Name="CustomerName" Mode="In" Type="String" />
+            <Parameter Name="Event" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
+            <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+            <Parameter Name="Remark" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_EPCIS_GetEP_URN_Result">
@@ -625,6 +733,27 @@
           <Property Type="String" Name="EPC" Nullable="false" />
           <Property Type="String" Name="AccHexKey" Nullable="false" MaxLength="32" />
           <Property Type="String" Name="KillHexKey" Nullable="false" MaxLength="32" />
+        </ComplexType>
+        <ComplexType Name="ups_GetEPC_Customer_ADL_Result">
+          <Property Type="Int64" Name="bigintPtrId" Nullable="false" />
+          <Property Type="String" Name="varversion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="varGTIN" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="varNextEPC" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="varEndEPC" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="intStartEPCSerial" Nullable="true" />
+          <Property Type="Int32" Name="intEndEPCSerial" Nullable="true" />
+          <Property Type="Int32" Name="intNextEPCSerial" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_EPC_Cust_ADL_Result">
+          <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="100" />
+          <Property Type="Int64" Name="SerialStart" Nullable="true" />
+          <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+          <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="GTIN" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Remark" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="AccessPWD" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="KillPWD" Nullable="false" MaxLength="1" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -939,6 +1068,36 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_TENDAM" FunctionName="rtracModel.Store.usp_UpdateAssPassword_TENDAM" />
+          <FunctionImportMapping FunctionImportName="ups_GetEPC_Customer_ADL" FunctionName="rtracModel.Store.ups_GetEPC_Customer_ADL">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="rtracModel.ups_GetEPC_Customer_ADL_Result">
+                <ScalarProperty Name="bigintPtrId" ColumnName="bigintPtrId" />
+                <ScalarProperty Name="varversion" ColumnName="varversion" />
+                <ScalarProperty Name="varGTIN" ColumnName="varGTIN" />
+                <ScalarProperty Name="varNextEPC" ColumnName="varNextEPC" />
+                <ScalarProperty Name="varEndEPC" ColumnName="varEndEPC" />
+                <ScalarProperty Name="intStartEPCSerial" ColumnName="intStartEPCSerial" />
+                <ScalarProperty Name="intEndEPCSerial" ColumnName="intEndEPCSerial" />
+                <ScalarProperty Name="intNextEPCSerial" ColumnName="intNextEPCSerial" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_EPC_Cust_ADL" FunctionName="rtracModel.Store.usp_EPC_Cust_ADL">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="rtracModel.usp_EPC_Cust_ADL_Result">
+                <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
+                <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
+                <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
+                <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="GTIN" ColumnName="GTIN" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
+                <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_EPC_InsertEPCLog" FunctionName="rtracModel.Store.usp_EPC_InsertEPCLog" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

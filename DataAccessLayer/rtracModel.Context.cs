@@ -736,5 +736,212 @@ namespace DataAccessLayer
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_UpdateAssPassword_TENDAM", xMLParameter);
         }
+    
+        public virtual ObjectResult<ups_GetEPC_Customer_ADL_Result> ups_GetEPC_Customer_ADL(string gTIN, Nullable<long> rPO, Nullable<long> detailLineNo, Nullable<long> qty, string customerId, string customerName, string @event, Nullable<long> userId, string customPara1, string customPara2)
+        {
+            var gTINParameter = gTIN != null ?
+                new ObjectParameter("GTIN", gTIN) :
+                new ObjectParameter("GTIN", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ups_GetEPC_Customer_ADL_Result>("ups_GetEPC_Customer_ADL", gTINParameter, rPOParameter, detailLineNoParameter, qtyParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, customPara1Parameter, customPara2Parameter);
+        }
+    
+        public virtual ObjectResult<usp_EPC_Cust_ADL_Result> usp_EPC_Cust_ADL(string gtin14, Nullable<long> serialStart, Nullable<long> serialEnd, string schema, string transaction, string ePCStart, string ePCEnd, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, Nullable<long> qty, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<System.DateTime> ePCStartDateTime, Nullable<long> id, string nextEPC, Nullable<long> nextEPCSerial)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var serialStartParameter = serialStart.HasValue ?
+                new ObjectParameter("SerialStart", serialStart) :
+                new ObjectParameter("SerialStart", typeof(long));
+    
+            var serialEndParameter = serialEnd.HasValue ?
+                new ObjectParameter("SerialEnd", serialEnd) :
+                new ObjectParameter("SerialEnd", typeof(long));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var ePCStartParameter = ePCStart != null ?
+                new ObjectParameter("EPCStart", ePCStart) :
+                new ObjectParameter("EPCStart", typeof(string));
+    
+            var ePCEndParameter = ePCEnd != null ?
+                new ObjectParameter("EPCEnd", ePCEnd) :
+                new ObjectParameter("EPCEnd", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var idParameter = id.HasValue ?
+                new ObjectParameter("Id", id) :
+                new ObjectParameter("Id", typeof(long));
+    
+            var nextEPCParameter = nextEPC != null ?
+                new ObjectParameter("NextEPC", nextEPC) :
+                new ObjectParameter("NextEPC", typeof(string));
+    
+            var nextEPCSerialParameter = nextEPCSerial.HasValue ?
+                new ObjectParameter("NextEPCSerial", nextEPCSerial) :
+                new ObjectParameter("NextEPCSerial", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_EPC_Cust_ADL_Result>("usp_EPC_Cust_ADL", gtin14Parameter, serialStartParameter, serialEndParameter, schemaParameter, transactionParameter, ePCStartParameter, ePCEndParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, qtyParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, ePCStartDateTimeParameter, idParameter, nextEPCParameter, nextEPCSerialParameter);
+        }
+    
+        public virtual int usp_EPC_InsertEPCLog(string gtin14, Nullable<long> serialStart, Nullable<long> serialEnd, string schema, string transaction, string ePCStart, string ePCEnd, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, Nullable<long> qty, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<System.DateTime> ePCStartDateTime, string remark)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var serialStartParameter = serialStart.HasValue ?
+                new ObjectParameter("SerialStart", serialStart) :
+                new ObjectParameter("SerialStart", typeof(long));
+    
+            var serialEndParameter = serialEnd.HasValue ?
+                new ObjectParameter("SerialEnd", serialEnd) :
+                new ObjectParameter("SerialEnd", typeof(long));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var ePCStartParameter = ePCStart != null ?
+                new ObjectParameter("EPCStart", ePCStart) :
+                new ObjectParameter("EPCStart", typeof(string));
+    
+            var ePCEndParameter = ePCEnd != null ?
+                new ObjectParameter("EPCEnd", ePCEnd) :
+                new ObjectParameter("EPCEnd", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var remarkParameter = remark != null ?
+                new ObjectParameter("Remark", remark) :
+                new ObjectParameter("Remark", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_EPC_InsertEPCLog", gtin14Parameter, serialStartParameter, serialEndParameter, schemaParameter, transactionParameter, ePCStartParameter, ePCEndParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, qtyParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, ePCStartDateTimeParameter, remarkParameter);
+        }
     }
 }

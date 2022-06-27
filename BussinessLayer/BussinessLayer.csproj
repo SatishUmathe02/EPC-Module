@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EPCBLL.cs" />
+    <Compile Include="EPCBLL_ADL.cs" />
     <Compile Include="EPCISBLL.cs" />
     <Compile Include="EPCPasswordBLL.cs" />
     <Compile Include="GS1_IntergrationBLL.cs" />

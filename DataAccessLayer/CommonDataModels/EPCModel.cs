@@ -177,4 +177,17 @@ namespace DataAccessLayer.CommonDataModels
         public string CustomerName { get; set; }
         public string IsGS1 { get; set; }
     }
+
+    public class ADL_EPC
+    {
+        public long bigintPtrId { get; set; }
+        public string Version { get; set; }
+        public string GTIN { get; set; }
+        public string NextEPC { get; set; }
+        public string EndEPC { get; set; }
+        public long StartEPCSerial { get; set; }
+        public long EndEPCSerial { get; set; }
+        public long NextEPCSerial { get; set; }
+        
+    }
 }

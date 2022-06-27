@@ -347,5 +347,62 @@ namespace DataAccessLayer
             return Obj;
         }
         #endregion
+
+        #region ADLER EPC
+        public static ups_GetEPC_Customer_ADL_Result GetEPC_Customer_ADL(string gtin14, long RPO, long DetailLineNo, long qty, string customerId, string customerName, string Event, long UserId, string CustomPara1, string CustomPara2)
+        {
+            ups_GetEPC_Customer_ADL_Result Obj = new ups_GetEPC_Customer_ADL_Result();
+            try
+            {
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+                   
+                    Obj = (from lst1 in db.ups_GetEPC_Customer_ADL(gtin14, RPO, DetailLineNo, qty, customerId, customerName, Event, UserId, CustomPara1, CustomPara2) select lst1).ToList().FirstOrDefault();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                               
+            }
+            return Obj;
+        }
+        public static usp_EPC_Cust_ADL_Result usp_EPC_Cust_ADL(string gtin14, long SerialStart, long SerialEnd, string Schema, string transaction, string EPCStart, string EPCEnd, long qty,  string customerId, string customerName, string Event, long UserId,  string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, DateTime EPCStartDateTime, long Id, string NextEPC, long NextEPCSerial)
+        {
+            usp_EPC_Cust_ADL_Result Obj = new usp_EPC_Cust_ADL_Result();
+            try
+            {
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+
+                    Obj = (from lst1 in db.usp_EPC_Cust_ADL(gtin14, SerialStart,SerialEnd, Schema, transaction, EPCStart, EPCEnd, RPO, DetailLineNo, CustomPara1, CustomPara2, qty, customerId, customerName, Event, UserId, EPCStartDateTime,Id, NextEPC, NextEPCSerial) select lst1).ToList().FirstOrDefault();
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Obj;
+        }
+        public static void EPC_InsertEPCLog(string gtin14, long SerialStart, long SerialEnd, string Schema, string transaction, string EPCStart, string EPCEnd, long qty, string customerId, string customerName, string Event, long UserId, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, DateTime EPCStartDateTime,string Remark)
+        {
+            
+            try
+            {
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+
+                    db.usp_EPC_InsertEPCLog(gtin14, SerialStart, SerialEnd, Schema, transaction, EPCStart, EPCEnd, RPO, DetailLineNo, CustomPara1, CustomPara2, qty, customerId, customerName, Event, UserId, EPCStartDateTime, Remark);
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            
+        }
+        #endregion
     }
 }

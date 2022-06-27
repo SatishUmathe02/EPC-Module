@@ -20,3 +20,14 @@ E:\r-trac\Project_GIT\r-trac EPC\EPC_GS1\bin\Debug\EntityFramework.xml
 E:\r-trac\Project_GIT\r-trac EPC\EPC_GS1\obj\Debug\EPC_GS1.csprojResolveAssemblyReference.cache
 E:\r-trac\Project_GIT\r-trac EPC\EPC_GS1\obj\Debug\EPC_GS1.dll
 E:\r-trac\Project_GIT\r-trac EPC\EPC_GS1\obj\Debug\EPC_GS1.pdb
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPC_GS1\bin\Debug\EPC_GS1.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPC_GS1\bin\Debug\EPC_GS1.pdb
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPC_GS1\bin\Debug\DataAccessLayer.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPC_GS1\bin\Debug\RestSharp.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPC_GS1\bin\Debug\EntityFramework.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPC_GS1\bin\Debug\DataAccessLayer.pdb
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPC_GS1\bin\Debug\RestSharp.xml
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPC_GS1\bin\Debug\EntityFramework.xml
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPC_GS1\obj\Debug\EPC_GS1.csprojResolveAssemblyReference.cache
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPC_GS1\obj\Debug\EPC_GS1.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPC_GS1\obj\Debug\EPC_GS1.pdb

@@ -41,3 +41,19 @@ E:\r-trac\Project_GIT\r-trac EPC\EPCGerryWeber\bin\Debug\RestSharp.xml
 E:\r-trac\Project_GIT\r-trac EPC\EPCGerryWeber\obj\Debug\EPCGerryWeber.csprojResolveAssemblyReference.cache
 E:\r-trac\Project_GIT\r-trac EPC\EPCGerryWeber\obj\Debug\EPCGerryWeber.dll
 E:\r-trac\Project_GIT\r-trac EPC\EPCGerryWeber\obj\Debug\EPCGerryWeber.pdb
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\EPCGerryWeber.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\EPCGerryWeber.pdb
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\BussinessLayer.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\DataAccessLayer.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\TagDataTranslation-net.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\EPC_GS1.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\EntityFramework.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\RestSharp.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\BussinessLayer.pdb
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\DataAccessLayer.pdb
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\EPC_GS1.pdb
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\EntityFramework.xml
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\RestSharp.xml
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\obj\Debug\EPCGerryWeber.csprojResolveAssemblyReference.cache
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\obj\Debug\EPCGerryWeber.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\obj\Debug\EPCGerryWeber.pdb

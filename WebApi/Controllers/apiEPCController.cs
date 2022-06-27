@@ -74,29 +74,44 @@ namespace WebApi.Controllers
             //EPCRequest Obj = new EPCRequest();
 
             //Obj = JsonConvert.DeserializeObject<EPCRequest>(Request);
-
-            if (Request.CustomerID == "InditexBershka")
-            {
-                if (!string.IsNullOrEmpty(Request.CustomPara1))
-                {
-                    string Val = Request.CustomPara1.Split("#".ToArray()).LastOrDefault();
-                    if ((Val == "N1") || (Val == "N2") || (Val == "N3"))
-                    {
-                        return Transaction_New.GetEPC_Customer(Request);
-                    }
-                }
-
-            }
-
+            
             if (Request.Quantity <= 0)
             {
                 EPCResponse ObjRes = new EPCResponse();
                 return ObjRes = EPCBLL.GetError(123);
             }
-
-
+            
             if (Request != null)
             {
+                #region CUSTOMER EPC
+
+                if (Request.CustomerID == "InditexBershka")
+                {
+                    if (!string.IsNullOrEmpty(Request.CustomPara1))
+                    {
+                        string Val = Request.CustomPara1.Split("#".ToArray()).LastOrDefault();
+                        if ((Val == "N1") || (Val == "N2") || (Val == "N3"))
+                        {
+                            return Transaction_New.GetEPC_Customer(Request);
+                        }
+
+                    }
+
+
+                }
+                if (Request.CustomerID == "ADL")
+                {
+                    if (!string.IsNullOrEmpty(Request.CustomPara1))
+                    {
+                        return EPCBLL_ADL.GetEPC_ADL(Request);
+                    }
+                    else
+                    {
+                        return EPCBLL.GetError(120);
+                    }
+
+                }
+                #endregion
                 //if (Request.CustomerID == "GerryWeber")
                 //Here we are checking the item code for GW which they will get from our EPC (r-trac EPC)
                 if ((Request.CustomerID == "GerryWeber") && (Request.CustomPara1 != "Catalog"))
