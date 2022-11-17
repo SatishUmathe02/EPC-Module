@@ -7,3 +7,13 @@ E:\r-trac\Project\r-trac EPC\DataAccessLayer\bin\Release\EntityFramework.xml
 E:\r-trac\Project\r-trac EPC\DataAccessLayer\bin\Release\EntityFramework.SqlServer.xml
 E:\r-trac\Project\r-trac EPC\DataAccessLayer\obj\Release\DataAccessLayer.dll
 E:\r-trac\Project\r-trac EPC\DataAccessLayer\obj\Release\DataAccessLayer.pdb
+C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\bin\Release\DataAccessLayer.dll.config
+C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\bin\Release\DataAccessLayer.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\bin\Release\DataAccessLayer.pdb
+C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\bin\Release\EntityFramework.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\bin\Release\EntityFramework.SqlServer.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\bin\Release\EntityFramework.xml
+C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\bin\Release\EntityFramework.SqlServer.xml
+C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\obj\Release\DataAccessLayer.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\obj\Release\DataAccessLayer.pdb
+C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\obj\Release\DataAccessLayer.csprojResolveAssemblyReference.cache

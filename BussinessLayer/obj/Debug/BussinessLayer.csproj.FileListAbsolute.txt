@@ -35,9 +35,6 @@ E:\r-trac\Project_GIT\r-trac EPC\BussinessLayer\bin\Debug\RestSharp.xml
 E:\r-trac\Project_GIT\r-trac EPC\BussinessLayer\obj\Debug\BussinessLayer.csprojResolveAssemblyReference.cache
 E:\r-trac\Project_GIT\r-trac EPC\BussinessLayer\obj\Debug\BussinessLayer.dll
 E:\r-trac\Project_GIT\r-trac EPC\BussinessLayer\obj\Debug\BussinessLayer.pdb
-C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\obj\Debug\BussinessLayer.csprojResolveAssemblyReference.cache
-C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\obj\Debug\BussinessLayer.dll
-C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\obj\Debug\BussinessLayer.pdb
 C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Debug\BussinessLayer.dll
 C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Debug\BussinessLayer.pdb
 C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Debug\DataAccessLayer.dll
@@ -49,3 +46,6 @@ C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Debug\DataAccessLayer.
 C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Debug\EPC_GS1.pdb
 C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Debug\EntityFramework.xml
 C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Debug\RestSharp.xml
+C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\obj\Debug\BussinessLayer.csprojResolveAssemblyReference.cache
+C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\obj\Debug\BussinessLayer.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\obj\Debug\BussinessLayer.pdb

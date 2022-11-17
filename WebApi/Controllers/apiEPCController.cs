@@ -154,7 +154,7 @@ namespace WebApi.Controllers
                     if ((Request.GS1Customer && Request.GS1apiRequired) && (string.IsNullOrEmpty(Request.GS1Prefix)))
                     {
                         // show the error
-                        EPCResponse EPC_Res = new EPCResponse();
+                        EPCResponse EPC_Res = null;
                         EPC_Res.EPCStart = "";
                         EPC_Res.EPCEnd = "";
                         EPC_Res.SerialStart = "";

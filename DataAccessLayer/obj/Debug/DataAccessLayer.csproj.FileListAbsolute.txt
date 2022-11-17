@@ -27,6 +27,6 @@ C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\bin\Debug\EntityFramework
 C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.dll
 C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\bin\Debug\EntityFramework.xml
 C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml
-C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\obj\Debug\DataAccessLayer.csprojResolveAssemblyReference.cache
 C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\obj\Debug\DataAccessLayer.dll
 C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\obj\Debug\DataAccessLayer.csprojResolveAssemblyReference.cache

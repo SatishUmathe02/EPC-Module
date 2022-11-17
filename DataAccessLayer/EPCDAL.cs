@@ -66,6 +66,95 @@ namespace DataAccessLayer
 
         #endregion
 
+        #region GET EPC VIA STORE PROCEDURE CA
+        public static usp_GTIN_GetEPC_CA_Result GetEPC_CA(string gtin14, long qty, string transaction, string schema, string customerId, string customerName, string Event, long UserId, long SerialStart, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, string GS1Prefix, int PartionVal, DateTime EPCStartDateTime)
+        {
+            usp_GTIN_GetEPC_CA_Result Obj = new usp_GTIN_GetEPC_CA_Result();
+            try
+            {
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+                    //if (qty >= 40000)
+                    {
+                        db.Database.CommandTimeout = 0;
+
+                    }
+
+                    Obj = (from lst1 in db.usp_GTIN_GetEPC_CA(gtin14, qty, transaction, schema, customerId, customerName, Event, UserId, SerialStart, EPC, RPO, DetailLineNo, CustomPara1, CustomPara2, GS1Prefix, PartionVal, EPCStartDateTime) select lst1).ToList().FirstOrDefault();
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                //using (EPC_DBEntities db = new EPC_DBEntities())
+                //{
+                //    Obj = (from lst1 in db.usp_GTIN_GetEPC(gtin14, qty, transaction, schema, customerId, customerName, Event, UserId, SerialStart, EPC, RPO, DetailLineNo, CustomPara1, CustomPara2, GS1Prefix, PartionVal) select lst1).ToList().FirstOrDefault();
+                //}
+            }
+            return Obj;
+        }
+
+
+        #endregion
+
+        #region GET EPC VIA STORE PROCEDURE HUGO BOSS
+        public static usp_GTIN_GetEPC_HugoBoss_Result GetEPC_HugoBoss(string gtin14, long qty, string transaction, string schema, string customerId, string customerName, string Event, long UserId, long SerialStart, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, string GS1Prefix, int PartionVal, DateTime EPCStartDateTime)
+        {
+            usp_GTIN_GetEPC_HugoBoss_Result Obj = new usp_GTIN_GetEPC_HugoBoss_Result();
+            try
+            {
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+                    //if (qty >= 40000)
+                    {
+                        db.Database.CommandTimeout = 0;
+
+                    }
+
+                    Obj = (from lst1 in db.usp_GTIN_GetEPC_HugoBoss(gtin14, qty, transaction, schema, customerId, customerName, Event, UserId, SerialStart, EPC, RPO, DetailLineNo, CustomPara1, CustomPara2, GS1Prefix, PartionVal, EPCStartDateTime) select lst1).ToList().FirstOrDefault();
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+               
+            }
+            return Obj;
+        }
+
+
+        #endregion
+
+        #region GET EPC VIA STORE PROCEDURE DEISEL
+        public static usp_GTIN_GetEPC_Diesel_Result GetEPC_Diesel(string gtin14, long qty, string transaction, string schema, string customerId, string customerName, string Event, long UserId, long SerialStart, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, string GS1Prefix, int PartionVal, DateTime EPCStartDateTime)
+        {
+            usp_GTIN_GetEPC_Diesel_Result Obj = new usp_GTIN_GetEPC_Diesel_Result();
+            try
+            {
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+                    //if (qty >= 40000)
+                    {
+                        db.Database.CommandTimeout = 0;
+
+                    }
+
+                    Obj = (from lst1 in db.usp_GTIN_GetEPC_Diesel(gtin14, qty, transaction, schema, customerId, customerName, Event, UserId, SerialStart, EPC, RPO, DetailLineNo, CustomPara1, CustomPara2, GS1Prefix, PartionVal, EPCStartDateTime) select lst1).ToList().FirstOrDefault();
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+            return Obj;
+        }
+
+
+        #endregion
 
         #region ADD ERROR LOG
         public static int InsertLog(System.Exception objException, string FileName)

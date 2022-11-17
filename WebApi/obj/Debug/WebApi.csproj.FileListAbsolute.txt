@@ -204,8 +204,6 @@ E:\r-trac\Project_GIT\r-trac EPC\WebApi\bin\RestSharp.xml
 E:\r-trac\Project_GIT\r-trac EPC\WebApi\obj\Debug\WebApi.csprojResolveAssemblyReference.cache
 E:\r-trac\Project_GIT\r-trac EPC\WebApi\obj\Debug\WebApi.dll
 E:\r-trac\Project_GIT\r-trac EPC\WebApi\obj\Debug\WebApi.pdb
-C:\SATISH\r-trac\Project-GIT\EPCModule\WebApi\obj\Debug\WebApi.csprojResolveAssemblyReference.cache
-C:\SATISH\r-trac\Project-GIT\EPCModule\WebApi\obj\Debug\WebApi.pdb
 C:\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\ApplicationInsights.config
 C:\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\WebApi.dll.config
 C:\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\WebApi.dll
@@ -273,4 +271,6 @@ C:\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\System.Web.WebPages.Deployment
 C:\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\System.Web.WebPages.Razor.xml
 C:\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\EPC_GS1.pdb
 C:\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\RestSharp.xml
+C:\SATISH\r-trac\Project-GIT\EPCModule\WebApi\obj\Debug\WebApi.csprojResolveAssemblyReference.cache
 C:\SATISH\r-trac\Project-GIT\EPCModule\WebApi\obj\Debug\WebApi.dll
+C:\SATISH\r-trac\Project-GIT\EPCModule\WebApi\obj\Debug\WebApi.pdb
