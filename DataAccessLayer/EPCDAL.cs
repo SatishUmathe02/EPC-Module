@@ -127,6 +127,47 @@ namespace DataAccessLayer
 
         #endregion
 
+        #region GET EPC VIA STORE PROCEDURE KIABI
+        public static usp_GTIN_GetEPC_Kiabi_Result GetEPC_Kiabi(string gtin14, long qty, string transaction, string schema, string customerId, string customerName, string Event, long UserId, long SerialStart, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, string GS1Prefix, int PartionVal, DateTime EPCStartDateTime)
+        {
+            usp_GTIN_GetEPC_Kiabi_Result uspGTINGetEPCKiabiResult = new usp_GTIN_GetEPC_Kiabi_Result();
+            try
+            {
+                using (EPC_DBEntities ePCDBEntity = new EPC_DBEntities())
+                {
+                    ePCDBEntity.Database.CommandTimeout = new int?(0);
+                    uspGTINGetEPCKiabiResult = (
+                        from lst1 in ePCDBEntity.usp_GTIN_GetEPC_Kiabi(gtin14, new long?(qty), transaction, schema, customerId, customerName, Event, new long?(UserId), new long?(SerialStart), EPC, new long?(RPO), new long?(DetailLineNo), CustomPara1, CustomPara2, GS1Prefix, new int?(PartionVal), new DateTime?(EPCStartDateTime))
+                        select lst1).ToList<usp_GTIN_GetEPC_Kiabi_Result>().FirstOrDefault<usp_GTIN_GetEPC_Kiabi_Result>();
+                }
+            }
+            catch (Exception exception)
+            {
+            }
+            return uspGTINGetEPCKiabiResult;
+        }
+
+        public static usp_GTIN_GetEPC_Kiabi_Range_Result GetEPC_Kiabi_Range(string gtin14, long qty, string transaction, string schema, string customerId, string customerName, string Event, long UserId, long SerialStart, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, string GS1Prefix, int PartionVal, DateTime EPCStartDateTime)
+        {
+            usp_GTIN_GetEPC_Kiabi_Range_Result uspGTINGetEPCKiabiRangeResult = new usp_GTIN_GetEPC_Kiabi_Range_Result();
+            try
+            {
+                using (EPC_DBEntities ePCDBEntity = new EPC_DBEntities())
+                {
+                    ePCDBEntity.Database.CommandTimeout = new int?(0);
+                    uspGTINGetEPCKiabiRangeResult = (
+                        from lst1 in ePCDBEntity.usp_GTIN_GetEPC_Kiabi_Range(gtin14, new long?(qty), transaction, schema, customerId, customerName, Event, new long?(UserId), new long?(SerialStart), EPC, new long?(RPO), new long?(DetailLineNo), CustomPara1, CustomPara2, GS1Prefix, new int?(PartionVal), new DateTime?(EPCStartDateTime))
+                        select lst1).ToList<usp_GTIN_GetEPC_Kiabi_Range_Result>().FirstOrDefault<usp_GTIN_GetEPC_Kiabi_Range_Result>();
+                }
+            }
+            catch (Exception exception)
+            {
+            }
+            return uspGTINGetEPCKiabiRangeResult;
+        }
+
+        #endregion
+
         #region GET EPC VIA STORE PROCEDURE DEISEL
         public static usp_GTIN_GetEPC_Diesel_Result GetEPC_Diesel(string gtin14, long qty, string transaction, string schema, string customerId, string customerName, string Event, long UserId, long SerialStart, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, string GS1Prefix, int PartionVal, DateTime EPCStartDateTime)
         {

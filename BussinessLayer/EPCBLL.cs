@@ -133,6 +133,22 @@ namespace BussinessLayer
             return Objlist;
 
         }
+        public static List<string> GetReprintEvent()
+        { 
+
+            return new List<string>()
+            {
+                "Preview",
+                "RePrint",
+                "Reprint_CP",
+                "Reprint_TH",
+                "PrintTest_CP",
+                "PrintTest_TH",
+                "PrintTestTH"
+            };
+
+
+        }
     }
 
     public class EPCGTIN

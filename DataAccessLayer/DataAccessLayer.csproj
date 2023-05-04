@@ -155,6 +155,12 @@
     <Compile Include="usp_GTIN_GetEPC_HugoBoss_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="usp_GTIN_GetEPC_Kiabi_Range_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_Kiabi_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="usp_GTIN_GetEPC_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>

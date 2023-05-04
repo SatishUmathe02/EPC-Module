@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPCGerryWeber", "..\..\EPCG
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPC_GS1", "..\..\EPC_GS1\EPC_GS1.csproj", "{E99321A1-D52A-4AA6-BA64-6F9AAFA85C8C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPC_Kaibi", "EPC_Kaibi\EPC_Kaibi.csproj", "{372AF9F6-22E2-4EA1-8E86-BAC14884CF50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{E99321A1-D52A-4AA6-BA64-6F9AAFA85C8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E99321A1-D52A-4AA6-BA64-6F9AAFA85C8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E99321A1-D52A-4AA6-BA64-6F9AAFA85C8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{372AF9F6-22E2-4EA1-8E86-BAC14884CF50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{372AF9F6-22E2-4EA1-8E86-BAC14884CF50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{372AF9F6-22E2-4EA1-8E86-BAC14884CF50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{372AF9F6-22E2-4EA1-8E86-BAC14884CF50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

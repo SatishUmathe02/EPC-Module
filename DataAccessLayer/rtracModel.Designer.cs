@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\rtracModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\rtracModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
