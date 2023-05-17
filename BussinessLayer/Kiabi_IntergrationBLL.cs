@@ -27,13 +27,18 @@ namespace BussinessLayer
                 }
                 else
                 {
-                    string str = string.Concat(string.Concat(new object[] { "{\n  \"skuId\": ", strArrays[3], ",\n  \"poId\": ", strArrays[2], ",\n  \"skuQuantity\": ", EPC_Req.Quantity }), "\n}");
                     string empty = string.Empty;
                     string empty1 = string.Empty;
-                    empty = Kiabi_http.Kiabi_apiResponse_Rest(EPC_Req, str).Result;
+
+                    if (strArrays.Count() > 3)
+                    {
+                        string str = string.Concat(string.Concat(new object[] { "{\n  \"skuId\": ", strArrays[3], ",\n  \"poId\": ", strArrays[2], ",\n  \"skuQuantity\": ", EPC_Req.Quantity }), "\n}");
+
+                        empty = Kiabi_http.Kiabi_apiResponse_Rest(EPC_Req, str).Result;
+                    }
                     if (string.IsNullOrEmpty(empty))
                     {
-                        uspGTINGetEPCKiabiRangeResult.Remark = "No response from Kiabi api";
+                        uspGTINGetEPCKiabiRangeResult.Remark = "Error from Kiabi API: No response from Kiabi api";
                     }
                     else
                     {
@@ -44,7 +49,7 @@ namespace BussinessLayer
                             {
                                 if (Convert.ToInt32(obj["code"].ToString().Substring(0, 1)) == 4)
                                 {
-                                    uspGTINGetEPCKiabiRangeResult.Remark = (string)obj["message"];
+                                    uspGTINGetEPCKiabiRangeResult.Remark = "Error from Kiabi API:"+ (string)obj["message"];
                                 }
                             }
                             else if (obj["epcRangeId"] != (dynamic)null)
@@ -55,7 +60,7 @@ namespace BussinessLayer
                         }
                         catch (Exception exception)
                         {
-                            uspGTINGetEPCKiabiRangeResult.Remark = exception.ToString();
+                            uspGTINGetEPCKiabiRangeResult.Remark = "Error from Kiabi API:"+ exception.ToString();
                         }
                     }
                 }

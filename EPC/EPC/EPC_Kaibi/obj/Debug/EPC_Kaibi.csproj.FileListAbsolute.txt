@@ -2,10 +2,12 @@ C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\bin\Debug\EPC_Kaibi.dll
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\bin\Debug\EPC_Kaibi.pdb
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\bin\Debug\DataAccessLayer.dll
-C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\bin\Debug\RestSharp.dll
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\bin\Debug\EntityFramework.dll
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\bin\Debug\DataAccessLayer.pdb
-C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\bin\Debug\RestSharp.xml
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\bin\Debug\EntityFramework.xml
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\obj\Debug\EPC_Kaibi.dll
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\obj\Debug\EPC_Kaibi.pdb
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\bin\Debug\EPC_GS1.dll
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\bin\Debug\RestSharp.dll
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\bin\Debug\EPC_GS1.pdb
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\bin\Debug\RestSharp.xml

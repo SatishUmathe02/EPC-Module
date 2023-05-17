@@ -355,6 +355,14 @@
           <Parameter Name="bigIntCreatedById" Type="bigint" Mode="In" />
           <Parameter Name="dtCreatedOn" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="USP_rtrac_InsertEPCReqRes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerId" Type="varchar" Mode="In" />
+          <Parameter Name="RPO" Type="bigint" Mode="In" />
+          <Parameter Name="DetailLineNo" Type="bigint" Mode="In" />
+          <Parameter Name="Request" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Response" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UserId" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="usp_UpdateAssPassword_MANGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="XML" Type="xml" Mode="In" />
         </Function>
@@ -713,6 +721,14 @@
             <Parameter Name="GS1Prefix" Mode="In" Type="String" />
             <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
             <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="USP_rtrac_InsertEPCReqRes">
+            <Parameter Name="CustomerId" Mode="In" Type="String" />
+            <Parameter Name="RPO" Mode="In" Type="Int64" />
+            <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+            <Parameter Name="Request" Mode="In" Type="String" />
+            <Parameter Name="Response" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="Int64" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_EPCIS_GetEP_URN_Result">
@@ -1418,6 +1434,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USP_rtrac_InsertEPCReqRes" FunctionName="rtracModel.Store.USP_rtrac_InsertEPCReqRes" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

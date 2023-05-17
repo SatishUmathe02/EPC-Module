@@ -350,6 +350,14 @@
     <Parameter Name="bigIntCreatedById" Type="bigint" Mode="In" />
     <Parameter Name="dtCreatedOn" Type="datetime" Mode="In" />
   </Function>
+  <Function Name="USP_rtrac_InsertEPCReqRes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CustomerId" Type="varchar" Mode="In" />
+    <Parameter Name="RPO" Type="bigint" Mode="In" />
+    <Parameter Name="DetailLineNo" Type="bigint" Mode="In" />
+    <Parameter Name="Request" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="Response" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+  </Function>
   <Function Name="usp_UpdateAssPassword_MANGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="XML" Type="xml" Mode="In" />
   </Function>

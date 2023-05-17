@@ -1308,5 +1308,34 @@ namespace DataAccessLayer
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_Kiabi_Range_Result>("usp_GTIN_GetEPC_Kiabi_Range", gTINParameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter);
         }
+    
+        public virtual int USP_rtrac_InsertEPCReqRes(string customerId, Nullable<long> rPO, Nullable<long> detailLineNo, string request, string response, Nullable<long> userId)
+        {
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var requestParameter = request != null ?
+                new ObjectParameter("Request", request) :
+                new ObjectParameter("Request", typeof(string));
+    
+            var responseParameter = response != null ?
+                new ObjectParameter("Response", response) :
+                new ObjectParameter("Response", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USP_rtrac_InsertEPCReqRes", customerIdParameter, rPOParameter, detailLineNoParameter, requestParameter, responseParameter, userIdParameter);
+        }
     }
 }

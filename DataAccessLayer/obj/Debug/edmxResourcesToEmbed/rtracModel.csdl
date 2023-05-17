@@ -345,6 +345,14 @@
       <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
       <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
     </FunctionImport>
+    <FunctionImport Name="USP_rtrac_InsertEPCReqRes">
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="Request" Mode="In" Type="String" />
+      <Parameter Name="Response" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="usp_EPCIS_GetEP_URN_Result">
     <Property Type="String" Name="CustomerId" Nullable="false" MaxLength="50" />

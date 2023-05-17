@@ -413,5 +413,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="USP_rtrac_InsertEPCReqRes" FunctionName="rtracModel.Store.USP_rtrac_InsertEPCReqRes" />
   </EntityContainerMapping>
 </Mapping>

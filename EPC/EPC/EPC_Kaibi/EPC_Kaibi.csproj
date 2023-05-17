@@ -30,8 +30,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="RestSharp, Version=106.15.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
-      <HintPath>..\packages\RestSharp.106.15.0\lib\net452\RestSharp.dll</HintPath>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -53,6 +53,10 @@
     <ProjectReference Include="..\..\..\DataAccessLayer\DataAccessLayer.csproj">
       <Project>{2a378239-0725-4963-b360-761a94666564}</Project>
       <Name>DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\EPC_GS1\EPC_GS1.csproj">
+      <Project>{e99321a1-d52a-4aa6-ba64-6f9aafa85c8c}</Project>
+      <Name>EPC_GS1</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

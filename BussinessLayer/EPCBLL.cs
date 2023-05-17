@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataAccessLayer.CommonDataModels;
 using TagDataTranslation;
 using DataAccessLayer;
+using Newtonsoft.Json;
 
 namespace BussinessLayer
 {
@@ -149,6 +150,24 @@ namespace BussinessLayer
 
 
         }
+
+        public static void rtrac_EPCReqRes(EPCRequest ObjEPCReq, string epc_res)
+        {
+            try
+            {
+                string epc_req = JsonConvert.SerializeObject(ObjEPCReq);
+                
+
+
+                EPCDAL.rtrac_InsertReqRes(ObjEPCReq.CustomerID, ObjEPCReq.RPO, ObjEPCReq.DetailLineID, epc_req, epc_res, ObjEPCReq.UserId);
+            }
+            catch(Exception ex)
+            {
+
+            }
+
+        }
+
     }
 
     public class EPCGTIN

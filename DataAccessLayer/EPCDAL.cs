@@ -534,5 +534,16 @@ namespace DataAccessLayer
             
         }
         #endregion
+
+
+        #region INSERT rtrac EPC REQUEST AND RESPONSE
+        public static void rtrac_InsertReqRes(string CustomerId, long RPO, long DetailLineNo, string Request, string Response, long UserId)
+        {
+            using (EPC_DBEntities db = new EPC_DBEntities())
+            {
+                db.USP_rtrac_InsertEPCReqRes(CustomerId, RPO, DetailLineNo, Request, Response, UserId);
+            }
+        }
+        #endregion
     }
 }

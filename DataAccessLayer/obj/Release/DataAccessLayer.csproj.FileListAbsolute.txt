@@ -17,3 +17,13 @@ C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\bin\Release\EntityFramewo
 C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\obj\Release\DataAccessLayer.dll
 C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\obj\Release\DataAccessLayer.pdb
 C:\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\obj\Release\DataAccessLayer.csprojResolveAssemblyReference.cache
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\bin\Release\DataAccessLayer.dll.config
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\bin\Release\DataAccessLayer.dll
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\bin\Release\DataAccessLayer.pdb
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\bin\Release\EntityFramework.dll
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\bin\Release\EntityFramework.xml
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\obj\Release\DataAccessLayer.dll
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\obj\Release\DataAccessLayer.pdb
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\obj\Release\DataAccessLayer.csprojResolveAssemblyReference.cache

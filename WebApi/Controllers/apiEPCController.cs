@@ -59,13 +59,17 @@ namespace WebApi.Controllers
                     ObjRes = await Run_GetEPCDecode(Request);
                 }
 
+                string epc_res = JsonConvert.SerializeObject(ObjRes);
+                EPCBLL.rtrac_EPCReqRes(Request, epc_res);
                 return Ok(ObjRes);
             }
             catch (Exception Ex)
             {
                 //EPCBLL.InsertLog(Ex, "api/apiEPC/GetEPC");
+                EPCBLL.rtrac_EPCReqRes(Request, Ex.ToString());
                 return Ok(Ex.ToString());
             }
+
 
         }
 
@@ -74,13 +78,13 @@ namespace WebApi.Controllers
             //EPCRequest Obj = new EPCRequest();
 
             //Obj = JsonConvert.DeserializeObject<EPCRequest>(Request);
-            
+
             if (Request.Quantity <= 0)
             {
                 EPCResponse ObjRes = new EPCResponse();
                 return ObjRes = EPCBLL.GetError(123);
             }
-            
+
             if (Request != null)
             {
                 #region CUSTOMER EPC
@@ -132,8 +136,16 @@ namespace WebApi.Controllers
                             {
                                 string GS1_Response = GS1_IntergrationBLL.GS1_apiResponse_Restapi(Request);
                                 List<GS1> ObjGS1 = JsonConvert.DeserializeObject<List<GS1>>(GS1_Response);
-                                string GS1JSON = JsonConvert.SerializeObject(ObjGS1);
-                                Request = GS1_IntergrationBLL.GS1_Details(Request, ObjGS1, GS1JSON);
+                                if (ObjGS1.Count == 0 && Request.CustomerID.ToUpper() == "CABOT")
+                                {
+                                    Request.GS1Prefix = "Defualt";
+                                    Request.PartitionValue = 5;
+                                }
+                                else
+                                {
+                                    string GS1JSON = JsonConvert.SerializeObject(ObjGS1);
+                                    Request = GS1_IntergrationBLL.GS1_Details(Request, ObjGS1, GS1JSON);
+                                }
 
                                 if (string.IsNullOrEmpty(Request.GS1Prefix))
                                 {
@@ -141,7 +153,7 @@ namespace WebApi.Controllers
                                 }
 
                             }
-                            catch
+                            catch (Exception ex)
                             {
                                 Request.GS1Prefix = "";
                             }

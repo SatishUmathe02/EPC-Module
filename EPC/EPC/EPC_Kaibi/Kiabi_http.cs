@@ -24,6 +24,7 @@ namespace EPC_Kaibi
 
         public Kiabi_http()
         {
+
         }
 
         public static string GetAuthToken(EPCRequest ObjEPC)
