@@ -246,6 +246,44 @@ namespace BussinessLayer
             return EPC_Res;
         }
 
+        public static EPCResponse GetEPC_Customer_Tempe(EPCRequest EPC_Req)
+        {
+            EPCResponse ePCResponse = new EPCResponse();
+            try
+            {
+                try
+                {
+                    EPC_Req.Schema = (EPC_Req.Schema == null ? "" : EPC_Req.Schema);
+                    EPC_Req.CustomerID = (EPC_Req.CustomerID == null ? "" : EPC_Req.CustomerID);
+                    usp_GTIN_GetEPC_Customer_Tempe_Result ePCCustomerTempe = EPCDAL.GetEPC_Customer_Tempe(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
+                    ePCResponse.EPCStart = ePCCustomerTempe.EpcStart;
+                    ePCResponse.EPCEnd = ePCCustomerTempe.EpcEnd;
+                    ePCResponse.SerialStart = Convert.ToString(ePCCustomerTempe.SerialStart);
+                    ePCResponse.SerialEnd = Convert.ToString(ePCCustomerTempe.SerailEnd);
+                    ePCResponse.Remark = Convert.ToString(ePCCustomerTempe.Remark);
+                    ePCResponse.CustomerID = EPC_Req.CustomerID;
+                    ePCResponse.Quantity = EPC_Req.Quantity;
+                    ePCResponse.GTIN = EPC_Req.GTIN;
+                    ePCResponse.AccessPWD = ePCCustomerTempe.AccessPWD;
+                    ePCResponse.KillPWD = ePCCustomerTempe.KillPWD;
+                }
+                catch (Exception exception)
+                {
+                    EPCDAL.SaveErrorFileResponse(exception.ToString(), "GetEPC");
+                    EPCBLL.InsertLog(exception, "GetEPC");
+                    ePCResponse = EPCBLL.GetError(122);
+                }
+            }
+            catch (Exception exception1)
+            {
+                EPCDAL.SaveErrorFileResponse(exception1.ToString(), "GetEPC_New");
+                EPCBLL.InsertLog(exception1, "GetEPC_New");
+                ePCResponse = EPCBLL.GetError(122);
+            }
+            return ePCResponse;
+        }
+
+
     }
 
     public class Transaction_Encode : EPCBLL

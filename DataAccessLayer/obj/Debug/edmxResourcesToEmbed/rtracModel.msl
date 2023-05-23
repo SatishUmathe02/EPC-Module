@@ -414,5 +414,20 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="USP_rtrac_InsertEPCReqRes" FunctionName="rtracModel.Store.USP_rtrac_InsertEPCReqRes" />
+    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_Customer_Tempe" FunctionName="rtracModel.Store.usp_GTIN_GetEPC_Customer_Tempe">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="rtracModel.usp_GTIN_GetEPC_Customer_Tempe_Result">
+          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
+          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
+          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
+          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
+          <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

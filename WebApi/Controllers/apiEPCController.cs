@@ -103,6 +103,21 @@ namespace WebApi.Controllers
 
 
                 }
+                if (Request.CustomerID == "Inditex")
+                {
+                    if (!string.IsNullOrEmpty(Request.CustomPara1))
+                    {
+                        string Val = Request.CustomPara1.Split("#".ToArray()).LastOrDefault();
+                        if ((Val == "TI"))
+                        {
+                            return Transaction_New.GetEPC_Customer_Tempe(Request);
+                        }
+
+                    }
+
+
+                }
+               
                 if (Request.CustomerID == "ADL")
                 {
                     if (!string.IsNullOrEmpty(Request.CustomPara1))

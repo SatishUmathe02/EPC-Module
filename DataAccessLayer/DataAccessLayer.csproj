@@ -146,6 +146,9 @@
     <Compile Include="usp_GTIN_GetEPC_Customer_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="usp_GTIN_GetEPC_Customer_Tempe_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="usp_GTIN_GetEPC_Diesel_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
