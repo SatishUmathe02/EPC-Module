@@ -147,33 +147,35 @@ namespace WebApi.Controllers
                     {
                         if (Request.GS1apiRequired)
                         {
+                            List<GS1> ObjGS1 = new List<GS1>();
+                            string GS1_Response = string.Empty;
+
                             try
                             {
-                                string GS1_Response = GS1_IntergrationBLL.GS1_apiResponse_Restapi(Request);
-                                List<GS1> ObjGS1 = JsonConvert.DeserializeObject<List<GS1>>(GS1_Response);
-                                if (ObjGS1.Count == 0 && Request.CustomerID.ToUpper() == "CABOT")
-                                {
-                                    Request.GS1Prefix = "Defualt";
-                                    Request.PartitionValue = 5;
-                                }
-                                else
-                                {
-                                    string GS1JSON = JsonConvert.SerializeObject(ObjGS1);
-                                    Request = GS1_IntergrationBLL.GS1_Details(Request, ObjGS1, GS1JSON);
-                                }
-
-                                if (string.IsNullOrEmpty(Request.GS1Prefix))
-                                {
-                                    GS1_IntergrationBLL.EmailNotification(GS1_Response, ObjGS1, Request);
-                                }
-
+                                GS1_Response = GS1_IntergrationBLL.GS1_apiResponse_Restapi(Request);
+                                ObjGS1 = JsonConvert.DeserializeObject<List<GS1>>(GS1_Response);
+                                
                             }
                             catch (Exception ex)
                             {
                                 Request.GS1Prefix = "";
                             }
 
+                            if (ObjGS1.Count == 0 && Request.CustomerID.ToUpper() == "CABOT")
+                            {
+                                Request.GS1Prefix = "Defualt";
+                                Request.PartitionValue = 5;
+                            }
+                            else
+                            {
+                                string GS1JSON = JsonConvert.SerializeObject(ObjGS1);
+                                Request = GS1_IntergrationBLL.GS1_Details(Request, ObjGS1, GS1JSON);
+                            }
 
+                            if (string.IsNullOrEmpty(Request.GS1Prefix))
+                            {
+                                GS1_IntergrationBLL.EmailNotification(GS1_Response, ObjGS1, Request);
+                            }
                         }
 
                     }
