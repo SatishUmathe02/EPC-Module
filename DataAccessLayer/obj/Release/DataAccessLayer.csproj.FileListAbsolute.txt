@@ -26,4 +26,3 @@ C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\bin\Release\EntityFramework.SqlServer.xml
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\obj\Release\DataAccessLayer.dll
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\obj\Release\DataAccessLayer.pdb
-C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\DataAccessLayer\obj\Release\DataAccessLayer.csprojResolveAssemblyReference.cache

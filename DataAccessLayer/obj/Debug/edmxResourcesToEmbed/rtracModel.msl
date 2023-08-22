@@ -429,5 +429,27 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetTempeEPCDetails" FunctionName="rtracModel.Store.usp_GetTempeEPCDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="rtracModel.usp_GetTempeEPCDetails_Result">
+          <ScalarProperty Name="purchaseOrder" ColumnName="purchaseOrder" />
+          <ScalarProperty Name="model" ColumnName="model" />
+          <ScalarProperty Name="quality" ColumnName="quality" />
+          <ScalarProperty Name="colorCode" ColumnName="colorCode" />
+          <ScalarProperty Name="sizeCode" ColumnName="sizeCode" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
+          <ScalarProperty Name="bigIntrpacDetailNumber" ColumnName="bigIntrpacDetailNumber" />
+          <ScalarProperty Name="rfidRequestId" ColumnName="rfidRequestId" />
+          <ScalarProperty Name="supplierId" ColumnName="supplierId" />
+          <ScalarProperty Name="inventoryTag" ColumnName="inventoryTag" />
+          <ScalarProperty Name="eas" ColumnName="eas" />
+          <ScalarProperty Name="tagSubType" ColumnName="tagSubType" />
+          <ScalarProperty Name="tagType" ColumnName="tagType" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_Tempe_EPC_InsertEPCLog_Decode" FunctionName="rtracModel.Store.usp_Tempe_EPC_InsertEPCLog_Decode" />
+    <FunctionImportMapping FunctionImportName="usp_Tempe_EPC_InsertEPCLog" FunctionName="rtracModel.Store.usp_Tempe_EPC_InsertEPCLog" />
   </EntityContainerMapping>
 </Mapping>

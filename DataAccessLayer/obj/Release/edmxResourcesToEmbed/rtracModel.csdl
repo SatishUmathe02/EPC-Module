@@ -353,6 +353,39 @@
       <Parameter Name="Response" Mode="In" Type="String" />
       <Parameter Name="UserId" Mode="In" Type="Int64" />
     </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_Customer_Tempe" ReturnType="Collection(rtracModel.usp_GTIN_GetEPC_Customer_Tempe_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetTempeEPCDetails" ReturnType="Collection(rtracModel.usp_GetTempeEPCDetails_Result)">
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailNumber" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Tempe_EPC_InsertEPCLog_Decode">
+      <Parameter Name="json" Mode="In" Type="String" />
+      <Parameter Name="rfidRequestId" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Tempe_EPC_InsertEPCLog">
+      <Parameter Name="json" Mode="In" Type="String" />
+      <Parameter Name="rpo" Mode="In" Type="Int64" />
+      <Parameter Name="rfidRequestId" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="usp_EPCIS_GetEP_URN_Result">
     <Property Type="String" Name="CustomerId" Nullable="false" MaxLength="50" />
@@ -638,5 +671,32 @@
     <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
     <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_Customer_Tempe_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GetTempeEPCDetails_Result">
+    <Property Type="String" Name="purchaseOrder" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="model" Nullable="true" MaxLength="5" />
+    <Property Type="String" Name="quality" Nullable="true" MaxLength="5" />
+    <Property Type="String" Name="colorCode" Nullable="true" MaxLength="4" />
+    <Property Type="String" Name="sizeCode" Nullable="true" MaxLength="150" />
+    <Property Type="String" Name="quantity" Nullable="true" MaxLength="5" />
+    <Property Type="Int64" Name="bigIntRPO" Nullable="true" />
+    <Property Type="Int64" Name="bigIntrpacDetailNumber" Nullable="true" />
+    <Property Type="String" Name="rfidRequestId" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="supplierId" Nullable="false" MaxLength="2" />
+    <Property Type="Int64" Name="inventoryTag" Nullable="true" />
+    <Property Type="String" Name="eas" Nullable="false" MaxLength="1" />
+    <Property Type="Int64" Name="tagSubType" Nullable="true" />
+    <Property Type="Int64" Name="tagType" Nullable="true" />
   </ComplexType>
 </Schema>
