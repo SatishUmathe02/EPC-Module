@@ -110,14 +110,31 @@ namespace WebApi.Controllers
                         string Val = Request.CustomPara1.Split("#".ToArray()).LastOrDefault();
                         if ((Val == "TI"))
                         {
-                            return Transaction_New.GetEPC_Customer_Tempe(Request);
+                            EPCResponse ObjResponse = Transaction_New.GetEPC_Customer_Tempe(Request);
+
+                            if (ObjResponse.Remark == "EPC Error Occurred: No EPC in master table")
+                            {
+                                
+                                string Result = EPC_Tempe.EPC_Tempe.EPCGeneration(Request);
+                                if(Result=="")
+                                {
+                                    ObjResponse = Transaction_New.GetEPC_Customer_Tempe(Request);
+                                }
+                                else
+                                {
+                                    ObjResponse.Remark = Result;
+                                }
+                            }
+
+
+                            return ObjResponse;
                         }
 
                     }
 
 
                 }
-               
+
                 if (Request.CustomerID == "ADL")
                 {
                     if (!string.IsNullOrEmpty(Request.CustomPara1))
@@ -154,7 +171,7 @@ namespace WebApi.Controllers
                             {
                                 GS1_Response = GS1_IntergrationBLL.GS1_apiResponse_Restapi(Request);
                                 ObjGS1 = JsonConvert.DeserializeObject<List<GS1>>(GS1_Response);
-                                
+
                             }
                             catch (Exception ex)
                             {
