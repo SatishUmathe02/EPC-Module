@@ -11,9 +11,15 @@ namespace DataAccessLayer
         public static usp_GetTempeEPCDetails_Result Get_Tempe_EPCDetail(long RPO, long DetailNumber)
         {
             usp_GetTempeEPCDetails_Result objlist = new usp_GetTempeEPCDetails_Result();
-            using (EPC_DBEntities db = new EPC_DBEntities())
+            try
             {
-                objlist = (from lst in db.usp_GetTempeEPCDetails(RPO, DetailNumber) select lst).FirstOrDefault();
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+                    objlist = (from lst in db.usp_GetTempeEPCDetails(RPO, DetailNumber) select lst).FirstOrDefault();
+                }
+            }catch(Exception EX)
+            {
+
             }
             return objlist;
         }

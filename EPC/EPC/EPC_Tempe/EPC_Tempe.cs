@@ -20,97 +20,206 @@ namespace EPC_Tempe
     {
         public static string EPCGeneration(EPCRequest Request)
         {
-            string Result = string.Empty;
+            string Result = "Successfully Got The Response From API";
 
-            Tempe_EPC_Request ObjEPC = new Tempe_EPC_Request();
+
 
             usp_GetTempeEPCDetails_Result ObjTempeData = EPC_TempeDAL.Get_Tempe_EPCDetail(Request.RPO, Request.DetailLineID);
 
             if (Convert.ToString(ObjTempeData.purchaseOrder) != "")
             {
 
-                #region GENERATE REQUEST
+                string Json_Request = "";
+                if (Convert.ToInt32(ObjTempeData.EPCFlow) == 5)
+                {
+                    Tempe_EPC_Request_Bulk ObjEPC_BULK = new Tempe_EPC_Request_Bulk();
+
+                    #region GENERATE REQUEST WEB SERVER BULK
 
 
-                ObjEPC.purchaseOrder = ObjTempeData.purchaseOrder;
-                ObjEPC.model = ObjTempeData.model;
-                ObjEPC.quality = ObjTempeData.quality;
-                ObjEPC.colors = new List<Color>();
-                Color Objc = new Color();
+                    ObjEPC_BULK.brandId = Convert.ToString(ObjTempeData.BrandId);
+                    ObjEPC_BULK.color = ObjTempeData.colorCode;
+                    ObjEPC_BULK.supplierId = ObjTempeData.supplierId;
+                    ObjEPC_BULK.inventoryTag = Convert.ToString(ObjTempeData.inventoryTag);
+                    ObjEPC_BULK.eas = ObjTempeData.eas;
+                    ObjEPC_BULK.tagSubType = Convert.ToString(ObjTempeData.tagSubType);
+                    ObjEPC_BULK.tagType = Convert.ToString(ObjTempeData.tagType);
 
-                Objc.colorCode = ObjTempeData.colorCode;
 
-                Objc.quantityBySize = new List<QuantityBySize>();
+                    ObjEPC_BULK.sectionId = Convert.ToString(ObjTempeData.sectionId);
+                    ObjEPC_BULK.productTypeCode = Convert.ToString(ObjTempeData.productTypeCode);
 
-                QuantityBySize Obj = new QuantityBySize();
+                    ObjEPC_BULK.Preencode_Endpoint = Convert.ToBoolean(ObjTempeData.Preencode_Endpoint);
+                    ObjEPC_BULK.ProductOrderTags_endpoint = Convert.ToBoolean(ObjTempeData.ProductOrderTags_endpoint);
 
-                Obj.sizeCode = ObjTempeData.sizeCode;
-                Obj.quantity = Convert.ToString(Request.Quantity);
+                    
+                    ObjEPC_BULK.quantityBySize = new List<QuantityBySize>();
 
-                Objc.quantityBySize.Add(Obj);
-                ObjEPC.colors.Add(Objc);
+                    QuantityBySize Obj = new QuantityBySize();
 
-                ObjEPC.supplierId = ObjTempeData.supplierId;
-                ObjEPC.inventoryTag = Convert.ToString(ObjTempeData.inventoryTag);
-                ObjEPC.eas = ObjTempeData.eas;
-                ObjEPC.tagSubType = Convert.ToString(ObjTempeData.tagSubType);
-                ObjEPC.tagType = Convert.ToString(ObjTempeData.tagType);
-                #endregion
+                    Obj.sizeCode = ObjTempeData.sizeCode;
+                    Obj.quantity = Convert.ToString(Request.Quantity);
+
+                    ObjEPC_BULK.quantityBySize.Add(Obj);
+
+
+
+                    #endregion
+
+                    Json_Request = JsonConvert.SerializeObject(ObjEPC_BULK);
+                }
+                else
+                {
+
+                    Tempe_EPC_Request ObjEPC = new Tempe_EPC_Request();
+                    #region GENERATE REQUEST WEB SERVER
+
+                    ObjEPC.purchaseOrder = ObjTempeData.purchaseOrder;
+                    ObjEPC.model = ObjTempeData.model;
+                    ObjEPC.quality = ObjTempeData.quality;
+                    ObjEPC.colors = new List<Color>();
+                    Color Objc = new Color();
+
+                    Objc.colorCode = ObjTempeData.colorCode;
+
+                    Objc.quantityBySize = new List<QuantityBySize>();
+
+                    QuantityBySize Obj = new QuantityBySize();
+
+                    Obj.sizeCode = ObjTempeData.sizeCode;
+                    Obj.quantity = Convert.ToString(Request.Quantity);
+
+                    Objc.quantityBySize.Add(Obj);
+                    ObjEPC.colors.Add(Objc);
+
+                    ObjEPC.supplierId = ObjTempeData.supplierId;
+                    ObjEPC.inventoryTag = Convert.ToString(ObjTempeData.inventoryTag);
+                    ObjEPC.eas = ObjTempeData.eas;
+                    ObjEPC.tagSubType = Convert.ToString(ObjTempeData.tagSubType);
+                    ObjEPC.tagType = Convert.ToString(ObjTempeData.tagType);
+                    #endregion
+
+                    Json_Request = JsonConvert.SerializeObject(ObjEPC);
+                }
 
                 #region CALLED HTTP
 
                 string Error = string.Empty;
 
-                string Json_Request = JsonConvert.SerializeObject(ObjEPC);
 
-                TempeResponse Response = Http_Tempe(Json_Request, ObjTempeData.rfidRequestId, Request.RPO);
+
+                TempeResponse Response = Http_Tempe(Json_Request, ObjTempeData.rfidRequestId, Request.RPO, Convert.ToInt32(ObjTempeData.EPCFlow,  ObjTempeData), Request);
+
+                #endregion
+
+                Root ObjRoot = new Root();
 
                 if (Response.Response != null)
                 {
-
-                    var ObjResponse = JObject.Parse(Response.Response);
-
-                    #endregion
-
-                    #region READ RESPONSE
-
-                    try
+                    if (Response.Response != "")
                     {
-
-                        if (Response.IsSucess)
+                        if (Convert.ToInt32(ObjTempeData.EPCFlow) == 5)
                         {
-                            string link = ObjResponse["_links"]["external"]["href"].ToString();
+                            #region READ RESPONSE WEB SERVICE BULK
 
-                            Root ObjRoot = Http_Tempe_EPC(link, Request.RPO, ObjTempeData.rfidRequestId, link, Request);
+                            try
+                            {
 
-                            InsertEPC(ObjRoot, Request.RPO, ObjTempeData.rfidRequestId, Request);
+
+
+                                if (Response.IsSucess)
+                                {
+                                    string link = Response.Response;
+
+                                    ObjRoot = Http_Tempe_EPC(link, Request.RPO, ObjTempeData.rfidRequestId, link, Request);
+
+                                    InsertEPC(ObjRoot, Request.RPO, ObjTempeData.rfidRequestId, Request);
+                                }
+                                else
+                                {
+                                    Result = "Tempe API Error Occurred: No  ";
+
+                                }
+
+                            }
+                            catch (Exception ex)
+                            {
+                                Result = "No Response from  Tempe API " + ex.ToString() + "";
+
+                            }
+                            #endregion
                         }
                         else
                         {
-                            if (ObjResponse["errors"].Count() > 0)
+                            #region READ RESPONSE WEBSERVCIE
+
+                            try
                             {
-                                Result = ObjResponse["errors"][0]["message"].ToString();
+                                var ObjResponse = JObject.Parse(Response.Response);
+                                if (Response.IsSucess)
+                                {
+                                    string link = ObjResponse["_links"]["external"]["href"].ToString();
+
+                                    ObjRoot = Http_Tempe_EPC(link, Request.RPO, ObjTempeData.rfidRequestId, link, Request);
+
+                                    InsertEPC(ObjRoot, Request.RPO, ObjTempeData.rfidRequestId, Request);
+                                }
+                                else
+                                {
+                                    if (ObjResponse["errors"].Count() > 0)
+                                    {
+                                        Result = "Tempe API Error Occurred: " + ObjResponse["errors"][0]["message"].ToString();
+
+                                    }
+                                }
 
                             }
+                            catch (Exception ex)
+                            {
+                                Result = "No Response from  Tempe API " + ex.ToString() + "";
+
+                            }
+                            #endregion
                         }
-
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        Result = "No Response from  Tempe API " + ex.ToString() + "";
-
+                        Result = "No Response from  Tempe API ";
                     }
-                    #endregion
                 }
                 else
                 {
-                    Result = "No Response from  Tempe API " + Request + "";
+                    Result = "No Response from  Tempe API ";
                 }
+
+                if (ObjRoot.results.Count > 0)
+                {
+
+                    try
+                    {
+                        long Start = (from c in ObjRoot.results
+                                      orderby c.SerialNumber ascending
+                                      select c.SerialNumber).FirstOrDefault();
+                        long End = (from c in ObjRoot.results
+                                    orderby c.SerialNumber ascending
+                                    select c.SerialNumber).LastOrDefault();
+
+                        Result = Convert.ToString(Start) + "#" + Convert.ToString(End);
+                    }
+                    catch (Exception ex)
+                    {
+                        EPCDAL.InsertReqRes(Request.CustomerID, Request.RPO, Request.DetailLineID, "SerialNumber not getting properly", ex.ToString(), "", Request.UserId, Request.GTIN);
+                    }
+
+                }
+
             }
             else
             {
-                Result = "No data found for the RPO " + Request + "";
+                Result = "No data found for the RPO ";
             }
+
+            EPCDAL.EPC_InsertEPCLog(Request.GTIN, Request.Serial, Request.Serial, Request.Schema, Request.TransactionType, "", "", Request.Quantity, Request.CustomerID, Request.CustomerName, Request.Event, Request.UserId, "", Request.RPO, Request.DetailLineID, Request.CustomPara1, Request.CustomPara2, Convert.ToDateTime(Request.RequestStartTime), Result);
 
             return Result;
         }
@@ -206,13 +315,21 @@ namespace EPC_Tempe
             }
         }
 
-        private static TempeResponse Http_Tempe(string Request, string rfidRequestId, long RPO)
+        private static TempeResponse Http_Tempe(string Request, string rfidRequestId, long RPO, int EPCFlow, EPCRequest ObjEPCRequest, usp_GetTempeEPCDetails_Result ObjTempeData)
         {
 
             TempeResponse Response = new TempeResponse();
 
-            string EPCpre_url = ConfigurationManager.AppSettings["Tempe_WebServiceURL_tags"].ToString();
-            string itx_apiKey = ConfigurationManager.AppSettings["Tempe_WebServiceURL_tagsKey"].ToString();
+
+            string EPCpre_url = ConfigurationManager.AppSettings["Tempe_WebServiceAPI"].ToString();
+            string itx_apiKey = ConfigurationManager.AppSettings["Tempe_WebServiceAPIKey"].ToString();
+            string EPCURL = ConfigurationManager.AppSettings["Tempe_PreEncodeEPCURL"].ToString();
+
+            if (EPCFlow == 5 && ObjTempeData.Preencode_Endpoint==true) //WebService- bulk
+            {
+                EPCpre_url = ConfigurationManager.AppSettings["Tempe_WebService_Bulk_API"].ToString();
+                itx_apiKey = ConfigurationManager.AppSettings["Tempe_WebService_Bulk_APIKey"].ToString();
+            }
 
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -230,8 +347,21 @@ namespace EPC_Tempe
 
             if (StatusCode == 200 || StatusCode == 201)
             {
+                if (EPCFlow == 5)
+                {
+                    //Response.Response = JsonConvert.SerializeObject(responseepcLog.Headers);
 
-                Response.Response = responseepcLog.Content.Substring(1, responseepcLog.Content.Length - 2);
+                    string localtion = (from c in responseepcLog.Headers
+                                        where c.Name == "Location"
+                                        select c.Value).FirstOrDefault().ToString();
+
+                    Response.Response = EPCURL + localtion;
+
+                }
+                else
+                {
+                    Response.Response = responseepcLog.Content.Substring(1, responseepcLog.Content.Length - 2);
+                }
                 Response.IsSucess = true;
             }
             else
@@ -239,6 +369,7 @@ namespace EPC_Tempe
                 Response.Response = responseepcLog.Content;
             }
 
+            EPCDAL.InsertReqRes(ObjEPCRequest.CustomerID, ObjEPCRequest.RPO, ObjEPCRequest.DetailLineID, Request, Response.Response, EPCpre_url, ObjEPCRequest.UserId, ObjEPCRequest.GTIN);
 
             return Response;
         }
@@ -445,6 +576,22 @@ namespace EPC_Tempe
         public string eas { get; set; }
         public string tagSubType { get; set; }
         public string tagType { get; set; }
+    }
+    public class Tempe_EPC_Request_Bulk
+    {
+        public string brandId { get; set; }
+        public string color { get; set; }
+        public string supplierId { get; set; }
+        public string inventoryTag { get; set; }
+        public string eas { get; set; }
+        public string tagSubType { get; set; }
+        public string tagType { get; set; }
+        public string sectionId { get; set; }
+        public string productTypeCode { get; set; }
+        public List<QuantityBySize> quantityBySize { get; set; }
+
+        public bool ProductOrderTags_endpoint { get; set; }
+        public bool Preencode_Endpoint { get; set; }
     }
     public class Color
     {

@@ -144,6 +144,7 @@
           <Parameter Name="GTIN" Type="varchar" Mode="In" />
           <Parameter Name="UserId" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="usp_GetTempe_EPC_Data" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_GetTempeEPCDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RPO" Type="bigint" Mode="In" />
           <Parameter Name="DetailNumber" Type="bigint" Mode="In" />
@@ -782,10 +783,6 @@
             <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
             <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="usp_GetTempeEPCDetails" ReturnType="Collection(rtracModel.usp_GetTempeEPCDetails_Result)">
-            <Parameter Name="RPO" Mode="In" Type="Int64" />
-            <Parameter Name="DetailNumber" Mode="In" Type="Int64" />
-          </FunctionImport>
           <FunctionImport Name="usp_Tempe_EPC_InsertEPCLog_Decode">
             <Parameter Name="json" Mode="In" Type="String" />
             <Parameter Name="rfidRequestId" Mode="In" Type="String" />
@@ -795,6 +792,11 @@
             <Parameter Name="json" Mode="In" Type="String" />
             <Parameter Name="rpo" Mode="In" Type="Int64" />
             <Parameter Name="rfidRequestId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetTempe_EPC_Data" ReturnType="Collection(rtracModel.usp_GetTempe_EPC_Data_Result)" />
+          <FunctionImport Name="usp_GetTempeEPCDetails" ReturnType="Collection(rtracModel.usp_GetTempeEPCDetails_Result)">
+            <Parameter Name="RPO" Mode="In" Type="Int64" />
+            <Parameter Name="DetailNumber" Mode="In" Type="Int64" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_EPCIS_GetEP_URN_Result">
@@ -1093,8 +1095,23 @@
           <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
         </ComplexType>
+        <ComplexType Name="usp_GetTempe_EPC_Data_Result">
+          <Property Type="DateTime" Name="dtProducedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="SupplierId" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="Encoder_ID" Nullable="true" MaxLength="1253" />
+          <Property Type="String" Name="EPC" Nullable="false" />
+          <Property Type="String" Name="Passsword" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="VarRSSI" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="varTID" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="varPO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="varSeason" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="varBrand_ID" Nullable="true" MaxLength="50" />
+          <Property Type="Int64" Name="bigIntRPO" Nullable="true" />
+          <Property Type="Int64" Name="bigIntrpacDetailNumber" Nullable="true" />
+          <Property Type="String" Name="bigIntGTIN" Nullable="true" MaxLength="15" />
+        </ComplexType>
         <ComplexType Name="usp_GetTempeEPCDetails_Result">
-          <Property Type="String" Name="purchaseOrder" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="purchaseOrder" Nullable="true" MaxLength="151" />
           <Property Type="String" Name="model" Nullable="true" MaxLength="5" />
           <Property Type="String" Name="quality" Nullable="true" MaxLength="5" />
           <Property Type="String" Name="colorCode" Nullable="true" MaxLength="4" />
@@ -1108,6 +1125,12 @@
           <Property Type="String" Name="eas" Nullable="false" MaxLength="1" />
           <Property Type="Int64" Name="tagSubType" Nullable="true" />
           <Property Type="Int64" Name="tagType" Nullable="true" />
+          <Property Type="Int64" Name="EPCFlow" Nullable="true" />
+          <Property Type="Int32" Name="BrandId" Nullable="false" />
+          <Property Type="Int64" Name="sectionId" Nullable="false" />
+          <Property Type="Double" Name="productTypeCode" Nullable="false" />
+          <Property Type="Boolean" Name="ProductOrderTags_endpoint" Nullable="true" />
+          <Property Type="Boolean" Name="Preencode_Endpoint" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1543,6 +1566,27 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Tempe_EPC_InsertEPCLog_Decode" FunctionName="rtracModel.Store.usp_Tempe_EPC_InsertEPCLog_Decode" />
+          <FunctionImportMapping FunctionImportName="usp_Tempe_EPC_InsertEPCLog" FunctionName="rtracModel.Store.usp_Tempe_EPC_InsertEPCLog" />
+          <FunctionImportMapping FunctionImportName="usp_GetTempe_EPC_Data" FunctionName="rtracModel.Store.usp_GetTempe_EPC_Data">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="rtracModel.usp_GetTempe_EPC_Data_Result">
+                <ScalarProperty Name="dtProducedDate" ColumnName="dtProducedDate" />
+                <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+                <ScalarProperty Name="Encoder_ID" ColumnName="Encoder_ID" />
+                <ScalarProperty Name="EPC" ColumnName="EPC" />
+                <ScalarProperty Name="Passsword" ColumnName="Passsword" />
+                <ScalarProperty Name="VarRSSI" ColumnName="VarRSSI" />
+                <ScalarProperty Name="varTID" ColumnName="varTID" />
+                <ScalarProperty Name="varPO" ColumnName="varPO" />
+                <ScalarProperty Name="varSeason" ColumnName="varSeason" />
+                <ScalarProperty Name="varBrand_ID" ColumnName="varBrand_ID" />
+                <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
+                <ScalarProperty Name="bigIntrpacDetailNumber" ColumnName="bigIntrpacDetailNumber" />
+                <ScalarProperty Name="bigIntGTIN" ColumnName="bigIntGTIN" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_GetTempeEPCDetails" FunctionName="rtracModel.Store.usp_GetTempeEPCDetails">
             <ResultMapping>
               <ComplexTypeMapping TypeName="rtracModel.usp_GetTempeEPCDetails_Result">
@@ -1560,11 +1604,15 @@
                 <ScalarProperty Name="eas" ColumnName="eas" />
                 <ScalarProperty Name="tagSubType" ColumnName="tagSubType" />
                 <ScalarProperty Name="tagType" ColumnName="tagType" />
+                <ScalarProperty Name="EPCFlow" ColumnName="EPCFlow" />
+                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+                <ScalarProperty Name="sectionId" ColumnName="sectionId" />
+                <ScalarProperty Name="productTypeCode" ColumnName="productTypeCode" />
+                <ScalarProperty Name="ProductOrderTags_endpoint" ColumnName="ProductOrderTags_endpoint" />
+                <ScalarProperty Name="Preencode_Endpoint" ColumnName="Preencode_Endpoint" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="usp_Tempe_EPC_InsertEPCLog_Decode" FunctionName="rtracModel.Store.usp_Tempe_EPC_InsertEPCLog_Decode" />
-          <FunctionImportMapping FunctionImportName="usp_Tempe_EPC_InsertEPCLog" FunctionName="rtracModel.Store.usp_Tempe_EPC_InsertEPCLog" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

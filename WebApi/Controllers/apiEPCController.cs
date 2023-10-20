@@ -110,20 +110,31 @@ namespace WebApi.Controllers
                         string Val = Request.CustomPara1.Split("#".ToArray()).LastOrDefault();
                         if ((Val == "TI"))
                         {
-                            EPCResponse ObjResponse = Transaction_New.GetEPC_Customer_Tempe(Request);
 
-                            if (ObjResponse.Remark == "EPC Error Occurred: No EPC in master table")
+                            int reprintcount = (from c in EPCBLL.GetReprintEvent()
+                                                where c.ToUpper() == Request.Event.ToUpper()
+                                                select c).Count();
+
+                            EPCResponse ObjResponse = new EPCResponse();
+
+                            if (reprintcount == 0)
                             {
-                                
+                                ObjResponse = Transaction_New.GetEPC_Customer_Tempe(Request);
+                            }
+                            else
+                            {
                                 string Result = EPC_Tempe.EPC_Tempe.EPCGeneration(Request);
-                                if(Result=="")
+
+                                if (Result.Contains("#"))
                                 {
+                                    Request.CustomPara2 = Result;
                                     ObjResponse = Transaction_New.GetEPC_Customer_Tempe(Request);
                                 }
                                 else
                                 {
                                     ObjResponse.Remark = Result;
                                 }
+
                             }
 
 

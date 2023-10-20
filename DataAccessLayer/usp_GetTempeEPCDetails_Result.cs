@@ -27,5 +27,11 @@ namespace DataAccessLayer
         public string eas { get; set; }
         public Nullable<long> tagSubType { get; set; }
         public Nullable<long> tagType { get; set; }
+        public Nullable<long> EPCFlow { get; set; }
+        public int BrandId { get; set; }
+        public long sectionId { get; set; }
+        public double productTypeCode { get; set; }
+        public Nullable<bool> ProductOrderTags_endpoint { get; set; }
+        public Nullable<bool> Preencode_Endpoint { get; set; }
     }
 }

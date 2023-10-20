@@ -1411,19 +1411,6 @@ namespace DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_Customer_Tempe_Result>("usp_GTIN_GetEPC_Customer_Tempe", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter);
         }
     
-        public virtual ObjectResult<usp_GetTempeEPCDetails_Result> usp_GetTempeEPCDetails(Nullable<long> rPO, Nullable<long> detailNumber)
-        {
-            var rPOParameter = rPO.HasValue ?
-                new ObjectParameter("RPO", rPO) :
-                new ObjectParameter("RPO", typeof(long));
-    
-            var detailNumberParameter = detailNumber.HasValue ?
-                new ObjectParameter("DetailNumber", detailNumber) :
-                new ObjectParameter("DetailNumber", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetTempeEPCDetails_Result>("usp_GetTempeEPCDetails", rPOParameter, detailNumberParameter);
-        }
-    
         public virtual int usp_Tempe_EPC_InsertEPCLog_Decode(string json, string rfidRequestId, Nullable<long> rPO)
         {
             var jsonParameter = json != null ?
@@ -1456,6 +1443,24 @@ namespace DataAccessLayer
                 new ObjectParameter("rfidRequestId", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Tempe_EPC_InsertEPCLog", jsonParameter, rpoParameter, rfidRequestIdParameter);
+        }
+    
+        public virtual ObjectResult<usp_GetTempe_EPC_Data_Result> usp_GetTempe_EPC_Data()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetTempe_EPC_Data_Result>("usp_GetTempe_EPC_Data");
+        }
+    
+        public virtual ObjectResult<usp_GetTempeEPCDetails_Result> usp_GetTempeEPCDetails(Nullable<long> rPO, Nullable<long> detailNumber)
+        {
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailNumberParameter = detailNumber.HasValue ?
+                new ObjectParameter("DetailNumber", detailNumber) :
+                new ObjectParameter("DetailNumber", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetTempeEPCDetails_Result>("usp_GetTempeEPCDetails", rPOParameter, detailNumberParameter);
         }
     }
 }

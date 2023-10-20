@@ -138,6 +138,9 @@
     <Compile Include="usp_GetTempeEPCDetails_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="usp_GetTempe_EPC_Data_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="usp_GS1_Customer_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>

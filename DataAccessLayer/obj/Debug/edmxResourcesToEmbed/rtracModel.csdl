@@ -372,10 +372,6 @@
       <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
       <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
     </FunctionImport>
-    <FunctionImport Name="usp_GetTempeEPCDetails" ReturnType="Collection(rtracModel.usp_GetTempeEPCDetails_Result)">
-      <Parameter Name="RPO" Mode="In" Type="Int64" />
-      <Parameter Name="DetailNumber" Mode="In" Type="Int64" />
-    </FunctionImport>
     <FunctionImport Name="usp_Tempe_EPC_InsertEPCLog_Decode">
       <Parameter Name="json" Mode="In" Type="String" />
       <Parameter Name="rfidRequestId" Mode="In" Type="String" />
@@ -385,6 +381,10 @@
       <Parameter Name="json" Mode="In" Type="String" />
       <Parameter Name="rpo" Mode="In" Type="Int64" />
       <Parameter Name="rfidRequestId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetTempeEPCDetails" ReturnType="Collection(rtracModel.usp_GetTempeEPCDetails_Result)">
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailNumber" Mode="In" Type="Int64" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="usp_EPCIS_GetEP_URN_Result">
@@ -684,7 +684,7 @@
     <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
   </ComplexType>
   <ComplexType Name="usp_GetTempeEPCDetails_Result">
-    <Property Type="String" Name="purchaseOrder" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="purchaseOrder" Nullable="true" MaxLength="151" />
     <Property Type="String" Name="model" Nullable="true" MaxLength="5" />
     <Property Type="String" Name="quality" Nullable="true" MaxLength="5" />
     <Property Type="String" Name="colorCode" Nullable="true" MaxLength="4" />
@@ -698,5 +698,9 @@
     <Property Type="String" Name="eas" Nullable="false" MaxLength="1" />
     <Property Type="Int64" Name="tagSubType" Nullable="true" />
     <Property Type="Int64" Name="tagType" Nullable="true" />
+    <Property Type="Int64" Name="EPCFlow" Nullable="true" />
+    <Property Type="Int32" Name="BrandId" Nullable="false" />
+    <Property Type="Int64" Name="sectionId" Nullable="true" />
+    <Property Type="Double" Name="productTypeCode" Nullable="false" />
   </ComplexType>
 </Schema>

@@ -429,6 +429,8 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_Tempe_EPC_InsertEPCLog_Decode" FunctionName="rtracModel.Store.usp_Tempe_EPC_InsertEPCLog_Decode" />
+    <FunctionImportMapping FunctionImportName="usp_Tempe_EPC_InsertEPCLog" FunctionName="rtracModel.Store.usp_Tempe_EPC_InsertEPCLog" />
     <FunctionImportMapping FunctionImportName="usp_GetTempeEPCDetails" FunctionName="rtracModel.Store.usp_GetTempeEPCDetails">
       <ResultMapping>
         <ComplexTypeMapping TypeName="rtracModel.usp_GetTempeEPCDetails_Result">
@@ -446,10 +448,12 @@
           <ScalarProperty Name="eas" ColumnName="eas" />
           <ScalarProperty Name="tagSubType" ColumnName="tagSubType" />
           <ScalarProperty Name="tagType" ColumnName="tagType" />
+          <ScalarProperty Name="EPCFlow" ColumnName="EPCFlow" />
+          <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+          <ScalarProperty Name="sectionId" ColumnName="sectionId" />
+          <ScalarProperty Name="productTypeCode" ColumnName="productTypeCode" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_Tempe_EPC_InsertEPCLog_Decode" FunctionName="rtracModel.Store.usp_Tempe_EPC_InsertEPCLog_Decode" />
-    <FunctionImportMapping FunctionImportName="usp_Tempe_EPC_InsertEPCLog" FunctionName="rtracModel.Store.usp_Tempe_EPC_InsertEPCLog" />
   </EntityContainerMapping>
 </Mapping>
