@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.CommonDataModels;
+using EPC_Huguboss;
 using System;
 using System.Linq;
 
@@ -89,7 +90,9 @@ namespace BussinessLayer
                             }
                             break;
                         case "Hugoboss":
-                            usp_GTIN_GetEPC_HugoBoss_Result Obj_HB = EPCDAL.GetEPC_HugoBoss(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
+                        case "HugoBoss":
+
+                            var Obj_HB = EPC_HB.GetEPC_HugoBoss(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
 
                             EPC_Res.EPCStart = Obj_HB.EpcStart;
                             EPC_Res.EPCEnd = Obj_HB.EpcEnd;
@@ -132,7 +135,7 @@ namespace BussinessLayer
                             break;
                     }
 
-                   
+
 
                 }
                 catch (Exception Ex)
@@ -282,6 +285,7 @@ namespace BussinessLayer
             }
             return ePCResponse;
         }
+
 
 
     }
