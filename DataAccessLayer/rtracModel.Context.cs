@@ -1462,5 +1462,31 @@ namespace DataAccessLayer
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetTempeEPCDetails_Result>("usp_GetTempeEPCDetails", rPOParameter, detailNumberParameter);
         }
+    
+        public virtual int usp_UpdateSerialNumber_CandA(Nullable<int> qty, string gTIN, Nullable<long> serialStart)
+        {
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(int));
+    
+            var gTINParameter = gTIN != null ?
+                new ObjectParameter("GTIN", gTIN) :
+                new ObjectParameter("GTIN", typeof(string));
+    
+            var serialStartParameter = serialStart.HasValue ?
+                new ObjectParameter("SerialStart", serialStart) :
+                new ObjectParameter("SerialStart", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_UpdateSerialNumber_CandA", qtyParameter, gTINParameter, serialStartParameter);
+        }
+    
+        public virtual ObjectResult<usp_GetCheckSerialNoLastUsed_CandA_Result> usp_GetCheckSerialNoLastUsed_CandA(string gTIN)
+        {
+            var gTINParameter = gTIN != null ?
+                new ObjectParameter("GTIN", gTIN) :
+                new ObjectParameter("GTIN", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetCheckSerialNoLastUsed_CandA_Result>("usp_GetCheckSerialNoLastUsed_CandA", gTINParameter);
+        }
     }
 }

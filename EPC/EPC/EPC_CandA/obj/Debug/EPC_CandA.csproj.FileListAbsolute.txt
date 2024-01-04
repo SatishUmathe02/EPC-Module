@@ -1,0 +1,11 @@
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_CandA\bin\Debug\EPC_CandA.dll
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_CandA\bin\Debug\EPC_CandA.pdb
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_CandA\bin\Debug\DataAccessLayer.dll
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_CandA\bin\Debug\RestSharp.dll
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_CandA\bin\Debug\EntityFramework.dll
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_CandA\bin\Debug\DataAccessLayer.pdb
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_CandA\bin\Debug\RestSharp.xml
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_CandA\bin\Debug\EntityFramework.xml
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_CandA\obj\Debug\EPC_CandA.csprojResolveAssemblyReference.cache
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_CandA\obj\Debug\EPC_CandA.dll
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_CandA\obj\Debug\EPC_CandA.pdb

@@ -431,6 +431,25 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="usp_Tempe_EPC_InsertEPCLog_Decode" FunctionName="rtracModel.Store.usp_Tempe_EPC_InsertEPCLog_Decode" />
     <FunctionImportMapping FunctionImportName="usp_Tempe_EPC_InsertEPCLog" FunctionName="rtracModel.Store.usp_Tempe_EPC_InsertEPCLog" />
+    <FunctionImportMapping FunctionImportName="usp_GetTempe_EPC_Data" FunctionName="rtracModel.Store.usp_GetTempe_EPC_Data">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="rtracModel.usp_GetTempe_EPC_Data_Result">
+          <ScalarProperty Name="dtProducedDate" ColumnName="dtProducedDate" />
+          <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
+          <ScalarProperty Name="Encoder_ID" ColumnName="Encoder_ID" />
+          <ScalarProperty Name="EPC" ColumnName="EPC" />
+          <ScalarProperty Name="Passsword" ColumnName="Passsword" />
+          <ScalarProperty Name="VarRSSI" ColumnName="VarRSSI" />
+          <ScalarProperty Name="varTID" ColumnName="varTID" />
+          <ScalarProperty Name="varPO" ColumnName="varPO" />
+          <ScalarProperty Name="varSeason" ColumnName="varSeason" />
+          <ScalarProperty Name="varBrand_ID" ColumnName="varBrand_ID" />
+          <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
+          <ScalarProperty Name="bigIntrpacDetailNumber" ColumnName="bigIntrpacDetailNumber" />
+          <ScalarProperty Name="bigIntGTIN" ColumnName="bigIntGTIN" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="usp_GetTempeEPCDetails" FunctionName="rtracModel.Store.usp_GetTempeEPCDetails">
       <ResultMapping>
         <ComplexTypeMapping TypeName="rtracModel.usp_GetTempeEPCDetails_Result">
@@ -452,6 +471,20 @@
           <ScalarProperty Name="BrandId" ColumnName="BrandId" />
           <ScalarProperty Name="sectionId" ColumnName="sectionId" />
           <ScalarProperty Name="productTypeCode" ColumnName="productTypeCode" />
+          <ScalarProperty Name="ProductOrderTags_endpoint" ColumnName="ProductOrderTags_endpoint" />
+          <ScalarProperty Name="Preencode_Endpoint" ColumnName="Preencode_Endpoint" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_UpdateSerialNumber_CandA" FunctionName="rtracModel.Store.usp_UpdateSerialNumber_CandA" />
+    <FunctionImportMapping FunctionImportName="usp_GetCheckSerialNoLastUsed_CandA" FunctionName="rtracModel.Store.usp_GetCheckSerialNoLastUsed_CandA">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="rtracModel.usp_GetCheckSerialNoLastUsed_CandA_Result">
+          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
+          <ScalarProperty Name="SerialEnd" ColumnName="SerialEnd" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Threshold" ColumnName="Threshold" />
+          <ScalarProperty Name="RequestorId" ColumnName="RequestorId" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

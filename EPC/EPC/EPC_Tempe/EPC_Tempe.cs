@@ -21,16 +21,21 @@ namespace EPC_Tempe
         public static string EPCGeneration(EPCRequest Request)
         {
             string Result = "Successfully Got The Response From API";
-
-
+            
 
             usp_GetTempeEPCDetails_Result ObjTempeData = EPC_TempeDAL.Get_Tempe_EPCDetail(Request.RPO, Request.DetailLineID);
+
+            if(ObjTempeData==null)
+            {
+                return Result = "No data found for the RPO ";
+            }
 
             if (Convert.ToString(ObjTempeData.purchaseOrder) != "")
             {
 
                 string Json_Request = "";
-                if (Convert.ToInt32(ObjTempeData.EPCFlow) == 5)
+                // if ((Convert.ToInt32(ObjTempeData.EPCFlow) == 5 || Convert.ToInt32(ObjTempeData.EPCFlow) == 2) && ObjTempeData.Preencode_Endpoint == true)
+                if (ObjTempeData.Preencode_Endpoint == true)
                 {
                     Tempe_EPC_Request_Bulk ObjEPC_BULK = new Tempe_EPC_Request_Bulk();
 
@@ -52,7 +57,7 @@ namespace EPC_Tempe
                     ObjEPC_BULK.Preencode_Endpoint = Convert.ToBoolean(ObjTempeData.Preencode_Endpoint);
                     ObjEPC_BULK.ProductOrderTags_endpoint = Convert.ToBoolean(ObjTempeData.ProductOrderTags_endpoint);
 
-                    
+
                     ObjEPC_BULK.quantityBySize = new List<QuantityBySize>();
 
                     QuantityBySize Obj = new QuantityBySize();
@@ -61,8 +66,7 @@ namespace EPC_Tempe
                     Obj.quantity = Convert.ToString(Request.Quantity);
 
                     ObjEPC_BULK.quantityBySize.Add(Obj);
-
-
+                    
 
                     #endregion
 
@@ -108,7 +112,7 @@ namespace EPC_Tempe
 
 
 
-                TempeResponse Response = Http_Tempe(Json_Request, ObjTempeData.rfidRequestId, Request.RPO, Convert.ToInt32(ObjTempeData.EPCFlow,  ObjTempeData), Request);
+                TempeResponse Response = Http_Tempe(Json_Request, ObjTempeData.rfidRequestId, Request.RPO, Convert.ToInt32(ObjTempeData.EPCFlow), Request, Convert.ToBoolean(ObjTempeData.Preencode_Endpoint));
 
                 #endregion
 
@@ -118,18 +122,19 @@ namespace EPC_Tempe
                 {
                     if (Response.Response != "")
                     {
-                        if (Convert.ToInt32(ObjTempeData.EPCFlow) == 5)
+                        //if (Convert.ToInt32(ObjTempeData.EPCFlow) == 5)
+                        if(ObjTempeData.Preencode_Endpoint == true)
                         {
                             #region READ RESPONSE WEB SERVICE BULK
 
                             try
                             {
 
-
-
                                 if (Response.IsSucess)
                                 {
                                     string link = Response.Response;
+
+                                    link = link.Replace("&limit=1000", "");
 
                                     ObjRoot = Http_Tempe_EPC(link, Request.RPO, ObjTempeData.rfidRequestId, link, Request);
 
@@ -159,6 +164,8 @@ namespace EPC_Tempe
                                 if (Response.IsSucess)
                                 {
                                     string link = ObjResponse["_links"]["external"]["href"].ToString();
+
+                                    link = link.Replace("&limit=1000", "");
 
                                     ObjRoot = Http_Tempe_EPC(link, Request.RPO, ObjTempeData.rfidRequestId, link, Request);
 
@@ -315,7 +322,7 @@ namespace EPC_Tempe
             }
         }
 
-        private static TempeResponse Http_Tempe(string Request, string rfidRequestId, long RPO, int EPCFlow, EPCRequest ObjEPCRequest, usp_GetTempeEPCDetails_Result ObjTempeData)
+        private static TempeResponse Http_Tempe(string Request, string rfidRequestId, long RPO, int EPCFlow, EPCRequest ObjEPCRequest, bool Preencode_Endpoint)
         {
 
             TempeResponse Response = new TempeResponse();
@@ -325,7 +332,8 @@ namespace EPC_Tempe
             string itx_apiKey = ConfigurationManager.AppSettings["Tempe_WebServiceAPIKey"].ToString();
             string EPCURL = ConfigurationManager.AppSettings["Tempe_PreEncodeEPCURL"].ToString();
 
-            if (EPCFlow == 5 && ObjTempeData.Preencode_Endpoint==true) //WebService- bulk
+            // if ((EPCFlow == 5 || EPCFlow == 2) && Preencode_Endpoint == true) //WebService- bulk
+            if ( Preencode_Endpoint == true) //WebService- bulk
             {
                 EPCpre_url = ConfigurationManager.AppSettings["Tempe_WebService_Bulk_API"].ToString();
                 itx_apiKey = ConfigurationManager.AppSettings["Tempe_WebService_Bulk_APIKey"].ToString();
@@ -347,15 +355,22 @@ namespace EPC_Tempe
 
             if (StatusCode == 200 || StatusCode == 201)
             {
-                if (EPCFlow == 5)
+                if (EPCFlow == 5 || EPCFlow == 2)
                 {
                     //Response.Response = JsonConvert.SerializeObject(responseepcLog.Headers);
 
-                    string localtion = (from c in responseepcLog.Headers
-                                        where c.Name == "Location"
-                                        select c.Value).FirstOrDefault().ToString();
+                    try
+                    {
+                        string localtion = (from c in responseepcLog.Headers
+                                            where c.Name == "Location"
+                                            select c.Value).FirstOrDefault().ToString();
 
-                    Response.Response = EPCURL + localtion;
+                        Response.Response = EPCURL + localtion;
+                    }
+                    catch
+                    {
+                        Response.Response = responseepcLog.Content.Substring(1, responseepcLog.Content.Length - 2);
+                    }
 
                 }
                 else

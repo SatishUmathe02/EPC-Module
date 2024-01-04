@@ -44,3 +44,5 @@ C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\obj\Release\BussinessLayer.dll
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\obj\Release\BussinessLayer.pdb
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Release\Newtonsoft.Json.xml
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Release\EPC_CandA.dll
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Release\EPC_CandA.pdb

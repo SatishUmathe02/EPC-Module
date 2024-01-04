@@ -374,7 +374,46 @@ namespace WebApi.Controllers
         }
 
 
+        #region C&A SGTIN Serial number
+        [HttpPost]
+        [Route("api/apiEPC/GetCA_SGTIN_Serial")]
+        public async Task<IHttpActionResult> GetCA_SGTIN_Serial([FromBody] EPCRequest Request)
+        {
+            EPCResponse ObjRes = new EPCResponse();
 
+            try
+            {
+                Request.RequestStartTime = System.DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss.fff");
+                ObjRes = await Run_SGTIN_Serial(Request);
+
+                string epc_res = JsonConvert.SerializeObject(ObjRes);
+                EPCBLL.rtrac_EPCReqRes(Request, epc_res);
+                return Ok(ObjRes);
+            }
+            catch (Exception ex)
+            {
+                EPCBLL.InsertLog(ex, "api/apiEPC/GetCA_SGTIN_Serial");
+                return Ok(ex.ToString());
+            }
+
+        }
+        private static async Task<EPCResponse> Run_SGTIN_Serial(EPCRequest Request)
+        {
+            EPCRequest Obj = new EPCRequest();
+
+            
+            if (Request != null)
+            {
+                EPCResponse ObjRes = CandA_IntergrationBLL.GetCA_SGTIN_Serial(Request);
+
+                return ObjRes;
+            }
+            else
+            {
+                return EPCBLL.GetError(107);
+            }
+        }
+        #endregion
     }
 
 }

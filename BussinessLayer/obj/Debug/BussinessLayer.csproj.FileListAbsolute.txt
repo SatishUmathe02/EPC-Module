@@ -67,3 +67,5 @@ C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\obj\Debug\BussinessLayer.dll
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\obj\Debug\BussinessLayer.pdb
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Debug\EPC_CandA.dll
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\bin\Debug\EPC_CandA.pdb

@@ -1,6 +1,5 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.CommonDataModels;
-using EPC_Huguboss;
 using System;
 using System.Linq;
 
@@ -38,23 +37,34 @@ namespace BussinessLayer
 
                     switch (EPC_Req.CustomerID)
                     {
-                        //case "CandA":
-                        //case "CAApps":
-                        //case "CAInts":
-                        //case "CATrai":
-                        //    usp_GTIN_GetEPC_CA_Result Obj = EPCDAL.GetEPC_CA(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
+                        case "CandA":
+                        case "CAApps":
+                        case "CAInts":
+                        case "CATrai":
 
-                        //    EPC_Res.EPCStart = Obj.EpcStart;
-                        //    EPC_Res.EPCEnd = Obj.EpcEnd;
-                        //    EPC_Res.SerialStart = Convert.ToString(Obj.SerialStart);
-                        //    EPC_Res.SerialEnd = Convert.ToString(Obj.SerailEnd);
-                        //    EPC_Res.Remark = Convert.ToString(Obj.Remark);
-                        //    EPC_Res.CustomerID = EPC_Req.CustomerID;
-                        //    EPC_Res.Quantity = EPC_Req.Quantity;
-                        //    EPC_Res.GTIN = EPC_Req.GTIN;
-                        //    EPC_Res.AccessPWD = Obj.AccessPWD;
-                        //    EPC_Res.KillPWD = Obj.KillPWD;
-                        //    break;
+
+                            EPC_Res = CandA_IntergrationBLL.GetCA_SGTIN_Serial(EPC_Req);
+
+                            if (EPC_Res.Remark == "Quantity is available")
+                            {
+                                //    usp_GTIN_GetEPC_CA_Result Obj = EPCDAL.GetEPC_CA(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
+
+                                usp_GTIN_GetEPC_Result Obj_CA = EPCDAL.GetEPC(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
+                                EPC_Res.EPCStart = Obj_CA.EpcStart;
+                                EPC_Res.EPCEnd = Obj_CA.EpcEnd;
+                                EPC_Res.SerialStart = Convert.ToString(Obj_CA.SerialStart);
+                                EPC_Res.SerialEnd = Convert.ToString(Obj_CA.SerailEnd);
+                                EPC_Res.Remark = Convert.ToString(Obj_CA.Remark);
+                                EPC_Res.CustomerID = EPC_Req.CustomerID;
+                                EPC_Res.Quantity = EPC_Req.Quantity;
+                                EPC_Res.GTIN = EPC_Req.GTIN;
+                                EPC_Res.AccessPWD = Obj_CA.AccessPWD;
+                                EPC_Res.KillPWD = Obj_CA.KillPWD;
+                            }
+
+                            break;
+
+
                         case "Kiabi":
 
                             int KiabiCount = (from c in EPCBLL.GetReprintEvent()
@@ -92,7 +102,7 @@ namespace BussinessLayer
                         case "Hugoboss":
                         case "HugoBoss":
 
-                            var Obj_HB = EPC_HB.GetEPC_HugoBoss(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
+                            var Obj_HB = EPCDAL.GetEPC_HugoBoss(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
 
                             EPC_Res.EPCStart = Obj_HB.EpcStart;
                             EPC_Res.EPCEnd = Obj_HB.EpcEnd;
@@ -204,7 +214,6 @@ namespace BussinessLayer
             return EPC_Res;
         }
 
-
         public static EPCResponse GetEPC_Customer(EPCRequest EPC_Req)
         {
             EPCResponse EPC_Res = new EPCResponse();
@@ -285,8 +294,6 @@ namespace BussinessLayer
             }
             return ePCResponse;
         }
-
-
 
     }
 
@@ -405,4 +412,5 @@ namespace BussinessLayer
             return EPC_Res;
         }
     }
+
 }

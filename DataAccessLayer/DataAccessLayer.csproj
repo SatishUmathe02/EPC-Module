@@ -60,6 +60,7 @@
     <Compile Include="EPCGerryWeberDAL.cs" />
     <Compile Include="EPCISDAL.cs" />
     <Compile Include="EPCPasswordDAL.cs" />
+    <Compile Include="EPC_CandADAL.cs" />
     <Compile Include="EPC_TempeDAL.cs" />
     <Compile Include="GS1_IntergrationDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,6 +95,9 @@
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_EPC_Cust_ADL_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GetCheckSerialNoLastUsed_CandA_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_GetCustomerWithGTIN_Parameters_Result.cs">

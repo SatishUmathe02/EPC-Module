@@ -98,6 +98,9 @@
           <Parameter Name="Res" Type="varchar(max)" Mode="In" />
           <Parameter Name="URL" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="usp_GetCheckSerialNoLastUsed_CandA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GTIN" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="usp_GetCustomerCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_GetCustomerWithGTIN_Parameters" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_GetEPCCounter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -405,6 +408,11 @@
         </Function>
         <Function Name="usp_UpdateAssPassword_TENDAM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="XML" Type="xml" Mode="In" />
+        </Function>
+        <Function Name="usp_UpdateSerialNumber_CandA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Qty" Type="int" Mode="In" />
+          <Parameter Name="GTIN" Type="varchar" Mode="In" />
+          <Parameter Name="SerialStart" Type="bigint" Mode="In" />
         </Function>
         <EntityContainer Name="rtracModelStoreContainer" />
       </Schema></edmx:StorageModels>
@@ -798,6 +806,14 @@
             <Parameter Name="RPO" Mode="In" Type="Int64" />
             <Parameter Name="DetailNumber" Mode="In" Type="Int64" />
           </FunctionImport>
+          <FunctionImport Name="usp_UpdateSerialNumber_CandA">
+            <Parameter Name="Qty" Mode="In" Type="Int32" />
+            <Parameter Name="GTIN" Mode="In" Type="String" />
+            <Parameter Name="SerialStart" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetCheckSerialNoLastUsed_CandA" ReturnType="Collection(rtracModel.usp_GetCheckSerialNoLastUsed_CandA_Result)">
+            <Parameter Name="GTIN" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_EPCIS_GetEP_URN_Result">
           <Property Type="String" Name="CustomerId" Nullable="false" MaxLength="50" />
@@ -1131,6 +1147,13 @@
           <Property Type="Double" Name="productTypeCode" Nullable="false" />
           <Property Type="Boolean" Name="ProductOrderTags_endpoint" Nullable="true" />
           <Property Type="Boolean" Name="Preencode_Endpoint" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_GetCheckSerialNoLastUsed_CandA_Result">
+          <Property Type="Int64" Name="SerialStart" Nullable="false" />
+          <Property Type="Int64" Name="SerialEnd" Nullable="true" />
+          <Property Type="String" Name="Remark" Nullable="false" MaxLength="21" />
+          <Property Type="Int64" Name="Threshold" Nullable="true" />
+          <Property Type="String" Name="RequestorId" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1610,6 +1633,18 @@
                 <ScalarProperty Name="productTypeCode" ColumnName="productTypeCode" />
                 <ScalarProperty Name="ProductOrderTags_endpoint" ColumnName="ProductOrderTags_endpoint" />
                 <ScalarProperty Name="Preencode_Endpoint" ColumnName="Preencode_Endpoint" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_UpdateSerialNumber_CandA" FunctionName="rtracModel.Store.usp_UpdateSerialNumber_CandA" />
+          <FunctionImportMapping FunctionImportName="usp_GetCheckSerialNoLastUsed_CandA" FunctionName="rtracModel.Store.usp_GetCheckSerialNoLastUsed_CandA">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="rtracModel.usp_GetCheckSerialNoLastUsed_CandA_Result">
+                <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
+                <ScalarProperty Name="SerialEnd" ColumnName="SerialEnd" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="Threshold" ColumnName="Threshold" />
+                <ScalarProperty Name="RequestorId" ColumnName="RequestorId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

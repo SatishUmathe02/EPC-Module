@@ -21,18 +21,19 @@ namespace EPCWeb.Controllers
         public ActionResult EPCModule()
         {
             EPCRequest ObjReq = new EPCRequest();
-            ObjReq.CustomerID = "";
-            ObjReq.CustomerName = "";
+            ObjReq.CustomerID = "C&A";
+            ObjReq.CustomerName = "C&A";
 
-            ObjReq.GTIN = "00123456789012";
+            ObjReq.GTIN = "04047111987659";// "00123456789012";
             ObjReq.Schema = "SGTIN-96";
-            ObjReq.Quantity = 1;
+            ObjReq.Quantity = 10;
             ObjReq.TransactionType = "New";
             ObjReq.EPC = "";
             ObjReq.Serial = 0;
             ObjReq.RPO = 999999910;
             ObjReq.DetailLineID = 999999910;
             ObjReq.Serial = 0;
+            ObjReq.CustomPara1 = "label-printer-3";
 
             ObjReq.Event = "";
 
@@ -242,7 +243,9 @@ namespace EPCWeb.Controllers
             HttpResponseMessage Res = new HttpResponseMessage();
 
 
-            Res = GlobalVariables.WebApiClient.PostAsJsonAsync("api/apiEPC/GetEPC", ReqObj).Result;
+             Res = GlobalVariables.WebApiClient.PostAsJsonAsync("api/apiEPC/GetEPC", ReqObj).Result;
+
+           // Res = GlobalVariables.WebApiClient.PostAsJsonAsync("api/apiEPC/GetCA_SGTIN_Serial", ReqObj).Result;
 
             /*
             if (ReqObj.TransactionType == "New")

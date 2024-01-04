@@ -212,3 +212,5 @@ C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\RestSharp.xml
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\obj\Release\WebApi.dll
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\obj\Release\WebApi.pdb
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\EPC_CandA.dll
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\EPC_CandA.pdb

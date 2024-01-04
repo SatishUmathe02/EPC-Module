@@ -410,5 +410,6 @@ C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPCWeb\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPCWeb\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPCWeb\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPCWeb\obj\Debug\EPCWeb.csprojResolveAssemblyReference.cache
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPCWeb\obj\Debug\EPCWeb.dll
 C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPCWeb\obj\Debug\EPCWeb.pdb

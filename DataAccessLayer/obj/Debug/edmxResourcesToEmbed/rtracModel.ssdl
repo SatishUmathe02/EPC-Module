@@ -93,6 +93,9 @@
     <Parameter Name="Res" Type="varchar(max)" Mode="In" />
     <Parameter Name="URL" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="usp_GetCheckSerialNoLastUsed_CandA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="GTIN" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="usp_GetCustomerCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="usp_GetCustomerWithGTIN_Parameters" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="usp_GetEPCCounter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -139,6 +142,7 @@
     <Parameter Name="GTIN" Type="varchar" Mode="In" />
     <Parameter Name="UserId" Type="bigint" Mode="In" />
   </Function>
+  <Function Name="usp_GetTempe_EPC_Data" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="usp_GetTempeEPCDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="RPO" Type="bigint" Mode="In" />
     <Parameter Name="DetailNumber" Type="bigint" Mode="In" />
@@ -399,6 +403,11 @@
   </Function>
   <Function Name="usp_UpdateAssPassword_TENDAM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="XML" Type="xml" Mode="In" />
+  </Function>
+  <Function Name="usp_UpdateSerialNumber_CandA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Qty" Type="int" Mode="In" />
+    <Parameter Name="GTIN" Type="varchar" Mode="In" />
+    <Parameter Name="SerialStart" Type="bigint" Mode="In" />
   </Function>
   <EntityContainer Name="rtracModelStoreContainer" />
 </Schema>

@@ -190,4 +190,11 @@ namespace DataAccessLayer.CommonDataModels
         public long NextEPCSerial { get; set; }
         
     }
+    public class CA_Request
+    {
+        public string gtin { get; set; }
+        public string requestorId { get; set; }
+        public int amount { get; set; }
+        
+    }
 }
