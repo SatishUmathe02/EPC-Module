@@ -59,8 +59,11 @@ namespace WebApi.Controllers
                     ObjRes = await Run_GetEPCDecode(Request);
                 }
 
+                Request.RequestEndTime = System.DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff");
+
                 string epc_res = JsonConvert.SerializeObject(ObjRes);
                 EPCBLL.rtrac_EPCReqRes(Request, epc_res);
+
                 return Ok(ObjRes);
             }
             catch (Exception Ex)

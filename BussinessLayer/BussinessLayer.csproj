@@ -57,6 +57,7 @@
     <Compile Include="EPCBLL_ADL.cs" />
     <Compile Include="EPCISBLL.cs" />
     <Compile Include="EPCPasswordBLL.cs" />
+    <Compile Include="EPC_StanderCustomerBLL.cs" />
     <Compile Include="GS1_IntergrationBLL.cs" />
     <Compile Include="GTINBLL.cs" />
     <Compile Include="Kiabi_IntergrationBLL.cs" />

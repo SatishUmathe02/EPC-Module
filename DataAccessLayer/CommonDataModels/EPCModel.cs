@@ -47,6 +47,8 @@ namespace DataAccessLayer.CommonDataModels
         public int PartitionValue { get; set; }
 
         public string RequestStartTime { get; set; }
+        public string RequestEndTime { get; set; }
+
 
     }
     public class EPCResponse

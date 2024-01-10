@@ -488,5 +488,36 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetStanderCustomerDetails" FunctionName="rtracModel.Store.usp_GetStanderCustomerDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="rtracModel.usp_GetStanderCustomerDetails_Result">
+          <ScalarProperty Name="CustmerId" ColumnName="CustmerId" />
+          <ScalarProperty Name="SerialRange_Start" ColumnName="SerialRange_Start" />
+          <ScalarProperty Name="SerialRange_End" ColumnName="SerialRange_End" />
+          <ScalarProperty Name="bitGS1" ColumnName="bitGS1" />
+          <ScalarProperty Name="intFilterValue" ColumnName="intFilterValue" />
+          <ScalarProperty Name="bitRFIDSerialization" ColumnName="bitRFIDSerialization" />
+          <ScalarProperty Name="bitUniqueCodeSerialization" ColumnName="bitUniqueCodeSerialization" />
+          <ScalarProperty Name="bitCustomize" ColumnName="bitCustomize" />
+          <ScalarProperty Name="GS1Prefix" ColumnName="GS1Prefix" />
+          <ScalarProperty Name="GS1apiRequired" ColumnName="GS1apiRequired" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_StanderCustomer" FunctionName="rtracModel.Store.usp_GTIN_GetEPC_StanderCustomer">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="rtracModel.usp_GTIN_GetEPC_StanderCustomer_Result">
+          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
+          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
+          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
+          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
+          <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

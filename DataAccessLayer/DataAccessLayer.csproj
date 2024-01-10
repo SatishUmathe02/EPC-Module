@@ -61,6 +61,7 @@
     <Compile Include="EPCISDAL.cs" />
     <Compile Include="EPCPasswordDAL.cs" />
     <Compile Include="EPC_CandADAL.cs" />
+    <Compile Include="EPC_StanderCustomerDAL.cs" />
     <Compile Include="EPC_TempeDAL.cs" />
     <Compile Include="GS1_IntergrationDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -139,6 +140,9 @@
     <Compile Include="usp_GetSerialNoGTIN_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="usp_GetStanderCustomerDetails_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="usp_GetTempeEPCDetails_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
@@ -176,6 +180,9 @@
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_GTIN_GetEPC_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

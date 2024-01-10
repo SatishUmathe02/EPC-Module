@@ -95,6 +95,12 @@ namespace BussinessLayer
                 case 123:
                     EPC_Res.Remark = "EPC Error Occurred: Quantity must be greater than 0";
                     break;
+                case 124:
+                    EPC_Res.Remark = "EPC Error Occurred: CompanyPrefix field cannot be empty";
+                    break;
+                case 125:
+                    EPC_Res.Remark = "Customer ID and Schema setup is missing in EPC Module.";
+                    break;
 
                 default:
                     EPC_Res.Remark = "Error: Invalid request";

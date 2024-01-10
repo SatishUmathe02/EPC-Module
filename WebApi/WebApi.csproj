@@ -85,6 +85,7 @@
     <Compile Include="Controllers\apiEPCController.cs" />
     <Compile Include="Controllers\apiEPCDetailsController.cs" />
     <Compile Include="Controllers\apiEPCISController.cs" />
+    <Compile Include="Controllers\apiEPC_StanderCustomerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

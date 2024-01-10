@@ -395,6 +395,29 @@
     <FunctionImport Name="usp_GetCheckSerialNoLastUsed_CandA" ReturnType="Collection(rtracModel.usp_GetCheckSerialNoLastUsed_CandA_Result)">
       <Parameter Name="GTIN" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="usp_GetStanderCustomerDetails" ReturnType="Collection(rtracModel.usp_GetStanderCustomerDetails_Result)">
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer" ReturnType="Collection(rtracModel.usp_GTIN_GetEPC_StanderCustomer_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="usp_EPCIS_GetEP_URN_Result">
     <Property Type="String" Name="CustomerId" Nullable="false" MaxLength="50" />
@@ -735,5 +758,28 @@
     <Property Type="String" Name="Remark" Nullable="false" MaxLength="21" />
     <Property Type="Int64" Name="Threshold" Nullable="true" />
     <Property Type="String" Name="RequestorId" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="usp_GetStanderCustomerDetails_Result">
+    <Property Type="String" Name="CustmerId" Nullable="false" MaxLength="100" />
+    <Property Type="Int64" Name="SerialRange_Start" Nullable="false" />
+    <Property Type="Int64" Name="SerialRange_End" Nullable="true" />
+    <Property Type="Boolean" Name="bitGS1" Nullable="false" />
+    <Property Type="Int32" Name="intFilterValue" Nullable="false" />
+    <Property Type="Boolean" Name="bitRFIDSerialization" Nullable="false" />
+    <Property Type="Boolean" Name="bitUniqueCodeSerialization" Nullable="false" />
+    <Property Type="Boolean" Name="bitCustomize" Nullable="false" />
+    <Property Type="String" Name="GS1Prefix" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="GS1apiRequired" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
   </ComplexType>
 </Schema>

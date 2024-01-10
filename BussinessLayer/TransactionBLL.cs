@@ -47,9 +47,9 @@ namespace BussinessLayer
 
                             if (EPC_Res.Remark == "Quantity is available")
                             {
-                                //    usp_GTIN_GetEPC_CA_Result Obj = EPCDAL.GetEPC_CA(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
+                                usp_GTIN_GetEPC_CA_Result Obj_CA = EPCDAL.GetEPC_CA(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
 
-                                usp_GTIN_GetEPC_Result Obj_CA = EPCDAL.GetEPC(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
+                                //usp_GTIN_GetEPC_Result Obj_CA = EPCDAL.GetEPC(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
                                 EPC_Res.EPCStart = Obj_CA.EpcStart;
                                 EPC_Res.EPCEnd = Obj_CA.EpcEnd;
                                 EPC_Res.SerialStart = Convert.ToString(Obj_CA.SerialStart);
