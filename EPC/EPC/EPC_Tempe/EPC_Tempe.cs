@@ -21,11 +21,11 @@ namespace EPC_Tempe
         public static string EPCGeneration(EPCRequest Request)
         {
             string Result = "Successfully Got The Response From API";
-            
+
 
             usp_GetTempeEPCDetails_Result ObjTempeData = EPC_TempeDAL.Get_Tempe_EPCDetail(Request.RPO, Request.DetailLineID);
 
-            if(ObjTempeData==null)
+            if (ObjTempeData == null)
             {
                 return Result = "No data found for the RPO ";
             }
@@ -66,7 +66,7 @@ namespace EPC_Tempe
                     Obj.quantity = Convert.ToString(Request.Quantity);
 
                     ObjEPC_BULK.quantityBySize.Add(Obj);
-                    
+
 
                     #endregion
 
@@ -123,7 +123,7 @@ namespace EPC_Tempe
                     if (Response.Response != "")
                     {
                         //if (Convert.ToInt32(ObjTempeData.EPCFlow) == 5)
-                        if(ObjTempeData.Preencode_Endpoint == true)
+                        if (ObjTempeData.Preencode_Endpoint == true)
                         {
                             #region READ RESPONSE WEB SERVICE BULK
 
@@ -173,10 +173,14 @@ namespace EPC_Tempe
                                 }
                                 else
                                 {
-                                    if (ObjResponse["errors"].Count() > 0)
+                                    if (ObjResponse["errors"] != null)
                                     {
                                         Result = "Tempe API Error Occurred: " + ObjResponse["errors"][0]["message"].ToString();
 
+                                    }
+                                    if (ObjResponse["message"] != null)
+                                    {
+                                        Result = "Tempe API Error Occurred: " + ObjResponse["message"].ToString();
                                     }
                                 }
 
@@ -199,25 +203,29 @@ namespace EPC_Tempe
                     Result = "No Response from  Tempe API ";
                 }
 
-                if (ObjRoot.results.Count > 0)
+                if (ObjRoot.results != null)
                 {
 
-                    try
+                    if (ObjRoot.results.Count > 0)
                     {
-                        long Start = (from c in ObjRoot.results
-                                      orderby c.SerialNumber ascending
-                                      select c.SerialNumber).FirstOrDefault();
-                        long End = (from c in ObjRoot.results
-                                    orderby c.SerialNumber ascending
-                                    select c.SerialNumber).LastOrDefault();
 
-                        Result = Convert.ToString(Start) + "#" + Convert.ToString(End);
-                    }
-                    catch (Exception ex)
-                    {
-                        EPCDAL.InsertReqRes(Request.CustomerID, Request.RPO, Request.DetailLineID, "SerialNumber not getting properly", ex.ToString(), "", Request.UserId, Request.GTIN);
-                    }
+                        try
+                        {
+                            long Start = (from c in ObjRoot.results
+                                          orderby c.SerialNumber ascending
+                                          select c.SerialNumber).FirstOrDefault();
+                            long End = (from c in ObjRoot.results
+                                        orderby c.SerialNumber ascending
+                                        select c.SerialNumber).LastOrDefault();
 
+                            Result = Convert.ToString(Start) + "#" + Convert.ToString(End);
+                        }
+                        catch (Exception ex)
+                        {
+                            EPCDAL.InsertReqRes(Request.CustomerID, Request.RPO, Request.DetailLineID, "SerialNumber not getting properly", ex.ToString(), "", Request.UserId, Request.GTIN);
+                        }
+
+                    }
                 }
 
             }
@@ -333,7 +341,7 @@ namespace EPC_Tempe
             string EPCURL = ConfigurationManager.AppSettings["Tempe_PreEncodeEPCURL"].ToString();
 
             // if ((EPCFlow == 5 || EPCFlow == 2) && Preencode_Endpoint == true) //WebService- bulk
-            if ( Preencode_Endpoint == true) //WebService- bulk
+            if (Preencode_Endpoint == true) //WebService- bulk
             {
                 EPCpre_url = ConfigurationManager.AppSettings["Tempe_WebService_Bulk_API"].ToString();
                 itx_apiKey = ConfigurationManager.AppSettings["Tempe_WebService_Bulk_APIKey"].ToString();
