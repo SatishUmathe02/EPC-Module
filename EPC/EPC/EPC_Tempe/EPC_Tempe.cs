@@ -118,6 +118,8 @@ namespace EPC_Tempe
 
                 Root ObjRoot = new Root();
 
+                List<long> SerialNumberList = new List<long>();
+
                 if (Response.Response != null)
                 {
                     if (Response.Response != "")
@@ -134,11 +136,42 @@ namespace EPC_Tempe
                                 {
                                     string link = Response.Response;
 
-                                    link = link.Replace("&limit=1000", "");
+                                    //link = link.Replace("&limit=1000", "");
 
-                                    ObjRoot = Http_Tempe_EPC(link, Request.RPO, ObjTempeData.rfidRequestId, link, Request);
+                                    //ObjRoot = Http_Tempe_EPC(link, Request.RPO, ObjTempeData.rfidRequestId, link, Request);
 
-                                    InsertEPC(ObjRoot, Request.RPO, ObjTempeData.rfidRequestId, Request);
+                                    //InsertEPC(ObjRoot, Request.RPO, ObjTempeData.rfidRequestId, Request);
+
+
+                                    List<string> ObjList = GetEPC_LinkList(Convert.ToInt32(Request.Quantity), link);
+                                    for (int kk = 0; kk < ObjList.Count(); kk++)
+                                    {
+                                        ObjRoot = Http_Tempe_EPC(ObjList[kk], Request.RPO, ObjTempeData.rfidRequestId, ObjList[kk], Request);
+
+                                        InsertEPC(ObjRoot, Request.RPO, ObjTempeData.rfidRequestId, Request);
+
+                                        if (ObjRoot.results != null)
+                                        {
+
+                                            if (ObjRoot.results.Count > 0)
+                                            {
+
+                                                long Start = (from c in ObjRoot.results
+                                                              orderby c.SerialNumber ascending
+                                                              select c.SerialNumber).FirstOrDefault();
+                                                long End = (from c in ObjRoot.results
+                                                            orderby c.SerialNumber ascending
+                                                            select c.SerialNumber).LastOrDefault();
+
+                                                SerialNumberList.Add(Start);
+                                                SerialNumberList.Add(End);
+                                            }
+                                        }
+
+
+                                    }
+
+
                                 }
                                 else
                                 {
@@ -165,11 +198,39 @@ namespace EPC_Tempe
                                 {
                                     string link = ObjResponse["_links"]["external"]["href"].ToString();
 
-                                    link = link.Replace("&limit=1000", "");
+                                    //link = link.Replace("&limit=1000", "");
 
-                                    ObjRoot = Http_Tempe_EPC(link, Request.RPO, ObjTempeData.rfidRequestId, link, Request);
+                                    //ObjRoot = Http_Tempe_EPC(link, Request.RPO, ObjTempeData.rfidRequestId, link, Request);
 
-                                    InsertEPC(ObjRoot, Request.RPO, ObjTempeData.rfidRequestId, Request);
+                                    //InsertEPC(ObjRoot, Request.RPO, ObjTempeData.rfidRequestId, Request);
+                                    
+                                    List<string> ObjList = GetEPC_LinkList(Convert.ToInt32(Request.Quantity), link);
+                                    for (int kk = 0; kk < ObjList.Count(); kk++)
+                                    {
+                                        ObjRoot = Http_Tempe_EPC(ObjList[kk], Request.RPO, ObjTempeData.rfidRequestId, ObjList[kk], Request);
+
+                                        InsertEPC(ObjRoot, Request.RPO, ObjTempeData.rfidRequestId, Request);
+
+                                        if (ObjRoot.results != null)
+                                        {
+
+                                            if (ObjRoot.results.Count > 0)
+                                            {
+
+                                                long Start = (from c in ObjRoot.results
+                                                              orderby c.SerialNumber ascending
+                                                              select c.SerialNumber).FirstOrDefault();
+                                                long End = (from c in ObjRoot.results
+                                                            orderby c.SerialNumber ascending
+                                                            select c.SerialNumber).LastOrDefault();
+
+                                                SerialNumberList.Add(Start);
+                                                SerialNumberList.Add(End);
+                                            }
+                                        }
+
+
+                                    }
                                 }
                                 else
                                 {
@@ -203,6 +264,16 @@ namespace EPC_Tempe
                     Result = "No Response from  Tempe API ";
                 }
 
+                if (SerialNumberList.Count != 0)
+                {
+
+                    long Start = (from c in SerialNumberList select c).FirstOrDefault();
+                    long End = (from c in SerialNumberList select c).LastOrDefault();
+
+                    Result = Convert.ToString(Start) + "#" + Convert.ToString(End);
+                }
+
+                /*
                 if (ObjRoot.results != null)
                 {
 
@@ -227,6 +298,7 @@ namespace EPC_Tempe
 
                     }
                 }
+                */
 
             }
             else
@@ -524,6 +596,36 @@ namespace EPC_Tempe
 
 
             return myDeserializedClass;
+        }
+
+        private static List<string> GetEPC_LinkList(int qty, string link)
+        {
+            List<string> ObjList = new List<string>();
+            try
+            {
+                string offset = "=0";
+                string NewOffset = "=0";
+                int loop = qty / 1000;
+
+                ObjList.Add(link);
+
+                for (int j = 0; j <= loop; j++)
+                {
+                    if (j > 0)
+                    {
+                        offset = "offset=0"; NewOffset = "offset=" + (j) + "000";
+                        string NewLink = link.Replace(offset, NewOffset);
+                        ObjList.Add(NewLink);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                ObjList.Add(link);
+            }
+
+            return ObjList;
         }
 
         private static long GetHexToInt(string EPC)
