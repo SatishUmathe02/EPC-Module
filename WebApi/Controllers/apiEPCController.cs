@@ -408,6 +408,7 @@ namespace WebApi.Controllers
             if (Request != null)
             {
                 EPCResponse ObjRes = CandA_IntergrationBLL.GetCA_SGTIN_Serial(Request);
+                ObjRes.Remark = "";
 
                 return ObjRes;
             }

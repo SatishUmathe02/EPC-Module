@@ -150,6 +150,13 @@ namespace EPC_Tempe
 
                                         InsertEPC(ObjRoot, Request.RPO, ObjTempeData.rfidRequestId, Request);
 
+                                        if (ObjRoot.results == null)
+                                        {
+                                            ObjRoot = Http_Tempe_EPC(ObjList[kk], Request.RPO, ObjTempeData.rfidRequestId, ObjList[kk], Request);
+
+                                            InsertEPC(ObjRoot, Request.RPO, ObjTempeData.rfidRequestId, Request);
+                                        }
+
                                         if (ObjRoot.results != null)
                                         {
 
@@ -210,6 +217,13 @@ namespace EPC_Tempe
                                         ObjRoot = Http_Tempe_EPC(ObjList[kk], Request.RPO, ObjTempeData.rfidRequestId, ObjList[kk], Request);
 
                                         InsertEPC(ObjRoot, Request.RPO, ObjTempeData.rfidRequestId, Request);
+
+                                        if(ObjRoot.results == null)
+                                        {
+                                            ObjRoot = Http_Tempe_EPC(ObjList[kk], Request.RPO, ObjTempeData.rfidRequestId, ObjList[kk], Request);
+
+                                            InsertEPC(ObjRoot, Request.RPO, ObjTempeData.rfidRequestId, Request);
+                                        }
 
                                         if (ObjRoot.results != null)
                                         {

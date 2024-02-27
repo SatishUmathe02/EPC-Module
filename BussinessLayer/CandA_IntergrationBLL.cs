@@ -12,6 +12,14 @@ namespace BussinessLayer
 {
     public class CandA_IntergrationBLL : EPCBLL
     {
+        public static bool CandA_GSIM;
+        static CandA_IntergrationBLL()
+        {
+            CandA_IntergrationBLL.CandA_GSIM = CandA_http.CandA_GSIM;
+            
+
+        }
+
         public static EPCResponse GetCA_SGTIN_Serial(EPCRequest EPC_Req)
         {
             EPCResponse EPC_Res = new EPCResponse();

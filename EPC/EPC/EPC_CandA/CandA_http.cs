@@ -14,10 +14,18 @@ namespace EPC_CandA
     public class CandA_http
     {
         private static string CandA_EmailIds;
+        private static string CandA_EmailId_CC;
+        public static bool CandA_GSIM;
+
+
 
         static CandA_http()
         {
             CandA_http.CandA_EmailIds = ConfigurationManager.AppSettings["CandA_EmailIds"].ToString();
+            CandA_http.CandA_EmailId_CC = ConfigurationManager.AppSettings["CandA_EmailId_CC"].ToString();
+            CandA_http.CandA_GSIM =Convert.ToBoolean(ConfigurationManager.AppSettings["CandA_GSIM"].ToString());
+
+
         }
 
         public CandA_http()
@@ -32,6 +40,7 @@ namespace EPC_CandA
             
             string url = ConfigurationManager.AppSettings["CandA_gsim_URL"].ToString();
             string Authorization = ConfigurationManager.AppSettings["CandA_Authorization"].ToString();
+            string ServerEnvironment = ConfigurationManager.AppSettings["ServerEnvironment"].ToString();
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             var clientepcLog = new RestClient(url);
@@ -57,12 +66,12 @@ namespace EPC_CandA
 
                 }
                 int StatusCode = Convert.ToInt32(response.StatusCode);
-                SendEmail(StatusCode, Response, ObjEPC.GTIN);
+                SendEmail(StatusCode, Response, ObjEPC.GTIN, Request, ServerEnvironment);
             }
             catch (WebException ex)
             {
                 int StatusCode = Convert.ToInt32(((System.Net.HttpWebResponse)ex.Response).StatusCode);
-                SendEmail(StatusCode, Response, ObjEPC.GTIN);
+                SendEmail(StatusCode, Response, ObjEPC.GTIN, Request, ServerEnvironment);
             }
 
             
@@ -71,12 +80,12 @@ namespace EPC_CandA
             return Response;
 
         }
-        public static void SendEmail(int StatusCode, string Response, string GTIN)
+        public static void SendEmail(int StatusCode, string Response, string GTIN, string Request, string ServerEnvironment)
         {
             int code = Convert.ToInt32(StatusCode.ToString().Substring(0, 1));
             string Recipient = CandA_EmailIds;
             string Subject = string.Empty;
-            string varCC = "";
+            string varCC = CandA_EmailId_CC;
             string varBCC = ""; string varReplyTo = "";
             //string varAttachmentName = "";
 
@@ -88,8 +97,14 @@ namespace EPC_CandA
                 case 4:
                 case 0:
                     //varCC = "Satish.umathe@r-pac.com,Namrata.bhagat@r-pac.com";
-                    Subject = "r-pac: C&A sgtin/serial web service not reachable " + StatusCode + " for GTIN:" + GTIN + "";
-                    Body.Append(Response);
+                    Subject = "r-pac: Error requesting serials on "+ ServerEnvironment + " Server from GSIM " + StatusCode + " ";
+
+                    Body.Append("Event Time: "+ DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssZ") +"");
+                    Body.Append("<br/><br/>");
+                    Body.Append("Error Code: " + StatusCode);
+                    Body.Append("<br/><br/>");
+                    Body.Append("Request: " + Request);
+                                        
                     EPCDAL.InsertEmail_GS1(Recipient, varCC, varBCC, varReplyTo, Subject, Body.ToString(), 1, DateTime.Now);
                     break;
 
@@ -98,12 +113,13 @@ namespace EPC_CandA
             }
         }
 
+        /*
         public static void SendEmail_AfterCheck_SerialNumber(int StatusCode, string Response, string GTIN)
         {
 
             string Recipient = CandA_EmailIds;
             string Subject = string.Empty;
-            string varCC = "Satish.umathe@r-pac.com";
+            string varCC = CandA_EmailId_CC;
             string varBCC = ""; string varReplyTo = "";
             //string varAttachmentName = "";
 
@@ -125,5 +141,6 @@ namespace EPC_CandA
                     break;
             }
         }
+        */
     }
 }

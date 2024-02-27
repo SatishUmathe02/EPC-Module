@@ -243,11 +243,11 @@ namespace EPCWeb.Controllers
             HttpResponseMessage Res = new HttpResponseMessage();
 
 
-           // Res = GlobalVariables.WebApiClient.PostAsJsonAsync("api/apiEPC/GetEPC", ReqObj).Result;
+            Res = GlobalVariables.WebApiClient.PostAsJsonAsync("api/apiEPC/GetEPC", ReqObj).Result;
 
             // Res = GlobalVariables.WebApiClient.PostAsJsonAsync("api/apiEPC/GetCA_SGTIN_Serial", ReqObj).Result;
 
-            Res = GlobalVariables.WebApiClient.PostAsJsonAsync("api/apiEPC/GetEPC_StanderCustomer", ReqObj).Result;
+           // Res = GlobalVariables.WebApiClient.PostAsJsonAsync("api/apiEPC/GetEPC_StanderCustomer", ReqObj).Result;
 
             /*
             if (ReqObj.TransactionType == "New")
