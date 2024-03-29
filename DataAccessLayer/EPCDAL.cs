@@ -342,10 +342,10 @@ namespace DataAccessLayer
         public static List<usp_GetEPCCustomer_TestingWeb_Result> EPC_Customer()
         {
             List<usp_GetEPCCustomer_TestingWeb_Result> lst = null;
-            using (EPC_DBEntities db = new EPC_DBEntities())
-            {
-                lst = (from lst1 in db.usp_GetEPCCustomer_TestingWeb() select lst1).ToList();
-            }
+            //using (EPC_DBEntities db = new EPC_DBEntities())
+            //{
+            //    lst = (from lst1 in db.usp_GetEPCCustomer_TestingWeb() select lst1).ToList();
+            //}
 
             return lst;
 

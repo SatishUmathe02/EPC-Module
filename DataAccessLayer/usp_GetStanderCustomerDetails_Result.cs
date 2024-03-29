@@ -20,7 +20,6 @@ namespace DataAccessLayer
         public int intFilterValue { get; set; }
         public bool bitRFIDSerialization { get; set; }
         public bool bitUniqueCodeSerialization { get; set; }
-        public bool bitCustomize { get; set; }
         public string GS1Prefix { get; set; }
         public string GS1apiRequired { get; set; }
     }

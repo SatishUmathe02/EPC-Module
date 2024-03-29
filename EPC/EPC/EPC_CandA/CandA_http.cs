@@ -23,7 +23,7 @@ namespace EPC_CandA
         {
             CandA_http.CandA_EmailIds = ConfigurationManager.AppSettings["CandA_EmailIds"].ToString();
             CandA_http.CandA_EmailId_CC = ConfigurationManager.AppSettings["CandA_EmailId_CC"].ToString();
-            CandA_http.CandA_GSIM =Convert.ToBoolean(ConfigurationManager.AppSettings["CandA_GSIM"].ToString());
+            CandA_http.CandA_GSIM = Convert.ToBoolean(ConfigurationManager.AppSettings["CandA_GSIM"].ToString());
 
 
         }
@@ -37,18 +37,20 @@ namespace EPC_CandA
         {
             string Response = string.Empty;
 
-            
+
             string url = ConfigurationManager.AppSettings["CandA_gsim_URL"].ToString();
             string Authorization = ConfigurationManager.AppSettings["CandA_Authorization"].ToString();
             string ServerEnvironment = ConfigurationManager.AppSettings["ServerEnvironment"].ToString();
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            ServicePointManager.Expect100Continue = false;
+
             var clientepcLog = new RestClient(url);
             clientepcLog.Timeout = -1;
             var requestepcLog = new RestRequest(Method.POST);
             requestepcLog.AddHeader("Content-Type", "application/json");
             requestepcLog.AddHeader("Authorization", Authorization);
-            string Request = "{\n  \"gtin\": \""+ ObjEPC.GTIN + "\",\n  \"requestorId\": \""+ requestorId + "\",\n  \"amount\": "+ Threshold + "\n}";
+            string Request = "{\n  \"gtin\": \"" + ObjEPC.GTIN + "\",\n  \"requestorId\": \"" + requestorId + "\",\n  \"amount\": " + Threshold + "\n}";
             requestepcLog.AddParameter("application/json", Request, ParameterType.RequestBody);
             IRestResponse response = clientepcLog.Execute(requestepcLog);
 
@@ -74,7 +76,7 @@ namespace EPC_CandA
                 SendEmail(StatusCode, Response, ObjEPC.GTIN, Request, ServerEnvironment);
             }
 
-            
+
             EPCDAL.InsertReqRes(ObjEPC.CustomerID, ObjEPC.RPO, ObjEPC.DetailLineID, Request, Response, url, ObjEPC.UserId, ObjEPC.GTIN);
 
             return Response;
@@ -95,16 +97,28 @@ namespace EPC_CandA
             {
                 case 5:
                 case 4:
-                case 0:
-                    //varCC = "Satish.umathe@r-pac.com,Namrata.bhagat@r-pac.com";
-                    Subject = "r-pac: Error requesting serials on "+ ServerEnvironment + " Server from GSIM " + StatusCode + " ";
 
-                    Body.Append("Event Time: "+ DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssZ") +"");
+                    Subject = "r-pac: Error requesting serials on " + ServerEnvironment + " Server from GSIM " + StatusCode + " ";
+                    Body.Append("Event Time: " + DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssZ") + "");
                     Body.Append("<br/><br/>");
                     Body.Append("Error Code: " + StatusCode);
                     Body.Append("<br/><br/>");
                     Body.Append("Request: " + Request);
-                                        
+
+                    EPCDAL.InsertEmail_GS1(Recipient, varCC, varBCC, varReplyTo, Subject, Body.ToString(), 1, DateTime.Now);
+                    break;
+                case 0:
+
+                    Recipient = CandA_EmailId_CC;
+                    varCC = "";
+                    Subject = "r-pac: Error requesting serials on " + ServerEnvironment + " Server from GSIM " + StatusCode + " ";
+
+                    Body.Append("Event Time: " + DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssZ") + "");
+                    Body.Append("<br/><br/>");
+                    Body.Append("Error Code: " + StatusCode);
+                    Body.Append("<br/><br/>");
+                    Body.Append("Request: " + Request);
+
                     EPCDAL.InsertEmail_GS1(Recipient, varCC, varBCC, varReplyTo, Subject, Body.ToString(), 1, DateTime.Now);
                     break;
 

@@ -63,6 +63,10 @@ namespace BussinessLayer
                                     EPC_Res.AccessPWD = Obj_CA.AccessPWD;
                                     EPC_Res.KillPWD = Obj_CA.KillPWD;
                                 }
+                                else
+                                {
+                                   // EPC_Res.Remark = "";
+                                }
 
                                 #endregion
                             }

@@ -26,7 +26,7 @@ namespace DataAccessLayer
         }
 
         #region GET EPC VIA STORE PROCEDURE
-        public static usp_GTIN_GetEPC_StanderCustomer_Result GetEPC(string gtin14, long qty, string transaction, string schema, string customerId, string customerName, string Event, long UserId, long SerialStart, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, string GS1Prefix, int PartionVal, DateTime EPCStartDateTime)
+        public static usp_GTIN_GetEPC_StanderCustomer_Result GetEPC(string gtin14, long qty, string transaction, string schema, string customerId, string customerName, string Event, long UserId, long SerialStart, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, string GS1Prefix, int PartionVal, DateTime EPCStartDateTime, int FilterValue)
         {
             usp_GTIN_GetEPC_StanderCustomer_Result Obj = new usp_GTIN_GetEPC_StanderCustomer_Result();
             try
@@ -39,7 +39,7 @@ namespace DataAccessLayer
 
                     }
 
-                    Obj = (from lst1 in db.usp_GTIN_GetEPC_StanderCustomer(gtin14, qty, transaction, schema, customerId, customerName, Event, UserId, SerialStart, EPC, RPO, DetailLineNo, CustomPara1, CustomPara2, GS1Prefix, PartionVal, EPCStartDateTime) select lst1).ToList().FirstOrDefault();
+                    Obj = (from lst1 in db.usp_GTIN_GetEPC_StanderCustomer(gtin14, qty, transaction, schema, customerId, customerName, Event, UserId, SerialStart, EPC, RPO, DetailLineNo, CustomPara1, CustomPara2, GS1Prefix, PartionVal, EPCStartDateTime, FilterValue) select lst1).ToList().FirstOrDefault();
 
                 }
             }

@@ -33,10 +33,13 @@ namespace BussinessLayer
 
                 for (int i = 0; i < ObjGS1.Count; i++)
                 {
-                    if (!string.IsNullOrEmpty(ObjGS1[0].Prefixes.GS1Prefix))
+                    if (ObjGS1[0].Prefixes != null)
                     {
-                        ObjEPC.GS1Prefix = ObjGS1[0].Prefixes.GS1Prefix;
-                        break;
+                        if (!string.IsNullOrEmpty(ObjGS1[0].Prefixes.GS1Prefix))
+                        {
+                            ObjEPC.GS1Prefix = ObjGS1[0].Prefixes.GS1Prefix;
+                            break;
+                        }
                     }
                 }
             }

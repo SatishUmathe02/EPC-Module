@@ -129,19 +129,23 @@ namespace BussinessLayer
         {
             var q = EPCDAL.EPC_Customer();
 
-            List<EPCCustomer> Objlist = (from c in q
-                                         select new EPCCustomer()
-                                         {
-                                             CustomerId = c.CustomerId,
-                                             CustomerName = c.CustomerName,
-                                             IsGS1 = c.IsGS1
-                                         }).ToList();
+            List<EPCCustomer> Objlist = new List<EPCCustomer>();
+            if (q != null)
+            {
+                Objlist = (from c in q
+                           select new EPCCustomer()
+                           {
+                               CustomerId = c.CustomerId,
+                               CustomerName = c.CustomerName,
+                               IsGS1 = c.IsGS1
+                           }).ToList();
+            }
 
             return Objlist;
 
         }
         public static List<string> GetReprintEvent()
-        { 
+        {
 
             return new List<string>()
             {
@@ -162,12 +166,12 @@ namespace BussinessLayer
             try
             {
                 string epc_req = JsonConvert.SerializeObject(ObjEPCReq);
-                
+
 
 
                 EPCDAL.rtrac_InsertReqRes(ObjEPCReq.CustomerID, ObjEPCReq.RPO, ObjEPCReq.DetailLineID, epc_req, epc_res, ObjEPCReq.UserId);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }

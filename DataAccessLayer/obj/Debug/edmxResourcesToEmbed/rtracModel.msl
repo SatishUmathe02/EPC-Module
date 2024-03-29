@@ -1,9 +1,142 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="rtracModelStoreContainer" CdmEntityContainer="EPC_DBEntities">
-    <FunctionImportMapping FunctionImportName="usp_EPCIS_GetEP_URN" FunctionName="rtracModel.Store.usp_EPCIS_GetEP_URN">
+  <EntityContainerMapping StorageEntityContainer="EPC_DBModelStoreContainer" CdmEntityContainer="EPC_DBEntities">
+    <FunctionImportMapping FunctionName="EPC_DBModel.Store.udf_EPC_Customer" FunctionImportName="udf_EPC_Customer">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_EPCIS_GetEP_URN_Result">
+        <ComplexTypeMapping TypeName="EPC_DBModel.udf_EPC_Customer_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="Schema" ColumnName="Schema" />
+          <ScalarProperty Name="NCZORE" ColumnName="NCZORE" />
+          <ScalarProperty Name="IsGS1" ColumnName="IsGS1" />
+          <ScalarProperty Name="IsCustParam1" ColumnName="IsCustParam1" />
+          <ScalarProperty Name="Ver" ColumnName="Ver" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionName="EPC_DBModel.Store.udf_GTIN_PartitionTable" FunctionImportName="udf_GTIN_PartitionTable">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.udf_GTIN_PartitionTable_Result">
+          <ScalarProperty Name="PartitionValue" ColumnName="PartitionValue" />
+          <ScalarProperty Name="GS1CompanyPrefix_Bits" ColumnName="GS1CompanyPrefix_Bits" />
+          <ScalarProperty Name="GS1CompanyPrefix_Digits" ColumnName="GS1CompanyPrefix_Digits" />
+          <ScalarProperty Name="ItemReference_Bits" ColumnName="ItemReference_Bits" />
+          <ScalarProperty Name="ItemReference_Digits" ColumnName="ItemReference_Digits" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionName="EPC_DBModel.Store.udf_Hmac" FunctionImportName="udf_Hmac">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.udf_Hmac_Result">
+          <ScalarProperty Name="Hash" ColumnName="Hash" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionName="EPC_DBModel.Store.udf_Split" FunctionImportName="udf_Split">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.udf_Split_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="VALUE" ColumnName="VALUE" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ups_GetEPC_Customer_ADL" FunctionName="EPC_DBModel.Store.ups_GetEPC_Customer_ADL">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.ups_GetEPC_Customer_ADL_Result">
+          <ScalarProperty Name="bigintPtrId" ColumnName="bigintPtrId" />
+          <ScalarProperty Name="varversion" ColumnName="varversion" />
+          <ScalarProperty Name="varGTIN" ColumnName="varGTIN" />
+          <ScalarProperty Name="varNextEPC" ColumnName="varNextEPC" />
+          <ScalarProperty Name="varEndEPC" ColumnName="varEndEPC" />
+          <ScalarProperty Name="intStartEPCSerial" ColumnName="intStartEPCSerial" />
+          <ScalarProperty Name="intEndEPCSerial" ColumnName="intEndEPCSerial" />
+          <ScalarProperty Name="intNextEPCSerial" ColumnName="intNextEPCSerial" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_AddErrorLog" FunctionName="EPC_DBModel.Store.usp_AddErrorLog" />
+    <FunctionImportMapping FunctionImportName="usp_Check_CertilogoData" FunctionName="EPC_DBModel.Store.usp_Check_CertilogoData" />
+    <FunctionImportMapping FunctionImportName="usp_EPC_Cust_ADL" FunctionName="EPC_DBModel.Store.usp_EPC_Cust_ADL">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_EPC_Cust_ADL_Result">
+          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
+          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
+          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
+          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
+          <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_EPC_Cust_AlvaroMoreno" FunctionName="EPC_DBModel.Store.usp_EPC_Cust_AlvaroMoreno" />
+    <FunctionImportMapping FunctionImportName="usp_EPC_Cust_Charanga" FunctionName="EPC_DBModel.Store.usp_EPC_Cust_Charanga" />
+    <FunctionImportMapping FunctionImportName="usp_EPC_Cust_Diesel" FunctionName="EPC_DBModel.Store.usp_EPC_Cust_Diesel" />
+    <FunctionImportMapping FunctionImportName="usp_EPC_Cust_ElCorteIngles" FunctionName="EPC_DBModel.Store.usp_EPC_Cust_ElCorteIngles" />
+    <FunctionImportMapping FunctionImportName="usp_EPC_Cust_EncuentroModa" FunctionName="EPC_DBModel.Store.usp_EPC_Cust_EncuentroModa" />
+    <FunctionImportMapping FunctionImportName="usp_EPC_Cust_Inditex" FunctionName="EPC_DBModel.Store.usp_EPC_Cust_Inditex" />
+    <FunctionImportMapping FunctionImportName="usp_EPC_Cust_MANGO" FunctionName="EPC_DBModel.Store.usp_EPC_Cust_MANGO" />
+    <FunctionImportMapping FunctionImportName="usp_EPC_Cust_StanderCustomer" FunctionName="EPC_DBModel.Store.usp_EPC_Cust_StanderCustomer" />
+    <FunctionImportMapping FunctionImportName="usp_EPC_Cust_StoneIsland" FunctionName="EPC_DBModel.Store.usp_EPC_Cust_StoneIsland" />
+    <FunctionImportMapping FunctionImportName="usp_EPC_Cust_TEMPE" FunctionName="EPC_DBModel.Store.usp_EPC_Cust_TEMPE" />
+    <FunctionImportMapping FunctionImportName="usp_EPC_Cust_TEMPE_DecodeEPC" FunctionName="EPC_DBModel.Store.usp_EPC_Cust_TEMPE_DecodeEPC">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_EPC_Cust_TEMPE_DecodeEPC_Result">
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="CommercialBrand" ColumnName="CommercialBrand" />
+          <ScalarProperty Name="Section" ColumnName="Section" />
+          <ScalarProperty Name="ProductType" ColumnName="ProductType" />
+          <ScalarProperty Name="MCCT" ColumnName="MCCT" />
+          <ScalarProperty Name="FlagActive" ColumnName="FlagActive" />
+          <ScalarProperty Name="Serial" ColumnName="Serial" />
+          <ScalarProperty Name="CreationDate_Batch" ColumnName="CreationDate+Batch" />
+          <ScalarProperty Name="Version_Copy_" ColumnName="Version(Copy)" />
+          <ScalarProperty Name="ProviderID" ColumnName="ProviderID" />
+          <ScalarProperty Name="FreeBits" ColumnName="FreeBits" />
+          <ScalarProperty Name="EAS" ColumnName="EAS" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="Quality" ColumnName="Quality" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Custom1" ColumnName="Custom1" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_EPC_Cust_TEMPE_Test" FunctionName="EPC_DBModel.Store.usp_EPC_Cust_TEMPE_Test" />
+    <FunctionImportMapping FunctionImportName="usp_EPC_Cust_TENDAM" FunctionName="EPC_DBModel.Store.usp_EPC_Cust_TENDAM" />
+    <FunctionImportMapping FunctionImportName="usp_EPC_InsertEPCLog" FunctionName="EPC_DBModel.Store.usp_EPC_InsertEPCLog" />
+    <FunctionImportMapping FunctionImportName="USP_EPCIS_Customer" FunctionName="EPC_DBModel.Store.USP_EPCIS_Customer">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.USP_EPCIS_Customer_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_EPCIS_GetEP_URN" FunctionName="EPC_DBModel.Store.usp_EPCIS_GetEP_URN">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_EPCIS_GetEP_URN_Result">
+          <ScalarProperty Name="EPCLogId" ColumnName="EPCLogId" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="RPO" ColumnName="RPO" />
+          <ScalarProperty Name="DetailNumber" ColumnName="DetailNumber" />
+          <ScalarProperty Name="EPCIS" ColumnName="EPCIS" />
+          <ScalarProperty Name="EPC" ColumnName="EPC" />
+          <ScalarProperty Name="SerailStart" ColumnName="SerailStart" />
+          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="PurchaseOrderNumber" ColumnName="PurchaseOrderNumber" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_EPCIS_GetEPC_Temera_FB_UpdateFlag" FunctionName="EPC_DBModel.Store.usp_EPCIS_GetEPC_Temera_FB_UpdateFlag" />
+    <FunctionImportMapping FunctionImportName="usp_EPCIS_GetEPC_URN_RPO" FunctionName="EPC_DBModel.Store.usp_EPCIS_GetEPC_URN_RPO">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_EPCIS_GetEPC_URN_RPO_Result">
           <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
           <ScalarProperty Name="RPO" ColumnName="RPO" />
           <ScalarProperty Name="DetailNumber" ColumnName="DetailNumber" />
@@ -15,70 +148,268 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_EPCIS_InsertLog" FunctionName="rtracModel.Store.usp_EPCIS_InsertLog" />
-    <FunctionImportMapping FunctionImportName="usp_GetCustomerCount" FunctionName="rtracModel.Store.usp_GetCustomerCount" />
-    <FunctionImportMapping FunctionImportName="usp_GetEPCLog" FunctionName="rtracModel.Store.usp_GetEPCLog">
+    <FunctionImportMapping FunctionImportName="usp_EPCIS_GetRPO" FunctionName="EPC_DBModel.Store.usp_EPCIS_GetRPO" />
+    <FunctionImportMapping FunctionImportName="usp_EPCIS_GetRPODetails_HugoBoss" FunctionName="EPC_DBModel.Store.usp_EPCIS_GetRPODetails_HugoBoss">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCLog_Result">
-          <ScalarProperty Name="bigIntId" ColumnName="bigIntId" />
-          <ScalarProperty Name="varGTIN" ColumnName="varGTIN" />
-          <ScalarProperty Name="bigIntSerialStart" ColumnName="bigIntSerialStart" />
-          <ScalarProperty Name="bigIntSerialEnd" ColumnName="bigIntSerialEnd" />
-          <ScalarProperty Name="varEPCStart" ColumnName="varEPCStart" />
-          <ScalarProperty Name="varEPCEnd" ColumnName="varEPCEnd" />
-          <ScalarProperty Name="varSchema" ColumnName="varSchema" />
-          <ScalarProperty Name="varCustomerName" ColumnName="varCustomerName" />
-          <ScalarProperty Name="varRemark" ColumnName="varRemark" />
-          <ScalarProperty Name="dtLogDateTime" ColumnName="dtLogDateTime" />
-          <ScalarProperty Name="bigIntCreatedById" ColumnName="bigIntCreatedById" />
-          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
-          <ScalarProperty Name="bigIntLastUpdatedById" ColumnName="bigIntLastUpdatedById" />
-          <ScalarProperty Name="dtLastUpdatedOn" ColumnName="dtLastUpdatedOn" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GetEPCSerial" FunctionName="rtracModel.Store.usp_GetEPCSerial">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCSerial_Result">
-          <ScalarProperty Name="bigIntId" ColumnName="bigIntId" />
-          <ScalarProperty Name="varGTIN" ColumnName="varGTIN" />
-          <ScalarProperty Name="bigIntSerialNoLastUsed" ColumnName="bigIntSerialNoLastUsed" />
-          <ScalarProperty Name="bigIntMaximumSerial" ColumnName="bigIntMaximumSerial" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GetSerialNoGTIN" FunctionName="rtracModel.Store.usp_GetSerialNoGTIN">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GetSerialNoGTIN_Result">
-          <ScalarProperty Name="bigIntId" ColumnName="bigIntId" />
-          <ScalarProperty Name="VARGTIN" ColumnName="VARGTIN" />
-          <ScalarProperty Name="bigIntSerialNoLastUsed" ColumnName="bigIntSerialNoLastUsed" />
-          <ScalarProperty Name="bigIntMaximumSerial" ColumnName="bigIntMaximumSerial" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GTIN_GetCustEPC" FunctionName="rtracModel.Store.usp_GTIN_GetCustEPC" />
-    <FunctionImportMapping FunctionImportName="usp_AddErrorLog" FunctionName="rtracModel.Store.usp_AddErrorLog" />
-    <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_Moda" FunctionName="rtracModel.Store.usp_UpdateAssPassword_Moda" />
-    <FunctionImportMapping FunctionImportName="usp_InsertEmailTrigger" FunctionName="rtracModel.Store.usp_InsertEmailTrigger" />
-    <FunctionImportMapping FunctionImportName="USP_GTIN_InsertEPCReqRes" FunctionName="rtracModel.Store.USP_GTIN_InsertEPCReqRes" />
-    <FunctionImportMapping FunctionImportName="usp_EPCIS_GetEPC_URN_RPO" FunctionName="rtracModel.Store.usp_EPCIS_GetEPC_URN_RPO">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_EPCIS_GetEPC_URN_RPO_Result">
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_EPCIS_GetRPODetails_HugoBoss_Result">
+          <ScalarProperty Name="EPCLogId" ColumnName="EPCLogId" />
           <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
           <ScalarProperty Name="RPO" ColumnName="RPO" />
           <ScalarProperty Name="DetailNumber" ColumnName="DetailNumber" />
-          <ScalarProperty Name="EPCIS" ColumnName="EPCIS" />
-          <ScalarProperty Name="EPC" ColumnName="EPC" />
-          <ScalarProperty Name="SerailStart" ColumnName="SerailStart" />
-          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
+          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
+          <ScalarProperty Name="SerialEnd" ColumnName="SerialEnd" />
+          <ScalarProperty Name="EPCStart" ColumnName="EPCStart" />
+          <ScalarProperty Name="EPCEnd" ColumnName="EPCEnd" />
           <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="epc_URN" ColumnName="epc_URN" />
+          <ScalarProperty Name="batchId" ColumnName="batchId" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GetEPCCounter" FunctionName="rtracModel.Store.usp_GetEPCCounter">
+    <FunctionImportMapping FunctionImportName="usp_EPCIS_InsertLog" FunctionName="EPC_DBModel.Store.usp_EPCIS_InsertLog" />
+    <FunctionImportMapping FunctionImportName="usp_EPCIS_InsertReqResLog" FunctionName="EPC_DBModel.Store.usp_EPCIS_InsertReqResLog" />
+    <FunctionImportMapping FunctionImportName="usp_GetCandA_SGTIN_List" FunctionName="EPC_DBModel.Store.usp_GetCandA_SGTIN_List">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCounter_Result">
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetCandA_SGTIN_List_Result">
+          <ScalarProperty Name="gtin" ColumnName="gtin" />
+          <ScalarProperty Name="Threshold" ColumnName="Threshold" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetCheckSerialNoLastUsed_CandA" FunctionName="EPC_DBModel.Store.usp_GetCheckSerialNoLastUsed_CandA">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetCheckSerialNoLastUsed_CandA_Result">
+          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
+          <ScalarProperty Name="SerialEnd" ColumnName="SerialEnd" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="Threshold" ColumnName="Threshold" />
+          <ScalarProperty Name="RequestorId" ColumnName="RequestorId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetCustomerCount" FunctionName="EPC_DBModel.Store.usp_GetCustomerCount" />
+    <FunctionImportMapping FunctionImportName="usp_GetCustomerWithGTIN_Parameters" FunctionName="EPC_DBModel.Store.usp_GetCustomerWithGTIN_Parameters">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetCustomerWithGTIN_Parameters_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
+          <ScalarProperty Name="CustomePara" ColumnName="CustomePara" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetDiesel_Feedback_Data" FunctionName="EPC_DBModel.Store.usp_GetDiesel_Feedback_Data">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetDiesel_Feedback_Data_Result">
+          <ScalarProperty Name="varQuantita" ColumnName="varQuantita" />
+          <ScalarProperty Name="varCustItemCode" ColumnName="varCustItemCode" />
+          <ScalarProperty Name="varDescrizioneModelloParte" ColumnName="varDescrizioneModelloParte" />
+          <ScalarProperty Name="varColore" ColumnName="varColore" />
+          <ScalarProperty Name="varTaglia" ColumnName="varTaglia" />
+          <ScalarProperty Name="EPC" ColumnName="EPC" />
+          <ScalarProperty Name="varCertilogo_code" ColumnName="varCertilogo_code" />
+          <ScalarProperty Name="varQR_code" ColumnName="varQR_code" />
+          <ScalarProperty Name="varNFC" ColumnName="varNFC" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetDiesel_Temera_Data" FunctionName="EPC_DBModel.Store.usp_GetDiesel_Temera_Data">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetDiesel_Temera_Data_Result">
+          <ScalarProperty Name="EPC" ColumnName="EPC" />
+          <ScalarProperty Name="TID" ColumnName="TID" />
+          <ScalarProperty Name="MediaType" ColumnName="MediaType" />
+          <ScalarProperty Name="EAN13" ColumnName="EAN13" />
+          <ScalarProperty Name="WorkOrder" ColumnName="WorkOrder" />
+          <ScalarProperty Name="AddOn" ColumnName="AddOn" />
+          <ScalarProperty Name="CLG" ColumnName="CLG" />
+          <ScalarProperty Name="UID" ColumnName="UID" />
+          <ScalarProperty Name="PlantEncoder" ColumnName="PlantEncoder" />
+          <ScalarProperty Name="EncodingTimestamp" ColumnName="EncodingTimestamp" />
+          <ScalarProperty Name="RPacLotNumber" ColumnName="RPacLotNumber" />
+          <ScalarProperty Name="DestinationWorker" ColumnName="DestinationWorker" />
+          <ScalarProperty Name="ShippingDate" ColumnName="ShippingDate" />
+          <ScalarProperty Name="MadeIn" ColumnName="MadeIn" />
+          <ScalarProperty Name="WorkOrderWorker" ColumnName="WorkOrderWorker" />
+          <ScalarProperty Name="DetailNo" ColumnName="DetailNo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetDiesel_Temera_Data_New" FunctionName="EPC_DBModel.Store.usp_GetDiesel_Temera_Data_New">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetDiesel_Temera_Data_New_Result">
+          <ScalarProperty Name="EPC" ColumnName="EPC" />
+          <ScalarProperty Name="TID" ColumnName="TID" />
+          <ScalarProperty Name="MediaType" ColumnName="MediaType" />
+          <ScalarProperty Name="EAN13" ColumnName="EAN13" />
+          <ScalarProperty Name="WorkOrder" ColumnName="WorkOrder" />
+          <ScalarProperty Name="AddOn" ColumnName="AddOn" />
+          <ScalarProperty Name="CLG" ColumnName="CLG" />
+          <ScalarProperty Name="UID" ColumnName="UID" />
+          <ScalarProperty Name="PlantEncoder" ColumnName="PlantEncoder" />
+          <ScalarProperty Name="EncodingTimestamp" ColumnName="EncodingTimestamp" />
+          <ScalarProperty Name="RPacLotNumber" ColumnName="RPacLotNumber" />
+          <ScalarProperty Name="DestinationWorker" ColumnName="DestinationWorker" />
+          <ScalarProperty Name="ShippingDate" ColumnName="ShippingDate" />
+          <ScalarProperty Name="MadeIn" ColumnName="MadeIn" />
+          <ScalarProperty Name="WorkOrderWorker" ColumnName="WorkOrderWorker" />
+          <ScalarProperty Name="DetailNo" ColumnName="DetailNo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetDiesel_Temera_Data_Old" FunctionName="EPC_DBModel.Store.usp_GetDiesel_Temera_Data_Old">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetDiesel_Temera_Data_Old_Result">
+          <ScalarProperty Name="EPC" ColumnName="EPC" />
+          <ScalarProperty Name="TID" ColumnName="TID" />
+          <ScalarProperty Name="MediaType" ColumnName="MediaType" />
+          <ScalarProperty Name="EAN13" ColumnName="EAN13" />
+          <ScalarProperty Name="WorkOrder" ColumnName="WorkOrder" />
+          <ScalarProperty Name="AddOn" ColumnName="AddOn" />
+          <ScalarProperty Name="CLG" ColumnName="CLG" />
+          <ScalarProperty Name="UID" ColumnName="UID" />
+          <ScalarProperty Name="PlantEncoder" ColumnName="PlantEncoder" />
+          <ScalarProperty Name="EncodingTimestamp" ColumnName="EncodingTimestamp" />
+          <ScalarProperty Name="RPacLotNumber" ColumnName="RPacLotNumber" />
+          <ScalarProperty Name="DestinationWorker" ColumnName="DestinationWorker" />
+          <ScalarProperty Name="ShippingDate" ColumnName="ShippingDate" />
+          <ScalarProperty Name="MadeIn" ColumnName="MadeIn" />
+          <ScalarProperty Name="WorkOrderWorker" ColumnName="WorkOrderWorker" />
+          <ScalarProperty Name="varCustItemCode" ColumnName="varCustItemCode" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetDieselCTMS_Feedback_Data" FunctionName="EPC_DBModel.Store.usp_GetDieselCTMS_Feedback_Data">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetDieselCTMS_Feedback_Data_Result">
+          <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
+          <ScalarProperty Name="clgCode" ColumnName="clgCode" />
+          <ScalarProperty Name="qrCode" ColumnName="qrCode" />
+          <ScalarProperty Name="serial" ColumnName="serial" />
+          <ScalarProperty Name="clientArtSerial" ColumnName="clientArtSerial" />
+          <ScalarProperty Name="EPC" ColumnName="EPC" />
+          <ScalarProperty Name="tid" ColumnName="tid" />
+          <ScalarProperty Name="ndef" ColumnName="ndef" />
+          <ScalarProperty Name="uid" ColumnName="uid" />
+          <ScalarProperty Name="company" ColumnName="company" />
+          <ScalarProperty Name="collection" ColumnName="collection" />
+          <ScalarProperty Name="companyType" ColumnName="companyType" />
+          <ScalarProperty Name="entity" ColumnName="entity" />
+          <ScalarProperty Name="idBrand" ColumnName="idBrand" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="cusOrder" ColumnName="cusOrder" />
+          <ScalarProperty Name="cusOrderRow" ColumnName="cusOrderRow" />
+          <ScalarProperty Name="productLine" ColumnName="productLine" />
+          <ScalarProperty Name="upc" ColumnName="upc" />
+          <ScalarProperty Name="clientArtModel" ColumnName="clientArtModel" />
+          <ScalarProperty Name="clientArtDescr" ColumnName="clientArtDescr" />
+          <ScalarProperty Name="cusArtSize" ColumnName="cusArtSize" />
+          <ScalarProperty Name="cusArtPart" ColumnName="cusArtPart" />
+          <ScalarProperty Name="cusArtColor" ColumnName="cusArtColor" />
+          <ScalarProperty Name="cusArtMaterial" ColumnName="cusArtMaterial" />
+          <ScalarProperty Name="cusArtVariant" ColumnName="cusArtVariant" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="cusSubContId" ColumnName="cusSubContId" />
+          <ScalarProperty Name="cusSubCont" ColumnName="cusSubCont" />
+          <ScalarProperty Name="cusSubContCity" ColumnName="cusSubContCity" />
+          <ScalarProperty Name="cusSubContCountry" ColumnName="cusSubContCountry" />
+          <ScalarProperty Name="madeIn" ColumnName="madeIn" />
+          <ScalarProperty Name="distributorType" ColumnName="distributorType" />
+          <ScalarProperty Name="distributorId" ColumnName="distributorId" />
+          <ScalarProperty Name="distributor" ColumnName="distributor" />
+          <ScalarProperty Name="storeName" ColumnName="storeName" />
+          <ScalarProperty Name="distributorCity" ColumnName="distributorCity" />
+          <ScalarProperty Name="distributorCountry" ColumnName="distributorCountry" />
+          <ScalarProperty Name="sellingAreaCountry" ColumnName="sellingAreaCountry" />
+          <ScalarProperty Name="sellingAreaRegion" ColumnName="sellingAreaRegion" />
+          <ScalarProperty Name="trackingDate" ColumnName="trackingDate" />
+          <ScalarProperty Name="idDocShipment" ColumnName="idDocShipment" />
+          <ScalarProperty Name="attachment" ColumnName="attachment" />
+          <ScalarProperty Name="tagId" ColumnName="tagId" />
+          <ScalarProperty Name="filter" ColumnName="filter" />
+          <ScalarProperty Name="bigintId" ColumnName="bigintId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetDieselCTMS_Feedback_Data_Old" FunctionName="EPC_DBModel.Store.usp_GetDieselCTMS_Feedback_Data_Old">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetDieselCTMS_Feedback_Data_Old_Result">
+          <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
+          <ScalarProperty Name="clgCode" ColumnName="clgCode" />
+          <ScalarProperty Name="qrCode" ColumnName="qrCode" />
+          <ScalarProperty Name="serial" ColumnName="serial" />
+          <ScalarProperty Name="clientArtSerial" ColumnName="clientArtSerial" />
+          <ScalarProperty Name="EPC" ColumnName="EPC" />
+          <ScalarProperty Name="tid" ColumnName="tid" />
+          <ScalarProperty Name="ndef" ColumnName="ndef" />
+          <ScalarProperty Name="uid" ColumnName="uid" />
+          <ScalarProperty Name="company" ColumnName="company" />
+          <ScalarProperty Name="collection" ColumnName="collection" />
+          <ScalarProperty Name="companyType" ColumnName="companyType" />
+          <ScalarProperty Name="entity" ColumnName="entity" />
+          <ScalarProperty Name="idBrand" ColumnName="idBrand" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="cusOrder" ColumnName="cusOrder" />
+          <ScalarProperty Name="cusOrderRow" ColumnName="cusOrderRow" />
+          <ScalarProperty Name="productLine" ColumnName="productLine" />
+          <ScalarProperty Name="upc" ColumnName="upc" />
+          <ScalarProperty Name="clientArtModel" ColumnName="clientArtModel" />
+          <ScalarProperty Name="clientArtDescr" ColumnName="clientArtDescr" />
+          <ScalarProperty Name="cusArtSize" ColumnName="cusArtSize" />
+          <ScalarProperty Name="cusArtPart" ColumnName="cusArtPart" />
+          <ScalarProperty Name="cusArtColor" ColumnName="cusArtColor" />
+          <ScalarProperty Name="cusArtMaterial" ColumnName="cusArtMaterial" />
+          <ScalarProperty Name="cusArtVariant" ColumnName="cusArtVariant" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="cusSubContId" ColumnName="cusSubContId" />
+          <ScalarProperty Name="cusSubCont" ColumnName="cusSubCont" />
+          <ScalarProperty Name="cusSubContCity" ColumnName="cusSubContCity" />
+          <ScalarProperty Name="cusSubContCountry" ColumnName="cusSubContCountry" />
+          <ScalarProperty Name="madeIn" ColumnName="madeIn" />
+          <ScalarProperty Name="distributorType" ColumnName="distributorType" />
+          <ScalarProperty Name="distributorId" ColumnName="distributorId" />
+          <ScalarProperty Name="distributor" ColumnName="distributor" />
+          <ScalarProperty Name="storeName" ColumnName="storeName" />
+          <ScalarProperty Name="distributorCity" ColumnName="distributorCity" />
+          <ScalarProperty Name="distributorCountry" ColumnName="distributorCountry" />
+          <ScalarProperty Name="sellingAreaCountry" ColumnName="sellingAreaCountry" />
+          <ScalarProperty Name="sellingAreaRegion" ColumnName="sellingAreaRegion" />
+          <ScalarProperty Name="trackingDate" ColumnName="trackingDate" />
+          <ScalarProperty Name="idDocShipment" ColumnName="idDocShipment" />
+          <ScalarProperty Name="attachment" ColumnName="attachment" />
+          <ScalarProperty Name="tagId" ColumnName="tagId" />
+          <ScalarProperty Name="filter" ColumnName="filter" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetEPCCount_with_YY_Customer" FunctionName="EPC_DBModel.Store.usp_GetEPCCount_with_YY_Customer">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetEPCCount_with_YY_Customer_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="GTIN___MONTHE" ColumnName="GTIN / MONTHE" />
+          <ScalarProperty Name="January" ColumnName="January" />
+          <ScalarProperty Name="February" ColumnName="February" />
+          <ScalarProperty Name="March" ColumnName="March" />
+          <ScalarProperty Name="April" ColumnName="April" />
+          <ScalarProperty Name="May" ColumnName="May" />
+          <ScalarProperty Name="June" ColumnName="June" />
+          <ScalarProperty Name="July" ColumnName="July" />
+          <ScalarProperty Name="August" ColumnName="August" />
+          <ScalarProperty Name="September" ColumnName="September" />
+          <ScalarProperty Name="October" ColumnName="October" />
+          <ScalarProperty Name="November" ColumnName="November" />
+          <ScalarProperty Name="December" ColumnName="December" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetEPCCounter" FunctionName="EPC_DBModel.Store.usp_GetEPCCounter">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetEPCCounter_Result">
           <ScalarProperty Name="bigintId" ColumnName="bigintId" />
           <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
           <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
@@ -98,55 +429,9 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="USP_EPCIS_Customer" FunctionName="rtracModel.Store.USP_EPCIS_Customer">
+    <FunctionImportMapping FunctionImportName="usp_GetEPCCounter_RPO_SerialNum" FunctionName="EPC_DBModel.Store.usp_GetEPCCounter_RPO_SerialNum">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.USP_EPCIS_Customer_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GS1_Customer" FunctionName="rtracModel.Store.usp_GS1_Customer">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GS1_Customer_Result">
-          <ScalarProperty Name="GS1Customer" ColumnName="GS1Customer" />
-          <ScalarProperty Name="GS1apiRequired" ColumnName="GS1apiRequired" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GS1_Insert" FunctionName="rtracModel.Store.usp_GS1_Insert">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GS1_Insert_Result">
-          <ScalarProperty Name="GS1Prefix" ColumnName="GS1Prefix" />
-          <ScalarProperty Name="Partiton" ColumnName="Partiton" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="udf_EPC_Customer" FunctionName="rtracModel.Store.udf_EPC_Customer">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.udf_EPC_Customer_Result">
-          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-          <ScalarProperty Name="Schema" ColumnName="Schema" />
-          <ScalarProperty Name="NCZORE" ColumnName="NCZORE" />
-          <ScalarProperty Name="IsGS1" ColumnName="IsGS1" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GetEPCCustomer_TestingWeb" FunctionName="rtracModel.Store.usp_GetEPCCustomer_TestingWeb">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCustomer_TestingWeb_Result">
-          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-          <ScalarProperty Name="Schema" ColumnName="Schema" />
-          <ScalarProperty Name="NCZORE" ColumnName="NCZORE" />
-          <ScalarProperty Name="IsGS1" ColumnName="IsGS1" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GetEPCCounter_RPO_SerialNum" FunctionName="rtracModel.Store.usp_GetEPCCounter_RPO_SerialNum">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCounter_RPO_SerialNum_Result">
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetEPCCounter_RPO_SerialNum_Result">
           <ScalarProperty Name="bigintId" ColumnName="bigintId" />
           <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
           <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
@@ -168,23 +453,9 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_GerryWeber" FunctionName="rtracModel.Store.usp_GTIN_GetEPC_GerryWeber">
+    <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForAlvaroMorenoPWD" FunctionName="EPC_DBModel.Store.usp_GetEPCCounterForAlvaroMorenoPWD">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GTIN_GetEPC_GerryWeber_Result">
-          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
-          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
-          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
-          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
-          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
-          <ScalarProperty Name="Remark" ColumnName="Remark" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_InsertEmailTrigger_GS1" FunctionName="rtracModel.Store.usp_InsertEmailTrigger_GS1" />
-    <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForAlvaroMorenoPWD" FunctionName="rtracModel.Store.usp_GetEPCCounterForAlvaroMorenoPWD">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCounterForAlvaroMorenoPWD_Result">
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetEPCCounterForAlvaroMorenoPWD_Result">
           <ScalarProperty Name="bigintId" ColumnName="bigintId" />
           <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
           <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
@@ -194,9 +465,9 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForMANGO_PWD" FunctionName="rtracModel.Store.usp_GetEPCCounterForMANGO_PWD">
+    <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForCharangaPWD" FunctionName="EPC_DBModel.Store.usp_GetEPCCounterForCharangaPWD">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCounterForMANGO_PWD_Result">
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetEPCCounterForCharangaPWD_Result">
           <ScalarProperty Name="bigintId" ColumnName="bigintId" />
           <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
           <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
@@ -206,9 +477,9 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForModaPWD" FunctionName="rtracModel.Store.usp_GetEPCCounterForModaPWD">
+    <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForMANGO_PWD" FunctionName="EPC_DBModel.Store.usp_GetEPCCounterForMANGO_PWD">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCounterForModaPWD_Result">
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetEPCCounterForMANGO_PWD_Result">
           <ScalarProperty Name="bigintId" ColumnName="bigintId" />
           <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
           <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
@@ -218,35 +489,44 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC" FunctionName="rtracModel.Store.usp_GTIN_GetEPC">
+    <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForModaPWD" FunctionName="EPC_DBModel.Store.usp_GetEPCCounterForModaPWD">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GTIN_GetEPC_Result">
-          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
-          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
-          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
-          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
-          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
-          <ScalarProperty Name="Remark" ColumnName="Remark" />
-          <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
-          <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetEPCCounterForModaPWD_Result">
+          <ScalarProperty Name="bigintId" ColumnName="bigintId" />
+          <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
+          <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
+          <ScalarProperty Name="EPC" ColumnName="EPC" />
+          <ScalarProperty Name="AccHexKey" ColumnName="AccHexKey" />
+          <ScalarProperty Name="KillHexKey" ColumnName="KillHexKey" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GetCustomerWithGTIN_Parameters" FunctionName="rtracModel.Store.usp_GetCustomerWithGTIN_Parameters">
+    <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForTENDAM_PWD" FunctionName="EPC_DBModel.Store.usp_GetEPCCounterForTENDAM_PWD">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GetCustomerWithGTIN_Parameters_Result">
-          <ScalarProperty Name="ID" ColumnName="ID" />
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetEPCCounterForTENDAM_PWD_Result">
+          <ScalarProperty Name="bigintId" ColumnName="bigintId" />
+          <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
+          <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
+          <ScalarProperty Name="EPC" ColumnName="EPC" />
+          <ScalarProperty Name="AccHexKey" ColumnName="AccHexKey" />
+          <ScalarProperty Name="KillHexKey" ColumnName="KillHexKey" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetEPCCustomer_TestingWeb" FunctionName="EPC_DBModel.Store.usp_GetEPCCustomer_TestingWeb">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetEPCCustomer_TestingWeb_Result">
           <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
           <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
-          <ScalarProperty Name="CustomePara" ColumnName="CustomePara" />
+          <ScalarProperty Name="Schema" ColumnName="Schema" />
+          <ScalarProperty Name="NCZORE" ColumnName="NCZORE" />
+          <ScalarProperty Name="IsGS1" ColumnName="IsGS1" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GetEPCDetails" FunctionName="rtracModel.Store.usp_GetEPCDetails">
+    <FunctionImportMapping FunctionImportName="usp_GetEPCDetails" FunctionName="EPC_DBModel.Store.usp_GetEPCDetails">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCDetails_Result">
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetEPCDetails_Result">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="GTIN" ColumnName="GTIN" />
           <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
@@ -267,173 +547,66 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForCharangaPWD" FunctionName="rtracModel.Store.usp_GetEPCCounterForCharangaPWD">
+    <FunctionImportMapping FunctionImportName="usp_GetEPCLog" FunctionName="EPC_DBModel.Store.usp_GetEPCLog">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCounterForCharangaPWD_Result">
-          <ScalarProperty Name="bigintId" ColumnName="bigintId" />
-          <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
-          <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
-          <ScalarProperty Name="EPC" ColumnName="EPC" />
-          <ScalarProperty Name="AccHexKey" ColumnName="AccHexKey" />
-          <ScalarProperty Name="KillHexKey" ColumnName="KillHexKey" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_MANGO" FunctionName="rtracModel.Store.usp_UpdateAssPassword_MANGO" />
-    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_Customer" FunctionName="rtracModel.Store.usp_GTIN_GetEPC_Customer">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GTIN_GetEPC_Customer_Result">
-          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
-          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
-          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
-          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
-          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
-          <ScalarProperty Name="Remark" ColumnName="Remark" />
-          <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
-          <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForTENDAM_PWD" FunctionName="rtracModel.Store.usp_GetEPCCounterForTENDAM_PWD">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GetEPCCounterForTENDAM_PWD_Result">
-          <ScalarProperty Name="bigintId" ColumnName="bigintId" />
-          <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
-          <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
-          <ScalarProperty Name="EPC" ColumnName="EPC" />
-          <ScalarProperty Name="AccHexKey" ColumnName="AccHexKey" />
-          <ScalarProperty Name="KillHexKey" ColumnName="KillHexKey" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_TENDAM" FunctionName="rtracModel.Store.usp_UpdateAssPassword_TENDAM" />
-    <FunctionImportMapping FunctionImportName="ups_GetEPC_Customer_ADL" FunctionName="rtracModel.Store.ups_GetEPC_Customer_ADL">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.ups_GetEPC_Customer_ADL_Result">
-          <ScalarProperty Name="bigintPtrId" ColumnName="bigintPtrId" />
-          <ScalarProperty Name="varversion" ColumnName="varversion" />
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetEPCLog_Result">
+          <ScalarProperty Name="bigIntId" ColumnName="bigIntId" />
           <ScalarProperty Name="varGTIN" ColumnName="varGTIN" />
-          <ScalarProperty Name="varNextEPC" ColumnName="varNextEPC" />
-          <ScalarProperty Name="varEndEPC" ColumnName="varEndEPC" />
-          <ScalarProperty Name="intStartEPCSerial" ColumnName="intStartEPCSerial" />
-          <ScalarProperty Name="intEndEPCSerial" ColumnName="intEndEPCSerial" />
-          <ScalarProperty Name="intNextEPCSerial" ColumnName="intNextEPCSerial" />
+          <ScalarProperty Name="bigIntSerialStart" ColumnName="bigIntSerialStart" />
+          <ScalarProperty Name="bigIntSerialEnd" ColumnName="bigIntSerialEnd" />
+          <ScalarProperty Name="varEPCStart" ColumnName="varEPCStart" />
+          <ScalarProperty Name="varEPCEnd" ColumnName="varEPCEnd" />
+          <ScalarProperty Name="varSchema" ColumnName="varSchema" />
+          <ScalarProperty Name="varCustomerName" ColumnName="varCustomerName" />
+          <ScalarProperty Name="varRemark" ColumnName="varRemark" />
+          <ScalarProperty Name="dtLogDateTime" ColumnName="dtLogDateTime" />
+          <ScalarProperty Name="bigIntCreatedById" ColumnName="bigIntCreatedById" />
+          <ScalarProperty Name="dtCreatedOn" ColumnName="dtCreatedOn" />
+          <ScalarProperty Name="bigIntLastUpdatedById" ColumnName="bigIntLastUpdatedById" />
+          <ScalarProperty Name="dtLastUpdatedOn" ColumnName="dtLastUpdatedOn" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_EPC_Cust_ADL" FunctionName="rtracModel.Store.usp_EPC_Cust_ADL">
+    <FunctionImportMapping FunctionImportName="usp_GetEPCReport_HugoBoss" FunctionName="EPC_DBModel.Store.usp_GetEPCReport_HugoBoss" />
+    <FunctionImportMapping FunctionImportName="usp_GetEPCSerial" FunctionName="EPC_DBModel.Store.usp_GetEPCSerial">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_EPC_Cust_ADL_Result">
-          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
-          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
-          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
-          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
-          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
-          <ScalarProperty Name="Remark" ColumnName="Remark" />
-          <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
-          <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetEPCSerial_Result">
+          <ScalarProperty Name="bigIntId" ColumnName="bigIntId" />
+          <ScalarProperty Name="varGTIN" ColumnName="varGTIN" />
+          <ScalarProperty Name="bigIntSerialNoLastUsed" ColumnName="bigIntSerialNoLastUsed" />
+          <ScalarProperty Name="bigIntMaximumSerial" ColumnName="bigIntMaximumSerial" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_EPC_InsertEPCLog" FunctionName="rtracModel.Store.usp_EPC_InsertEPCLog" />
-    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_CA" FunctionName="rtracModel.Store.usp_GTIN_GetEPC_CA">
+    <FunctionImportMapping FunctionImportName="usp_GetSerialNoGTIN" FunctionName="EPC_DBModel.Store.usp_GetSerialNoGTIN">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GTIN_GetEPC_CA_Result">
-          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
-          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
-          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
-          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
-          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
-          <ScalarProperty Name="Remark" ColumnName="Remark" />
-          <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
-          <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetSerialNoGTIN_Result">
+          <ScalarProperty Name="bigIntId" ColumnName="bigIntId" />
+          <ScalarProperty Name="VARGTIN" ColumnName="VARGTIN" />
+          <ScalarProperty Name="bigIntSerialNoLastUsed" ColumnName="bigIntSerialNoLastUsed" />
+          <ScalarProperty Name="bigIntMaximumSerial" ColumnName="bigIntMaximumSerial" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_HugoBoss" FunctionName="rtracModel.Store.usp_GTIN_GetEPC_HugoBoss">
+    <FunctionImportMapping FunctionImportName="usp_GetSet_FileSequenceNumber" FunctionName="EPC_DBModel.Store.usp_GetSet_FileSequenceNumber" />
+    <FunctionImportMapping FunctionImportName="usp_GetStanderCustomerDetails" FunctionName="EPC_DBModel.Store.usp_GetStanderCustomerDetails">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GTIN_GetEPC_HugoBoss_Result">
-          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
-          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
-          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
-          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
-          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
-          <ScalarProperty Name="Remark" ColumnName="Remark" />
-          <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
-          <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetStanderCustomerDetails_Result">
+          <ScalarProperty Name="CustmerId" ColumnName="CustmerId" />
+          <ScalarProperty Name="SerialRange_Start" ColumnName="SerialRange_Start" />
+          <ScalarProperty Name="SerialRange_End" ColumnName="SerialRange_End" />
+          <ScalarProperty Name="bitGS1" ColumnName="bitGS1" />
+          <ScalarProperty Name="intFilterValue" ColumnName="intFilterValue" />
+          <ScalarProperty Name="bitRFIDSerialization" ColumnName="bitRFIDSerialization" />
+          <ScalarProperty Name="bitUniqueCodeSerialization" ColumnName="bitUniqueCodeSerialization" />
+          <ScalarProperty Name="GS1Prefix" ColumnName="GS1Prefix" />
+          <ScalarProperty Name="GS1apiRequired" ColumnName="GS1apiRequired" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_Diesel" FunctionName="rtracModel.Store.usp_GTIN_GetEPC_Diesel">
+    <FunctionImportMapping FunctionImportName="usp_GetTempe_EPC_Data" FunctionName="EPC_DBModel.Store.usp_GetTempe_EPC_Data">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GTIN_GetEPC_Diesel_Result">
-          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
-          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
-          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
-          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
-          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
-          <ScalarProperty Name="Remark" ColumnName="Remark" />
-          <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
-          <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_Kiabi" FunctionName="rtracModel.Store.usp_GTIN_GetEPC_Kiabi">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GTIN_GetEPC_Kiabi_Result">
-          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
-          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
-          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
-          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
-          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
-          <ScalarProperty Name="Remark" ColumnName="Remark" />
-          <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
-          <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_Kiabi_Range" FunctionName="rtracModel.Store.usp_GTIN_GetEPC_Kiabi_Range">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GTIN_GetEPC_Kiabi_Range_Result">
-          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
-          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
-          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
-          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
-          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
-          <ScalarProperty Name="Remark" ColumnName="Remark" />
-          <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
-          <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="USP_rtrac_InsertEPCReqRes" FunctionName="rtracModel.Store.USP_rtrac_InsertEPCReqRes" />
-    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_Customer_Tempe" FunctionName="rtracModel.Store.usp_GTIN_GetEPC_Customer_Tempe">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GTIN_GetEPC_Customer_Tempe_Result">
-          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
-          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
-          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
-          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
-          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
-          <ScalarProperty Name="Remark" ColumnName="Remark" />
-          <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
-          <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_Tempe_EPC_InsertEPCLog_Decode" FunctionName="rtracModel.Store.usp_Tempe_EPC_InsertEPCLog_Decode" />
-    <FunctionImportMapping FunctionImportName="usp_Tempe_EPC_InsertEPCLog" FunctionName="rtracModel.Store.usp_Tempe_EPC_InsertEPCLog" />
-    <FunctionImportMapping FunctionImportName="usp_GetTempe_EPC_Data" FunctionName="rtracModel.Store.usp_GetTempe_EPC_Data">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GetTempe_EPC_Data_Result">
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetTempe_EPC_Data_Result">
           <ScalarProperty Name="dtProducedDate" ColumnName="dtProducedDate" />
           <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
           <ScalarProperty Name="Encoder_ID" ColumnName="Encoder_ID" />
@@ -450,9 +623,9 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GetTempeEPCDetails" FunctionName="rtracModel.Store.usp_GetTempeEPCDetails">
+    <FunctionImportMapping FunctionImportName="usp_GetTempeEPCDetails" FunctionName="EPC_DBModel.Store.usp_GetTempeEPCDetails">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GetTempeEPCDetails_Result">
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetTempeEPCDetails_Result">
           <ScalarProperty Name="purchaseOrder" ColumnName="purchaseOrder" />
           <ScalarProperty Name="model" ColumnName="model" />
           <ScalarProperty Name="quality" ColumnName="quality" />
@@ -476,37 +649,39 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_UpdateSerialNumber_CandA" FunctionName="rtracModel.Store.usp_UpdateSerialNumber_CandA" />
-    <FunctionImportMapping FunctionImportName="usp_GetCheckSerialNoLastUsed_CandA" FunctionName="rtracModel.Store.usp_GetCheckSerialNoLastUsed_CandA">
+    <FunctionImportMapping FunctionImportName="usp_GS1_Customer" FunctionName="EPC_DBModel.Store.usp_GS1_Customer">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GetCheckSerialNoLastUsed_CandA_Result">
-          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
-          <ScalarProperty Name="SerialEnd" ColumnName="SerialEnd" />
-          <ScalarProperty Name="Remark" ColumnName="Remark" />
-          <ScalarProperty Name="Threshold" ColumnName="Threshold" />
-          <ScalarProperty Name="RequestorId" ColumnName="RequestorId" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GetStanderCustomerDetails" FunctionName="rtracModel.Store.usp_GetStanderCustomerDetails">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GetStanderCustomerDetails_Result">
-          <ScalarProperty Name="CustmerId" ColumnName="CustmerId" />
-          <ScalarProperty Name="SerialRange_Start" ColumnName="SerialRange_Start" />
-          <ScalarProperty Name="SerialRange_End" ColumnName="SerialRange_End" />
-          <ScalarProperty Name="bitGS1" ColumnName="bitGS1" />
-          <ScalarProperty Name="intFilterValue" ColumnName="intFilterValue" />
-          <ScalarProperty Name="bitRFIDSerialization" ColumnName="bitRFIDSerialization" />
-          <ScalarProperty Name="bitUniqueCodeSerialization" ColumnName="bitUniqueCodeSerialization" />
-          <ScalarProperty Name="bitCustomize" ColumnName="bitCustomize" />
-          <ScalarProperty Name="GS1Prefix" ColumnName="GS1Prefix" />
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GS1_Customer_Result">
+          <ScalarProperty Name="GS1Customer" ColumnName="GS1Customer" />
           <ScalarProperty Name="GS1apiRequired" ColumnName="GS1apiRequired" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_StanderCustomer" FunctionName="rtracModel.Store.usp_GTIN_GetEPC_StanderCustomer">
+    <FunctionImportMapping FunctionImportName="usp_GS1_GTIN" FunctionName="EPC_DBModel.Store.usp_GS1_GTIN">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="rtracModel.usp_GTIN_GetEPC_StanderCustomer_Result">
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GS1_GTIN_Result">
+          <ScalarProperty Name="varGTIN" ColumnName="varGTIN" />
+          <ScalarProperty Name="varCustomerId" ColumnName="varCustomerId" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GS1_GTIN_TEST" FunctionName="EPC_DBModel.Store.usp_GS1_GTIN_TEST" />
+    <FunctionImportMapping FunctionImportName="usp_GS1_Insert" FunctionName="EPC_DBModel.Store.usp_GS1_Insert">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GS1_Insert_Result">
+          <ScalarProperty Name="GS1Prefix" ColumnName="GS1Prefix" />
+          <ScalarProperty Name="Partiton" ColumnName="Partiton" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GS1_InsertUpdatePartition" FunctionName="EPC_DBModel.Store.usp_GS1_InsertUpdatePartition" />
+    <FunctionImportMapping FunctionImportName="usp_GS1_InsertUpdatePartition_TEST" FunctionName="EPC_DBModel.Store.usp_GS1_InsertUpdatePartition_TEST" />
+    <FunctionImportMapping FunctionImportName="usp_GTIN_GetCustEPC" FunctionName="EPC_DBModel.Store.usp_GTIN_GetCustEPC" />
+    <FunctionImportMapping FunctionImportName="usp_GTIN_GetCustEPC_CA" FunctionName="EPC_DBModel.Store.usp_GTIN_GetCustEPC_CA" />
+    <FunctionImportMapping FunctionImportName="usp_GTIN_GetCustEPC_StanderCustomer" FunctionName="EPC_DBModel.Store.usp_GTIN_GetCustEPC_StanderCustomer" />
+    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC" FunctionName="EPC_DBModel.Store.usp_GTIN_GetEPC">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GTIN_GetEPC_Result">
           <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
           <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
           <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
@@ -519,5 +694,165 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_CA" FunctionName="EPC_DBModel.Store.usp_GTIN_GetEPC_CA">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GTIN_GetEPC_CA_Result">
+          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
+          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
+          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
+          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
+          <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_Customer" FunctionName="EPC_DBModel.Store.usp_GTIN_GetEPC_Customer">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GTIN_GetEPC_Customer_Result">
+          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
+          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
+          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
+          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
+          <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_Customer_Tempe" FunctionName="EPC_DBModel.Store.usp_GTIN_GetEPC_Customer_Tempe">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GTIN_GetEPC_Customer_Tempe_Result">
+          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
+          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
+          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
+          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
+          <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_Diesel" FunctionName="EPC_DBModel.Store.usp_GTIN_GetEPC_Diesel">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GTIN_GetEPC_Diesel_Result">
+          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
+          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
+          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
+          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
+          <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_GerryWeber" FunctionName="EPC_DBModel.Store.usp_GTIN_GetEPC_GerryWeber">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GTIN_GetEPC_GerryWeber_Result">
+          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
+          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
+          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
+          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_HugoBoss" FunctionName="EPC_DBModel.Store.usp_GTIN_GetEPC_HugoBoss">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GTIN_GetEPC_HugoBoss_Result">
+          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
+          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
+          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
+          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
+          <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_Kiabi" FunctionName="EPC_DBModel.Store.usp_GTIN_GetEPC_Kiabi">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GTIN_GetEPC_Kiabi_Result">
+          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
+          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
+          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
+          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
+          <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_Kiabi_Range" FunctionName="EPC_DBModel.Store.usp_GTIN_GetEPC_Kiabi_Range">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GTIN_GetEPC_Kiabi_Range_Result">
+          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
+          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
+          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
+          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
+          <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_StanderCustomer" FunctionName="EPC_DBModel.Store.usp_GTIN_GetEPC_StanderCustomer">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_Result">
+          <ScalarProperty Name="EpcStart" ColumnName="EpcStart" />
+          <ScalarProperty Name="EpcEnd" ColumnName="EpcEnd" />
+          <ScalarProperty Name="SerialStart" ColumnName="SerialStart" />
+          <ScalarProperty Name="SerailEnd" ColumnName="SerailEnd" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="GTIN" ColumnName="GTIN" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="AccessPWD" ColumnName="AccessPWD" />
+          <ScalarProperty Name="KillPWD" ColumnName="KillPWD" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPCTest" FunctionName="EPC_DBModel.Store.usp_GTIN_GetEPCTest" />
+    <FunctionImportMapping FunctionImportName="USP_GTIN_InsertEPCReqRes" FunctionName="EPC_DBModel.Store.USP_GTIN_InsertEPCReqRes" />
+    <FunctionImportMapping FunctionImportName="usp_InsertEmailTrigger" FunctionName="EPC_DBModel.Store.usp_InsertEmailTrigger" />
+    <FunctionImportMapping FunctionImportName="usp_InsertEmailTrigger_EPC" FunctionName="EPC_DBModel.Store.usp_InsertEmailTrigger_EPC" />
+    <FunctionImportMapping FunctionImportName="usp_InsertEmailTrigger_GS1" FunctionName="EPC_DBModel.Store.usp_InsertEmailTrigger_GS1" />
+    <FunctionImportMapping FunctionImportName="usp_Name" FunctionName="EPC_DBModel.Store.usp_Name">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_Name_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="Schema" ColumnName="Schema" />
+          <ScalarProperty Name="NCZORE" ColumnName="NCZORE" />
+          <ScalarProperty Name="IsGS1" ColumnName="IsGS1" />
+          <ScalarProperty Name="IsCustParam1" ColumnName="IsCustParam1" />
+          <ScalarProperty Name="Ver" ColumnName="Ver" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="USP_rtrac_InsertEPCReqRes" FunctionName="EPC_DBModel.Store.USP_rtrac_InsertEPCReqRes" />
+    <FunctionImportMapping FunctionImportName="usp_Tempe_EPC_InsertEPCLog" FunctionName="EPC_DBModel.Store.usp_Tempe_EPC_InsertEPCLog" />
+    <FunctionImportMapping FunctionImportName="usp_Tempe_EPC_InsertEPCLog_Decode" FunctionName="EPC_DBModel.Store.usp_Tempe_EPC_InsertEPCLog_Decode" />
+    <FunctionImportMapping FunctionImportName="usp_TestUpdate" FunctionName="EPC_DBModel.Store.usp_TestUpdate" />
+    <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_MANGO" FunctionName="EPC_DBModel.Store.usp_UpdateAssPassword_MANGO" />
+    <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_Moda" FunctionName="EPC_DBModel.Store.usp_UpdateAssPassword_Moda" />
+    <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_TENDAM" FunctionName="EPC_DBModel.Store.usp_UpdateAssPassword_TENDAM" />
+    <FunctionImportMapping FunctionImportName="usp_UpdateSerialNumber_CandA" FunctionName="EPC_DBModel.Store.usp_UpdateSerialNumber_CandA" />
   </EntityContainerMapping>
 </Mapping>

@@ -13,6 +13,7 @@ namespace DataAccessLayer
     
     public partial class usp_EPCIS_GetEP_URN_Result
     {
+        public long EPCLogId { get; set; }
         public string CustomerId { get; set; }
         public Nullable<long> RPO { get; set; }
         public Nullable<long> DetailNumber { get; set; }
@@ -21,5 +22,7 @@ namespace DataAccessLayer
         public Nullable<long> SerailStart { get; set; }
         public long SerailEnd { get; set; }
         public long Qty { get; set; }
+        public System.DateTime CreationDate { get; set; }
+        public string PurchaseOrderNumber { get; set; }
     }
 }

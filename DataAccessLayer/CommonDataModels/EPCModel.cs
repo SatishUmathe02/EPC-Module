@@ -20,7 +20,7 @@ namespace DataAccessLayer.CommonDataModels
         public long DetailLineID { get; set; }
         public string CustomPara1 { get; set; }
         public string CustomPara2 { get; set; }
-        
+
 
 
     }
@@ -49,6 +49,8 @@ namespace DataAccessLayer.CommonDataModels
         public string RequestStartTime { get; set; }
         public string RequestEndTime { get; set; }
 
+        public int FilterValue { get; set; }
+        public bool UniqueCodeSerialization { get; set; }
 
     }
     public class EPCResponse
@@ -164,6 +166,10 @@ namespace DataAccessLayer.CommonDataModels
         public string GSRN { get; set; }
         public string ModifiedDate { get; set; }
         public Prefixes Prefixes { get; set; }
+
+        public string errorCode { get; set; }
+        public string errorMessage { get; set; }
+
     }
     public class Prefixes
     {
@@ -190,13 +196,15 @@ namespace DataAccessLayer.CommonDataModels
         public long StartEPCSerial { get; set; }
         public long EndEPCSerial { get; set; }
         public long NextEPCSerial { get; set; }
-        
+
     }
     public class CA_Request
     {
         public string gtin { get; set; }
         public string requestorId { get; set; }
         public int amount { get; set; }
-        
+
     }
+
+   
 }

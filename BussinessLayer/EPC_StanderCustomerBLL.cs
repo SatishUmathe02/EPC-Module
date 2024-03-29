@@ -37,17 +37,34 @@ namespace BussinessLayer
                     EPC_Req.Schema = EPC_Req.Schema == null ? "" : EPC_Req.Schema;
                     EPC_Req.CustomerID = EPC_Req.CustomerID == null ? "" : EPC_Req.CustomerID;
 
-                    usp_GTIN_GetEPC_StanderCustomer_Result Obj = EPC_StanderCustomerDAL.GetEPC(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
-                    EPC_Res.EPCStart = Obj.EpcStart;
-                    EPC_Res.EPCEnd = Obj.EpcEnd;
-                    EPC_Res.SerialStart = Convert.ToString(Obj.SerialStart);
-                    EPC_Res.SerialEnd = Convert.ToString(Obj.SerailEnd);
-                    EPC_Res.Remark = Convert.ToString(Obj.Remark);
-                    EPC_Res.CustomerID = EPC_Req.CustomerID;
-                    EPC_Res.Quantity = EPC_Req.Quantity;
-                    EPC_Res.GTIN = EPC_Req.GTIN;
-                    EPC_Res.AccessPWD = Obj.AccessPWD;
-                    EPC_Res.KillPWD = Obj.KillPWD;
+                    if (EPC_Req.TransactionType == "Test")
+                    {
+                        usp_GTIN_GetEPC_StanderCustomer_Result Obj = EPC_StanderCustomerDAL.GetEPC(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime), EPC_Req.FilterValue);
+                        EPC_Res.EPCStart = Obj.EpcStart;
+                        EPC_Res.EPCEnd = Obj.EpcEnd;
+                        EPC_Res.SerialStart = Convert.ToString(Obj.SerialStart);
+                        EPC_Res.SerialEnd = Convert.ToString(Obj.SerailEnd);
+                        EPC_Res.Remark = Convert.ToString(Obj.Remark);
+                        EPC_Res.CustomerID = EPC_Req.CustomerID;
+                        EPC_Res.Quantity = EPC_Req.Quantity;
+                        EPC_Res.GTIN = EPC_Req.GTIN;
+                        EPC_Res.AccessPWD = Obj.AccessPWD;
+                        EPC_Res.KillPWD = Obj.KillPWD;
+                    }
+                    else
+                    {
+                        usp_GTIN_GetEPC_StanderCustomer_Result Obj = EPC_StanderCustomerDAL.GetEPC(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime), EPC_Req.FilterValue);
+                        EPC_Res.EPCStart = Obj.EpcStart;
+                        EPC_Res.EPCEnd = Obj.EpcEnd;
+                        EPC_Res.SerialStart = Convert.ToString(Obj.SerialStart);
+                        EPC_Res.SerialEnd = Convert.ToString(Obj.SerailEnd);
+                        EPC_Res.Remark = Convert.ToString(Obj.Remark);
+                        EPC_Res.CustomerID = EPC_Req.CustomerID;
+                        EPC_Res.Quantity = EPC_Req.Quantity;
+                        EPC_Res.GTIN = EPC_Req.GTIN;
+                        EPC_Res.AccessPWD = Obj.AccessPWD;
+                        EPC_Res.KillPWD = Obj.KillPWD;
+                    }
 
                 }
                 catch (Exception Ex)
