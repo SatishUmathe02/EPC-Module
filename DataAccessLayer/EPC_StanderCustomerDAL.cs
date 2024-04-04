@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,16 @@ namespace DataAccessLayer
 {
     public class EPC_StanderCustomerDAL
     {
+        public static bool CallEPCCustomerWise;
+
+
+
+        static EPC_StanderCustomerDAL()
+        {
+            EPC_StanderCustomerDAL.CallEPCCustomerWise = Convert.ToBoolean(ConfigurationManager.AppSettings["CallEPCCustomerWise"].ToString());
+
+        }
+
         public static usp_GetStanderCustomerDetails_Result GetStanderCustomerDetail(string CustomerId, string gtin)
         {
             usp_GetStanderCustomerDetails_Result objlist = new usp_GetStanderCustomerDetails_Result();
@@ -45,7 +56,35 @@ namespace DataAccessLayer
             }
             catch (Exception ex)
             {
-                               
+
+            }
+            return Obj;
+        }
+
+
+        #endregion
+
+        #region GET EPC VIA STORE PROCEDURE FOR ALL CUSTOMER
+        public static usp_GTIN_GetEPC_StanderCustomerALL_Result GetEPCAll(string gtin14, long qty, string transaction, string schema, string customerId, string customerName, string Event, long UserId, long SerialStart, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, string GS1Prefix, int PartionVal, DateTime EPCStartDateTime, int FilterValue)
+        {
+            usp_GTIN_GetEPC_StanderCustomerALL_Result Obj = new usp_GTIN_GetEPC_StanderCustomerALL_Result();
+            try
+            {
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+                    //if (qty >= 40000)
+                    {
+                        db.Database.CommandTimeout = 0;
+
+                    }
+
+                    Obj = (from lst1 in db.usp_GTIN_GetEPC_StanderCustomerALL(gtin14, qty, transaction, schema, customerId, customerName, Event, UserId, SerialStart, EPC, RPO, DetailLineNo, CustomPara1, CustomPara2, GS1Prefix, PartionVal, EPCStartDateTime, FilterValue) select lst1).ToList().FirstOrDefault();
+
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
             return Obj;
         }

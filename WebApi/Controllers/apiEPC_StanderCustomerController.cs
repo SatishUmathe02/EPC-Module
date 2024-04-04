@@ -61,13 +61,13 @@ namespace WebApi.Controllers
 
                 usp_GetStanderCustomerDetails_Result ObjEC = EPC_StanderCustomerBLL.GetStanderCustomer_Details(Request);
 
-                if(ObjEC==null)
+                if (ObjEC == null)
                 {
                     return EPCBLL.GetError(125);
                 }
                 else
                 {
-                    if(ObjEC.CustmerId==null)
+                    if (ObjEC.CustmerId == null)
                     {
                         return EPCBLL.GetError(125);
                     }
@@ -76,12 +76,12 @@ namespace WebApi.Controllers
 
                 Request.GS1Customer = ObjEC.bitGS1;
                 Request.GS1apiRequired = Convert.ToBoolean(ObjEC.GS1apiRequired);
-                
+
 
                 if (Request.GS1Customer) //the customer is GS1
                 {
                     #region GS1 CALL
-                    
+
                     if (Request.GS1apiRequired)
                     {
                         List<GS1> ObjGS1 = new List<GS1>();
@@ -109,16 +109,17 @@ namespace WebApi.Controllers
 
 
                     #endregion
-                }else
+                }
+                else
                 {
                     if (ObjEC.GS1Prefix == null || ObjEC.GS1Prefix == "")
                     {
                         return EPCBLL.GetError(124);
                     }
                     Request.GS1Prefix = Convert.ToString(ObjEC.GS1Prefix);
-                    Request.PartitionValue = Convert.ToString(ObjEC.GS1Prefix).Length;
+                    //Request.PartitionValue = Convert.ToString(ObjEC.GS1Prefix).Length;
                 }
-               
+
 
                 #region EPC CALL
 
@@ -169,19 +170,14 @@ namespace WebApi.Controllers
                 //usp_GetStanderCustomerDetails_Result ObjEC = EPC_StanderCustomerBLL.GetStanderCustomer_Details(Request);
                 usp_GetStanderCustomerDetails_Result ObjEC = new usp_GetStanderCustomerDetails_Result();
 
-                ObjEC = EPC_StanderCustomerBLL.GetStanderCustomer_Details(Request);
 
-                if (ObjEC.CustmerId == null)
-                {
-
-                    ObjEC.CustmerId = Request.CustomerID;
-                    ObjEC.SerialRange_Start = Request.Serial;
-                    ObjEC.bitGS1 = Request.GS1Customer;
-                    ObjEC.intFilterValue = Request.FilterValue;
-                    ObjEC.bitUniqueCodeSerialization = Request.UniqueCodeSerialization;
-                    ObjEC.GS1Prefix = Request.GS1Prefix;
-                    //ObjEC.GS1apiRequired = Convert.ToBoolean(Request.GS1Customer);
-                }
+                ObjEC.CustmerId = Request.CustomerID;
+                ObjEC.SerialRange_Start = Request.Serial;
+                ObjEC.bitGS1 = Request.GS1Customer;
+                ObjEC.intFilterValue = Request.FilterValue;
+                ObjEC.bitUniqueCodeSerialization = Request.UniqueCodeSerialization;
+                ObjEC.GS1Prefix = Request.GS1Prefix;
+                //ObjEC.GS1apiRequired = Convert.ToBoolean(Request.GS1Customer);
                 
 
                 if (ObjEC == null)
@@ -191,7 +187,7 @@ namespace WebApi.Controllers
 
                 Request.GS1Customer = ObjEC.bitGS1;
                 Request.GS1apiRequired = Convert.ToBoolean(Request.GS1Customer);
-                
+
 
                 if (Request.GS1Customer) //the customer is GS1
                 {
@@ -232,7 +228,7 @@ namespace WebApi.Controllers
                         return EPCBLL.GetError(124);
                     }
                     Request.GS1Prefix = Convert.ToString(ObjEC.GS1Prefix);
-                    Request.PartitionValue = Convert.ToString(ObjEC.GS1Prefix).Length;
+                   // Request.PartitionValue = Convert.ToString(ObjEC.GS1Prefix).Length;
                 }
 
 
