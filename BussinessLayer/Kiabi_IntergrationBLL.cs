@@ -49,7 +49,9 @@ namespace BussinessLayer
                             {
                                 if (Convert.ToInt32(obj["code"].ToString().Substring(0, 1)) == 4)
                                 {
-                                    uspGTINGetEPCKiabiRangeResult.Remark = "Error from Kiabi API:"+ (string)obj["message"];
+                                    uspGTINGetEPCKiabiRangeResult.Remark = "Error from Kiabi API:" + (string)obj["message"] +
+                                         "<br/>" + "This order may have been cancelled. Please contact the vendor and global CS for further instructions."; //BR 65 
+
                                 }
                             }
                             else if (obj["epcRangeId"] != (dynamic)null)
@@ -60,7 +62,7 @@ namespace BussinessLayer
                         }
                         catch (Exception exception)
                         {
-                            uspGTINGetEPCKiabiRangeResult.Remark = "Error from Kiabi API:"+ exception.ToString();
+                            uspGTINGetEPCKiabiRangeResult.Remark = "Error from Kiabi API:" + exception.ToString();
                         }
                     }
                 }
