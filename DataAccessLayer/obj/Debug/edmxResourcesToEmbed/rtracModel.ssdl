@@ -512,6 +512,9 @@
     <Parameter Name="QrCode" Type="nvarchar" Mode="In" />
     <Parameter Name="OrgId" Type="bigint" Mode="In" />
   </Function>
+  <Function Name="usp_CheckSPForStatnderCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CustomerId" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="usp_EPC_Cust_ADL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="gtin14" Type="varchar" Mode="In" />
     <Parameter Name="SerialStart" Type="bigint" Mode="In" />

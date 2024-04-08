@@ -113,6 +113,7 @@ namespace BussinessLayer
                             }
                             else
                             {
+
                                 usp_GTIN_GetEPC_Kiabi_Range_Result uspGTINGetEPCKiabiRangeResult = Kiabi_IntergrationBLL.Kaibi_apiResponse_Restapi(EPC_Req);
                                 EPC_Res.EPCStart = uspGTINGetEPCKiabiRangeResult.EpcStart;
                                 EPC_Res.EPCEnd = uspGTINGetEPCKiabiRangeResult.EpcEnd;

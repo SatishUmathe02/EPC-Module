@@ -2587,6 +2587,15 @@ namespace DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_UpdateSerialNumber_CandA", qtyParameter, gTINParameter, serialStartParameter);
         }
     
+        public virtual ObjectResult<Nullable<int>> usp_CheckSPForStatnderCustomer(string customerId)
+        {
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("usp_CheckSPForStatnderCustomer", customerIdParameter);
+        }
+    
         public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomerALL_Result> usp_GTIN_GetEPC_StanderCustomerALL(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
         {
             var gtin14Parameter = gtin14 != null ?

@@ -91,5 +91,28 @@ namespace DataAccessLayer
 
 
         #endregion
+
+        public static bool CheckSPForStatnderCustomer(string CustomerId)
+        {
+            bool SPExit = false;
+            try
+            {
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+                    
+                    int k = (int)(from lst1 in db.usp_CheckSPForStatnderCustomer(CustomerId) select lst1).ToList().FirstOrDefault();
+
+                    if(k>0)
+                    {
+                        SPExit = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                SPExit = false;
+            }
+            return SPExit;
+        }
     }
 }

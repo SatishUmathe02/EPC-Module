@@ -1,0 +1,5 @@
+Date: 06 Apr 2024 10:11 PM
+GetEPC:
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BussinessLayer.EPC_StanderCustomerBLL.GetEPC_SC(EPCRequest EPC_Req) in C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\BussinessLayer\EPC_StanderCustomerBLL.cs:line 60
+

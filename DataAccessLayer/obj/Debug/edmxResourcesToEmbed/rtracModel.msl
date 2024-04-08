@@ -854,6 +854,7 @@
     <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_Moda" FunctionName="EPC_DBModel.Store.usp_UpdateAssPassword_Moda" />
     <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_TENDAM" FunctionName="EPC_DBModel.Store.usp_UpdateAssPassword_TENDAM" />
     <FunctionImportMapping FunctionImportName="usp_UpdateSerialNumber_CandA" FunctionName="EPC_DBModel.Store.usp_UpdateSerialNumber_CandA" />
+    <FunctionImportMapping FunctionImportName="usp_CheckSPForStatnderCustomer" FunctionName="EPC_DBModel.Store.usp_CheckSPForStatnderCustomer" />
     <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_StanderCustomerALL" FunctionName="EPC_DBModel.Store.usp_GTIN_GetEPC_StanderCustomerALL">
       <ResultMapping>
         <ComplexTypeMapping TypeName="EPC_DBModel.usp_GTIN_GetEPC_StanderCustomerALL_Result">

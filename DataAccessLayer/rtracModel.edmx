@@ -517,6 +517,9 @@
           <Parameter Name="QrCode" Type="nvarchar" Mode="In" />
           <Parameter Name="OrgId" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="usp_CheckSPForStatnderCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CustomerId" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="usp_EPC_Cust_ADL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="gtin14" Type="varchar" Mode="In" />
           <Parameter Name="SerialStart" Type="bigint" Mode="In" />
@@ -1936,6 +1939,9 @@
             <Parameter Name="Qty" Mode="In" Type="Int32" />
             <Parameter Name="GTIN" Mode="In" Type="String" />
             <Parameter Name="SerialStart" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="usp_CheckSPForStatnderCustomer" ReturnType="Collection(Int32)">
+          <Parameter Name="CustomerId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomerALL" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomerALL_Result)">
             <Parameter Name="gtin14" Mode="In" Type="String" />
@@ -3416,6 +3422,7 @@
           <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_Moda" FunctionName="EPC_DBModel.Store.usp_UpdateAssPassword_Moda" />
           <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_TENDAM" FunctionName="EPC_DBModel.Store.usp_UpdateAssPassword_TENDAM" />
           <FunctionImportMapping FunctionImportName="usp_UpdateSerialNumber_CandA" FunctionName="EPC_DBModel.Store.usp_UpdateSerialNumber_CandA" />
+          <FunctionImportMapping FunctionImportName="usp_CheckSPForStatnderCustomer" FunctionName="EPC_DBModel.Store.usp_CheckSPForStatnderCustomer" />
           <FunctionImportMapping FunctionImportName="usp_GTIN_GetEPC_StanderCustomerALL" FunctionName="EPC_DBModel.Store.usp_GTIN_GetEPC_StanderCustomerALL">
             <ResultMapping>
               <ComplexTypeMapping TypeName="EPC_DBModel.usp_GTIN_GetEPC_StanderCustomerALL_Result">

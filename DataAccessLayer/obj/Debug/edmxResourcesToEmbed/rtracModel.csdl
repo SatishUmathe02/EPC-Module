@@ -728,6 +728,9 @@
       <Parameter Name="GTIN" Mode="In" Type="String" />
       <Parameter Name="SerialStart" Mode="In" Type="Int64" />
     </FunctionImport>
+    <FunctionImport Name="usp_CheckSPForStatnderCustomer" ReturnType="Collection(Int32)">
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomerALL" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomerALL_Result)">
       <Parameter Name="gtin14" Mode="In" Type="String" />
       <Parameter Name="Qty" Mode="In" Type="Int64" />

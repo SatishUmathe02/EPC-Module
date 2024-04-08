@@ -20,6 +20,13 @@ namespace BussinessLayer
             usp_GTIN_GetEPC_Kiabi_Range_Result uspGTINGetEPCKiabiRangeResult = new usp_GTIN_GetEPC_Kiabi_Range_Result();
             try
             {
+
+                if(string.IsNullOrEmpty(EPC_Req.CustomPara1))
+                {
+                    uspGTINGetEPCKiabiRangeResult.Remark = "Customer Para is empty";
+                    return uspGTINGetEPCKiabiRangeResult;
+                }
+
                 string[] strArrays = EPC_Req.CustomPara1.Split("#".ToCharArray());
                 if (strArrays.Count<string>() <= 0)
                 {

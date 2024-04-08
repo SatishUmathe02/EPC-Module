@@ -113,6 +113,11 @@ namespace BussinessLayer
 
         }
 
+        public static bool CheckCustomerSPInEPC(string CustomerId)
+        {
+            return EPC_StanderCustomerDAL.CheckSPForStatnderCustomer(CustomerId);
+        }
+
 
     }
 }

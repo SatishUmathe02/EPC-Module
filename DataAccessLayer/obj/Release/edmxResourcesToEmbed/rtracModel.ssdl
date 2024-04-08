@@ -512,6 +512,9 @@
     <Parameter Name="QrCode" Type="nvarchar" Mode="In" />
     <Parameter Name="OrgId" Type="bigint" Mode="In" />
   </Function>
+  <Function Name="usp_CheckSPForStatnderCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CustomerId" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="usp_EPC_Cust_ADL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="gtin14" Type="varchar" Mode="In" />
     <Parameter Name="SerialStart" Type="bigint" Mode="In" />
@@ -1077,6 +1080,26 @@
     <Parameter Name="EPCStartDateTime" Type="datetime" Mode="In" />
   </Function>
   <Function Name="usp_GTIN_GetEPC_StanderCustomer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="gtin14" Type="varchar" Mode="In" />
+    <Parameter Name="Qty" Type="bigint" Mode="In" />
+    <Parameter Name="Transaction" Type="varchar" Mode="In" />
+    <Parameter Name="Schema" Type="varchar" Mode="In" />
+    <Parameter Name="CustomerId" Type="varchar" Mode="In" />
+    <Parameter Name="CustomerName" Type="varchar" Mode="In" />
+    <Parameter Name="Event" Type="varchar" Mode="In" />
+    <Parameter Name="UserId" Type="bigint" Mode="In" />
+    <Parameter Name="Serail" Type="bigint" Mode="In" />
+    <Parameter Name="EPC" Type="varchar" Mode="In" />
+    <Parameter Name="RPO" Type="bigint" Mode="In" />
+    <Parameter Name="DetailLineNo" Type="bigint" Mode="In" />
+    <Parameter Name="CustomPara1" Type="varchar" Mode="In" />
+    <Parameter Name="CustomPara2" Type="varchar" Mode="In" />
+    <Parameter Name="GS1Prefix" Type="varchar" Mode="In" />
+    <Parameter Name="PartitionValue" Type="int" Mode="In" />
+    <Parameter Name="EPCStartDateTime" Type="datetime" Mode="In" />
+    <Parameter Name="FilterValue" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_GTIN_GetEPC_StanderCustomerALL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="gtin14" Type="varchar" Mode="In" />
     <Parameter Name="Qty" Type="bigint" Mode="In" />
     <Parameter Name="Transaction" Type="varchar" Mode="In" />

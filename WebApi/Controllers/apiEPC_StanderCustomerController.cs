@@ -140,11 +140,27 @@ namespace WebApi.Controllers
                 }
                 else
                 {
+                    if (EPC_StanderCustomerBLL.CheckCustomerSPInEPC(Request.CustomerID))
+                    {
+                        EPCResponse ObjRes = EPC_StanderCustomerBLL.GetEPC_SC(Request);
+                        return ObjRes;
+                    }
+                    else
+                    {
+                        EPCResponse EPC_Res = new EPCResponse();
+                        EPC_Res.EPCStart = "";
+                        EPC_Res.EPCEnd = "";
+                        EPC_Res.SerialStart = "";
+                        EPC_Res.SerialEnd = "";
+                        EPC_Res.GTIN = "";
+                        EPC_Res.CustomerID = Request.CustomerID;
+                        EPC_Res.Remark = "The Customer " + Request.CustomerID + " SP does not exist in EPC Module";
 
-                    EPCResponse ObjRes = EPC_StanderCustomerBLL.GetEPC_SC(Request);
+                        return EPC_Res;
+                    }
 
 
-                    return ObjRes;
+
                 }
 
                 #endregion
@@ -178,7 +194,7 @@ namespace WebApi.Controllers
                 ObjEC.bitUniqueCodeSerialization = Request.UniqueCodeSerialization;
                 ObjEC.GS1Prefix = Request.GS1Prefix;
                 //ObjEC.GS1apiRequired = Convert.ToBoolean(Request.GS1Customer);
-                
+
 
                 if (ObjEC == null)
                 {
@@ -228,7 +244,7 @@ namespace WebApi.Controllers
                         return EPCBLL.GetError(124);
                     }
                     Request.GS1Prefix = Convert.ToString(ObjEC.GS1Prefix);
-                   // Request.PartitionValue = Convert.ToString(ObjEC.GS1Prefix).Length;
+                    // Request.PartitionValue = Convert.ToString(ObjEC.GS1Prefix).Length;
                 }
 
 
