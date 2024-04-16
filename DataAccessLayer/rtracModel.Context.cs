@@ -2672,5 +2672,27 @@ namespace DataAccessLayer
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomerALL_Result>("usp_GTIN_GetEPC_StanderCustomerALL", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
         }
+    
+        public virtual ObjectResult<usp_GetEPCCounterForKiabi_PWD_Result> usp_GetEPCCounterForKiabi_PWD(Nullable<long> rPO, Nullable<long> detailNo)
+        {
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailNoParameter = detailNo.HasValue ?
+                new ObjectParameter("DetailNo", detailNo) :
+                new ObjectParameter("DetailNo", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetEPCCounterForKiabi_PWD_Result>("usp_GetEPCCounterForKiabi_PWD", rPOParameter, detailNoParameter);
+        }
+    
+        public virtual int usp_UpdateAssPassword_Kiabi(string xML)
+        {
+            var xMLParameter = xML != null ?
+                new ObjectParameter("XML", xML) :
+                new ObjectParameter("XML", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_UpdateAssPassword_Kiabi", xMLParameter);
+        }
     }
 }

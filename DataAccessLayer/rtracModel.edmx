@@ -802,6 +802,10 @@
           <Parameter Name="RPO" Type="bigint" Mode="In" />
           <Parameter Name="DetailNo" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="usp_GetEPCCounterForKiabi_PWD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RPO" Type="bigint" Mode="In" />
+          <Parameter Name="DetailNo" Type="bigint" Mode="In" />
+        </Function>
         <Function Name="usp_GetEPCCounterForMANGO_PWD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RPO" Type="bigint" Mode="In" />
           <Parameter Name="DetailNo" Type="bigint" Mode="In" />
@@ -1193,6 +1197,9 @@
           <Parameter Name="RPO" Type="bigint" Mode="In" />
         </Function>
         <Function Name="usp_TestUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_UpdateAssPassword_Kiabi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="XML" Type="xml" Mode="In" />
+        </Function>
         <Function Name="usp_UpdateAssPassword_MANGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="XML" Type="xml" Mode="In" />
         </Function>
@@ -1963,6 +1970,13 @@
             <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
             <Parameter Name="FilterValue" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="usp_GetEPCCounterForKiabi_PWD" ReturnType="Collection(EPC_DBModel.usp_GetEPCCounterForKiabi_PWD_Result)">
+            <Parameter Name="RPO" Mode="In" Type="Int64" />
+            <Parameter Name="DetailNo" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="usp_UpdateAssPassword_Kiabi">
+            <Parameter Name="XML" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="ups_GetEPC_Customer_ADL_Result">
           <Property Type="Int64" Name="bigintPtrId" Nullable="false" />
@@ -2562,6 +2576,14 @@
           <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="usp_GetEPCCounterForKiabi_PWD_Result">
+          <Property Type="Int64" Name="bigintId" Nullable="false" />
+          <Property Type="Int64" Name="bigIntRPO" Nullable="false" />
+          <Property Type="Int64" Name="bigIntDetailLineID" Nullable="false" />
+          <Property Type="String" Name="EPC" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="AccHexKey" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="KillHexKey" Nullable="false" MaxLength="1" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3438,6 +3460,19 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForKiabi_PWD" FunctionName="EPC_DBModel.Store.usp_GetEPCCounterForKiabi_PWD">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetEPCCounterForKiabi_PWD_Result">
+                <ScalarProperty Name="bigintId" ColumnName="bigintId" />
+                <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
+                <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
+                <ScalarProperty Name="EPC" ColumnName="EPC" />
+                <ScalarProperty Name="AccHexKey" ColumnName="AccHexKey" />
+                <ScalarProperty Name="KillHexKey" ColumnName="KillHexKey" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_Kiabi" FunctionName="EPC_DBModel.Store.usp_UpdateAssPassword_Kiabi" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

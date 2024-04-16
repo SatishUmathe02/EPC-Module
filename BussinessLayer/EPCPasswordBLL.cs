@@ -312,6 +312,122 @@ namespace BussinessLayer
                 throw ex;
             }
         }
+
+
+
+        #region Kiabi Passwords
+
+        public static async Task<bool> UpdatePassword_KIABI(long RPO, long DetailNo)
+        {
+            bool flag = false;
+
+            try
+            {
+                var epclist = EPCPasswordDAL.GetEPCCounterFor_Kiabi_PWD(RPO, DetailNo);
+
+                StringBuilder xml = new StringBuilder();
+
+                if (epclist.Count == 0)
+                {
+                    flag = true;
+                }
+                if (epclist.Count > 0)
+                {
+                    xml.Append("<EPC>");
+                    foreach (var item in epclist)
+                    {
+                        xml.Append("<Password>");
+                        xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
+                        xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
+                        xml.Append("<EPC>" + item.EPC + "</EPC>");
+                        string Pwd = PasswordGenerator_Kiabi(item.EPC);
+                        xml.Append("<AccesPwd>" + Pwd + "</AccesPwd>");
+                        xml.Append("<KillPwd>" + Pwd + "</KillPwd>");
+                        xml.Append("</Password>");
+                    }
+                    xml.Append("</EPC>");
+                    EPCPasswordDAL.UpdatePassword_Kiabi(xml.ToString());
+                    flag = true;
+
+                }
+            }
+            catch (Exception Ex)
+            {
+                flag = false;
+                EPCBLL.InsertLog(Ex, "UpdatePassword_KIBAI");
+            }
+
+            return flag;
+
+        }
+
+        internal static string PasswordGenerator_Kiabi(string EPCHexaValue)
+        {
+
+            char[] charArray = EPCHexaValue.ToCharArray();
+            List<int> EPCDEcValue = new List<int>();
+
+            foreach (char a in charArray)
+            {
+                EPCDEcValue.Add(int.Parse(a.ToString(), System.Globalization.NumberStyles.HexNumber));
+            }
+
+            //Calculation Stage 1
+            int[] PasswordStageOne = new int[8];
+            PasswordStageOne[0] = EPCDEcValue[0] + EPCDEcValue[23];
+            PasswordStageOne[1] = EPCDEcValue[5] + EPCDEcValue[10] + EPCDEcValue[15] + EPCDEcValue[20];
+            PasswordStageOne[2] = EPCDEcValue[2] + EPCDEcValue[6] + EPCDEcValue[11] + EPCDEcValue[16];
+            PasswordStageOne[3] = EPCDEcValue[7] + EPCDEcValue[13] + EPCDEcValue[18] + EPCDEcValue[21];
+            PasswordStageOne[4] = EPCDEcValue[3] + EPCDEcValue[17] + EPCDEcValue[22] + EPCDEcValue[23];
+            PasswordStageOne[5] = EPCDEcValue[8] + EPCDEcValue[9] + EPCDEcValue[19];
+            PasswordStageOne[6] = EPCDEcValue[1] + EPCDEcValue[4] + EPCDEcValue[12] + EPCDEcValue[14] + EPCDEcValue[22];
+            PasswordStageOne[7] = EPCDEcValue[1] + EPCDEcValue[22] + EPCDEcValue[23];
+
+            //Calculation Coefficient Stage 2
+            int[] PasswordStageTwo = new int[8];
+            PasswordStageTwo[0] = PasswordStageOne[5];
+            PasswordStageTwo[1] = 2;
+            PasswordStageTwo[2] = PasswordStageTwo[0] + PasswordStageTwo[1];
+            PasswordStageTwo[3] = PasswordStageTwo[1] + PasswordStageTwo[2];
+            PasswordStageTwo[4] = PasswordStageTwo[2] + PasswordStageTwo[3];
+            PasswordStageTwo[5] = PasswordStageTwo[3] + PasswordStageTwo[4];
+            PasswordStageTwo[6] = PasswordStageTwo[4] + PasswordStageTwo[5];
+            PasswordStageTwo[7] = PasswordStageTwo[5] + PasswordStageTwo[6];
+
+            //Calculation Stage 3
+            int[] PasswordStageThree = new int[8];
+            PasswordStageThree[0] = PasswordStageOne[0] * PasswordStageTwo[0];
+            PasswordStageThree[1] = PasswordStageOne[1] * PasswordStageTwo[1];
+            PasswordStageThree[2] = PasswordStageOne[2] * PasswordStageTwo[2];
+            PasswordStageThree[3] = PasswordStageOne[3] * PasswordStageTwo[3];
+            PasswordStageThree[4] = PasswordStageOne[4] * PasswordStageTwo[4];
+            PasswordStageThree[5] = PasswordStageOne[5] * PasswordStageTwo[5];
+            PasswordStageThree[6] = PasswordStageOne[6] * PasswordStageTwo[6];
+            PasswordStageThree[7] = PasswordStageOne[7] * PasswordStageTwo[7];
+
+            //Calculation Final Password Stage 4 (dec)
+            int[] PasswordStageFour = new int[8];
+            PasswordStageFour[0] = PasswordStageThree[0] % 15;
+            PasswordStageFour[1] = PasswordStageThree[1] % 15;
+            PasswordStageFour[2] = PasswordStageThree[2] % 15;
+            PasswordStageFour[3] = PasswordStageThree[3] % 15;
+            PasswordStageFour[4] = PasswordStageThree[4] % 15;
+            PasswordStageFour[5] = PasswordStageThree[5] % 15;
+            PasswordStageFour[6] = PasswordStageThree[6] % 15;
+            PasswordStageFour[7] = PasswordStageThree[7] % 15;
+
+            //Conversion of Final Password from dec to hex
+            char[] FinalPassword = new char[8];
+            for (int i = 0; i < PasswordStageFour.Length; i++)
+            {
+                FinalPassword[i] = Convert.ToChar(PasswordStageFour[i].ToString("X"));
+            }
+
+            return new string(FinalPassword);
+        }
+
+        #endregion
+        
     }
 
 

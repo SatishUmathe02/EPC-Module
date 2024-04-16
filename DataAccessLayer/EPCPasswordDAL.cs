@@ -62,5 +62,33 @@ namespace DataAccessLayer
             return 0;
         }
 
+        #region GET ECP COUNTER DATA FRO KIABI PASSWORD
+        public static List<usp_GetEPCCounterForKiabi_PWD_Result> GetEPCCounterFor_Kiabi_PWD(long RPO, long DetailNo)
+        {
+            List<usp_GetEPCCounterForKiabi_PWD_Result> Obj = new List<usp_GetEPCCounterForKiabi_PWD_Result>();
+            using (EPC_DBEntities db = new EPC_DBEntities())
+            {
+                //db.Database.CommandTimeout = 0;
+                Obj = (from lst1 in db.usp_GetEPCCounterForKiabi_PWD(RPO, DetailNo) select lst1).ToList();
+            }
+            return Obj;
+        }
+
+        public static int UpdatePassword_Kiabi(string xml)
+        {
+
+            using (EPC_DBEntities db = new EPC_DBEntities())
+            {
+                //db.Database.CommandTimeout = 0;
+                db.usp_UpdateAssPassword_Kiabi(xml);
+            }
+
+
+            return 0;
+        }
+
+
+        #endregion
+
     }
 }
