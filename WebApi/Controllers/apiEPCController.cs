@@ -279,6 +279,13 @@ namespace WebApi.Controllers
                                     ObjRes = EPCBLL.GetError(122);
                                 }
                                 break;
+                            case "Kiabi":
+                                flag = await EPCPasswordBLL.UpdatePassword_KIABI(Request.RPO, Request.DetailLineID);
+                                if (!flag)
+                                {
+                                    ObjRes = EPCBLL.GetError(122);
+                                }
+                                break;
                             default:
                                 break;
                         }

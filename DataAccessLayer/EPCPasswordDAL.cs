@@ -63,6 +63,7 @@ namespace DataAccessLayer
         }
 
         #region GET ECP COUNTER DATA FRO KIABI PASSWORD
+
         public static List<usp_GetEPCCounterForKiabi_PWD_Result> GetEPCCounterFor_Kiabi_PWD(long RPO, long DetailNo)
         {
             List<usp_GetEPCCounterForKiabi_PWD_Result> Obj = new List<usp_GetEPCCounterForKiabi_PWD_Result>();

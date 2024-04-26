@@ -320,7 +320,6 @@ namespace BussinessLayer
         public static async Task<bool> UpdatePassword_KIABI(long RPO, long DetailNo)
         {
             bool flag = false;
-
             try
             {
                 var epclist = EPCPasswordDAL.GetEPCCounterFor_Kiabi_PWD(RPO, DetailNo);
