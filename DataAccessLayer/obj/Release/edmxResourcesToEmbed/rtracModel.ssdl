@@ -797,6 +797,10 @@
     <Parameter Name="RPO" Type="bigint" Mode="In" />
     <Parameter Name="DetailNo" Type="bigint" Mode="In" />
   </Function>
+  <Function Name="usp_GetEPCCounterForKiabi_PWD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RPO" Type="bigint" Mode="In" />
+    <Parameter Name="DetailNo" Type="bigint" Mode="In" />
+  </Function>
   <Function Name="usp_GetEPCCounterForMANGO_PWD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="RPO" Type="bigint" Mode="In" />
     <Parameter Name="DetailNo" Type="bigint" Mode="In" />
@@ -1188,6 +1192,9 @@
     <Parameter Name="RPO" Type="bigint" Mode="In" />
   </Function>
   <Function Name="usp_TestUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_UpdateAssPassword_Kiabi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="XML" Type="xml" Mode="In" />
+  </Function>
   <Function Name="usp_UpdateAssPassword_MANGO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="XML" Type="xml" Mode="In" />
   </Function>

@@ -134,12 +134,16 @@ namespace EPC_Tempe
 
                                 if (Response.IsSucess)
                                 {
-                                    string link = Response.Response;
+                                    //comment
+                                    //string link = Response.Response;
+
+                                    // Added code the below
+                                    JObject jsonObject = JObject.Parse("{" + Response.Response + "}");
+                                    string link = (string)jsonObject["_links"]["external"]["href"];
+                                    //***********************
 
                                     //link = link.Replace("&limit=1000", "");
-
                                     //ObjRoot = Http_Tempe_EPC(link, Request.RPO, ObjTempeData.rfidRequestId, link, Request);
-
                                     //InsertEPC(ObjRoot, Request.RPO, ObjTempeData.rfidRequestId, Request);
 
 
@@ -210,7 +214,7 @@ namespace EPC_Tempe
                                     //ObjRoot = Http_Tempe_EPC(link, Request.RPO, ObjTempeData.rfidRequestId, link, Request);
 
                                     //InsertEPC(ObjRoot, Request.RPO, ObjTempeData.rfidRequestId, Request);
-                                    
+
                                     List<string> ObjList = GetEPC_LinkList(Convert.ToInt32(Request.Quantity), link);
                                     for (int kk = 0; kk < ObjList.Count(); kk++)
                                     {
@@ -218,7 +222,7 @@ namespace EPC_Tempe
 
                                         InsertEPC(ObjRoot, Request.RPO, ObjTempeData.rfidRequestId, Request);
 
-                                        if(ObjRoot.results == null)
+                                        if (ObjRoot.results == null)
                                         {
                                             ObjRoot = Http_Tempe_EPC(ObjList[kk], Request.RPO, ObjTempeData.rfidRequestId, ObjList[kk], Request);
 

@@ -751,6 +751,13 @@
       <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
       <Parameter Name="FilterValue" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="usp_GetEPCCounterForKiabi_PWD" ReturnType="Collection(EPC_DBModel.usp_GetEPCCounterForKiabi_PWD_Result)">
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailNo" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UpdateAssPassword_Kiabi">
+      <Parameter Name="XML" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="ups_GetEPC_Customer_ADL_Result">
     <Property Type="Int64" Name="bigintPtrId" Nullable="false" />
@@ -1350,5 +1357,13 @@
     <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
     <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GetEPCCounterForKiabi_PWD_Result">
+    <Property Type="Int64" Name="bigintId" Nullable="false" />
+    <Property Type="Int64" Name="bigIntRPO" Nullable="false" />
+    <Property Type="Int64" Name="bigIntDetailLineID" Nullable="false" />
+    <Property Type="String" Name="EPC" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="AccHexKey" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="KillHexKey" Nullable="false" MaxLength="1" />
   </ComplexType>
 </Schema>

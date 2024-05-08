@@ -870,5 +870,18 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForKiabi_PWD" FunctionName="EPC_DBModel.Store.usp_GetEPCCounterForKiabi_PWD">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetEPCCounterForKiabi_PWD_Result">
+          <ScalarProperty Name="bigintId" ColumnName="bigintId" />
+          <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
+          <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
+          <ScalarProperty Name="EPC" ColumnName="EPC" />
+          <ScalarProperty Name="AccHexKey" ColumnName="AccHexKey" />
+          <ScalarProperty Name="KillHexKey" ColumnName="KillHexKey" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_Kiabi" FunctionName="EPC_DBModel.Store.usp_UpdateAssPassword_Kiabi" />
   </EntityContainerMapping>
 </Mapping>
