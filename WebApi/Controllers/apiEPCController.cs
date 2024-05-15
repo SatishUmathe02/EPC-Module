@@ -174,6 +174,18 @@ namespace WebApi.Controllers
                     //**
                     Request = GS1_IntergrationBLL.IsCustomerGS1(Request);
 
+                    #region El Corte Ingles BR 8	EPC Encoding
+                    
+                    if (Request.CustomPara1 == "Internal" && Request.CustomerID.ToUpper() == "ELCORTEINGLES")
+                    {
+                        Request.GS1Customer = false;
+                        Request.GS1Prefix = "Default";
+                        Request.PartitionValue = 5;
+                    }
+                    
+                    #endregion
+
+
                     if (Request.GS1Customer) //the customer is GS1
                     {
                         if (Request.GS1apiRequired)
@@ -194,7 +206,7 @@ namespace WebApi.Controllers
 
                             if (ObjGS1.Count == 0 && Request.CustomerID.ToUpper() == "CABOT")
                             {
-                                Request.GS1Prefix = "Defualt";
+                                Request.GS1Prefix = "Default";
                                 Request.PartitionValue = 5;
                             }
                             else
@@ -411,7 +423,7 @@ namespace WebApi.Controllers
         {
             EPCRequest Obj = new EPCRequest();
 
-            
+
             if (Request != null)
             {
                 EPCResponse ObjRes = CandA_IntergrationBLL.GetCA_SGTIN_Serial(Request);
