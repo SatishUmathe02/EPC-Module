@@ -171,18 +171,13 @@ namespace WebApi.Controllers
                 }
                 else
                 {
-                    //**
+                    
                     Request = GS1_IntergrationBLL.IsCustomerGS1(Request);
 
-                    #region El Corte Ingles BR 8	EPC Encoding
-                    
-                    if (Request.CustomPara1 == "Internal" && Request.CustomerID.ToUpper() == "ELCORTEINGLES")
-                    {
-                        Request.GS1Customer = false;
-                        Request.GS1Prefix = "Default";
-                        Request.PartitionValue = 5;
-                    }
-                    
+                    #region El Corte Ingles BR 8	EPC Encoding & Liberated Brands BR 92 EPC Module for LPN Sticker
+
+                    Request = new InternalRequest().HandleRequest(Request);
+
                     #endregion
 
 
