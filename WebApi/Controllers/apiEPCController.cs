@@ -164,13 +164,14 @@ namespace WebApi.Controllers
                 #endregion
                 //if (Request.CustomerID == "GerryWeber")
                 //Here we are checking the item code for GW which they will get from our EPC (r-trac EPC)
-                if ((Request.CustomerID == "GerryWeber") && (Request.CustomPara1 != "Catalog"))
-                {
-                    EPCResponse ObjRes = Transaction_New_GWEPC.GetEPC_New(Request);
-                    return ObjRes;
-                }
-                else
-                {
+
+                //if ((Request.CustomerID == "GerryWeber") && (Request.CustomPara1 != "Catalog"))
+                //{
+                //    EPCResponse ObjRes = Transaction_New_GWEPC.GetEPC_New(Request);
+                //    return ObjRes;
+                //}
+                //else
+                //{
                     
                     Request = GS1_IntergrationBLL.IsCustomerGS1(Request);
 
@@ -180,6 +181,8 @@ namespace WebApi.Controllers
 
                     #endregion
 
+                    #region GS1 SERVICE
+                                      
 
                     if (Request.GS1Customer) //the customer is GS1
                     {
@@ -217,7 +220,11 @@ namespace WebApi.Controllers
                         }
 
                     }
+                    #endregion
                     //***
+
+                    #region CALL EPC FROM DB 
+                                       
                     if ((Request.GS1Customer && Request.GS1apiRequired) && (string.IsNullOrEmpty(Request.GS1Prefix)))
                     {
                         // show the error
@@ -247,6 +254,8 @@ namespace WebApi.Controllers
 
                         //EPCResponse ObjRes = Transaction_New.GetEPC_New(Request);
 
+                        #region UPDATE ACESS PASSWORD
+                                              
                         bool flag = false;
                         switch (Request.CustomerID)
                         {
@@ -296,11 +305,12 @@ namespace WebApi.Controllers
                             default:
                                 break;
                         }
-
+                        #endregion
 
                         return ObjRes;
                     }
-                }
+                    #endregion
+               // }
 
 
             }
