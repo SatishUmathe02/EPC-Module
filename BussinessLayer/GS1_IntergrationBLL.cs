@@ -122,7 +122,7 @@ namespace BussinessLayer
             try
             {
 
-                
+
 
                 ObjGS1_V4 = JsonConvert.DeserializeObject<List<GS1_V4>>(GS1_Response);
 
@@ -131,15 +131,15 @@ namespace BussinessLayer
                 ObjGS1 = (from c in ObjGS1_V4
                           select new GS1
                           {
-                              
+                              Source = c.licensingMO.moName == null ? "" : c.licensingMO.moName.ToString(),
                               EntityGLN = c.licenseeGln,
                               CompanyName = c.licenseeName,
-                              StreetAddress1 = Convert.ToString(c.address.streetAddress.value),
-                              StreetAddress2= c.address.streetAddressLine2== null ? "" : c.address.streetAddressLine2.value,
+                              StreetAddress1 = c.address.streetAddress == null ? "" : c.address.streetAddress.value,
+                              StreetAddress2 = c.address.streetAddressLine2 == null ? "" : c.address.streetAddressLine2.value,
                               StreetAddress3 = c.address.streetAddressLine2 == null ? "" : c.address.streetAddressLine2.value,
 
-                              City = Convert.ToString(c.address.addressLocality.value),
-                              StateProvince = Convert.ToString(c.address.addressRegion.value),
+                              City = c.address.addressLocality == null ? "" : c.address.addressLocality.value,
+                              StateProvince = c.address.addressRegion == null ? "" : c.address.addressRegion.value,
                               ZipCode = c.address.postalCode,
                               Country = c.address.countryCode,
                               GSRN = c.gsrn,
@@ -157,7 +157,7 @@ namespace BussinessLayer
 
 
             }
-            catch(Exception extr)
+            catch (Exception extr)
             {
                 try
                 {
