@@ -89,8 +89,10 @@ namespace WebApi.Controllers
 
                         try
                         {
-                            GS1_Response = GS1_IntergrationBLL.GS1_apiResponse_Restapi(Request);
-                            ObjGS1 = JsonConvert.DeserializeObject<List<GS1>>(GS1_Response);
+                            // GS1_Response = GS1_IntergrationBLL.GS1_apiResponse_Restapi(Request);
+                            // ObjGS1 = JsonConvert.DeserializeObject<List<GS1>>(GS1_Response);
+                             ObjGS1 = GS1_IntergrationBLL.GS1_apiResponse_Restapi(Request);
+
 
                         }
                         catch (Exception ex)
@@ -216,8 +218,10 @@ namespace WebApi.Controllers
 
                         try
                         {
-                            GS1_Response = GS1_IntergrationBLL.GS1_apiResponse_Restapi(Request);
-                            ObjGS1 = JsonConvert.DeserializeObject<List<GS1>>(GS1_Response);
+                            // GS1_Response = GS1_IntergrationBLL.GS1_apiResponse_Restapi(Request);
+                            // ObjGS1 = JsonConvert.DeserializeObject<List<GS1>>(GS1_Response);
+
+                            ObjGS1 = GS1_IntergrationBLL.GS1_apiResponse_Restapi(Request);
 
                         }
                         catch (Exception ex)

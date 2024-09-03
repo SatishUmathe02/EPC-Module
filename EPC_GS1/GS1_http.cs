@@ -10,13 +10,20 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.UI.WebControls;
 
 namespace EPC_GS1
 {
     public class GS1_http
     {
-       static string GS1_EmailIds = ConfigurationManager.AppSettings["GS1_EmailIds"].ToString();
+        static string GS1_EmailIds = ConfigurationManager.AppSettings["GS1_EmailIds"].ToString();
 
+
+        public static bool GS1_NewVersion()
+        {
+            return  ConfigurationManager.AppSettings["GS1_NewVersion"] == null ? false : Convert.ToBoolean(ConfigurationManager.AppSettings["GS1_NewVersion"].ToString());
+
+        }
         public static async Task<string> GS1_apiResponse_Rest(EPCRequest ObjEPC)
         {
             string Response = string.Empty;
@@ -25,21 +32,22 @@ namespace EPC_GS1
 
             string GS1_api = ConfigurationManager.AppSettings["GS1_api"].ToString();
             string GS1_apiKey = ConfigurationManager.AppSettings["GS1_apiKey"].ToString();
-            
+            string GS1_apiKeyHeader = ConfigurationManager.AppSettings["GS1_apiKeyHeader"].ToString();
+
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 
             var url = GS1_api + "/" + ObjEPC.GTIN;
-            
+
             var client = new RestClient(url);
             client.Timeout = -1;
             var request = new RestRequest(Method.GET);
-            request.AddHeader("APIKey", GS1_apiKey);
+            request.AddHeader(GS1_apiKeyHeader, GS1_apiKey);
             IRestResponse response = client.Execute(request);
 
             try
             {
-                
+
                 if (response.StatusCode.ToString() == "OK")
                 {
                     Response = response.Content;
@@ -48,7 +56,7 @@ namespace EPC_GS1
                 else
                 {
                     Response = response.Content == "" ? response.ErrorMessage : response.Content;
-                    
+
                 }
                 int StatusCode = Convert.ToInt32(response.StatusCode);
                 SendEmail(StatusCode, Response, ObjEPC.GTIN);
@@ -58,10 +66,10 @@ namespace EPC_GS1
                 int StatusCode = Convert.ToInt32(((System.Net.HttpWebResponse)ex.Response).StatusCode);
                 SendEmail(StatusCode, Response, ObjEPC.GTIN);
             }
-            
+
             //Response =System.IO.File.ReadAllText(@"E:\DEMO Project\DemoApplication\GS1_Int\bin\Debug\GS2.json");
             EPCDAL.InsertReqRes(ObjEPC.CustomerID, ObjEPC.RPO, ObjEPC.DetailLineID, url, Response, GS1_api, ObjEPC.UserId, ObjEPC.GTIN);
-            
+
             return Response;
 
         }
@@ -86,7 +94,7 @@ namespace EPC_GS1
                     Body.Append(Response);
                     EPCDAL.InsertEmail_GS1(Recipient, varCC, varBCC, varReplyTo, Subject, Body.ToString(), 1, DateTime.Now);
                     break;
-               
+
                 default:
                     break;
             }

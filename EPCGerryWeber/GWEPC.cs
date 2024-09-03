@@ -221,6 +221,13 @@ namespace EPCGerryWeber
             }
         }
 
+        public static bool GerryWeber_APIColling()
+        {
+            string val = ConfigurationManager.AppSettings["GerryWeber_EPC_APIColling"] == null ? "true" : ConfigurationManager.AppSettings["GerryWeber_EPC_APIColling"].ToString();
+
+            return Convert.ToBoolean(val);
+        }
+
     }
 
     public class RequestPrintOrderDO

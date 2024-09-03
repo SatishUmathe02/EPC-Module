@@ -28,11 +28,17 @@ namespace DataAccessLayer
         public static usp_GS1_Insert_Result InsertGS1Details_GetPartitionValue(string gtin14, string CustomerId, string GS1Details)
         {
             usp_GS1_Insert_Result objlist = new usp_GS1_Insert_Result();
-            using (EPC_DBEntities db = new EPC_DBEntities())
+            try
             {
-                objlist = db.usp_GS1_Insert(gtin14, CustomerId, GS1Details).FirstOrDefault();
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+                    objlist = db.usp_GS1_Insert(gtin14, CustomerId, GS1Details).FirstOrDefault();
+                }
             }
-
+            catch(Exception ex)
+            {
+               // throw new Exception(ex.Message);
+            }
             return objlist;
         }
     }

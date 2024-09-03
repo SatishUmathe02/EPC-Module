@@ -206,5 +206,71 @@ namespace DataAccessLayer.CommonDataModels
 
     }
 
-   
+
+    #region GS1 V4
+    // Root myDeserializedClass = JsonConvert.DeserializeObject<List<Root>>(myJsonResponse);
+    public class Address
+    {
+        public StreetAddress streetAddress { get; set; }
+        public StreetAddress streetAddressLine2 { get; set; }
+        public StreetAddress streetAddressLine3 { get; set; }
+
+        public AddressLocality addressLocality { get; set; }
+        public string countryCode { get; set; }
+        public string countrySubdivisionCode { get; set; }
+        public AddressRegion addressRegion { get; set; }
+        public string postalCode { get; set; }
+    }
+
+    public class AddressLocality
+    {
+        public string language { get; set; }
+        public string value { get; set; }
+    }
+
+    public class AddressRegion
+    {
+        public string language { get; set; }
+        public string value { get; set; }
+    }
+
+    public class LicensingMO
+    {
+        public string moGLN { get; set; }
+        public string moName { get; set; }
+    }
+
+    public class PrimaryMO
+    {
+        public string moGLN { get; set; }
+        public string moName { get; set; }
+    }
+
+    public class GS1_V4
+    {
+        public string gsrn { get; set; }
+        public string upcCompanyPrefix { get; set; }
+        public string licenceKey { get; set; }
+        public string licenceType { get; set; }
+        public string companyAccount { get; set; }
+        public string licenseeName { get; set; }
+        public string licenseeGln { get; set; }
+        public string licenceStatus { get; set; }
+        public PrimaryMO primaryMO { get; set; }
+        public LicensingMO licensingMO { get; set; }
+        public Address address { get; set; }
+        public DateTime dateCreated { get; set; }
+        public DateTime dateUpdated { get; set; }
+        public string gtin { get; set; }
+    }
+
+    public class StreetAddress
+    {
+        public string language { get; set; }
+        public string value { get; set; }
+    }
+
+
+    #endregion
+
 }

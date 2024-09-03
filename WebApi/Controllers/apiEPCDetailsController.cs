@@ -89,16 +89,17 @@ namespace WebApi.Controllers
             EPCRequest ObjEPC = new EPCRequest();
             ObjEPC.GTIN = GTIN;
             ObjEPC.CustomerID = CustomerId;
-            var GS1_Response = GS1_IntergrationBLL.GS1_apiResponse_Restapi(ObjEPC);
+           // var GS1_Response = GS1_IntergrationBLL.GS1_apiResponse_Restapi(ObjEPC);
 
             try
             {
 
-                ObjGS1.GS1List = JsonConvert.DeserializeObject<List<GS1>>(GS1_Response);
+                // ObjGS1.GS1List = JsonConvert.DeserializeObject<List<GS1>>(GS1_Response);
+                ObjGS1.GS1List = GS1_IntergrationBLL.GS1_apiResponse_Restapi(ObjEPC);
             }
             catch (Exception ex)
             {
-                ObjGS1.Error = GS1_Response;
+                ObjGS1.Error = ex.ToString();
             }
             return ObjGS1;
         }
