@@ -260,7 +260,7 @@ namespace DataAccessLayer.CommonDataModels
         public LicensingMO licensingMO { get; set; }
         public Address address { get; set; }
         public DateTime dateCreated { get; set; }
-        public DateTime dateUpdated { get; set; }
+        public string dateUpdated { get; set; }
         public string gtin { get; set; }
     }
 

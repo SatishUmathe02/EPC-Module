@@ -130,7 +130,7 @@ namespace BussinessLayer
 
 
 
-                DateTime dateUpdated = ObjGS1_V4.Count() == 0 ? System.DateTime.Now : (ObjGS1_V4[0].dateUpdated == null ? System.DateTime.Now : ObjGS1_V4[0].dateUpdated);
+                string dateUpdated = ObjGS1_V4.Count() == 0 ? "" : (ObjGS1_V4[0].dateUpdated == null ? "" : ObjGS1_V4[0].dateUpdated.ToString());
 
                 ObjGS1 = (from c in ObjGS1_V4
                           select new GS1
