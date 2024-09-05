@@ -128,27 +128,31 @@ namespace BussinessLayer
 
                 //object jsonObject = JsonConvert.DeserializeObject(GS1_Response);
 
+
+
+                DateTime dateUpdated = ObjGS1_V4.Count() == 0 ? System.DateTime.Now : (ObjGS1_V4[0].dateUpdated == null ? System.DateTime.Now : ObjGS1_V4[0].dateUpdated);
+
                 ObjGS1 = (from c in ObjGS1_V4
                           select new GS1
                           {
                               Source = c.licensingMO.moName == null ? "" : c.licensingMO.moName.ToString(),
-                              EntityGLN = c.licenseeGln,
-                              CompanyName = c.licenseeName,
+                              EntityGLN = c.licensingMO.moGLN == null ? "" : c.licensingMO.moGLN.ToString(),
+                              CompanyName = c.licenseeName == null ? "" : c.licenseeName,
                               StreetAddress1 = c.address.streetAddress == null ? "" : c.address.streetAddress.value,
                               StreetAddress2 = c.address.streetAddressLine2 == null ? "" : c.address.streetAddressLine2.value,
                               StreetAddress3 = c.address.streetAddressLine2 == null ? "" : c.address.streetAddressLine2.value,
-
+                              ModifiedDate= Convert.ToString(dateUpdated),
                               City = c.address.addressLocality == null ? "" : c.address.addressLocality.value,
                               StateProvince = c.address.addressRegion == null ? "" : c.address.addressRegion.value,
-                              ZipCode = c.address.postalCode,
-                              Country = c.address.countryCode,
-                              GSRN = c.gsrn,
+                              ZipCode = c.address.postalCode == null ? "" : c.address.postalCode,
+                              Country = c.address.countryCode == null ? "" : c.address.countryCode,
+                              GSRN = c.gsrn==null ?"": c.gsrn,
                               Prefixes = (new Prefixes()
                               {
-                                  UPCPrefix = c.upcCompanyPrefix,
-                                  GS1Prefix = c.licenceKey,
-                                  PrefixStatus = c.licenceStatus,
-                                  ModifiedDate = Convert.ToString(c.dateUpdated),
+                                  UPCPrefix = c.upcCompanyPrefix==null? "" : c.upcCompanyPrefix,
+                                  GS1Prefix = c.licenceKey == null ? "" : c.licenceKey,
+                                  PrefixStatus = c.licenceStatus == null ? "" : c.licenceStatus,
+                                  ModifiedDate = Convert.ToString(dateUpdated),
 
                               }),
 
@@ -164,16 +168,16 @@ namespace BussinessLayer
                     ObjGS1 = (from c in ObjGS1_V4
                               select new GS1
                               {
-                                  EntityGLN = c.licenseeGln,
-                                  CompanyName = c.licenseeName,
-                                  ZipCode = c.address.postalCode,
-                                  Country = c.address.countryCode,
-                                  GSRN = c.gsrn,
+                                  EntityGLN = c.licenseeGln == null ? "" : c.licenseeGln,
+                                  CompanyName = c.licenseeName == null ? "" : c.licenseeName,
+                                  ZipCode = c.address.postalCode == null ? "" : c.address.postalCode,
+                                  Country = c.address.countryCode == null ? "" : c.address.countryCode,
+                                  GSRN = c.gsrn == null ? "" : c.gsrn,
                                   Prefixes = (new Prefixes()
                                   {
-                                      UPCPrefix = c.upcCompanyPrefix,
-                                      GS1Prefix = c.licenceKey,
-                                      PrefixStatus = c.licenceStatus,
+                                      UPCPrefix = c.upcCompanyPrefix == null ? "" : c.upcCompanyPrefix,
+                                      GS1Prefix = c.licenceKey == null ? "" : c.licenceKey,
+                                      PrefixStatus = c.licenceStatus == null ? "" : c.licenceStatus,
                                       ModifiedDate = Convert.ToString(c.dateUpdated),
 
                                   }),
