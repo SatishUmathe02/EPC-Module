@@ -163,6 +163,15 @@ namespace DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("usp_Check_CertilogoData", certilogoParameter, qrCodeParameter, orgIdParameter);
         }
     
+        public virtual ObjectResult<Nullable<int>> usp_CheckSPForStatnderCustomer(string customerId)
+        {
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("usp_CheckSPForStatnderCustomer", customerIdParameter);
+        }
+    
         public virtual ObjectResult<usp_EPC_Cust_ADL_Result> usp_EPC_Cust_ADL(string gtin14, Nullable<long> serialStart, Nullable<long> serialEnd, string schema, string transaction, string ePCStart, string ePCEnd, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, Nullable<long> qty, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<System.DateTime> ePCStartDateTime, Nullable<long> id, string nextEPC, Nullable<long> nextEPCSerial)
         {
             var gtin14Parameter = gtin14 != null ?
@@ -542,6 +551,55 @@ namespace DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_EPC_Cust_Inditex", customerIdParameter, gtin14Parameter, serial_number_StartParameter, serial_number_EndParameter, schemaParameter, transactionParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, result);
         }
     
+        public virtual int usp_EPC_Cust_Kiabi(string gtin14, Nullable<long> serial_number_Start, Nullable<long> serial_number_End, string schema, string transaction, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, Nullable<int> partition, ObjectParameter result)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var serial_number_StartParameter = serial_number_Start.HasValue ?
+                new ObjectParameter("serial_number_Start", serial_number_Start) :
+                new ObjectParameter("serial_number_Start", typeof(long));
+    
+            var serial_number_EndParameter = serial_number_End.HasValue ?
+                new ObjectParameter("serial_number_End", serial_number_End) :
+                new ObjectParameter("serial_number_End", typeof(long));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var partitionParameter = partition.HasValue ?
+                new ObjectParameter("Partition", partition) :
+                new ObjectParameter("Partition", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_EPC_Cust_Kiabi", gtin14Parameter, serial_number_StartParameter, serial_number_EndParameter, schemaParameter, transactionParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, partitionParameter, result);
+        }
+    
         public virtual int usp_EPC_Cust_MANGO(string gtin14, Nullable<long> serial_number_Start, Nullable<long> serial_number_End, string schema, string transaction, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, Nullable<int> partition, ObjectParameter result)
         {
             var gtin14Parameter = gtin14 != null ?
@@ -589,6 +647,104 @@ namespace DataAccessLayer
                 new ObjectParameter("Partition", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_EPC_Cust_MANGO", gtin14Parameter, serial_number_StartParameter, serial_number_EndParameter, schemaParameter, transactionParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, partitionParameter, result);
+        }
+    
+        public virtual int usp_EPC_Cust_MooseKnuckles(string gtin14, Nullable<long> serial_number_Start, Nullable<long> serial_number_End, string schema, string transaction, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, Nullable<int> partition, ObjectParameter result)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var serial_number_StartParameter = serial_number_Start.HasValue ?
+                new ObjectParameter("serial_number_Start", serial_number_Start) :
+                new ObjectParameter("serial_number_Start", typeof(long));
+    
+            var serial_number_EndParameter = serial_number_End.HasValue ?
+                new ObjectParameter("serial_number_End", serial_number_End) :
+                new ObjectParameter("serial_number_End", typeof(long));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var partitionParameter = partition.HasValue ?
+                new ObjectParameter("Partition", partition) :
+                new ObjectParameter("Partition", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_EPC_Cust_MooseKnuckles", gtin14Parameter, serial_number_StartParameter, serial_number_EndParameter, schemaParameter, transactionParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, partitionParameter, result);
+        }
+    
+        public virtual int usp_EPC_Cust_OnCloud(string gtin14, Nullable<long> serial_number_Start, Nullable<long> serial_number_End, string schema, string transaction, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, Nullable<int> partition, ObjectParameter result)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var serial_number_StartParameter = serial_number_Start.HasValue ?
+                new ObjectParameter("serial_number_Start", serial_number_Start) :
+                new ObjectParameter("serial_number_Start", typeof(long));
+    
+            var serial_number_EndParameter = serial_number_End.HasValue ?
+                new ObjectParameter("serial_number_End", serial_number_End) :
+                new ObjectParameter("serial_number_End", typeof(long));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var partitionParameter = partition.HasValue ?
+                new ObjectParameter("Partition", partition) :
+                new ObjectParameter("Partition", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_EPC_Cust_OnCloud", gtin14Parameter, serial_number_StartParameter, serial_number_EndParameter, schemaParameter, transactionParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, partitionParameter, result);
         }
     
         public virtual int usp_EPC_Cust_StanderCustomer(string gtin14, Nullable<long> serial_number_Start, Nullable<long> serial_number_End, string schema, string transaction, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, Nullable<int> partition, Nullable<int> filter_value, string customerId, ObjectParameter result)
@@ -757,51 +913,6 @@ namespace DataAccessLayer
                 new ObjectParameter("EPC", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_EPC_Cust_TEMPE_DecodeEPC_Result>("usp_EPC_Cust_TEMPE_DecodeEPC", rpoParameter, ePCParameter);
-        }
-    
-        public virtual int usp_EPC_Cust_TEMPE_Test(string gtin14, Nullable<long> serial_number_Start, Nullable<long> serial_number_End, string schema, string transaction, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, ObjectParameter result)
-        {
-            var gtin14Parameter = gtin14 != null ?
-                new ObjectParameter("gtin14", gtin14) :
-                new ObjectParameter("gtin14", typeof(string));
-    
-            var serial_number_StartParameter = serial_number_Start.HasValue ?
-                new ObjectParameter("serial_number_Start", serial_number_Start) :
-                new ObjectParameter("serial_number_Start", typeof(long));
-    
-            var serial_number_EndParameter = serial_number_End.HasValue ?
-                new ObjectParameter("serial_number_End", serial_number_End) :
-                new ObjectParameter("serial_number_End", typeof(long));
-    
-            var schemaParameter = schema != null ?
-                new ObjectParameter("Schema", schema) :
-                new ObjectParameter("Schema", typeof(string));
-    
-            var transactionParameter = transaction != null ?
-                new ObjectParameter("Transaction", transaction) :
-                new ObjectParameter("Transaction", typeof(string));
-    
-            var ePCParameter = ePC != null ?
-                new ObjectParameter("EPC", ePC) :
-                new ObjectParameter("EPC", typeof(string));
-    
-            var rPOParameter = rPO.HasValue ?
-                new ObjectParameter("RPO", rPO) :
-                new ObjectParameter("RPO", typeof(long));
-    
-            var detailLineNoParameter = detailLineNo.HasValue ?
-                new ObjectParameter("DetailLineNo", detailLineNo) :
-                new ObjectParameter("DetailLineNo", typeof(long));
-    
-            var customPara1Parameter = customPara1 != null ?
-                new ObjectParameter("CustomPara1", customPara1) :
-                new ObjectParameter("CustomPara1", typeof(string));
-    
-            var customPara2Parameter = customPara2 != null ?
-                new ObjectParameter("CustomPara2", customPara2) :
-                new ObjectParameter("CustomPara2", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_EPC_Cust_TEMPE_Test", gtin14Parameter, serial_number_StartParameter, serial_number_EndParameter, schemaParameter, transactionParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, result);
         }
     
         public virtual int usp_EPC_Cust_TENDAM(string gtin14, Nullable<long> serial_number_Start, Nullable<long> serial_number_End, string schema, string transaction, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, Nullable<int> partition, ObjectParameter result)
@@ -1064,15 +1175,6 @@ namespace DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetDiesel_Temera_Data_Result>("usp_GetDiesel_Temera_Data", orgIdParameter);
         }
     
-        public virtual ObjectResult<usp_GetDiesel_Temera_Data_New_Result> usp_GetDiesel_Temera_Data_New(Nullable<long> orgId)
-        {
-            var orgIdParameter = orgId.HasValue ?
-                new ObjectParameter("OrgId", orgId) :
-                new ObjectParameter("OrgId", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetDiesel_Temera_Data_New_Result>("usp_GetDiesel_Temera_Data_New", orgIdParameter);
-        }
-    
         public virtual ObjectResult<usp_GetDiesel_Temera_Data_Old_Result> usp_GetDiesel_Temera_Data_Old()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetDiesel_Temera_Data_Old_Result>("usp_GetDiesel_Temera_Data_Old");
@@ -1086,6 +1188,16 @@ namespace DataAccessLayer
         public virtual ObjectResult<usp_GetDieselCTMS_Feedback_Data_Old_Result> usp_GetDieselCTMS_Feedback_Data_Old()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetDieselCTMS_Feedback_Data_Old_Result>("usp_GetDieselCTMS_Feedback_Data_Old");
+        }
+    
+        public virtual ObjectResult<usp_GetDieselCTMS_Feedback_Data_WASTED_Result> usp_GetDieselCTMS_Feedback_Data_WASTED()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetDieselCTMS_Feedback_Data_WASTED_Result>("usp_GetDieselCTMS_Feedback_Data_WASTED");
+        }
+    
+        public virtual ObjectResult<usp_GetDieselCTMS_Feedback_Data_With_WithOutTID_Result> usp_GetDieselCTMS_Feedback_Data_With_WithOutTID()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetDieselCTMS_Feedback_Data_With_WithOutTID_Result>("usp_GetDieselCTMS_Feedback_Data_With_WithOutTID");
         }
     
         public virtual ObjectResult<usp_GetEPCCount_with_YY_Customer_Result> usp_GetEPCCount_with_YY_Customer(string yY, string customerId)
@@ -1135,6 +1247,23 @@ namespace DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetEPCCounter_RPO_SerialNum_Result>("usp_GetEPCCounter_RPO_SerialNum", gTINParameter, rPOParameter, detailNoParameter, serialStartParameter, serialEndParameter);
         }
     
+        public virtual ObjectResult<usp_GetEPCCounterForAccessKillPassword_Result> usp_GetEPCCounterForAccessKillPassword(Nullable<long> rPO, Nullable<long> detailNo, string customerId)
+        {
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailNoParameter = detailNo.HasValue ?
+                new ObjectParameter("DetailNo", detailNo) :
+                new ObjectParameter("DetailNo", typeof(long));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetEPCCounterForAccessKillPassword_Result>("usp_GetEPCCounterForAccessKillPassword", rPOParameter, detailNoParameter, customerIdParameter);
+        }
+    
         public virtual ObjectResult<usp_GetEPCCounterForAlvaroMorenoPWD_Result> usp_GetEPCCounterForAlvaroMorenoPWD(Nullable<long> rPO, Nullable<long> detailNo)
         {
             var rPOParameter = rPO.HasValue ?
@@ -1159,6 +1288,19 @@ namespace DataAccessLayer
                 new ObjectParameter("DetailNo", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetEPCCounterForCharangaPWD_Result>("usp_GetEPCCounterForCharangaPWD", rPOParameter, detailNoParameter);
+        }
+    
+        public virtual ObjectResult<usp_GetEPCCounterForKiabi_PWD_Result> usp_GetEPCCounterForKiabi_PWD(Nullable<long> rPO, Nullable<long> detailNo)
+        {
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailNoParameter = detailNo.HasValue ?
+                new ObjectParameter("DetailNo", detailNo) :
+                new ObjectParameter("DetailNo", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetEPCCounterForKiabi_PWD_Result>("usp_GetEPCCounterForKiabi_PWD", rPOParameter, detailNoParameter);
         }
     
         public virtual ObjectResult<usp_GetEPCCounterForMANGO_PWD_Result> usp_GetEPCCounterForMANGO_PWD(Nullable<long> rPO, Nullable<long> detailNo)
@@ -1320,11 +1462,6 @@ namespace DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GS1_GTIN_Result>("usp_GS1_GTIN");
         }
     
-        public virtual int usp_GS1_GTIN_TEST()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_GS1_GTIN_TEST");
-        }
-    
         public virtual ObjectResult<usp_GS1_Insert_Result> usp_GS1_Insert(string gtin14, string customerId, string json)
         {
             var gtin14Parameter = gtin14 != null ?
@@ -1357,23 +1494,6 @@ namespace DataAccessLayer
                 new ObjectParameter("json", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_GS1_InsertUpdatePartition", gtin14Parameter, customerIdParameter, jsonParameter);
-        }
-    
-        public virtual int usp_GS1_InsertUpdatePartition_TEST(string gtin14, string customerId, string json)
-        {
-            var gtin14Parameter = gtin14 != null ?
-                new ObjectParameter("gtin14", gtin14) :
-                new ObjectParameter("gtin14", typeof(string));
-    
-            var customerIdParameter = customerId != null ?
-                new ObjectParameter("CustomerId", customerId) :
-                new ObjectParameter("CustomerId", typeof(string));
-    
-            var jsonParameter = json != null ?
-                new ObjectParameter("json", json) :
-                new ObjectParameter("json", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_GS1_InsertUpdatePartition_TEST", gtin14Parameter, customerIdParameter, jsonParameter);
         }
     
         public virtual int usp_GTIN_GetCustEPC(string gtin14, Nullable<long> serial_number_Start, Nullable<long> serial_number_End, string schema, string customerId, string ePC, string transaction, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, Nullable<int> partition, string @event, ObjectParameter result)
@@ -2289,6 +2409,1700 @@ namespace DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_Result>("usp_GTIN_GetEPC_StanderCustomer", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
         }
     
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomer_18ROCKSLLC_Result> usp_GTIN_GetEPC_StanderCustomer_18ROCKSLLC(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_18ROCKSLLC_Result>("usp_GTIN_GetEPC_StanderCustomer_18ROCKSLLC", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomer_1982_Result> usp_GTIN_GetEPC_StanderCustomer_1982(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_1982_Result>("usp_GTIN_GetEPC_StanderCustomer_1982", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomer_2GetherFashionBV_Result> usp_GTIN_GetEPC_StanderCustomer_2GetherFashionBV(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_2GetherFashionBV_Result>("usp_GTIN_GetEPC_StanderCustomer_2GetherFashionBV", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomer_88INTERNATIONALINC_Result> usp_GTIN_GetEPC_StanderCustomer_88INTERNATIONALINC(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_88INTERNATIONALINC_Result>("usp_GTIN_GetEPC_StanderCustomer_88INTERNATIONALINC", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomer_AANTILLC_Result> usp_GTIN_GetEPC_StanderCustomer_AANTILLC(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_AANTILLC_Result>("usp_GTIN_GetEPC_StanderCustomer_AANTILLC", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomer_Abcdcorp_Result> usp_GTIN_GetEPC_StanderCustomer_Abcdcorp(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_Abcdcorp_Result>("usp_GTIN_GetEPC_StanderCustomer_Abcdcorp", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomer_Acupath_Result> usp_GTIN_GetEPC_StanderCustomer_Acupath(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_Acupath_Result>("usp_GTIN_GetEPC_StanderCustomer_Acupath", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomer_Adidas_Result> usp_GTIN_GetEPC_StanderCustomer_Adidas(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_Adidas_Result>("usp_GTIN_GetEPC_StanderCustomer_Adidas", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomer_Aeropostale_Result> usp_GTIN_GetEPC_StanderCustomer_Aeropostale(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_Aeropostale_Result>("usp_GTIN_GetEPC_StanderCustomer_Aeropostale", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomer_ALOYOGA_Result> usp_GTIN_GetEPC_StanderCustomer_ALOYOGA(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_ALOYOGA_Result>("usp_GTIN_GetEPC_StanderCustomer_ALOYOGA", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomer_BatteryBiz_Result> usp_GTIN_GetEPC_StanderCustomer_BatteryBiz(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_BatteryBiz_Result>("usp_GTIN_GetEPC_StanderCustomer_BatteryBiz", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomer_CapriGroup_Result> usp_GTIN_GetEPC_StanderCustomer_CapriGroup(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_CapriGroup_Result>("usp_GTIN_GetEPC_StanderCustomer_CapriGroup", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomer_Fila_Result> usp_GTIN_GetEPC_StanderCustomer_Fila(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_Fila_Result>("usp_GTIN_GetEPC_StanderCustomer_Fila", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomer_MielooAlexander_Result> usp_GTIN_GetEPC_StanderCustomer_MielooAlexander(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_MielooAlexander_Result>("usp_GTIN_GetEPC_StanderCustomer_MielooAlexander", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomer_nike_Result> usp_GTIN_GetEPC_StanderCustomer_nike(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_nike_Result>("usp_GTIN_GetEPC_StanderCustomer_nike", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomer_RichemontGroup_Result> usp_GTIN_GetEPC_StanderCustomer_RichemontGroup(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_RichemontGroup_Result>("usp_GTIN_GetEPC_StanderCustomer_RichemontGroup", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomer_SAXX_Result> usp_GTIN_GetEPC_StanderCustomer_SAXX(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_SAXX_Result>("usp_GTIN_GetEPC_StanderCustomer_SAXX", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomer_Teamsports_Result> usp_GTIN_GetEPC_StanderCustomer_Teamsports(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_Teamsports_Result>("usp_GTIN_GetEPC_StanderCustomer_Teamsports", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomer_WalgreensDatabase_Result> usp_GTIN_GetEPC_StanderCustomer_WalgreensDatabase(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_WalgreensDatabase_Result>("usp_GTIN_GetEPC_StanderCustomer_WalgreensDatabase", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomer_XYZ123_Result> usp_GTIN_GetEPC_StanderCustomer_XYZ123(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_XYZ123_Result>("usp_GTIN_GetEPC_StanderCustomer_XYZ123", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomer_XYZ1234_Result> usp_GTIN_GetEPC_StanderCustomer_XYZ1234(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomer_XYZ1234_Result>("usp_GTIN_GetEPC_StanderCustomer_XYZ1234", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
+        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomerALL_Result> usp_GTIN_GetEPC_StanderCustomerALL(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
+        {
+            var gtin14Parameter = gtin14 != null ?
+                new ObjectParameter("gtin14", gtin14) :
+                new ObjectParameter("gtin14", typeof(string));
+    
+            var qtyParameter = qty.HasValue ?
+                new ObjectParameter("Qty", qty) :
+                new ObjectParameter("Qty", typeof(long));
+    
+            var transactionParameter = transaction != null ?
+                new ObjectParameter("Transaction", transaction) :
+                new ObjectParameter("Transaction", typeof(string));
+    
+            var schemaParameter = schema != null ?
+                new ObjectParameter("Schema", schema) :
+                new ObjectParameter("Schema", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            var customerNameParameter = customerName != null ?
+                new ObjectParameter("CustomerName", customerName) :
+                new ObjectParameter("CustomerName", typeof(string));
+    
+            var eventParameter = @event != null ?
+                new ObjectParameter("Event", @event) :
+                new ObjectParameter("Event", typeof(string));
+    
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(long));
+    
+            var serailParameter = serail.HasValue ?
+                new ObjectParameter("Serail", serail) :
+                new ObjectParameter("Serail", typeof(long));
+    
+            var ePCParameter = ePC != null ?
+                new ObjectParameter("EPC", ePC) :
+                new ObjectParameter("EPC", typeof(string));
+    
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailLineNoParameter = detailLineNo.HasValue ?
+                new ObjectParameter("DetailLineNo", detailLineNo) :
+                new ObjectParameter("DetailLineNo", typeof(long));
+    
+            var customPara1Parameter = customPara1 != null ?
+                new ObjectParameter("CustomPara1", customPara1) :
+                new ObjectParameter("CustomPara1", typeof(string));
+    
+            var customPara2Parameter = customPara2 != null ?
+                new ObjectParameter("CustomPara2", customPara2) :
+                new ObjectParameter("CustomPara2", typeof(string));
+    
+            var gS1PrefixParameter = gS1Prefix != null ?
+                new ObjectParameter("GS1Prefix", gS1Prefix) :
+                new ObjectParameter("GS1Prefix", typeof(string));
+    
+            var partitionValueParameter = partitionValue.HasValue ?
+                new ObjectParameter("PartitionValue", partitionValue) :
+                new ObjectParameter("PartitionValue", typeof(int));
+    
+            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
+                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
+                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
+    
+            var filterValueParameter = filterValue.HasValue ?
+                new ObjectParameter("FilterValue", filterValue) :
+                new ObjectParameter("FilterValue", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomerALL_Result>("usp_GTIN_GetEPC_StanderCustomerALL", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
+        }
+    
         public virtual ObjectResult<Nullable<int>> usp_GTIN_GetEPCTest()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("usp_GTIN_GetEPCTest");
@@ -2466,6 +4280,37 @@ namespace DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_InsertEmailTrigger_GS1", varProjectParameter, varRecipientParameter, varCCParameter, varBCCParameter, varReplyToParameter, varSubjectParameter, varBodyParameter, varAttachmentNameParameter, bigIntCreatedByIdParameter, dtCreatedOnParameter);
         }
     
+        public virtual int usp_InsertMK_AnexyaID(string json, string dropBoxLink, string fileName)
+        {
+            var jsonParameter = json != null ?
+                new ObjectParameter("json", json) :
+                new ObjectParameter("json", typeof(string));
+    
+            var dropBoxLinkParameter = dropBoxLink != null ?
+                new ObjectParameter("DropBoxLink", dropBoxLink) :
+                new ObjectParameter("DropBoxLink", typeof(string));
+    
+            var fileNameParameter = fileName != null ?
+                new ObjectParameter("FileName", fileName) :
+                new ObjectParameter("FileName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_InsertMK_AnexyaID", jsonParameter, dropBoxLinkParameter, fileNameParameter);
+        }
+    
+        public virtual ObjectResult<usp_MK_Anexya_GetData_Feedback_Result> usp_MK_Anexya_GetData_Feedback()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_MK_Anexya_GetData_Feedback_Result>("usp_MK_Anexya_GetData_Feedback");
+        }
+    
+        public virtual int usp_MK_Anexya_UpdateFlag(string xml)
+        {
+            var xmlParameter = xml != null ?
+                new ObjectParameter("xml", xml) :
+                new ObjectParameter("xml", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_MK_Anexya_UpdateFlag", xmlParameter);
+        }
+    
         public virtual ObjectResult<usp_Name_Result> usp_Name(string xyz)
         {
             var xyzParameter = xyz != null ?
@@ -2538,9 +4383,26 @@ namespace DataAccessLayer
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Tempe_EPC_InsertEPCLog_Decode", jsonParameter, rfidRequestIdParameter, rPOParameter);
         }
     
-        public virtual int usp_TestUpdate()
+        public virtual int usp_Update_Access_Kill_Password(string xML, string customerId)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_TestUpdate");
+            var xMLParameter = xML != null ?
+                new ObjectParameter("XML", xML) :
+                new ObjectParameter("XML", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Update_Access_Kill_Password", xMLParameter, customerIdParameter);
+        }
+    
+        public virtual int usp_UpdateAssPassword_Kiabi(string xML)
+        {
+            var xMLParameter = xML != null ?
+                new ObjectParameter("XML", xML) :
+                new ObjectParameter("XML", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_UpdateAssPassword_Kiabi", xMLParameter);
         }
     
         public virtual int usp_UpdateAssPassword_MANGO(string xML)
@@ -2585,114 +4447,6 @@ namespace DataAccessLayer
                 new ObjectParameter("SerialStart", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_UpdateSerialNumber_CandA", qtyParameter, gTINParameter, serialStartParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<int>> usp_CheckSPForStatnderCustomer(string customerId)
-        {
-            var customerIdParameter = customerId != null ?
-                new ObjectParameter("CustomerId", customerId) :
-                new ObjectParameter("CustomerId", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("usp_CheckSPForStatnderCustomer", customerIdParameter);
-        }
-    
-        public virtual ObjectResult<usp_GTIN_GetEPC_StanderCustomerALL_Result> usp_GTIN_GetEPC_StanderCustomerALL(string gtin14, Nullable<long> qty, string transaction, string schema, string customerId, string customerName, string @event, Nullable<long> userId, Nullable<long> serail, string ePC, Nullable<long> rPO, Nullable<long> detailLineNo, string customPara1, string customPara2, string gS1Prefix, Nullable<int> partitionValue, Nullable<System.DateTime> ePCStartDateTime, Nullable<int> filterValue)
-        {
-            var gtin14Parameter = gtin14 != null ?
-                new ObjectParameter("gtin14", gtin14) :
-                new ObjectParameter("gtin14", typeof(string));
-    
-            var qtyParameter = qty.HasValue ?
-                new ObjectParameter("Qty", qty) :
-                new ObjectParameter("Qty", typeof(long));
-    
-            var transactionParameter = transaction != null ?
-                new ObjectParameter("Transaction", transaction) :
-                new ObjectParameter("Transaction", typeof(string));
-    
-            var schemaParameter = schema != null ?
-                new ObjectParameter("Schema", schema) :
-                new ObjectParameter("Schema", typeof(string));
-    
-            var customerIdParameter = customerId != null ?
-                new ObjectParameter("CustomerId", customerId) :
-                new ObjectParameter("CustomerId", typeof(string));
-    
-            var customerNameParameter = customerName != null ?
-                new ObjectParameter("CustomerName", customerName) :
-                new ObjectParameter("CustomerName", typeof(string));
-    
-            var eventParameter = @event != null ?
-                new ObjectParameter("Event", @event) :
-                new ObjectParameter("Event", typeof(string));
-    
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(long));
-    
-            var serailParameter = serail.HasValue ?
-                new ObjectParameter("Serail", serail) :
-                new ObjectParameter("Serail", typeof(long));
-    
-            var ePCParameter = ePC != null ?
-                new ObjectParameter("EPC", ePC) :
-                new ObjectParameter("EPC", typeof(string));
-    
-            var rPOParameter = rPO.HasValue ?
-                new ObjectParameter("RPO", rPO) :
-                new ObjectParameter("RPO", typeof(long));
-    
-            var detailLineNoParameter = detailLineNo.HasValue ?
-                new ObjectParameter("DetailLineNo", detailLineNo) :
-                new ObjectParameter("DetailLineNo", typeof(long));
-    
-            var customPara1Parameter = customPara1 != null ?
-                new ObjectParameter("CustomPara1", customPara1) :
-                new ObjectParameter("CustomPara1", typeof(string));
-    
-            var customPara2Parameter = customPara2 != null ?
-                new ObjectParameter("CustomPara2", customPara2) :
-                new ObjectParameter("CustomPara2", typeof(string));
-    
-            var gS1PrefixParameter = gS1Prefix != null ?
-                new ObjectParameter("GS1Prefix", gS1Prefix) :
-                new ObjectParameter("GS1Prefix", typeof(string));
-    
-            var partitionValueParameter = partitionValue.HasValue ?
-                new ObjectParameter("PartitionValue", partitionValue) :
-                new ObjectParameter("PartitionValue", typeof(int));
-    
-            var ePCStartDateTimeParameter = ePCStartDateTime.HasValue ?
-                new ObjectParameter("EPCStartDateTime", ePCStartDateTime) :
-                new ObjectParameter("EPCStartDateTime", typeof(System.DateTime));
-    
-            var filterValueParameter = filterValue.HasValue ?
-                new ObjectParameter("FilterValue", filterValue) :
-                new ObjectParameter("FilterValue", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GTIN_GetEPC_StanderCustomerALL_Result>("usp_GTIN_GetEPC_StanderCustomerALL", gtin14Parameter, qtyParameter, transactionParameter, schemaParameter, customerIdParameter, customerNameParameter, eventParameter, userIdParameter, serailParameter, ePCParameter, rPOParameter, detailLineNoParameter, customPara1Parameter, customPara2Parameter, gS1PrefixParameter, partitionValueParameter, ePCStartDateTimeParameter, filterValueParameter);
-        }
-    
-        public virtual ObjectResult<usp_GetEPCCounterForKiabi_PWD_Result> usp_GetEPCCounterForKiabi_PWD(Nullable<long> rPO, Nullable<long> detailNo)
-        {
-            var rPOParameter = rPO.HasValue ?
-                new ObjectParameter("RPO", rPO) :
-                new ObjectParameter("RPO", typeof(long));
-    
-            var detailNoParameter = detailNo.HasValue ?
-                new ObjectParameter("DetailNo", detailNo) :
-                new ObjectParameter("DetailNo", typeof(long));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetEPCCounterForKiabi_PWD_Result>("usp_GetEPCCounterForKiabi_PWD", rPOParameter, detailNoParameter);
-        }
-    
-        public virtual int usp_UpdateAssPassword_Kiabi(string xML)
-        {
-            var xMLParameter = xML != null ?
-                new ObjectParameter("XML", xML) :
-                new ObjectParameter("XML", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_UpdateAssPassword_Kiabi", xMLParameter);
         }
     }
 }

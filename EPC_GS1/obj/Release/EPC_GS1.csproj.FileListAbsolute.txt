@@ -28,6 +28,9 @@ C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC_GS1\bin\Release\DataAccessLayer.pdb
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC_GS1\bin\Release\RestSharp.xml
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC_GS1\bin\Release\EntityFramework.xml
-C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC_GS1\obj\Release\EPC_GS1.csprojResolveAssemblyReference.cache
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC_GS1\obj\Release\EPC_GS1.dll
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC_GS1\obj\Release\EPC_GS1.pdb
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC_GS1\bin\Release\DataAccessLayer.dll.config
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC_GS1\obj\Release\EPC_GS1.csproj.AssemblyReference.cache
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC_GS1\obj\Release\EPC_GS1.csproj.CoreCompileInputs.cache
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC_GS1\obj\Release\EPC_GS1.csproj.CopyComplete

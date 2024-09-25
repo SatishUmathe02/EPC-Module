@@ -48,7 +48,10 @@ C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Release\EPC_Kaibi.pdb
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Release\EntityFramework.xml
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Release\RestSharp.xml
-C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\obj\Release\EPCGerryWeber.csprojResolveAssemblyReference.cache
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\obj\Release\EPCGerryWeber.dll
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\obj\Release\EPCGerryWeber.pdb
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Release\Newtonsoft.Json.xml
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Release\DataAccessLayer.dll.config
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\obj\Release\EPCGerryWeber.csproj.AssemblyReference.cache
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\obj\Release\EPCGerryWeber.csproj.CoreCompileInputs.cache
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\obj\Release\EPCGerryWeber.csproj.CopyComplete

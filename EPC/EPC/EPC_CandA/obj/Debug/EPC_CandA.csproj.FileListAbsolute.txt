@@ -6,6 +6,9 @@ C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_CandA\bin\Debug\DataAccessLayer.pdb
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_CandA\bin\Debug\RestSharp.xml
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_CandA\bin\Debug\EntityFramework.xml
-C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_CandA\obj\Debug\EPC_CandA.csprojResolveAssemblyReference.cache
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_CandA\obj\Debug\EPC_CandA.dll
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_CandA\obj\Debug\EPC_CandA.pdb
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_CandA\bin\Debug\DataAccessLayer.dll.config
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_CandA\obj\Debug\EPC_CandA.csproj.AssemblyReference.cache
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_CandA\obj\Debug\EPC_CandA.csproj.CoreCompileInputs.cache
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_CandA\obj\Debug\EPC_CandA.csproj.CopyComplete

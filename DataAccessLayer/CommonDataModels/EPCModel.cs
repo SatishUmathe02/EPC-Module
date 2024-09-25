@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -273,4 +274,16 @@ namespace DataAccessLayer.CommonDataModels
 
     #endregion
 
+
+    #region CUSTOMER SETTING 
+    public class Customers
+    {
+        [Key] // Assuming Id is the primary key
+        public string CustomerId { get; set; }
+        public string AccessKey { get; set; }
+        public string KillKey { get; set; }
+
+
+    }
+    #endregion
 }

@@ -1,10 +1,18 @@
 ﻿using DataAccessLayer;
+using DataAccessLayer.CommonDataModels;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Runtime.InteropServices;
+using System.Runtime.Remoting;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace BussinessLayer
 {
@@ -426,7 +434,111 @@ namespace BussinessLayer
         }
 
         #endregion
-        
+
+
+        #region ACCESS PASSWORD
+       
+        public static async Task<EPCResponse> UpdateAccessPassword(EPCRequest Request, EPCResponse Response)
+        {
+            if(EPCPasswordBLL.CheckCustomerForAccessPassword(Request))
+            {
+              bool  flag = await EPCPasswordBLL.UpdatePassword(Request.RPO, Request.DetailLineID, Request.CustomerID);
+                if (!flag)
+                {
+                    Response = EPCBLL.GetError(122);
+                }
+            }
+
+            return Response;
+        }
+
+        private static bool CheckCustomerForAccessPassword(EPCRequest request)
+        {
+            List<Customers> ObjList = (from c in GetCustomerAccessPassord()
+                                       where c.CustomerId == request.CustomerID
+                                       select c).ToList();
+
+
+            return ObjList.Count() == 0 ? false : true;
+        }
+
+        private static List<Customers> GetCustomerAccessPassord()
+        {
+
+            string xmlContent = HttpContext.Current.Server.MapPath("~/App_Data/CustomerSetting.xml");// ConfigurationManager.AppSettings["CustomerSetting"].ToString();
+
+            List<Customers> ObjList = new List<Customers>();
+
+            try
+            {
+
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(xmlContent);
+
+                XmlNodeList customerNodes = xmlDoc.SelectNodes("/AccessPassword/Customer");
+                foreach (XmlNode customer in customerNodes)
+                {
+
+                    Customers Obj = new Customers();
+
+                    Obj.CustomerId = customer.Attributes["Id"].Value;
+                   
+                    ObjList.Add(Obj);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+            return ObjList;
+        }
+
+        private static async Task<bool> UpdatePassword(long RPO, long DetailNo, string CustomerId)
+        {
+            bool flag = false;
+            try
+            {
+                var epclist = EPCDAL.GetEPCCounterForAccessKillPassword(RPO, DetailNo, CustomerId);
+
+                StringBuilder xml = new StringBuilder();
+                if (epclist.Count == 0)
+                {
+                    flag = true;
+                }
+
+                if (epclist.Count > 0)
+                {
+                    xml.Append("<EPC>");
+                    foreach (var item in epclist)
+                    {
+                        xml.Append("<Password>");
+                        xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
+                        xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
+                        xml.Append("<EPC>" + item.EPC + "</EPC>");
+                        xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.AccHexKey) + "</AccesPwd>");
+                        xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.KillHexKey) + "</KillPwd>");
+                        xml.Append("</Password>");
+                    }
+                    xml.Append("</EPC>");
+                    EPCDAL.UpdatePassword(xml.ToString(), CustomerId);
+                    flag = true;
+
+                }
+            }
+            catch (Exception Ex)
+            {
+                EPCDAL.SaveErrorFileResponse(Ex.ToString(), "UpdatePassword");
+                flag = false;
+                EPCBLL.InsertLog(Ex, "UpdatePassword");
+            }
+
+            return flag;
+
+        }
+        #endregion
+
     }
 
 

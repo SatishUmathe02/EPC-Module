@@ -8,6 +8,9 @@ C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\bin\Release\EPC_GS1.pdb
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\bin\Release\RestSharp.xml
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\bin\Release\EntityFramework.xml
-C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\obj\Release\EPC_Kaibi.csprojResolveAssemblyReference.cache
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\obj\Release\EPC_Kaibi.dll
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\obj\Release\EPC_Kaibi.pdb
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\bin\Release\DataAccessLayer.dll.config
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\obj\Release\EPC_Kaibi.csproj.AssemblyReference.cache
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\obj\Release\EPC_Kaibi.csproj.CoreCompileInputs.cache
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Kaibi\obj\Release\EPC_Kaibi.csproj.CopyComplete

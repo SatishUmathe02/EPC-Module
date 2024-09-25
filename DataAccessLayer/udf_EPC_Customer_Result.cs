@@ -13,13 +13,11 @@ namespace DataAccessLayer
     
     public partial class udf_EPC_Customer_Result
     {
-        public Nullable<int> Id { get; set; }
         public string CustomerId { get; set; }
         public string CustomerName { get; set; }
         public string Schema { get; set; }
         public string NCZORE { get; set; }
         public string IsGS1 { get; set; }
         public string IsCustParam1 { get; set; }
-        public Nullable<int> Ver { get; set; }
     }
 }

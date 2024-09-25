@@ -10,6 +10,9 @@ C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Tempe\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Tempe\bin\Debug\RestSharp.xml
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Tempe\bin\Debug\EntityFramework.xml
-C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Tempe\obj\Debug\EPC_Tempe.csprojResolveAssemblyReference.cache
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Tempe\obj\Debug\EPC_Tempe.dll
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Tempe\obj\Debug\EPC_Tempe.pdb
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Tempe\bin\Debug\DataAccessLayer.dll.config
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Tempe\obj\Debug\EPC_Tempe.csproj.AssemblyReference.cache
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Tempe\obj\Debug\EPC_Tempe.csproj.CoreCompileInputs.cache
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Tempe\obj\Debug\EPC_Tempe.csproj.CopyComplete

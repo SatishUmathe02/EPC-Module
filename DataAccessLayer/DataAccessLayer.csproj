@@ -129,16 +129,22 @@
     <Compile Include="usp_GetDieselCTMS_Feedback_Data_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="usp_GetDiesel_Feedback_Data_Result.cs">
+    <Compile Include="usp_GetDieselCTMS_Feedback_Data_WASTED_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="usp_GetDiesel_Temera_Data_New_Result.cs">
+    <Compile Include="usp_GetDieselCTMS_Feedback_Data_With_WithOutTID_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GetDiesel_Feedback_Data_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_GetDiesel_Temera_Data_Old_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_GetDiesel_Temera_Data_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GetEPCCounterForAccessKillPassword_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_GetEPCCounterForAlvaroMorenoPWD_Result.cs">
@@ -231,7 +237,73 @@
     <Compile Include="usp_GTIN_GetEPC_StanderCustomerALL_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_18ROCKSLLC_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_1982_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_2GetherFashionBV_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_88INTERNATIONALINC_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_AANTILLC_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_Abcdcorp_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_Acupath_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_Adidas_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_Aeropostale_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_ALOYOGA_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_BatteryBiz_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_CapriGroup_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_Fila_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_MielooAlexander_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_nike_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="usp_GTIN_GetEPC_StanderCustomer_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_RichemontGroup_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_SAXX_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_Teamsports_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_WalgreensDatabase_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_XYZ1234_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_GTIN_GetEPC_StanderCustomer_XYZ123_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="usp_MK_Anexya_GetData_Feedback_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
     <Compile Include="usp_Name_Result.cs">

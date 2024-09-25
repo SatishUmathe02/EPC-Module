@@ -7,6 +7,8 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <_PublishTargetUrl>C:\Published-EPC</_PublishTargetUrl>
+    <History>True|2024-09-05T10:23:06.3531688Z;True|2024-09-05T15:04:25.7287134+05:30;True|2024-09-05T12:06:37.3369926+05:30;True|2024-09-05T11:33:57.4977821+05:30;True|2024-09-03T17:15:27.0165452+05:30;</History>
+    <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
@@ -15,20 +17,32 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>05/04/2023 21:24:17</publishTime>
     </File>
+    <File Include="bin/Antlr3.Runtime.pdb">
+      <publishTime>05/04/2023 21:24:17</publishTime>
+    </File>
     <File Include="bin/ApplicationInsights.config">
       <publishTime>05/04/2023 21:24:18</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>05/08/2024 17:15:23</publishTime>
+      <publishTime>09/05/2024 15:53:04</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>05/08/2024 17:15:22</publishTime>
+      <publishTime>09/05/2024 15:53:04</publishTime>
     </File>
     <File Include="bin/BussinessLayer.dll">
-      <publishTime>05/08/2024 17:15:15</publishTime>
+      <publishTime>09/05/2024 15:52:56</publishTime>
+    </File>
+    <File Include="bin/BussinessLayer.pdb">
+      <publishTime>09/05/2024 15:52:56</publishTime>
     </File>
     <File Include="bin/DataAccessLayer.dll">
-      <publishTime>05/08/2024 17:15:15</publishTime>
+      <publishTime>09/05/2024 15:52:56</publishTime>
+    </File>
+    <File Include="bin/DataAccessLayer.dll.config">
+      <publishTime>05/08/2024 16:44:27</publishTime>
+    </File>
+    <File Include="bin/DataAccessLayer.pdb">
+      <publishTime>09/05/2024 15:52:56</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>05/04/2023 21:24:17</publishTime>
@@ -40,22 +54,37 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/14/2019 10:27:56</publishTime>
     </File>
     <File Include="bin/EPCGerryWeber.dll">
-      <publishTime>05/08/2024 17:15:16</publishTime>
+      <publishTime>09/05/2024 15:52:56</publishTime>
+    </File>
+    <File Include="bin/EPCGerryWeber.pdb">
+      <publishTime>09/05/2024 15:52:56</publishTime>
     </File>
     <File Include="bin/EPC_CandA.dll">
-      <publishTime>05/08/2024 17:15:15</publishTime>
+      <publishTime>09/05/2024 15:52:56</publishTime>
+    </File>
+    <File Include="bin/EPC_CandA.pdb">
+      <publishTime>09/05/2024 15:52:56</publishTime>
     </File>
     <File Include="bin/EPC_GS1.dll">
-      <publishTime>05/08/2024 17:15:15</publishTime>
+      <publishTime>09/05/2024 15:52:56</publishTime>
+    </File>
+    <File Include="bin/EPC_GS1.pdb">
+      <publishTime>09/05/2024 15:52:56</publishTime>
     </File>
     <File Include="bin/EPC_Huguboss.dll">
       <publishTime>12/13/2023 17:42:55</publishTime>
     </File>
     <File Include="bin/EPC_Kaibi.dll">
-      <publishTime>05/08/2024 17:15:15</publishTime>
+      <publishTime>09/05/2024 15:52:56</publishTime>
+    </File>
+    <File Include="bin/EPC_Kaibi.pdb">
+      <publishTime>09/05/2024 15:52:56</publishTime>
     </File>
     <File Include="bin/EPC_Tempe.dll">
-      <publishTime>05/08/2024 17:15:15</publishTime>
+      <publishTime>09/05/2024 15:52:56</publishTime>
+    </File>
+    <File Include="bin/EPC_Tempe.pdb">
+      <publishTime>09/05/2024 15:52:56</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>05/04/2023 21:24:18</publishTime>
@@ -208,7 +237,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/04/2023 21:24:18</publishTime>
     </File>
     <File Include="bin/WebApi.dll">
-      <publishTime>05/08/2024 17:15:18</publishTime>
+      <publishTime>09/05/2024 15:52:59</publishTime>
+    </File>
+    <File Include="bin/WebApi.pdb">
+      <publishTime>09/05/2024 15:52:59</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>05/04/2023 21:24:18</publishTime>
@@ -277,7 +309,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/22/2024 14:39:53</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>05/08/2024 17:15:19</publishTime>
+      <publishTime>09/05/2024 15:53:00</publishTime>
     </File>
     <File Include="scripts/ai.0.22.9-build00167.js">
       <publishTime>05/04/2023 21:24:19</publishTime>
@@ -328,7 +360,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/04/2023 21:24:19</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/08/2024 17:15:18</publishTime>
+      <publishTime>09/05/2024 15:53:00</publishTime>
     </File>
   </ItemGroup>
 </Project>

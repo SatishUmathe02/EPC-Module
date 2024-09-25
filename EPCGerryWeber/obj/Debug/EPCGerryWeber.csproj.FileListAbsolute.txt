@@ -57,6 +57,8 @@ C:\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\RestSharp.xml
 C:\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\obj\Debug\EPCGerryWeber.csprojResolveAssemblyReference.cache
 C:\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\obj\Debug\EPCGerryWeber.dll
 C:\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\obj\Debug\EPCGerryWeber.pdb
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\obj\Debug\EPCGerryWeber.csproj.AssemblyReference.cache
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\obj\Debug\EPCGerryWeber.csproj.CoreCompileInputs.cache
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\EPCGerryWeber.dll
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\EPCGerryWeber.pdb
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\BussinessLayer.dll
@@ -70,12 +72,13 @@ C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\RestSharp.dll
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\BussinessLayer.pdb
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\DataAccessLayer.pdb
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\DataAccessLayer.dll.config
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\EPC_CandA.pdb
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\EPC_GS1.pdb
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\EPC_Kaibi.pdb
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\EntityFramework.xml
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\bin\Debug\RestSharp.xml
-C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\obj\Debug\EPCGerryWeber.csprojResolveAssemblyReference.cache
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\obj\Debug\EPCGerryWeber.csproj.CopyComplete
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\obj\Debug\EPCGerryWeber.dll
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPCGerryWeber\obj\Debug\EPCGerryWeber.pdb

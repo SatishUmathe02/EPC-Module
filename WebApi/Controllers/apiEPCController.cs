@@ -46,7 +46,7 @@ namespace WebApi.Controllers
 
             try
             {
-
+               
                 Request.RequestStartTime = System.DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff");
 
 
@@ -304,8 +304,14 @@ namespace WebApi.Controllers
                                 }
                                 break;
                             default:
+                                ObjRes = await EPCPasswordBLL.UpdateAccessPassword(Request, ObjRes);
                                 break;
                         }
+
+                        #endregion
+
+                        #region UPDATE ACESS PASSWORD V1
+
                         #endregion
 
                         return ObjRes;

@@ -274,6 +274,8 @@ C:\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\RestSharp.xml
 C:\SATISH\r-trac\Project-GIT\EPCModule\WebApi\obj\Debug\WebApi.csprojResolveAssemblyReference.cache
 C:\SATISH\r-trac\Project-GIT\EPCModule\WebApi\obj\Debug\WebApi.dll
 C:\SATISH\r-trac\Project-GIT\EPCModule\WebApi\obj\Debug\WebApi.pdb
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\obj\Debug\WebApi.csproj.AssemblyReference.cache
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\obj\Debug\WebApi.csproj.CoreCompileInputs.cache
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\ApplicationInsights.config
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\WebApi.dll.config
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\WebApi.dll
@@ -329,6 +331,7 @@ C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\RestSharp.dll
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\BussinessLayer.pdb
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\DataAccessLayer.pdb
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\DataAccessLayer.dll.config
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\EPCGerryWeber.pdb
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\EPC_Tempe.pdb
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\Antlr3.Runtime.pdb
@@ -347,6 +350,6 @@ C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\EPC_GS1.pdb
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\EPC_Kaibi.pdb
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\bin\RestSharp.xml
-C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\obj\Debug\WebApi.csprojResolveAssemblyReference.cache
+C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\obj\Debug\WebApi.csproj.CopyComplete
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\obj\Debug\WebApi.dll
 C:\Users\Satish.umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\WebApi\obj\Debug\WebApi.pdb

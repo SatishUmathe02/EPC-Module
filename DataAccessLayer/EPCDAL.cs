@@ -119,7 +119,7 @@ namespace DataAccessLayer
             catch (Exception ex)
             {
 
-               
+
             }
             return Obj;
         }
@@ -417,14 +417,14 @@ namespace DataAccessLayer
             {
                 using (EPC_DBEntities db = new EPC_DBEntities())
                 {
-                   
+
                     Obj = (from lst1 in db.usp_GetEPCDetails(CustomerId, Gtin, Qty, RPO, DetailLineNo) select lst1).ToList().FirstOrDefault();
 
                 }
             }
             catch (Exception ex)
             {
-                
+
             }
             return Obj;
         }
@@ -485,18 +485,18 @@ namespace DataAccessLayer
             {
                 using (EPC_DBEntities db = new EPC_DBEntities())
                 {
-                   
+
                     Obj = (from lst1 in db.ups_GetEPC_Customer_ADL(gtin14, RPO, DetailLineNo, qty, customerId, customerName, Event, UserId, CustomPara1, CustomPara2) select lst1).ToList().FirstOrDefault();
 
                 }
             }
             catch (Exception ex)
             {
-                               
+
             }
             return Obj;
         }
-        public static usp_EPC_Cust_ADL_Result usp_EPC_Cust_ADL(string gtin14, long SerialStart, long SerialEnd, string Schema, string transaction, string EPCStart, string EPCEnd, long qty,  string customerId, string customerName, string Event, long UserId,  string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, DateTime EPCStartDateTime, long Id, string NextEPC, long NextEPCSerial)
+        public static usp_EPC_Cust_ADL_Result usp_EPC_Cust_ADL(string gtin14, long SerialStart, long SerialEnd, string Schema, string transaction, string EPCStart, string EPCEnd, long qty, string customerId, string customerName, string Event, long UserId, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, DateTime EPCStartDateTime, long Id, string NextEPC, long NextEPCSerial)
         {
             usp_EPC_Cust_ADL_Result Obj = new usp_EPC_Cust_ADL_Result();
             try
@@ -504,7 +504,7 @@ namespace DataAccessLayer
                 using (EPC_DBEntities db = new EPC_DBEntities())
                 {
 
-                    Obj = (from lst1 in db.usp_EPC_Cust_ADL(gtin14, SerialStart,SerialEnd, Schema, transaction, EPCStart, EPCEnd, RPO, DetailLineNo, CustomPara1, CustomPara2, qty, customerId, customerName, Event, UserId, EPCStartDateTime,Id, NextEPC, NextEPCSerial) select lst1).ToList().FirstOrDefault();
+                    Obj = (from lst1 in db.usp_EPC_Cust_ADL(gtin14, SerialStart, SerialEnd, Schema, transaction, EPCStart, EPCEnd, RPO, DetailLineNo, CustomPara1, CustomPara2, qty, customerId, customerName, Event, UserId, EPCStartDateTime, Id, NextEPC, NextEPCSerial) select lst1).ToList().FirstOrDefault();
 
                 }
             }
@@ -514,9 +514,9 @@ namespace DataAccessLayer
             }
             return Obj;
         }
-        public static void EPC_InsertEPCLog(string gtin14, long SerialStart, long SerialEnd, string Schema, string transaction, string EPCStart, string EPCEnd, long qty, string customerId, string customerName, string Event, long UserId, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, DateTime EPCStartDateTime,string Remark)
+        public static void EPC_InsertEPCLog(string gtin14, long SerialStart, long SerialEnd, string Schema, string transaction, string EPCStart, string EPCEnd, long qty, string customerId, string customerName, string Event, long UserId, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, DateTime EPCStartDateTime, string Remark)
         {
-            
+
             try
             {
                 using (EPC_DBEntities db = new EPC_DBEntities())
@@ -530,7 +530,7 @@ namespace DataAccessLayer
             {
 
             }
-            
+
         }
         #endregion
 
@@ -568,6 +568,42 @@ namespace DataAccessLayer
         }
         #endregion
 
-                
+
+        #region GET ECP COUNTER DATA FRO PASSWORD
+
+        public static List<usp_GetEPCCounterForAccessKillPassword_Result> GetEPCCounterForAccessKillPassword(long RPO, long DetailNo, string CustomerId)
+        {
+            List<usp_GetEPCCounterForAccessKillPassword_Result> Obj = new List<usp_GetEPCCounterForAccessKillPassword_Result>();
+            using (EPC_DBEntities db = new EPC_DBEntities())
+            {
+
+                Obj = (from lst1 in db.usp_GetEPCCounterForAccessKillPassword(RPO, DetailNo, CustomerId) select lst1).ToList();
+            }
+            return Obj;
+        }
+        public static int UpdatePassword(string xml, string CustomerId)
+        {
+            try
+            {
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+
+                    db.usp_Update_Access_Kill_Password(xml, CustomerId);
+                }
+            }
+            catch (Exception ex)
+            {
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+
+                    db.usp_Update_Access_Kill_Password(xml, CustomerId);
+                }
+            }
+
+
+            return 0;
+        }
+        #endregion
+
     }
 }

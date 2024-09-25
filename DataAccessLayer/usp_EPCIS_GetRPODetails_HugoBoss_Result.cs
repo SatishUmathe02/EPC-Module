@@ -13,6 +13,7 @@ namespace DataAccessLayer
     
     public partial class usp_EPCIS_GetRPODetails_HugoBoss_Result
     {
+        public string varGTIN { get; set; }
         public long EPCLogId { get; set; }
         public string CustomerId { get; set; }
         public Nullable<long> RPO { get; set; }
@@ -24,5 +25,7 @@ namespace DataAccessLayer
         public long Qty { get; set; }
         public string epc_URN { get; set; }
         public string batchId { get; set; }
+        public System.DateTime Createdon { get; set; }
+        public int NumberOfEPCOneRequest { get; set; }
     }
 }
