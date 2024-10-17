@@ -305,6 +305,7 @@ namespace WebApi.Controllers
                                 break;
                             default:
                                 ObjRes = await EPCPasswordBLL.UpdateAccessPassword(Request, ObjRes);
+                                ObjRes = await EPCPasswordBLL.UpdateHexToBase64(Request, ObjRes);
                                 break;
                         }
 

@@ -145,6 +145,9 @@ namespace WebApi.Controllers
                     if (EPC_StanderCustomerBLL.CheckCustomerSPInEPC(Request.CustomerID))
                     {
                         EPCResponse ObjRes = EPC_StanderCustomerBLL.GetEPC_SC(Request);
+
+                        ObjRes = await EPCPasswordBLL.UpdateAccessPassword(Request, ObjRes);
+
                         return ObjRes;
                     }
                     else

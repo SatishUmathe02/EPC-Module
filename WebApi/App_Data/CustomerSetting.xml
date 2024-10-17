@@ -1,5 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<AccessPassword>
-  <Customer Id="OnCloud"></Customer>
-  <Customer Id=""></Customer>
-</AccessPassword>
+<Customers>
+  <AccessPassword>
+    <Customer Id="OnCloud"></Customer>
+    <Customer Id="CapriGroup"></Customer>
+  </AccessPassword>
+  <HexToBase64>
+    <Customer Id="MooseKnuckles"></Customer>
+  </HexToBase64>
+</Customers>
