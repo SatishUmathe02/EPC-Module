@@ -1310,5 +1310,16 @@
     <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_Moda" FunctionName="EPC_DBModel.Store.usp_UpdateAssPassword_Moda" />
     <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_TENDAM" FunctionName="EPC_DBModel.Store.usp_UpdateAssPassword_TENDAM" />
     <FunctionImportMapping FunctionImportName="usp_UpdateSerialNumber_CandA" FunctionName="EPC_DBModel.Store.usp_UpdateSerialNumber_CandA" />
+    <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForHexToBase64" FunctionName="EPC_DBModel.Store.usp_GetEPCCounterForHexToBase64">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetEPCCounterForHexToBase64_Result">
+          <ScalarProperty Name="bigintId" ColumnName="bigintId" />
+          <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
+          <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
+          <ScalarProperty Name="EPC" ColumnName="EPC" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_Update_HexToBase64" FunctionName="EPC_DBModel.Store.usp_Update_HexToBase64" />
   </EntityContainerMapping>
 </Mapping>

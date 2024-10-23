@@ -475,7 +475,7 @@ namespace BussinessLayer
                 XmlDocument xmlDoc = new XmlDocument();
                 xmlDoc.Load(xmlContent);
 
-                XmlNodeList customerNodes = xmlDoc.SelectNodes("/AccessPassword/Customer");
+                XmlNodeList customerNodes = xmlDoc.SelectNodes("Customers/AccessPassword/Customer");
                 foreach (XmlNode customer in customerNodes)
                 {
 
@@ -537,6 +537,130 @@ namespace BussinessLayer
             return flag;
 
         }
+        #endregion
+
+
+        #region HEX TO BASE65
+
+        public static async Task<EPCResponse> UpdateHexToBase64(EPCRequest Request, EPCResponse Response)
+        {
+            if (EPCPasswordBLL.CheckCustomerForHexToBase64(Request))
+            {
+                bool flag = await EPCPasswordBLL.UpdateHexToBase64(Request.RPO, Request.DetailLineID, Request.CustomerID);
+                if (!flag)
+                {
+                    Response = EPCBLL.GetError(122);
+                }
+            }
+
+            return Response;
+        }
+
+        private static bool CheckCustomerForHexToBase64(EPCRequest request)
+        {
+            List<Customers> ObjList = (from c in GetCustomerHexToBase64()
+                                       where c.CustomerId == request.CustomerID
+                                       select c).ToList();
+
+
+            return ObjList.Count() == 0 ? false : true;
+        }
+
+        private static List<Customers> GetCustomerHexToBase64()
+        {
+
+            string xmlContent = HttpContext.Current.Server.MapPath("~/App_Data/CustomerSetting.xml");// ConfigurationManager.AppSettings["CustomerSetting"].ToString();
+
+            List<Customers> ObjList = new List<Customers>();
+
+            try
+            {
+
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(xmlContent);
+
+                XmlNodeList customerNodes = xmlDoc.SelectNodes("Customers/HexToBase64/Customer");
+                foreach (XmlNode customer in customerNodes)
+                {
+
+                    Customers Obj = new Customers();
+
+                    Obj.CustomerId = customer.Attributes["Id"].Value;
+
+                    ObjList.Add(Obj);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+            return ObjList;
+        }
+
+        private static async Task<bool> UpdateHexToBase64(long RPO, long DetailNo, string CustomerId)
+        {
+            bool flag = false;
+            try
+            {
+                var epclist = EPCDAL.GetEPCCounterForHexToBase64(RPO, DetailNo, CustomerId);
+
+                StringBuilder xml = new StringBuilder();
+                if (epclist.Count == 0)
+                {
+                    flag = true;
+                }
+
+                if (epclist.Count > 0)
+                {
+                    xml.Append("<EPC>");
+                    foreach (var item in epclist)
+                    {
+                        xml.Append("<Password>");
+                        xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
+                        xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
+                        xml.Append("<EPC>" + item.EPC + "</EPC>");
+                        xml.Append("<AccesPwd>" + HexStringToBase64(item.EPC) + "</AccesPwd>");
+                        xml.Append("<KillPwd></KillPwd>");
+                        xml.Append("</Password>");
+                    }
+                    xml.Append("</EPC>");
+                    EPCDAL.UpdateHexToBase64(xml.ToString(), CustomerId);
+                    flag = true;
+
+                }
+            }
+            catch (Exception Ex)
+            {
+                EPCDAL.SaveErrorFileResponse(Ex.ToString(), "UpdatePassword");
+                flag = false;
+                EPCBLL.InsertLog(Ex, "UpdatePassword");
+            }
+
+            return flag;
+
+        }
+
+        private static string HexStringToBase64(string input)
+        {
+            byte[] text = HexStringToHex(input);
+            string _str = System.Convert.ToBase64String(text);
+                      
+            return _str;
+        }
+
+        private static byte[] HexStringToHex(string inputhex)
+        {
+            var resultantArray = new byte[inputhex.Length / 2];
+            for (int i = 0; i < resultantArray.Length; i++)
+            {
+                resultantArray[i] = System.Convert.ToByte(inputhex.Substring(i * 2, 2), 16);
+            }
+
+            return resultantArray;
+        }
+
         #endregion
 
     }

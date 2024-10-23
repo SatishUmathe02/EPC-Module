@@ -1215,6 +1215,15 @@
       <Parameter Name="GTIN" Mode="In" Type="String" />
       <Parameter Name="SerialStart" Mode="In" Type="Int64" />
     </FunctionImport>
+    <FunctionImport Name="usp_GetEPCCounterForHexToBase64" ReturnType="Collection(EPC_DBModel.usp_GetEPCCounterForHexToBase64_Result)">
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Update_HexToBase64">
+      <Parameter Name="XML" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="ups_GetEPC_Customer_ADL_Result">
     <Property Type="Int64" Name="bigintPtrId" Nullable="false" />
@@ -2153,5 +2162,11 @@
     <Property Type="String" Name="NCZORE" Nullable="true" MaxLength="10" />
     <Property Type="String" Name="IsGS1" Nullable="true" MaxLength="10" />
     <Property Type="String" Name="IsCustParam1" Nullable="true" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="usp_GetEPCCounterForHexToBase64_Result">
+    <Property Type="Int64" Name="bigintId" Nullable="false" />
+    <Property Type="Int64" Name="bigIntRPO" Nullable="false" />
+    <Property Type="Int64" Name="bigIntDetailLineID" Nullable="false" />
+    <Property Type="String" Name="EPC" Nullable="false" MaxLength="250" />
   </ComplexType>
 </Schema>

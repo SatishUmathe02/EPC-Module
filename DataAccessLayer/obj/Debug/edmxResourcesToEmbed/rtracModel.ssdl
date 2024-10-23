@@ -847,6 +847,11 @@
     <Parameter Name="RPO" Type="bigint" Mode="In" />
     <Parameter Name="DetailNo" Type="bigint" Mode="In" />
   </Function>
+  <Function Name="usp_GetEPCCounterForHexToBase64" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RPO" Type="bigint" Mode="In" />
+    <Parameter Name="DetailNo" Type="bigint" Mode="In" />
+    <Parameter Name="CustomerId" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="usp_GetEPCCounterForKiabi_PWD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="RPO" Type="bigint" Mode="In" />
     <Parameter Name="DetailNo" Type="bigint" Mode="In" />
@@ -1665,6 +1670,10 @@
     <Parameter Name="RPO" Type="bigint" Mode="In" />
   </Function>
   <Function Name="usp_Update_Access_Kill_Password" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="XML" Type="xml" Mode="In" />
+    <Parameter Name="CustomerId" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Update_HexToBase64" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="XML" Type="xml" Mode="In" />
     <Parameter Name="CustomerId" Type="varchar" Mode="In" />
   </Function>

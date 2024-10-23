@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EPC_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EPC_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <Function Name="Accespwd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar(max)">
           <Parameter Name="Counter" Type="bigint" Mode="In" />
           <Parameter Name="key" Type="bigint" Mode="In" />
@@ -852,6 +852,11 @@
           <Parameter Name="RPO" Type="bigint" Mode="In" />
           <Parameter Name="DetailNo" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="usp_GetEPCCounterForHexToBase64" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RPO" Type="bigint" Mode="In" />
+          <Parameter Name="DetailNo" Type="bigint" Mode="In" />
+          <Parameter Name="CustomerId" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="usp_GetEPCCounterForKiabi_PWD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="RPO" Type="bigint" Mode="In" />
           <Parameter Name="DetailNo" Type="bigint" Mode="In" />
@@ -1673,6 +1678,10 @@
           <Parameter Name="XML" Type="xml" Mode="In" />
           <Parameter Name="CustomerId" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="usp_Update_HexToBase64" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="XML" Type="xml" Mode="In" />
+          <Parameter Name="CustomerId" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="usp_UpdateAssPassword_Kiabi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="XML" Type="xml" Mode="In" />
         </Function>
@@ -1691,8 +1700,7 @@
           <Parameter Name="SerialStart" Type="bigint" Mode="In" />
         </Function>
         <EntityContainer Name="EPC_DBModelStoreContainer" />
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EPC_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1756,7 +1764,7 @@
             <Parameter Name="OrgId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="usp_CheckSPForStatnderCustomer" ReturnType="Collection(Int32)">
-            <Parameter Name="CustomerId" Mode="In" Type="String" />
+          <Parameter Name="CustomerId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_EPC_Cust_ADL" ReturnType="Collection(EPC_DBModel.usp_EPC_Cust_ADL_Result)">
             <Parameter Name="gtin14" Mode="In" Type="String" />
@@ -2004,20 +2012,20 @@
           </FunctionImport>
           <FunctionImport Name="USP_EPCIS_Customer" ReturnType="Collection(EPC_DBModel.USP_EPCIS_Customer_Result)" />
           <FunctionImport Name="usp_EPCIS_GetEP_URN" ReturnType="Collection(EPC_DBModel.usp_EPCIS_GetEP_URN_Result)">
-            <Parameter Name="CustomerId" Mode="In" Type="String" />
+          <Parameter Name="CustomerId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_EPCIS_GetEPC_Temera_FB_UpdateFlag">
-            <Parameter Name="json" Mode="In" Type="String" />
+          <Parameter Name="json" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_EPCIS_GetEPC_URN_RPO" ReturnType="Collection(EPC_DBModel.usp_EPCIS_GetEPC_URN_RPO_Result)">
             <Parameter Name="CustomerId" Mode="In" Type="String" />
             <Parameter Name="RPO" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="usp_EPCIS_GetRPO" ReturnType="Collection(Int64)">
-            <Parameter Name="CustomerId" Mode="In" Type="String" />
+          <Parameter Name="CustomerId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_EPCIS_GetRPODetails_HugoBoss" ReturnType="Collection(EPC_DBModel.usp_EPCIS_GetRPODetails_HugoBoss_Result)">
-            <Parameter Name="CustomerId" Mode="In" Type="String" />
+          <Parameter Name="CustomerId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_EPCIS_InsertLog">
             <Parameter Name="xml" Mode="In" Type="String" />
@@ -2033,13 +2041,13 @@
           </FunctionImport>
           <FunctionImport Name="usp_GetCandA_SGTIN_List" ReturnType="Collection(EPC_DBModel.usp_GetCandA_SGTIN_List_Result)" />
           <FunctionImport Name="usp_GetCheckSerialNoLastUsed_CandA" ReturnType="Collection(EPC_DBModel.usp_GetCheckSerialNoLastUsed_CandA_Result)">
-            <Parameter Name="GTIN" Mode="In" Type="String" />
+          <Parameter Name="GTIN" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_GetCustomerCount" ReturnType="Collection(String)" />
           <FunctionImport Name="usp_GetCustomerWithGTIN_Parameters" ReturnType="Collection(EPC_DBModel.usp_GetCustomerWithGTIN_Parameters_Result)" />
           <FunctionImport Name="usp_GetDiesel_Feedback_Data" ReturnType="Collection(EPC_DBModel.usp_GetDiesel_Feedback_Data_Result)" />
           <FunctionImport Name="usp_GetDiesel_Temera_Data" ReturnType="Collection(EPC_DBModel.usp_GetDiesel_Temera_Data_Result)">
-            <Parameter Name="OrgId" Mode="In" Type="Int64" />
+          <Parameter Name="OrgId" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="usp_GetDiesel_Temera_Data_Old" ReturnType="Collection(EPC_DBModel.usp_GetDiesel_Temera_Data_Old_Result)" />
           <FunctionImport Name="usp_GetDieselCTMS_Feedback_Data" ReturnType="Collection(EPC_DBModel.usp_GetDieselCTMS_Feedback_Data_Result)" />
@@ -2051,7 +2059,7 @@
             <Parameter Name="CustomerId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_GetEPCCounter" ReturnType="Collection(EPC_DBModel.usp_GetEPCCounter_Result)">
-            <Parameter Name="RPO" Mode="In" Type="Int64" />
+          <Parameter Name="RPO" Mode="In" Type="Int64" />
           </FunctionImport>
           <FunctionImport Name="usp_GetEPCCounter_RPO_SerialNum" ReturnType="Collection(EPC_DBModel.usp_GetEPCCounter_RPO_SerialNum_Result)">
             <Parameter Name="GTIN" Mode="In" Type="String" />
@@ -2867,10 +2875,10 @@
           </FunctionImport>
           <FunctionImport Name="usp_MK_Anexya_GetData_Feedback" ReturnType="Collection(EPC_DBModel.usp_MK_Anexya_GetData_Feedback_Result)" />
           <FunctionImport Name="usp_MK_Anexya_UpdateFlag">
-            <Parameter Name="xml" Mode="In" Type="String" />
+          <Parameter Name="xml" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_Name" ReturnType="Collection(EPC_DBModel.usp_Name_Result)">
-            <Parameter Name="xyz" Mode="In" Type="String" />
+          <Parameter Name="xyz" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="USP_rtrac_InsertEPCReqRes">
             <Parameter Name="CustomerId" Mode="In" Type="String" />
@@ -2895,21 +2903,30 @@
             <Parameter Name="CustomerId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_UpdateAssPassword_Kiabi">
-            <Parameter Name="XML" Mode="In" Type="String" />
+          <Parameter Name="XML" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_UpdateAssPassword_MANGO">
-            <Parameter Name="XML" Mode="In" Type="String" />
+          <Parameter Name="XML" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_UpdateAssPassword_Moda">
-            <Parameter Name="XML" Mode="In" Type="String" />
+          <Parameter Name="XML" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_UpdateAssPassword_TENDAM">
-            <Parameter Name="XML" Mode="In" Type="String" />
+          <Parameter Name="XML" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="usp_UpdateSerialNumber_CandA">
             <Parameter Name="Qty" Mode="In" Type="Int32" />
             <Parameter Name="GTIN" Mode="In" Type="String" />
             <Parameter Name="SerialStart" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetEPCCounterForHexToBase64" ReturnType="Collection(EPC_DBModel.usp_GetEPCCounterForHexToBase64_Result)">
+            <Parameter Name="RPO" Mode="In" Type="Int64" />
+            <Parameter Name="DetailNo" Mode="In" Type="Int64" />
+            <Parameter Name="CustomerId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_Update_HexToBase64">
+            <Parameter Name="XML" Mode="In" Type="String" />
+            <Parameter Name="CustomerId" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="ups_GetEPC_Customer_ADL_Result">
@@ -3849,6 +3866,12 @@
           <Property Type="String" Name="NCZORE" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="IsGS1" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="IsCustParam1" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="usp_GetEPCCounterForHexToBase64_Result">
+          <Property Type="Int64" Name="bigintId" Nullable="false" />
+          <Property Type="Int64" Name="bigIntRPO" Nullable="false" />
+          <Property Type="Int64" Name="bigIntDetailLineID" Nullable="false" />
+          <Property Type="String" Name="EPC" Nullable="false" MaxLength="250" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -5165,6 +5188,17 @@
           <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_Moda" FunctionName="EPC_DBModel.Store.usp_UpdateAssPassword_Moda" />
           <FunctionImportMapping FunctionImportName="usp_UpdateAssPassword_TENDAM" FunctionName="EPC_DBModel.Store.usp_UpdateAssPassword_TENDAM" />
           <FunctionImportMapping FunctionImportName="usp_UpdateSerialNumber_CandA" FunctionName="EPC_DBModel.Store.usp_UpdateSerialNumber_CandA" />
+          <FunctionImportMapping FunctionImportName="usp_GetEPCCounterForHexToBase64" FunctionName="EPC_DBModel.Store.usp_GetEPCCounterForHexToBase64">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EPC_DBModel.usp_GetEPCCounterForHexToBase64_Result">
+                <ScalarProperty Name="bigintId" ColumnName="bigintId" />
+                <ScalarProperty Name="bigIntRPO" ColumnName="bigIntRPO" />
+                <ScalarProperty Name="bigIntDetailLineID" ColumnName="bigIntDetailLineID" />
+                <ScalarProperty Name="EPC" ColumnName="EPC" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_Update_HexToBase64" FunctionName="EPC_DBModel.Store.usp_Update_HexToBase64" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

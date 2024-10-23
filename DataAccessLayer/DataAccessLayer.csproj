@@ -153,6 +153,9 @@
     <Compile Include="usp_GetEPCCounterForCharangaPWD_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="usp_GetEPCCounterForHexToBase64_Result.cs">
+      <DependentUpon>rtracModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="usp_GetEPCCounterForKiabi_PWD_Result.cs">
       <DependentUpon>rtracModel.tt</DependentUpon>
     </Compile>

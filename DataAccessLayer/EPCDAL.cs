@@ -605,5 +605,42 @@ namespace DataAccessLayer
         }
         #endregion
 
+
+        #region GET ECP COUNTER DATA FRO HEX TO BASE 64
+
+        public static List<usp_GetEPCCounterForHexToBase64_Result> GetEPCCounterForHexToBase64(long RPO, long DetailNo, string CustomerId)
+        {
+            List<usp_GetEPCCounterForHexToBase64_Result> Obj = new List<usp_GetEPCCounterForHexToBase64_Result>();
+            using (EPC_DBEntities db = new EPC_DBEntities())
+            {
+
+                Obj = (from lst1 in db.usp_GetEPCCounterForHexToBase64(RPO, DetailNo, CustomerId) select lst1).ToList();
+            }
+            return Obj;
+        }
+        public static int UpdateHexToBase64(string xml, string CustomerId)
+        {
+            try
+            {
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+
+                    db.usp_Update_HexToBase64(xml, CustomerId);
+                }
+            }
+            catch (Exception ex)
+            {
+                using (EPC_DBEntities db = new EPC_DBEntities())
+                {
+
+                    db.usp_Update_HexToBase64(xml, CustomerId);
+                }
+            }
+
+
+            return 0;
+        }
+        #endregion
+
     }
 }

@@ -1,14 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="EPC_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <ComplexType Name="udf_EPC_Customer_Result">
-    <Property Name="Id" Type="Int32" />
     <Property Name="CustomerId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="CustomerName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
     <Property Name="Schema" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="NCZORE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="IsGS1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="IsCustParam1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Name="Ver" Type="Int32" />
   </ComplexType>
   <ComplexType Name="udf_GTIN_PartitionTable_Result">
     <Property Name="PartitionValue" Type="Int32" />
@@ -60,6 +58,9 @@
       <Parameter Name="Certilogo" Mode="In" Type="String" />
       <Parameter Name="QrCode" Mode="In" Type="String" />
       <Parameter Name="OrgId" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="usp_CheckSPForStatnderCustomer" ReturnType="Collection(Int32)">
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="usp_EPC_Cust_ADL" ReturnType="Collection(EPC_DBModel.usp_EPC_Cust_ADL_Result)">
       <Parameter Name="gtin14" Mode="In" Type="String" />
@@ -167,7 +168,49 @@
       <Parameter Name="CustomPara2" Mode="In" Type="String" />
       <Parameter Name="Result" Mode="InOut" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="usp_EPC_Cust_Kiabi">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="serial_number_Start" Mode="In" Type="Int64" />
+      <Parameter Name="serial_number_End" Mode="In" Type="Int64" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="Partition" Mode="In" Type="Int32" />
+      <Parameter Name="Result" Mode="InOut" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="usp_EPC_Cust_MANGO">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="serial_number_Start" Mode="In" Type="Int64" />
+      <Parameter Name="serial_number_End" Mode="In" Type="Int64" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="Partition" Mode="In" Type="Int32" />
+      <Parameter Name="Result" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_EPC_Cust_MooseKnuckles">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="serial_number_Start" Mode="In" Type="Int64" />
+      <Parameter Name="serial_number_End" Mode="In" Type="Int64" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="Partition" Mode="In" Type="Int32" />
+      <Parameter Name="Result" Mode="InOut" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_EPC_Cust_OnCloud">
       <Parameter Name="gtin14" Mode="In" Type="String" />
       <Parameter Name="serial_number_Start" Mode="In" Type="Int64" />
       <Parameter Name="serial_number_End" Mode="In" Type="Int64" />
@@ -228,19 +271,6 @@
     <FunctionImport Name="usp_EPC_Cust_TEMPE_DecodeEPC" ReturnType="Collection(EPC_DBModel.usp_EPC_Cust_TEMPE_DecodeEPC_Result)">
       <Parameter Name="rpo" Mode="In" Type="Int64" />
       <Parameter Name="EPC" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="usp_EPC_Cust_TEMPE_Test">
-      <Parameter Name="gtin14" Mode="In" Type="String" />
-      <Parameter Name="serial_number_Start" Mode="In" Type="Int64" />
-      <Parameter Name="serial_number_End" Mode="In" Type="Int64" />
-      <Parameter Name="Schema" Mode="In" Type="String" />
-      <Parameter Name="Transaction" Mode="In" Type="String" />
-      <Parameter Name="EPC" Mode="In" Type="String" />
-      <Parameter Name="RPO" Mode="In" Type="Int64" />
-      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
-      <Parameter Name="CustomPara1" Mode="In" Type="String" />
-      <Parameter Name="CustomPara2" Mode="In" Type="String" />
-      <Parameter Name="Result" Mode="InOut" Type="String" />
     </FunctionImport>
     <FunctionImport Name="usp_EPC_Cust_TENDAM">
       <Parameter Name="gtin14" Mode="In" Type="String" />
@@ -315,12 +345,11 @@
     <FunctionImport Name="usp_GetDiesel_Temera_Data" ReturnType="Collection(EPC_DBModel.usp_GetDiesel_Temera_Data_Result)">
       <Parameter Name="OrgId" Mode="In" Type="Int64" />
     </FunctionImport>
-    <FunctionImport Name="usp_GetDiesel_Temera_Data_New" ReturnType="Collection(EPC_DBModel.usp_GetDiesel_Temera_Data_New_Result)">
-      <Parameter Name="OrgId" Mode="In" Type="Int64" />
-    </FunctionImport>
     <FunctionImport Name="usp_GetDiesel_Temera_Data_Old" ReturnType="Collection(EPC_DBModel.usp_GetDiesel_Temera_Data_Old_Result)" />
     <FunctionImport Name="usp_GetDieselCTMS_Feedback_Data" ReturnType="Collection(EPC_DBModel.usp_GetDieselCTMS_Feedback_Data_Result)" />
     <FunctionImport Name="usp_GetDieselCTMS_Feedback_Data_Old" ReturnType="Collection(EPC_DBModel.usp_GetDieselCTMS_Feedback_Data_Old_Result)" />
+    <FunctionImport Name="usp_GetDieselCTMS_Feedback_Data_WASTED" ReturnType="Collection(EPC_DBModel.usp_GetDieselCTMS_Feedback_Data_WASTED_Result)" />
+    <FunctionImport Name="usp_GetDieselCTMS_Feedback_Data_With_WithOutTID" ReturnType="Collection(EPC_DBModel.usp_GetDieselCTMS_Feedback_Data_With_WithOutTID_Result)" />
     <FunctionImport Name="usp_GetEPCCount_with_YY_Customer" ReturnType="Collection(EPC_DBModel.usp_GetEPCCount_with_YY_Customer_Result)">
       <Parameter Name="YY" Mode="In" Type="String" />
       <Parameter Name="CustomerId" Mode="In" Type="String" />
@@ -335,11 +364,20 @@
       <Parameter Name="SerialStart" Mode="In" Type="Int64" />
       <Parameter Name="SerialEnd" Mode="In" Type="Int64" />
     </FunctionImport>
+    <FunctionImport Name="usp_GetEPCCounterForAccessKillPassword" ReturnType="Collection(EPC_DBModel.usp_GetEPCCounterForAccessKillPassword_Result)">
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="usp_GetEPCCounterForAlvaroMorenoPWD" ReturnType="Collection(EPC_DBModel.usp_GetEPCCounterForAlvaroMorenoPWD_Result)">
       <Parameter Name="RPO" Mode="In" Type="Int64" />
       <Parameter Name="DetailNo" Mode="In" Type="Int64" />
     </FunctionImport>
     <FunctionImport Name="usp_GetEPCCounterForCharangaPWD" ReturnType="Collection(EPC_DBModel.usp_GetEPCCounterForCharangaPWD_Result)">
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailNo" Mode="In" Type="Int64" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetEPCCounterForKiabi_PWD" ReturnType="Collection(EPC_DBModel.usp_GetEPCCounterForKiabi_PWD_Result)">
       <Parameter Name="RPO" Mode="In" Type="Int64" />
       <Parameter Name="DetailNo" Mode="In" Type="Int64" />
     </FunctionImport>
@@ -388,18 +426,12 @@
       <Parameter Name="CustomerId" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="usp_GS1_GTIN" ReturnType="Collection(EPC_DBModel.usp_GS1_GTIN_Result)" />
-    <FunctionImport Name="usp_GS1_GTIN_TEST" />
     <FunctionImport Name="usp_GS1_Insert" ReturnType="Collection(EPC_DBModel.usp_GS1_Insert_Result)">
       <Parameter Name="gtin14" Mode="In" Type="String" />
       <Parameter Name="CustomerId" Mode="In" Type="String" />
       <Parameter Name="json" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="usp_GS1_InsertUpdatePartition">
-      <Parameter Name="gtin14" Mode="In" Type="String" />
-      <Parameter Name="CustomerId" Mode="In" Type="String" />
-      <Parameter Name="json" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="usp_GS1_InsertUpdatePartition_TEST">
       <Parameter Name="gtin14" Mode="In" Type="String" />
       <Parameter Name="CustomerId" Mode="In" Type="String" />
       <Parameter Name="json" Mode="In" Type="String" />
@@ -645,6 +677,446 @@
       <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
       <Parameter Name="FilterValue" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer_18ROCKSLLC" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_18ROCKSLLC_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer_1982" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_1982_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer_2GetherFashionBV" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_2GetherFashionBV_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer_88INTERNATIONALINC" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_88INTERNATIONALINC_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer_AANTILLC" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_AANTILLC_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer_Abcdcorp" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_Abcdcorp_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer_Acupath" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_Acupath_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer_Adidas" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_Adidas_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer_Aeropostale" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_Aeropostale_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer_ALOYOGA" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_ALOYOGA_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer_BatteryBiz" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_BatteryBiz_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer_CapriGroup" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_CapriGroup_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer_Fila" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_Fila_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer_MielooAlexander" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_MielooAlexander_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer_nike" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_nike_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer_RichemontGroup" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_RichemontGroup_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer_SAXX" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_SAXX_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer_Teamsports" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_Teamsports_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer_WalgreensDatabase" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_WalgreensDatabase_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer_XYZ123" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_XYZ123_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomer_XYZ1234" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomer_XYZ1234_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomerALL" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomerALL_Result)">
+      <Parameter Name="gtin14" Mode="In" Type="String" />
+      <Parameter Name="Qty" Mode="In" Type="Int64" />
+      <Parameter Name="Transaction" Mode="In" Type="String" />
+      <Parameter Name="Schema" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="Event" Mode="In" Type="String" />
+      <Parameter Name="UserId" Mode="In" Type="Int64" />
+      <Parameter Name="Serail" Mode="In" Type="Int64" />
+      <Parameter Name="EPC" Mode="In" Type="String" />
+      <Parameter Name="RPO" Mode="In" Type="Int64" />
+      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomPara1" Mode="In" Type="String" />
+      <Parameter Name="CustomPara2" Mode="In" Type="String" />
+      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
+      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
+      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
+      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
+    </FunctionImport>
     <FunctionImport Name="usp_GTIN_GetEPCTest" ReturnType="Collection(Int32)" />
     <FunctionImport Name="USP_GTIN_InsertEPCReqRes">
       <Parameter Name="CustomerId" Mode="In" Type="String" />
@@ -692,6 +1164,15 @@
       <Parameter Name="bigIntCreatedById" Mode="In" Type="Int64" />
       <Parameter Name="dtCreatedOn" Mode="In" Type="DateTime" />
     </FunctionImport>
+    <FunctionImport Name="usp_InsertMK_AnexyaID">
+      <Parameter Name="json" Mode="In" Type="String" />
+      <Parameter Name="DropBoxLink" Mode="In" Type="String" />
+      <Parameter Name="FileName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_MK_Anexya_GetData_Feedback" ReturnType="Collection(EPC_DBModel.usp_MK_Anexya_GetData_Feedback_Result)" />
+    <FunctionImport Name="usp_MK_Anexya_UpdateFlag">
+      <Parameter Name="xml" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="usp_Name" ReturnType="Collection(EPC_DBModel.usp_Name_Result)">
       <Parameter Name="xyz" Mode="In" Type="String" />
     </FunctionImport>
@@ -713,7 +1194,13 @@
       <Parameter Name="rfidRequestId" Mode="In" Type="String" />
       <Parameter Name="RPO" Mode="In" Type="Int64" />
     </FunctionImport>
-    <FunctionImport Name="usp_TestUpdate" />
+    <FunctionImport Name="usp_Update_Access_Kill_Password">
+      <Parameter Name="XML" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UpdateAssPassword_Kiabi">
+      <Parameter Name="XML" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="usp_UpdateAssPassword_MANGO">
       <Parameter Name="XML" Mode="In" Type="String" />
     </FunctionImport>
@@ -728,35 +1215,14 @@
       <Parameter Name="GTIN" Mode="In" Type="String" />
       <Parameter Name="SerialStart" Mode="In" Type="Int64" />
     </FunctionImport>
-    <FunctionImport Name="usp_CheckSPForStatnderCustomer" ReturnType="Collection(Int32)">
-      <Parameter Name="CustomerId" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="usp_GTIN_GetEPC_StanderCustomerALL" ReturnType="Collection(EPC_DBModel.usp_GTIN_GetEPC_StanderCustomerALL_Result)">
-      <Parameter Name="gtin14" Mode="In" Type="String" />
-      <Parameter Name="Qty" Mode="In" Type="Int64" />
-      <Parameter Name="Transaction" Mode="In" Type="String" />
-      <Parameter Name="Schema" Mode="In" Type="String" />
-      <Parameter Name="CustomerId" Mode="In" Type="String" />
-      <Parameter Name="CustomerName" Mode="In" Type="String" />
-      <Parameter Name="Event" Mode="In" Type="String" />
-      <Parameter Name="UserId" Mode="In" Type="Int64" />
-      <Parameter Name="Serail" Mode="In" Type="Int64" />
-      <Parameter Name="EPC" Mode="In" Type="String" />
-      <Parameter Name="RPO" Mode="In" Type="Int64" />
-      <Parameter Name="DetailLineNo" Mode="In" Type="Int64" />
-      <Parameter Name="CustomPara1" Mode="In" Type="String" />
-      <Parameter Name="CustomPara2" Mode="In" Type="String" />
-      <Parameter Name="GS1Prefix" Mode="In" Type="String" />
-      <Parameter Name="PartitionValue" Mode="In" Type="Int32" />
-      <Parameter Name="EPCStartDateTime" Mode="In" Type="DateTime" />
-      <Parameter Name="FilterValue" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="usp_GetEPCCounterForKiabi_PWD" ReturnType="Collection(EPC_DBModel.usp_GetEPCCounterForKiabi_PWD_Result)">
+    <FunctionImport Name="usp_GetEPCCounterForHexToBase64" ReturnType="Collection(EPC_DBModel.usp_GetEPCCounterForHexToBase64_Result)">
       <Parameter Name="RPO" Mode="In" Type="Int64" />
       <Parameter Name="DetailNo" Mode="In" Type="Int64" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="usp_UpdateAssPassword_Kiabi">
+    <FunctionImport Name="usp_Update_HexToBase64">
       <Parameter Name="XML" Mode="In" Type="String" />
+      <Parameter Name="CustomerId" Mode="In" Type="String" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="ups_GetEPC_Customer_ADL_Result">
@@ -827,6 +1293,7 @@
     <Property Type="Int64" Name="Qty" Nullable="false" />
   </ComplexType>
   <ComplexType Name="usp_EPCIS_GetRPODetails_HugoBoss_Result">
+    <Property Type="String" Name="varGTIN" Nullable="false" MaxLength="50" />
     <Property Type="Int64" Name="EPCLogId" Nullable="false" />
     <Property Type="String" Name="CustomerId" Nullable="false" MaxLength="50" />
     <Property Type="Int64" Name="RPO" Nullable="true" />
@@ -838,6 +1305,8 @@
     <Property Type="Int64" Name="Qty" Nullable="false" />
     <Property Type="String" Name="epc_URN" Nullable="true" MaxLength="500" />
     <Property Type="String" Name="batchId" Nullable="true" />
+    <Property Type="DateTime" Name="Createdon" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="NumberOfEPCOneRequest" Nullable="false" />
   </ComplexType>
   <ComplexType Name="usp_GetCandA_SGTIN_List_Result">
     <Property Type="String" Name="gtin" Nullable="true" MaxLength="50" />
@@ -859,39 +1328,19 @@
   </ComplexType>
   <ComplexType Name="usp_GetDiesel_Feedback_Data_Result">
     <Property Type="String" Name="varQuantita" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="varCustItemCode" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="varCustItemCode" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="varDescrizioneModelloParte" Nullable="true" MaxLength="500" />
     <Property Type="String" Name="varColore" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="varTaglia" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="EPC" Nullable="false" />
+    <Property Type="String" Name="EPC" Nullable="false" MaxLength="250" />
     <Property Type="String" Name="varCertilogo_code" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="varQR_code" Nullable="true" MaxLength="350" />
     <Property Type="String" Name="varNFC" Nullable="true" MaxLength="500" />
   </ComplexType>
   <ComplexType Name="usp_GetDiesel_Temera_Data_Result">
-    <Property Type="String" Name="EPC" Nullable="false" />
+    <Property Type="String" Name="EPC" Nullable="false" MaxLength="250" />
     <Property Type="String" Name="TID" Nullable="false" MaxLength="1" />
-    <Property Type="String" Name="MediaType" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="EAN13" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="WorkOrder" Nullable="true" MaxLength="500" />
-    <Property Type="String" Name="AddOn" Nullable="false" MaxLength="1" />
-    <Property Type="String" Name="CLG" Nullable="true" MaxLength="250" />
-    <Property Type="String" Name="UID" Nullable="false" MaxLength="1" />
-    <Property Type="Int64" Name="PlantEncoder" Nullable="true" />
-    <Property Type="Int32" Name="EncodingTimestamp" Nullable="true" />
-    <Property Type="Int64" Name="RPacLotNumber" Nullable="true" />
-    <Property Type="String" Name="DestinationWorker" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="ShippingDate" Nullable="true" MaxLength="4000" />
-    <Property Type="String" Name="MadeIn" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="WorkOrderWorker" Nullable="true" MaxLength="500" />
-    <Property Type="Int64" Name="DetailNo" Nullable="false" />
-    <Property Type="Int64" Name="Id" Nullable="false" />
-    <Property Type="String" Name="GTIN" Nullable="false" MaxLength="50" />
-  </ComplexType>
-  <ComplexType Name="usp_GetDiesel_Temera_Data_New_Result">
-    <Property Type="String" Name="EPC" Nullable="false" />
-    <Property Type="String" Name="TID" Nullable="false" MaxLength="1" />
-    <Property Type="String" Name="MediaType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MediaType" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="EAN13" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="WorkOrder" Nullable="true" MaxLength="500" />
     <Property Type="String" Name="AddOn" Nullable="false" MaxLength="1" />
@@ -911,7 +1360,7 @@
   <ComplexType Name="usp_GetDiesel_Temera_Data_Old_Result">
     <Property Type="String" Name="EPC" Nullable="false" />
     <Property Type="String" Name="TID" Nullable="false" MaxLength="1" />
-    <Property Type="String" Name="MediaType" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="MediaType" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="EAN13" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="WorkOrder" Nullable="true" MaxLength="500" />
     <Property Type="String" Name="AddOn" Nullable="false" MaxLength="1" />
@@ -924,16 +1373,16 @@
     <Property Type="String" Name="ShippingDate" Nullable="true" MaxLength="4000" />
     <Property Type="String" Name="MadeIn" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="WorkOrderWorker" Nullable="true" MaxLength="500" />
-    <Property Type="String" Name="varCustItemCode" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="varCustItemCode" Nullable="true" MaxLength="100" />
   </ComplexType>
   <ComplexType Name="usp_GetDieselCTMS_Feedback_Data_Result">
     <Property Type="Int64" Name="bigIntRPO" Nullable="true" />
     <Property Type="String" Name="clgCode" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="qrCode" Nullable="true" MaxLength="250" />
     <Property Type="String" Name="serial" Nullable="false" MaxLength="1" />
-    <Property Type="String" Name="clientArtSerial" Nullable="false" />
-    <Property Type="String" Name="EPC" Nullable="false" />
-    <Property Type="String" Name="tid" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="clientArtSerial" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="EPC" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="tid" Nullable="true" MaxLength="200" />
     <Property Type="String" Name="ndef" Nullable="false" MaxLength="1" />
     <Property Type="String" Name="uid" Nullable="false" MaxLength="1" />
     <Property Type="String" Name="company" Nullable="false" MaxLength="1" />
@@ -969,8 +1418,8 @@
     <Property Type="String" Name="sellingAreaRegion" Nullable="false" MaxLength="1" />
     <Property Type="String" Name="trackingDate" Nullable="false" MaxLength="1" />
     <Property Type="String" Name="idDocShipment" Nullable="false" MaxLength="1" />
-    <Property Type="String" Name="attachment" Nullable="false" MaxLength="6" />
-    <Property Type="String" Name="tagId" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="attachment" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="tagId" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="filter" Nullable="false" MaxLength="1" />
     <Property Type="Int64" Name="bigintId" Nullable="false" />
   </ComplexType>
@@ -980,7 +1429,7 @@
     <Property Type="String" Name="qrCode" Nullable="true" MaxLength="250" />
     <Property Type="String" Name="serial" Nullable="false" MaxLength="1" />
     <Property Type="String" Name="clientArtSerial" Nullable="false" MaxLength="1" />
-    <Property Type="String" Name="EPC" Nullable="false" />
+    <Property Type="String" Name="EPC" Nullable="false" MaxLength="250" />
     <Property Type="String" Name="tid" Nullable="false" MaxLength="1" />
     <Property Type="String" Name="ndef" Nullable="false" MaxLength="1" />
     <Property Type="String" Name="uid" Nullable="false" MaxLength="1" />
@@ -1020,6 +1469,102 @@
     <Property Type="String" Name="attachment" Nullable="false" MaxLength="1" />
     <Property Type="String" Name="tagId" Nullable="true" MaxLength="500" />
     <Property Type="String" Name="filter" Nullable="false" MaxLength="1" />
+  </ComplexType>
+  <ComplexType Name="usp_GetDieselCTMS_Feedback_Data_WASTED_Result">
+    <Property Type="Int64" Name="bigIntRPO" Nullable="true" />
+    <Property Type="String" Name="clgCode" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="qrCode" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="serial" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="clientArtSerial" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="EPC" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="tid" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="ndef" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="uid" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="company" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="collection" Nullable="true" MaxLength="4000" />
+    <Property Type="String" Name="companyType" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="entity" Nullable="false" MaxLength="3" />
+    <Property Type="String" Name="idBrand" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="year" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="cusOrder" Nullable="true" MaxLength="500" />
+    <Property Type="Int64" Name="cusOrderRow" Nullable="true" />
+    <Property Type="String" Name="productLine" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="upc" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="clientArtModel" Nullable="true" MaxLength="80" />
+    <Property Type="String" Name="clientArtDescr" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="cusArtSize" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="cusArtPart" Nullable="true" MaxLength="80" />
+    <Property Type="String" Name="cusArtColor" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="cusArtMaterial" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="cusArtVariant" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="quantity" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="cusSubContId" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="cusSubCont" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="cusSubContCity" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="cusSubContCountry" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="madeIn" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="distributorType" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="distributorId" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="distributor" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="storeName" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="distributorCity" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="distributorCountry" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="sellingAreaCountry" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="sellingAreaRegion" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="trackingDate" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="idDocShipment" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="attachment" Nullable="false" MaxLength="6" />
+    <Property Type="String" Name="tagId" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="filter" Nullable="false" MaxLength="1" />
+    <Property Type="Int64" Name="bigintId" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="usp_GetDieselCTMS_Feedback_Data_With_WithOutTID_Result">
+    <Property Type="Int64" Name="bigIntRPO" Nullable="true" />
+    <Property Type="String" Name="clgCode" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="qrCode" Nullable="true" MaxLength="250" />
+    <Property Type="String" Name="serial" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="clientArtSerial" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="EPC" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="tid" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="ndef" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="uid" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="company" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="collection" Nullable="true" MaxLength="4000" />
+    <Property Type="String" Name="companyType" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="entity" Nullable="false" MaxLength="3" />
+    <Property Type="String" Name="idBrand" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="year" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="cusOrder" Nullable="true" MaxLength="500" />
+    <Property Type="Int64" Name="cusOrderRow" Nullable="true" />
+    <Property Type="String" Name="productLine" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="upc" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="clientArtModel" Nullable="true" MaxLength="80" />
+    <Property Type="String" Name="clientArtDescr" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="cusArtSize" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="cusArtPart" Nullable="true" MaxLength="80" />
+    <Property Type="String" Name="cusArtColor" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="cusArtMaterial" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="cusArtVariant" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="quantity" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="cusSubContId" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="cusSubCont" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="cusSubContCity" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="cusSubContCountry" Nullable="true" MaxLength="2" />
+    <Property Type="String" Name="madeIn" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="distributorType" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="distributorId" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="distributor" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="storeName" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="distributorCity" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="distributorCountry" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="sellingAreaCountry" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="sellingAreaRegion" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="trackingDate" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="idDocShipment" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="attachment" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="tagId" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="filter" Nullable="false" MaxLength="1" />
+    <Property Type="Int64" Name="bigintId" Nullable="false" />
   </ComplexType>
   <ComplexType Name="usp_GetEPCCount_with_YY_Customer_Result">
     <Property Type="Int32" Name="ID" Nullable="true" />
@@ -1075,6 +1620,14 @@
     <Property Type="String" Name="varBarcode" Nullable="true" MaxLength="250" />
     <Property Type="String" Name="varCertilogoCode" Nullable="true" MaxLength="50" />
   </ComplexType>
+  <ComplexType Name="usp_GetEPCCounterForAccessKillPassword_Result">
+    <Property Type="Int64" Name="bigintId" Nullable="false" />
+    <Property Type="Int64" Name="bigIntRPO" Nullable="false" />
+    <Property Type="Int64" Name="bigIntDetailLineID" Nullable="false" />
+    <Property Type="String" Name="EPC" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="AccHexKey" Nullable="false" MaxLength="32" />
+    <Property Type="String" Name="KillHexKey" Nullable="false" MaxLength="32" />
+  </ComplexType>
   <ComplexType Name="usp_GetEPCCounterForAlvaroMorenoPWD_Result">
     <Property Type="Int64" Name="bigintId" Nullable="false" />
     <Property Type="Int64" Name="bigIntRPO" Nullable="false" />
@@ -1090,6 +1643,14 @@
     <Property Type="String" Name="EPC" Nullable="false" />
     <Property Type="String" Name="AccHexKey" Nullable="false" MaxLength="32" />
     <Property Type="String" Name="KillHexKey" Nullable="false" MaxLength="32" />
+  </ComplexType>
+  <ComplexType Name="usp_GetEPCCounterForKiabi_PWD_Result">
+    <Property Type="Int64" Name="bigintId" Nullable="false" />
+    <Property Type="Int64" Name="bigIntRPO" Nullable="false" />
+    <Property Type="Int64" Name="bigIntDetailLineID" Nullable="false" />
+    <Property Type="String" Name="EPC" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="AccHexKey" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="KillHexKey" Nullable="false" MaxLength="1" />
   </ComplexType>
   <ComplexType Name="usp_GetEPCCounterForMANGO_PWD_Result">
     <Property Type="Int64" Name="bigintId" Nullable="false" />
@@ -1337,15 +1898,236 @@
     <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
   </ComplexType>
-  <ComplexType Name="usp_Name_Result">
-    <Property Type="Int32" Name="Id" Nullable="true" />
-    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="200" />
-    <Property Type="String" Name="Schema" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="NCZORE" Nullable="true" MaxLength="10" />
-    <Property Type="String" Name="IsGS1" Nullable="true" MaxLength="10" />
-    <Property Type="String" Name="IsCustParam1" Nullable="true" MaxLength="10" />
-    <Property Type="Int32" Name="Ver" Nullable="true" />
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_18ROCKSLLC_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_1982_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_2GetherFashionBV_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_88INTERNATIONALINC_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_AANTILLC_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_Abcdcorp_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_Acupath_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_Adidas_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_Aeropostale_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_ALOYOGA_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_BatteryBiz_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_CapriGroup_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_Fila_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_MielooAlexander_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_nike_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_RichemontGroup_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_SAXX_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_Teamsports_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_WalgreensDatabase_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_XYZ123_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_GTIN_GetEPC_StanderCustomer_XYZ1234_Result">
+    <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="EpcEnd" Nullable="true" MaxLength="200" />
+    <Property Type="Int64" Name="SerialStart" Nullable="true" />
+    <Property Type="Int64" Name="SerailEnd" Nullable="true" />
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="GTIN" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Remark" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
   </ComplexType>
   <ComplexType Name="usp_GTIN_GetEPC_StanderCustomerALL_Result">
     <Property Type="String" Name="EpcStart" Nullable="true" MaxLength="200" />
@@ -1358,12 +2140,33 @@
     <Property Type="String" Name="AccessPWD" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="KillPWD" Nullable="true" MaxLength="100" />
   </ComplexType>
-  <ComplexType Name="usp_GetEPCCounterForKiabi_PWD_Result">
+  <ComplexType Name="usp_MK_Anexya_GetData_Feedback_Result">
+    <Property Type="Int64" Name="EPCCounterId" Nullable="false" />
+    <Property Type="Int64" Name="EncoCheckId" Nullable="false" />
+    <Property Type="Int64" Name="RPO" Nullable="false" />
+    <Property Type="Int64" Name="rpacDetailNumber" Nullable="false" />
+    <Property Type="String" Name="EPC" Nullable="false" MaxLength="250" />
+    <Property Type="String" Name="TID" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="SECURE_DIGITAL_ID" Nullable="true" />
+    <Property Type="String" Name="Order_Type" Nullable="false" MaxLength="3" />
+    <Property Type="String" Name="Order_Status" Nullable="false" MaxLength="3" />
+    <Property Type="String" Name="Style" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Color" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Size" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="CPO" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="usp_Name_Result">
+    <Property Type="String" Name="CustomerId" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="200" />
+    <Property Type="String" Name="Schema" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="NCZORE" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="IsGS1" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="IsCustParam1" Nullable="true" MaxLength="10" />
+  </ComplexType>
+  <ComplexType Name="usp_GetEPCCounterForHexToBase64_Result">
     <Property Type="Int64" Name="bigintId" Nullable="false" />
     <Property Type="Int64" Name="bigIntRPO" Nullable="false" />
     <Property Type="Int64" Name="bigIntDetailLineID" Nullable="false" />
     <Property Type="String" Name="EPC" Nullable="false" MaxLength="250" />
-    <Property Type="String" Name="AccHexKey" Nullable="false" MaxLength="1" />
-    <Property Type="String" Name="KillHexKey" Nullable="false" MaxLength="1" />
   </ComplexType>
 </Schema>

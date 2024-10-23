@@ -4448,5 +4448,35 @@ namespace DataAccessLayer
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_UpdateSerialNumber_CandA", qtyParameter, gTINParameter, serialStartParameter);
         }
+    
+        public virtual ObjectResult<usp_GetEPCCounterForHexToBase64_Result> usp_GetEPCCounterForHexToBase64(Nullable<long> rPO, Nullable<long> detailNo, string customerId)
+        {
+            var rPOParameter = rPO.HasValue ?
+                new ObjectParameter("RPO", rPO) :
+                new ObjectParameter("RPO", typeof(long));
+    
+            var detailNoParameter = detailNo.HasValue ?
+                new ObjectParameter("DetailNo", detailNo) :
+                new ObjectParameter("DetailNo", typeof(long));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetEPCCounterForHexToBase64_Result>("usp_GetEPCCounterForHexToBase64", rPOParameter, detailNoParameter, customerIdParameter);
+        }
+    
+        public virtual int usp_Update_HexToBase64(string xML, string customerId)
+        {
+            var xMLParameter = xML != null ?
+                new ObjectParameter("XML", xML) :
+                new ObjectParameter("XML", typeof(string));
+    
+            var customerIdParameter = customerId != null ?
+                new ObjectParameter("CustomerId", customerId) :
+                new ObjectParameter("CustomerId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_Update_HexToBase64", xMLParameter, customerIdParameter);
+        }
     }
 }
