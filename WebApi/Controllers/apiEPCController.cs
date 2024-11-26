@@ -123,9 +123,18 @@ namespace WebApi.Controllers
                             if (reprintcount == 0)
                             {
                                 ObjResponse = Transaction_New.GetEPC_Customer_Tempe(Request);
+
+                                if (ObjResponse.Remark.Contains("No EPC in master table"))
+                                {
+                                    ObjResponse = HandleEPCGeneration_Temp(Request, ObjResponse);
+                                }
                             }
                             else
                             {
+
+                                ObjResponse= HandleEPCGeneration_Temp(Request, ObjResponse);
+
+                                /*
                                 string Result = EPC_Tempe.EPC_Tempe.EPCGeneration(Request);
 
                                 if (Result.Contains("#"))
@@ -137,6 +146,7 @@ namespace WebApi.Controllers
                                 {
                                     ObjResponse.Remark = Result;
                                 }
+                                */
 
                             }
 
@@ -448,6 +458,25 @@ namespace WebApi.Controllers
             {
                 return EPCBLL.GetError(107);
             }
+        }
+        #endregion
+
+        #region TEMP CALL EPC
+        private static EPCResponse HandleEPCGeneration_Temp(EPCRequest Request, EPCResponse ObjResponse)
+        {
+            string Result = EPC_Tempe.EPC_Tempe.EPCGeneration(Request);
+
+            if (Result.Contains("#"))
+            {
+                Request.CustomPara2 = Result;
+                ObjResponse = Transaction_New.GetEPC_Customer_Tempe(Request);
+            }
+            else
+            {
+                ObjResponse.Remark = Result;
+            }
+
+            return ObjResponse;
         }
         #endregion
     }

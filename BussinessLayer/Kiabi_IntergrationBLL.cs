@@ -69,7 +69,8 @@ namespace BussinessLayer
                         }
                         catch (Exception exception)
                         {
-                            uspGTINGetEPCKiabiRangeResult.Remark = "Error from Kiabi API:" + exception.ToString();
+                            // uspGTINGetEPCKiabiRangeResult.Remark = "Error from Kiabi API:" + exception.ToString();
+                            uspGTINGetEPCKiabiRangeResult.Remark = "Error from Kiabi API:" + empty;
                         }
                     }
                 }

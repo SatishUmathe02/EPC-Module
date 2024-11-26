@@ -100,6 +100,7 @@ namespace BussinessLayer
                             if (KiabiCount == 0)
                             {
                                 usp_GTIN_GetEPC_Kiabi_Result ePCKiabi = EPCDAL.GetEPC_Kiabi(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
+                                
                                 EPC_Res.EPCStart = ePCKiabi.EpcStart;
                                 EPC_Res.EPCEnd = ePCKiabi.EpcEnd;
                                 EPC_Res.SerialStart = Convert.ToString(ePCKiabi.SerialStart);
@@ -110,10 +111,17 @@ namespace BussinessLayer
                                 EPC_Res.GTIN = EPC_Req.GTIN;
                                 EPC_Res.AccessPWD = ePCKiabi.AccessPWD;
                                 EPC_Res.KillPWD = ePCKiabi.KillPWD;
+
+                                if (Convert.ToString(ePCKiabi.Remark).Contains("Serial number is exceeding Maximum serial number assigned for this customer"))
+                                {
+                                    EPC_Res = HandleEPCGeneration_KIABI(EPC_Req, EPC_Res);
+                                }
                             }
                             else
                             {
 
+                                EPC_Res = HandleEPCGeneration_KIABI(EPC_Req, EPC_Res);
+                                /*
                                 usp_GTIN_GetEPC_Kiabi_Range_Result uspGTINGetEPCKiabiRangeResult = Kiabi_IntergrationBLL.Kaibi_apiResponse_Restapi(EPC_Req);
                                 EPC_Res.EPCStart = uspGTINGetEPCKiabiRangeResult.EpcStart;
                                 EPC_Res.EPCEnd = uspGTINGetEPCKiabiRangeResult.EpcEnd;
@@ -125,6 +133,7 @@ namespace BussinessLayer
                                 EPC_Res.GTIN = EPC_Req.GTIN;
                                 EPC_Res.AccessPWD = uspGTINGetEPCKiabiRangeResult.AccessPWD;
                                 EPC_Res.KillPWD = uspGTINGetEPCKiabiRangeResult.KillPWD;
+                                */
                             }
                             break;
                         case "Hugoboss":
@@ -322,6 +331,25 @@ namespace BussinessLayer
             }
             return ePCResponse;
         }
+
+        #region KIBAI CALL EPC
+        private static EPCResponse HandleEPCGeneration_KIABI(EPCRequest EPC_Req, EPCResponse EPC_Res)
+        {
+            usp_GTIN_GetEPC_Kiabi_Range_Result uspGTINGetEPCKiabiRangeResult = Kiabi_IntergrationBLL.Kaibi_apiResponse_Restapi(EPC_Req);
+            EPC_Res.EPCStart = uspGTINGetEPCKiabiRangeResult.EpcStart;
+            EPC_Res.EPCEnd = uspGTINGetEPCKiabiRangeResult.EpcEnd;
+            EPC_Res.SerialStart = Convert.ToString(uspGTINGetEPCKiabiRangeResult.SerialStart);
+            EPC_Res.SerialEnd = Convert.ToString(uspGTINGetEPCKiabiRangeResult.SerailEnd);
+            EPC_Res.Remark = Convert.ToString(uspGTINGetEPCKiabiRangeResult.Remark);
+            EPC_Res.CustomerID = EPC_Req.CustomerID;
+            EPC_Res.Quantity = EPC_Req.Quantity;
+            EPC_Res.GTIN = EPC_Req.GTIN;
+            EPC_Res.AccessPWD = uspGTINGetEPCKiabiRangeResult.AccessPWD;
+            EPC_Res.KillPWD = uspGTINGetEPCKiabiRangeResult.KillPWD;
+
+            return EPC_Res;
+        }
+        #endregion
 
     }
 
