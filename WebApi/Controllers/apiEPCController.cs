@@ -78,6 +78,156 @@ namespace WebApi.Controllers
 
         private static async Task<EPCResponse> Run_GetEPC(EPCRequest Request)
         {
+            if (Request.Quantity <= 0)
+            {
+                return EPCBLL.GetError(123);
+            }
+
+            if (Request == null)
+            {
+                return EPCBLL.GetError(107);
+            }
+
+            EPCResponse ObjRes = null;
+
+            switch (Request.CustomerID)
+            {
+                case "InditexBershka":
+                    if (!string.IsNullOrEmpty(Request.CustomPara1))
+                    {
+                        string Val = Request.CustomPara1.Split('#').LastOrDefault();
+                        if (new[] { "N1", "N2", "N3" }.Contains(Val))
+                        {
+                            return Transaction_New.GetEPC_Customer(Request);
+                        }
+                    }
+                    break;
+
+                case "Inditex":
+                    if (!string.IsNullOrEmpty(Request.CustomPara1))
+                    {
+                        string Val = Request.CustomPara1.Split('#').LastOrDefault();
+                        if (Val == "TI")
+                        {
+                            int reprintcount = EPCBLL.GetReprintEvent().Count(c => c.ToUpper() == Request.Event.ToUpper());
+
+                            if (reprintcount == 0)
+                            {
+                                ObjRes = Transaction_New.GetEPC_Customer_Tempe(Request);
+                                if (ObjRes.Remark.Contains("No EPC in master table"))
+                                {
+                                    return HandleEPCGeneration_Temp(Request, ObjRes);
+                                }
+                            }
+                            else
+                            {
+                                return HandleEPCGeneration_Temp(Request, ObjRes);
+                            }
+                        }
+                    }
+                    break;
+                    /*  COMMENT ADL CASE DUE TO NEW IMPLIMENT ATION FOR ADLER BR 169
+                case "ADL":
+                    if (!string.IsNullOrEmpty(Request.CustomPara1))
+                    {
+                        return EPCBLL_ADL.GetEPC_ADL(Request);
+                    }
+                    return EPCBLL.GetError(120);
+                    */
+
+                case "GerryWeber":
+                    if (Request.CustomPara1 != "Catalog" && GWEPC.GerryWeber_APIColling())
+                    {
+                        return Transaction_New_GWEPC.GetEPC_New(Request);
+                    }
+                    break;
+
+                default:
+                    Request = GS1_IntergrationBLL.IsCustomerGS1(Request);
+
+                    #region El Corte Ingles BR 8	EPC Encoding & Liberated Brands BR 92 EPC Module for LPN Sticker
+                    Request = new InternalRequest().HandleRequest(Request);
+                    #endregion
+
+                    if (Request.GS1Customer && Request.GS1apiRequired)
+                    {
+                        List<GS1> ObjGS1 = GS1_IntergrationBLL.GS1_apiResponse_Restapi(Request);
+                        if (ObjGS1.Count == 0 && Request.CustomerID.ToUpper() == "CABOT")
+                        {
+                            Request.GS1Prefix = "Default";
+                            Request.PartitionValue = 5;
+                        }
+                        else
+                        {
+                            string GS1JSON = JsonConvert.SerializeObject(ObjGS1);
+                            Request = GS1_IntergrationBLL.GS1_Details(Request, ObjGS1, GS1JSON);
+                        }
+
+                        if (string.IsNullOrEmpty(Request.GS1Prefix))
+                        {
+                            GS1_IntergrationBLL.EmailNotification(string.Empty, ObjGS1, Request);
+                        }
+                    }
+
+                    if ((Request.GS1Customer && Request.GS1apiRequired) && string.IsNullOrEmpty(Request.GS1Prefix))
+                    {
+                        return new EPCResponse
+                        {
+                            EPCStart = "",
+                            EPCEnd = "",
+                            SerialStart = "",
+                            SerialEnd = "",
+                            GTIN = "",
+                            CustomerID = Request.CustomerID,
+                            Remark = $"The GTIN {Request.GTIN} included in this order does not exist in GS1 database. Please contact Customer Service to confirm GTIN: {Request.GTIN}"
+                        };
+                    }
+
+                    ObjRes = Request.CustomerID == "StoneIsland" && (Request.Event == "Print_CP" || Request.Event == "Print_TH")
+                        ? Transaction_New.GetEPCDetail(Request)
+                        : Transaction_New.GetEPC_New(Request);
+
+                    bool flag = true;
+                    switch (Request.CustomerID)
+                    {
+                        case "EncuentroModa":
+                            flag = await EPCPasswordBLL.UpdatePassword_MODA(Request.RPO, Request.DetailLineID);
+                            break;
+                        case "MANGO":
+                            flag = await EPCPasswordBLL.UpdatePassword_MANGO(Request.RPO, Request.DetailLineID);
+                            break;
+                        case "AlvaroMoreno":
+                            flag = await EPCPasswordBLL.UpdatePassword_AlvaroMoreno(Request.RPO, Request.DetailLineID);
+                            break;
+                        case "Charanga":
+                            flag = await EPCPasswordBLL.UpdatePassword_Charanga(Request.RPO, Request.DetailLineID);
+                            break;
+                        case "Tendam":
+                            flag = await EPCPasswordBLL.UpdatePassword_TENDAM(Request.RPO, Request.DetailLineID);
+                            break;
+                        case "Kiabi":
+                            flag = await EPCPasswordBLL.UpdatePassword_KIABI(Request.RPO, Request.DetailLineID);
+                            break;
+                        default:
+                            ObjRes = await EPCPasswordBLL.UpdateAccessPassword(Request, ObjRes);
+                            ObjRes = await EPCPasswordBLL.UpdateHexToBase64(Request, ObjRes);
+                            break;
+                    }
+
+                    if (!flag)
+                    {
+                        return EPCBLL.GetError(122);
+                    }
+
+                    return ObjRes;
+            }
+
+            return EPCBLL.GetError(107);
+        }
+
+
+        private static async Task<EPCResponse> Run_GetEPC_Old(EPCRequest Request)
+        {
             //EPCRequest Obj = new EPCRequest();
 
             //Obj = JsonConvert.DeserializeObject<EPCRequest>(Request);
