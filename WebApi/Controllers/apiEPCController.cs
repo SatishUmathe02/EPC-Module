@@ -46,7 +46,7 @@ namespace WebApi.Controllers
 
             try
             {
-               
+
                 Request.RequestStartTime = System.DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff");
 
 
@@ -118,6 +118,10 @@ namespace WebApi.Controllers
                                 {
                                     return HandleEPCGeneration_Temp(Request, ObjRes);
                                 }
+                                else
+                                {
+                                    return ObjRes;
+                                }
                             }
                             else
                             {
@@ -126,14 +130,14 @@ namespace WebApi.Controllers
                         }
                     }
                     break;
-                    /*  COMMENT ADL CASE DUE TO NEW IMPLIMENT ATION FOR ADLER BR 169
-                case "ADL":
-                    if (!string.IsNullOrEmpty(Request.CustomPara1))
-                    {
-                        return EPCBLL_ADL.GetEPC_ADL(Request);
-                    }
-                    return EPCBLL.GetError(120);
-                    */
+                /*  COMMENT ADL CASE DUE TO NEW IMPLIMENT ATION FOR ADLER BR 169
+            case "ADL":
+                if (!string.IsNullOrEmpty(Request.CustomPara1))
+                {
+                    return EPCBLL_ADL.GetEPC_ADL(Request);
+                }
+                return EPCBLL.GetError(120);
+                */
 
                 case "GerryWeber":
                     if (Request.CustomPara1 != "Catalog" && GWEPC.GerryWeber_APIColling())
@@ -282,7 +286,7 @@ namespace WebApi.Controllers
                             else
                             {
 
-                                ObjResponse= HandleEPCGeneration_Temp(Request, ObjResponse);
+                                ObjResponse = HandleEPCGeneration_Temp(Request, ObjResponse);
 
                                 /*
                                 string Result = EPC_Tempe.EPC_Tempe.EPCGeneration(Request);
@@ -465,7 +469,7 @@ namespace WebApi.Controllers
                                 break;
                             default:
                                 ObjRes = await EPCPasswordBLL.UpdateAccessPassword(Request, ObjRes);
-                                ObjRes = await EPCPasswordBLL.UpdateHexToBase64(Request, ObjRes); 
+                                ObjRes = await EPCPasswordBLL.UpdateHexToBase64(Request, ObjRes);
                                 break;
                         }
 
