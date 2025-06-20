@@ -146,6 +146,12 @@ namespace WebApi.Controllers
                     }
                     break;
 
+                case "MorellatoGroup":
+
+                    return Transaction_New.GetEPC_Customer_MorellatoGroup(Request);
+
+                    break;
+
                 default:
                     Request = GS1_IntergrationBLL.IsCustomerGS1(Request);
 

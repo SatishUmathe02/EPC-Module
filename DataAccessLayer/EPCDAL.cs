@@ -642,5 +642,28 @@ namespace DataAccessLayer
         }
         #endregion
 
+        #region MorellatoGroup EPC
+
+        public static usp_GTIN_GetEPC_Customer_MorellatoGroup_Result GetEPC_Customer_MorellatoGroup(string gtin14, long qty, string transaction, string schema, string customerId, string customerName, string Event, long UserId, long SerialStart, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, string GS1Prefix, int PartionVal, DateTime EPCStartDateTime)
+        {
+            usp_GTIN_GetEPC_Customer_MorellatoGroup_Result uspGTINGetEPCCustomerResult = new usp_GTIN_GetEPC_Customer_MorellatoGroup_Result();
+            try
+            {
+                using (EPC_DBEntities ePCDBEntity = new EPC_DBEntities())
+                {
+                    ePCDBEntity.Database.CommandTimeout = new int?(0);
+                    uspGTINGetEPCCustomerResult = (
+                        from lst1 in ePCDBEntity.usp_GTIN_GetEPC_Customer_MorellatoGroup(gtin14, new long?(qty), transaction, schema, customerId, customerName, Event, new long?(UserId), new long?(SerialStart), EPC, new long?(RPO), new long?(DetailLineNo), CustomPara1, CustomPara2, GS1Prefix, new int?(PartionVal), new DateTime?(EPCStartDateTime))
+                        select lst1).ToList<usp_GTIN_GetEPC_Customer_MorellatoGroup_Result>().FirstOrDefault<usp_GTIN_GetEPC_Customer_MorellatoGroup_Result>();
+                }
+            }
+            catch (Exception exception)
+            {
+            }
+            return uspGTINGetEPCCustomerResult;
+        }
+
+        #endregion
+
     }
 }
