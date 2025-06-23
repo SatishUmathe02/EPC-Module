@@ -148,7 +148,15 @@ namespace WebApi.Controllers
 
                 case "MorellatoGroup":
 
-                    return Transaction_New.GetEPC_Customer_MorellatoGroup(Request);
+                    int _reprintcount = EPCBLL.GetOnlyReprintEvent().Count(c => c.ToUpper() == Request.Event.ToUpper());
+                    if (_reprintcount == 0)
+                    {
+                        return Transaction_New.GetEPC_Customer_MorellatoGroup(Request);
+                    }
+                    else
+                    {
+                        return EPCBLL.GetError(126);
+                    }
 
                     break;
 

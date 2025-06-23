@@ -101,6 +101,9 @@ namespace BussinessLayer
                 case 125:
                     EPC_Res.Remark = "Customer ID and Schema setup is missing in EPC Module.";
                     break;
+                case 126:
+                    EPC_Res.Remark = "EPC Error Occurred: Reprint functionality is not available for this customer.";
+                    break;
 
                 default:
                     EPC_Res.Remark = "Error: Invalid request";
@@ -156,6 +159,20 @@ namespace BussinessLayer
                 "PrintTest_CP",
                 "PrintTest_TH",
                 "PrintTestTH"
+            };
+
+
+        }
+        public static List<string> GetOnlyReprintEvent()
+        {
+
+            return new List<string>()
+            {
+                "RePrint",
+                "Reprint_CP",
+                "RePrint_CPEF",
+                "Reprint_TH",
+
             };
 
 
