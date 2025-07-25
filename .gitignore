@@ -362,3 +362,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/EPC/EPC/.vs/EPC/v17/.suo
+/EPC/EPC/.vs/EPC/config/applicationhost.config
