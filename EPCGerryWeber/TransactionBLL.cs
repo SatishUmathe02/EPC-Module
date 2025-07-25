@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataAccessLayer.CommonDataModels;
-using BussinessLayer;
+﻿using BussinessLayer;
 using DataAccessLayer;
+using DataAccessLayer.CommonDataModels;
+using System;
+using System.Linq;
 
 namespace EPCGerryWeber
 {
@@ -20,10 +17,9 @@ namespace EPCGerryWeber
                 //EPCLog ObjEPCLog = new EPCLog();
 
                 // Check GTIN 
-                Int64 result;
 
                 // Check Quantity 
-                if (!Int64.TryParse(EPC_Req.Quantity.ToString(), out result))
+                if (!long.TryParse(EPC_Req.Quantity.ToString(), out long result))
                 {
                     return GetError(103);
                 }
@@ -41,7 +37,7 @@ namespace EPCGerryWeber
                         string _gtin = "";
                         for (int i = 0; i < atuallen; i++)
                         {
-                            _gtin = _gtin + "0";
+                            _gtin += "0";
                         }
 
                         EPC_Req.GTIN = _gtin + EPC_Req.GTIN;
@@ -72,7 +68,7 @@ namespace EPCGerryWeber
                         {
                             if (i != 1 && i != 3)
                             {
-                                if (!Int64.TryParse(GWParamList[i].ToString(), out result))
+                                if (!long.TryParse(GWParamList[i].ToString(), out result))
                                 {
                                     return GetError(119);
                                 }
@@ -100,33 +96,33 @@ namespace EPCGerryWeber
                 try
                 {
 
-                    RequestPrintOrderDO Obj = new RequestPrintOrderDO();
+                    RequestPrintOrderDO Obj = new RequestPrintOrderDO
+                    {
+                        //Obj.datref = 2645; // false
+                        pos = 1, // false
+                                 //Obj.pro_location = "";// "IS1"; // false
+                                 //Obj.prr_id = "";// "1";// false
+
+                        quantity = Convert.ToInt32(EPC_Req.Quantity),// true - and not accept 0
 
 
-                    //Obj.datref = 2645; // false
-                    Obj.pos = 1; // false
-                    //Obj.pro_location = "";// "IS1"; // false
-                    //Obj.prr_id = "";// "1";// false
+                        company = Convert.ToInt32(GWParamList[0]),// 1; // true
+                        label_type = GWParamList[1],// "D2"; // true
+                        po_pos = Convert.ToInt32(GWParamList[2]),// 1; // true
+                        po_size = GWParamList[3],//  "34"; // true
+                        po_number = Convert.ToInt32(GWParamList[4]),// 8776;// true
+                        datref = GWParamList[5] == "" ? 0 : Convert.ToInt32(GWParamList[5]),// 2645; // false
+                        pro_location = GWParamList[6],//  "IS1"; // false
+                        season = Convert.ToInt32(GWParamList[7]),// 2181;// true
 
-                    Obj.quantity = Convert.ToInt32(EPC_Req.Quantity);// true - and not accept 0
+                        ProdOrDevEndPoint = ProdOrDev, // for endpoint & logging criteria
 
-
-                    Obj.company = Convert.ToInt32(GWParamList[0]);// 1; // true
-                    Obj.label_type = GWParamList[1];// "D2"; // true
-                    Obj.po_pos = Convert.ToInt32(GWParamList[2]);// 1; // true
-                    Obj.po_size = GWParamList[3];//  "34"; // true
-                    Obj.po_number = Convert.ToInt32(GWParamList[4]);// 8776;// true
-                    Obj.datref = GWParamList[5] == "" ? 0 : Convert.ToInt32(GWParamList[5]);// 2645; // false
-                    Obj.pro_location = GWParamList[6];//  "IS1"; // false
-                    Obj.season = Convert.ToInt32(GWParamList[7]);// 2181;// true
-
-                    Obj.ProdOrDevEndPoint = ProdOrDev; // for endpoint & logging criteria
-
-                    Obj.RPO = EPC_Req.RPO;
-                    Obj.DetailNo = EPC_Req.DetailLineID;
-                    Obj.CustomerId = EPC_Req.CustomerID;
-                    Obj.UserId = EPC_Req.UserId;
-                    Obj.GTIN = EPC_Req.GTIN;
+                        RPO = EPC_Req.RPO,
+                        DetailNo = EPC_Req.DetailLineID,
+                        CustomerId = EPC_Req.CustomerID,
+                        UserId = EPC_Req.UserId,
+                        GTIN = EPC_Req.GTIN
+                    };
 
                     ResponsePrintOrderDO Objres = GWEPC.GetEPC(Obj);
 
@@ -147,7 +143,7 @@ namespace EPCGerryWeber
                 {
                     EPCDAL.SaveErrorFileResponse(Ex.ToString(), "usp_GTIN_GetEPC_GerryWeber_Result");
                     EPC_Res = GetError(122);
-                    InsertLog(Ex, "usp_GTIN_GetEPC_GerryWeber_Result");
+                    _ = InsertLog(Ex, "usp_GTIN_GetEPC_GerryWeber_Result");
                 }
 
             }
@@ -155,7 +151,7 @@ namespace EPCGerryWeber
             {
                 EPCDAL.SaveErrorFileResponse(ex.ToString(), "GerryWeber_GetEPC_New");
                 EPC_Res = GetError(122);
-                InsertLog(ex, "GerryWeber_GetEPC_New");
+                _ = InsertLog(ex, "GerryWeber_GetEPC_New");
             }
             return EPC_Res;
         }

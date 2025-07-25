@@ -5,14 +5,9 @@ using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Configuration;
-using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EPC_Tempe
 {
@@ -60,10 +55,11 @@ namespace EPC_Tempe
 
                     ObjEPC_BULK.quantityBySize = new List<QuantityBySize>();
 
-                    QuantityBySize Obj = new QuantityBySize();
-
-                    Obj.sizeCode = ObjTempeData.sizeCode;
-                    Obj.quantity = Convert.ToString(Request.Quantity);
+                    QuantityBySize Obj = new QuantityBySize
+                    {
+                        sizeCode = ObjTempeData.sizeCode,
+                        quantity = Convert.ToString(Request.Quantity)
+                    };
 
                     ObjEPC_BULK.quantityBySize.Add(Obj);
 
@@ -82,16 +78,18 @@ namespace EPC_Tempe
                     ObjEPC.model = ObjTempeData.model;
                     ObjEPC.quality = ObjTempeData.quality;
                     ObjEPC.colors = new List<Color>();
-                    Color Objc = new Color();
+                    Color Objc = new Color
+                    {
+                        colorCode = ObjTempeData.colorCode,
 
-                    Objc.colorCode = ObjTempeData.colorCode;
+                        quantityBySize = new List<QuantityBySize>()
+                    };
 
-                    Objc.quantityBySize = new List<QuantityBySize>();
-
-                    QuantityBySize Obj = new QuantityBySize();
-
-                    Obj.sizeCode = ObjTempeData.sizeCode;
-                    Obj.quantity = Convert.ToString(Request.Quantity);
+                    QuantityBySize Obj = new QuantityBySize
+                    {
+                        sizeCode = ObjTempeData.sizeCode,
+                        quantity = Convert.ToString(Request.Quantity)
+                    };
 
                     Objc.quantityBySize.Add(Obj);
                     ObjEPC.colors.Add(Objc);
@@ -204,7 +202,7 @@ namespace EPC_Tempe
 
                             try
                             {
-                                var ObjResponse = JObject.Parse(Response.Response);
+                                JObject ObjResponse = JObject.Parse(Response.Response);
                                 if (Response.IsSucess)
                                 {
                                     string link = ObjResponse["_links"]["external"]["href"].ToString();
@@ -439,14 +437,16 @@ namespace EPC_Tempe
 
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-            var clientepcLog = new RestClient(EPCpre_url);
-            clientepcLog.Timeout = -1;
-            var requestepcLog = new RestRequest(Method.POST);
-            requestepcLog.AddHeader("itx-apiKey", itx_apiKey);
-            requestepcLog.AddHeader("Content-Type", "application/json");
+            RestClient clientepcLog = new RestClient(EPCpre_url)
+            {
+                Timeout = -1
+            };
+            RestRequest requestepcLog = new RestRequest(Method.POST);
+            _ = requestepcLog.AddHeader("itx-apiKey", itx_apiKey);
+            _ = requestepcLog.AddHeader("Content-Type", "application/json");
 
             //var body = @"";
-            requestepcLog.AddParameter("application/json", Request, ParameterType.RequestBody);
+            _ = requestepcLog.AddParameter("application/json", Request, ParameterType.RequestBody);
             IRestResponse responseepcLog = clientepcLog.Execute(requestepcLog);
 
             int StatusCode = Convert.ToInt32(((RestSharp.RestResponseBase)responseepcLog).StatusCode);
@@ -500,13 +500,15 @@ namespace EPC_Tempe
 
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-            var clientRfidexecution = new RestClient(NewLink);
-            clientRfidexecution.Timeout = -1;
-            var requestRfidexecution = new RestRequest(Method.GET);
+            RestClient clientRfidexecution = new RestClient(NewLink)
+            {
+                Timeout = -1
+            };
+            RestRequest requestRfidexecution = new RestRequest(Method.GET);
 
-            var body = @"";
-            requestRfidexecution.AddHeader("itx-apiKey", itx_apiKey);
-            requestRfidexecution.AddParameter("text/plain", body, ParameterType.RequestBody);
+            string body = @"";
+            _ = requestRfidexecution.AddHeader("itx-apiKey", itx_apiKey);
+            _ = requestRfidexecution.AddParameter("text/plain", body, ParameterType.RequestBody);
             IRestResponse responseRfidexecution = clientRfidexecution.Execute(requestRfidexecution);
 
             string respRfidexecution = "";
@@ -566,14 +568,16 @@ namespace EPC_Tempe
             string Link = EPCpre_url + "/api/v1/product/epc/" + epc + "/decode";
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-            var clientepcLog = new RestClient(Link);
-            clientepcLog.Timeout = -1;
-            var requestepcLog = new RestRequest(Method.GET);
-            requestepcLog.AddHeader("itx-apiKey", itx_apiKey);
-            requestepcLog.AddHeader("Content-Type", "application/json");
+            RestClient clientepcLog = new RestClient(Link)
+            {
+                Timeout = -1
+            };
+            RestRequest requestepcLog = new RestRequest(Method.GET);
+            _ = requestepcLog.AddHeader("itx-apiKey", itx_apiKey);
+            _ = requestepcLog.AddHeader("Content-Type", "application/json");
 
-            var body = @"";
-            requestepcLog.AddParameter("application/json", body, ParameterType.RequestBody);
+            string body = @"";
+            _ = requestepcLog.AddParameter("application/json", body, ParameterType.RequestBody);
             IRestResponse responseepcLog = clientepcLog.Execute(requestepcLog);
 
             int StatusCode = Convert.ToInt32(((RestSharp.RestResponseBase)responseepcLog).StatusCode);
@@ -593,14 +597,7 @@ namespace EPC_Tempe
                 try
                 {
                     EPCError ObjEPCError = JsonConvert.DeserializeObject<EPCError>(responseepcLog.Content);
-                    if (ObjEPCError.errors != null)
-                    {
-                        myDeserializedClass.Error = ObjEPCError.errors[0].message.Replace("'", "''");
-                    }
-                    else
-                    {
-                        myDeserializedClass.Error = responseepcLog.Content;
-                    }
+                    myDeserializedClass.Error = ObjEPCError.errors != null ? ObjEPCError.errors[0].message.Replace("'", "''") : responseepcLog.Content;
                     myDeserializedClass.IsError = 1;
                     myDeserializedClass.epc = epc;
                 }
@@ -631,14 +628,14 @@ namespace EPC_Tempe
                 {
                     if (j > 0)
                     {
-                        offset = "offset=0"; NewOffset = "offset=" + (j) + "000";
+                        offset = "offset=0"; NewOffset = "offset=" + j + "000";
                         string NewLink = link.Replace(offset, NewOffset);
                         ObjList.Add(NewLink);
                     }
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 ObjList.Add(link);
             }
@@ -655,10 +652,12 @@ namespace EPC_Tempe
 
             string epcClean = EPC.Replace(" ", "").Replace("-", ""); // handleCopyPaste
 
-            string binEpc = String.Join(String.Empty, epcClean.Select(c => Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2).PadLeft(4, '0')));
+            string binEpc = string.Join(string.Empty, epcClean.Select(c => Convert.ToString(Convert.ToInt32(c.ToString(), 16), 2).PadLeft(4, '0')));
 
             if (epcClean.Length != 32)
+            {
                 throw new Exception("Invaid EPC Len");
+            }
 
             int Version = Convert.ToInt32(binEpc.Substring(0, 5), 2);//Hardcoded.
             long Serial;

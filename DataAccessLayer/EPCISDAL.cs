@@ -1,9 +1,6 @@
-﻿using System;
+﻿using DataAccessLayer.CommonDataModels;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataAccessLayer.CommonDataModels;
 
 namespace DataAccessLayer
 {
@@ -41,7 +38,7 @@ namespace DataAccessLayer
             //string _xml = "";
             using (EPC_DBEntities db = new EPC_DBEntities())
             {
-              int i = db.usp_EPCIS_InsertLog(xml, ObjEPCIS.EPCIS_Request, ObjEPCIS.EPCIS_Response, ObjEPCIS.URL);
+                int i = db.usp_EPCIS_InsertLog(xml, ObjEPCIS.EPCIS_Request, ObjEPCIS.EPCIS_Response, ObjEPCIS.URL);
             }
             return "";
         }

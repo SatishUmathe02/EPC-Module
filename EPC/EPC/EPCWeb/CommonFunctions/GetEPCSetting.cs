@@ -1,11 +1,11 @@
-﻿namespace EPCWeb.CommonFunctions
-{
-    using System;
-    using System.Linq;
-    using System.Web;
-    using Models;
-    using System.Xml.Linq;
+﻿using EPCWeb.Models;
+using System;
+using System.Linq;
+using System.Web;
+using System.Xml.Linq;
 
+namespace EPCWeb.CommonFunctions
+{
     public class GetEPCSetting
     {
         public static EPCSetting GetSetting()

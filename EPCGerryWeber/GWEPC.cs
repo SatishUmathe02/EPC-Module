@@ -1,12 +1,9 @@
 ﻿using DataAccessLayer;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace EPCGerryWeber
@@ -15,12 +12,8 @@ namespace EPCGerryWeber
     {
         public static ResponsePrintOrderDO GetEPC(RequestPrintOrderDO Obj)
         {
-
-
-            string Req = string.Empty;
-            string Res = string.Empty;
-            Req = Request_requestPrintOrder(Obj);
-            Res = HttpResponse(Req, "requestPrintOrder", Obj.ProdOrDevEndPoint);
+            string Req = Request_requestPrintOrder(Obj);
+            string Res = HttpResponse(Req, "requestPrintOrder", Obj.ProdOrDevEndPoint);
 
 
             string endPoint = ConfigurationManager.AppSettings["" + Obj.ProdOrDevEndPoint + "_endPoint"].ToString();
@@ -32,47 +25,47 @@ namespace EPCGerryWeber
         private static string Request_requestPrintOrder(RequestPrintOrderDO Obj)
         {
             StringBuilder str = new StringBuilder();
-            str.Append("<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">");
-            str.Append("<soapenv:Body>");
+            _ = str.Append("<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">");
+            _ = str.Append("<soapenv:Body>");
 
-            str.Append("<requestPrintOrder>");
+            _ = str.Append("<requestPrintOrder>");
 
-            str.Append("<PrintRequestHead>");
-            str.Append("<datref>" + Obj.datref + "</datref>");
-            str.Append("<transmission_time>" + DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssZ") + "</transmission_time>");
-            str.Append("<prr_id>" + Obj.prr_id + "</prr_id>");
-            str.Append("<company>" + Obj.company + "</company>");
-            str.Append("<season>" + Obj.season + "</season>");
-            str.Append("<po_number>" + Obj.po_number + "</po_number>");
-            str.Append("<pro_location>" + Obj.pro_location + "</pro_location>");
-            str.Append("<prr_type>1</prr_type>");
-            str.Append("<prr_prio>1</prr_prio>");
+            _ = str.Append("<PrintRequestHead>");
+            _ = str.Append("<datref>" + Obj.datref + "</datref>");
+            _ = str.Append("<transmission_time>" + DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssZ") + "</transmission_time>");
+            _ = str.Append("<prr_id>" + Obj.prr_id + "</prr_id>");
+            _ = str.Append("<company>" + Obj.company + "</company>");
+            _ = str.Append("<season>" + Obj.season + "</season>");
+            _ = str.Append("<po_number>" + Obj.po_number + "</po_number>");
+            _ = str.Append("<pro_location>" + Obj.pro_location + "</pro_location>");
+            _ = str.Append("<prr_type>1</prr_type>");
+            _ = str.Append("<prr_prio>1</prr_prio>");
 
-            str.Append("<positions>");
+            _ = str.Append("<positions>");
             //str.Append("<PrintRequestPosition>");
 
-            str.Append("<pos>" + Obj.pos + "</pos>");
-            str.Append("<label_type>" + Obj.label_type + "</label_type>");
+            _ = str.Append("<pos>" + Obj.pos + "</pos>");
+            _ = str.Append("<label_type>" + Obj.label_type + "</label_type>");
 
-            str.Append("<quantitys>");
+            _ = str.Append("<quantitys>");
             //str.Append("<PrintRequestQuantitys>");
 
-            str.Append("<po_pos>" + Obj.po_pos + "</po_pos>");
-            str.Append("<po_size>" + Obj.po_size + "</po_size>");
-            str.Append("<quantity>" + Obj.quantity + "</quantity>");
+            _ = str.Append("<po_pos>" + Obj.po_pos + "</po_pos>");
+            _ = str.Append("<po_size>" + Obj.po_size + "</po_size>");
+            _ = str.Append("<quantity>" + Obj.quantity + "</quantity>");
 
             //str.Append("</PrintRequestQuantitys>");
-            str.Append("</quantitys>");
+            _ = str.Append("</quantitys>");
 
 
             //str.Append("</PrintRequestPosition>");
-            str.Append("</positions>");
+            _ = str.Append("</positions>");
 
-            str.Append("</PrintRequestHead>");
-            str.Append("</requestPrintOrder>");
+            _ = str.Append("</PrintRequestHead>");
+            _ = str.Append("</requestPrintOrder>");
 
-            str.Append("</soapenv:Body>");
-            str.Append("</soapenv:Envelope>");
+            _ = str.Append("</soapenv:Body>");
+            _ = str.Append("</soapenv:Envelope>");
 
             return str.ToString();
         }
@@ -109,7 +102,7 @@ namespace EPCGerryWeber
                 {
                     using (Stream stream = httpResponse.GetResponseStream())
                     {
-                        response = (new StreamReader(stream)).ReadToEnd();
+                        response = new StreamReader(stream).ReadToEnd();
                     }
                 }
             }
@@ -159,7 +152,7 @@ namespace EPCGerryWeber
                             }
                         }
 
-                        if ((string.IsNullOrEmpty(Obj.epc_start)) || (string.IsNullOrEmpty(Obj.epc_end)))
+                        if (string.IsNullOrEmpty(Obj.epc_start) || string.IsNullOrEmpty(Obj.epc_end))
                         {
                             Obj.Remark = "No EPC";
                         }
@@ -174,7 +167,7 @@ namespace EPCGerryWeber
                                 Error = document.SelectSingleNode("//err_message") == null ? "" : document.SelectSingleNode("//err_message").InnerText;
                             }
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                             Error = "";
                         }
@@ -200,8 +193,6 @@ namespace EPCGerryWeber
         {
             int code = Convert.ToInt32(StatusCode.ToString().Substring(0, 1));
             string Recipient = ConfigurationManager.AppSettings["ITEmailID"].ToString();
-            string Subject = string.Empty;
-            string varCC = "";
             string varBCC = ""; string varReplyTo = "";
             //string varAttachmentName = "";
 
@@ -211,9 +202,9 @@ namespace EPCGerryWeber
             {
                 case 5:
                 case 4:
-                    varCC = "Satish.umathe@r-pac.com,Namrata.bhagat@r-pac.com,Jacco.Vandingstee@r-pac.com";
-                    Subject = "r-pac: Gerry Weber web service not reachable " + StatusCode + "(" + DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssZ") + ")";
-                    Body.Append(Response);
+                    string varCC = "Satish.umathe@r-pac.com,Namrata.bhagat@r-pac.com,Jacco.Vandingstee@r-pac.com";
+                    string Subject = "r-pac: Gerry Weber web service not reachable " + StatusCode + "(" + DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssZ") + ")";
+                    _ = Body.Append(Response);
                     EPCDAL.InsertEmail(Recipient, varCC, varBCC, varReplyTo, Subject, Body.ToString(), 1, DateTime.Now);
                     break;
                 default:

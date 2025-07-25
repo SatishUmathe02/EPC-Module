@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
@@ -14,7 +11,7 @@ namespace DataAccessLayer
             using (EPC_DBEntities db = new EPC_DBEntities())
             {
                 //db.Database.CommandTimeout = 0;
-                db.usp_UpdateAssPassword_Moda(xml);
+                _ = db.usp_UpdateAssPassword_Moda(xml);
             }
 
             /*
@@ -43,9 +40,9 @@ namespace DataAccessLayer
             using (EPC_DBEntities db = new EPC_DBEntities())
             {
                 //db.Database.CommandTimeout = 0;
-                db.usp_UpdateAssPassword_MANGO(xml);
+                _ = db.usp_UpdateAssPassword_MANGO(xml);
             }
-            
+
 
             return 0;
         }
@@ -55,7 +52,7 @@ namespace DataAccessLayer
             using (EPC_DBEntities db = new EPC_DBEntities())
             {
                 //db.Database.CommandTimeout = 0;
-                db.usp_UpdateAssPassword_TENDAM(xml);
+                _ = db.usp_UpdateAssPassword_TENDAM(xml);
             }
 
 
@@ -81,7 +78,7 @@ namespace DataAccessLayer
             using (EPC_DBEntities db = new EPC_DBEntities())
             {
                 //db.Database.CommandTimeout = 0;
-                db.usp_UpdateAssPassword_Kiabi(xml);
+                _ = db.usp_UpdateAssPassword_Kiabi(xml);
             }
 
 

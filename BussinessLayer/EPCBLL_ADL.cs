@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DataAccessLayer;
 using DataAccessLayer.CommonDataModels;
-using TagDataTranslation;
-using DataAccessLayer;
-using System.Numerics;
+using System;
 using System.Globalization;
+using System.Numerics;
 
 namespace BussinessLayer
 {
@@ -34,9 +29,9 @@ namespace BussinessLayer
                     ObjRes.Remark = "Success";
 
                     ObjEPC.varNextEPC = NextEndEPC;
-                    ObjEPC.intNextEPCSerial = (ObjEPC.intNextEPCSerial + Convert.ToInt32(ObjReq.Quantity));
+                    ObjEPC.intNextEPCSerial += Convert.ToInt32(ObjReq.Quantity);
 
-                    usp_EPC_Cust_ADL_Result ObjEPC_ADL = EPCDAL.usp_EPC_Cust_ADL(ObjRes.GTIN, Convert.ToInt64(ObjRes.SerialStart),Convert.ToInt64(ObjRes.SerialEnd), ObjReq.Schema, ObjReq.TransactionType, ObjRes.EPCStart, ObjRes.EPCEnd, ObjReq.Quantity, ObjReq.CustomerID, ObjReq.CustomerName, ObjReq.Event, ObjReq.UserId, ObjReq.EPC, ObjReq.RPO, ObjReq.DetailLineID, ObjReq.CustomPara1, ObjReq.CustomPara2,Convert.ToDateTime(ObjReq.RequestStartTime), ObjEPC.bigintPtrId, ObjEPC.varNextEPC,Convert.ToInt32(ObjEPC.intNextEPCSerial));
+                    usp_EPC_Cust_ADL_Result ObjEPC_ADL = EPCDAL.usp_EPC_Cust_ADL(ObjRes.GTIN, Convert.ToInt64(ObjRes.SerialStart), Convert.ToInt64(ObjRes.SerialEnd), ObjReq.Schema, ObjReq.TransactionType, ObjRes.EPCStart, ObjRes.EPCEnd, ObjReq.Quantity, ObjReq.CustomerID, ObjReq.CustomerName, ObjReq.Event, ObjReq.UserId, ObjReq.EPC, ObjReq.RPO, ObjReq.DetailLineID, ObjReq.CustomPara1, ObjReq.CustomPara2, Convert.ToDateTime(ObjReq.RequestStartTime), ObjEPC.bigintPtrId, ObjEPC.varNextEPC, Convert.ToInt32(ObjEPC.intNextEPCSerial));
 
                     ObjRes.EPCStart = ObjEPC_ADL.EpcStart;
                     ObjRes.EPCEnd = ObjEPC_ADL.EpcEnd;
@@ -52,7 +47,7 @@ namespace BussinessLayer
                     ObjRes.EPCStart = "";
                     ObjRes.EPCEnd = "";
                     ObjRes.Remark = "No EPC Available for this Key";
-                    EPCDAL.EPC_InsertEPCLog(ObjRes.GTIN, Convert.ToInt64(ObjRes.SerialStart), Convert.ToInt64(ObjRes.SerialEnd), ObjReq.Schema, ObjReq.TransactionType,ObjRes.EPCStart, ObjRes.EPCEnd, ObjReq.Quantity, ObjReq.CustomerID, ObjReq.CustomerName, ObjReq.Event, ObjReq.UserId, ObjReq.EPC, ObjReq.RPO, ObjReq.DetailLineID, ObjReq.CustomPara1, ObjReq.CustomPara2, Convert.ToDateTime(ObjReq.RequestStartTime), ObjRes.Remark);
+                    EPCDAL.EPC_InsertEPCLog(ObjRes.GTIN, Convert.ToInt64(ObjRes.SerialStart), Convert.ToInt64(ObjRes.SerialEnd), ObjReq.Schema, ObjReq.TransactionType, ObjRes.EPCStart, ObjRes.EPCEnd, ObjReq.Quantity, ObjReq.CustomerID, ObjReq.CustomerName, ObjReq.Event, ObjReq.UserId, ObjReq.EPC, ObjReq.RPO, ObjReq.DetailLineID, ObjReq.CustomPara1, ObjReq.CustomPara2, Convert.ToDateTime(ObjReq.RequestStartTime), ObjRes.Remark);
                 }
             }
             else
@@ -60,7 +55,7 @@ namespace BussinessLayer
                 ObjRes.Remark = "No EPC Available for this Key";
                 EPCDAL.EPC_InsertEPCLog(ObjRes.GTIN, Convert.ToInt64(ObjRes.SerialStart), Convert.ToInt64(ObjRes.SerialEnd), ObjReq.Schema, ObjReq.TransactionType, ObjRes.EPCStart, ObjRes.EPCEnd, ObjReq.Quantity, ObjReq.CustomerID, ObjReq.CustomerName, ObjReq.Event, ObjReq.UserId, ObjReq.EPC, ObjReq.RPO, ObjReq.DetailLineID, ObjReq.CustomPara1, ObjReq.CustomPara2, Convert.ToDateTime(ObjReq.RequestStartTime), ObjRes.Remark);
             }
-        
+
 
 
             return ObjRes;
@@ -78,14 +73,7 @@ namespace BussinessLayer
         {
             BigInteger EPCStart = BigInteger.Parse(EPC, NumberStyles.HexNumber);
             BigInteger EPCEnd = BigInteger.Parse(EndEpc, NumberStyles.HexNumber);
-            if (EPCStart <= EPCEnd)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return EPCStart <= EPCEnd;
 
         }
     }

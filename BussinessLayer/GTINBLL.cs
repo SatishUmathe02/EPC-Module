@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using TagDataTranslation;
 
 namespace BussinessLayer
@@ -40,8 +39,6 @@ namespace BussinessLayer
 
         private static string GetBinaryToHex(GTINDO Obj)
         {
-            string res = string.Empty;
-
             try
             {
                 TDTEngine engine = new TDTEngine();
@@ -62,8 +59,6 @@ namespace BussinessLayer
         }
         private static GTINDO GetDecode(GTINDO Obj)
         {
-            string res = string.Empty;
-
             try
             {
                 TDTEngine engine = new TDTEngine();
@@ -78,7 +73,7 @@ namespace BussinessLayer
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //return ex.ToString();
             }
@@ -93,13 +88,13 @@ namespace BussinessLayer
             ObjRes = (from c in EPCDAL.GetCustomerWithGTINParameter()
                       select new EPCRequest()
                       {
-                          CustomerID=c.CustomerId,
-                          CustomerName=c.CustomerName,
-                          GTIN=c.GTIN,
-                          CustomPara1=c.CustomePara
+                          CustomerID = c.CustomerId,
+                          CustomerName = c.CustomerName,
+                          GTIN = c.GTIN,
+                          CustomPara1 = c.CustomePara
                       }).ToList();
 
-            
+
             return ObjRes;
         }
     }
@@ -107,14 +102,14 @@ namespace BussinessLayer
     public class GTIN_Manul_BLL
     {
         // Table 6. The EPC SGTIN-96 bit allocation, header, and maximum decimal values. page 27.
-        private static int? BIN = 2;
-        private static int? HEX = 16;
-        private static string sgtin96_bin_header = "00110000";
-        private static int sgtin96_filter_value_bits = 3;
-        private static int sgtin96_partition_value_bits = 3;
-        private static int sgtin96_serial_number_bits = 38;
-        private static int sgtin96_length_bits = 96;
-        private static int sgtin96_length_hex = 24;
+        private static readonly int? BIN = 2;
+        private static readonly int? HEX = 16;
+        private static readonly string sgtin96_bin_header = "00110000";
+        private static readonly int sgtin96_filter_value_bits = 3;
+        private static readonly int sgtin96_partition_value_bits = 3;
+        private static readonly int sgtin96_serial_number_bits = 38;
+        private static readonly int sgtin96_length_bits = 96;
+        private static readonly int sgtin96_length_hex = 24;
         private static Dictionary<int, int[]> sgtin96_company_prefix_len_partitions = sgtin96_company_prefix_len_partitions_();
 
         //static  {
@@ -132,14 +127,16 @@ namespace BussinessLayer
 
         private static Dictionary<int, int[]> sgtin96_company_prefix_len_partitions_()
         {
-            sgtin96_company_prefix_len_partitions = new Dictionary<int, int[]>();
-            sgtin96_company_prefix_len_partitions.Add(12, new int[] { 0, 40, 4, 1 });
-            sgtin96_company_prefix_len_partitions.Add(11, new int[] { 1, 37, 7, 2 });
-            sgtin96_company_prefix_len_partitions.Add(10, new int[] { 2, 34, 10, 3 });
-            sgtin96_company_prefix_len_partitions.Add(9, new int[] { 3, 30, 14, 4 });
-            sgtin96_company_prefix_len_partitions.Add(8, new int[] { 4, 27, 17, 5 });
-            sgtin96_company_prefix_len_partitions.Add(7, new int[] { 5, 24, 20, 6 });
-            sgtin96_company_prefix_len_partitions.Add(6, new int[] { 6, 20, 24, 7 });
+            sgtin96_company_prefix_len_partitions = new Dictionary<int, int[]>
+            {
+                { 12, new int[] { 0, 40, 4, 1 } },
+                { 11, new int[] { 1, 37, 7, 2 } },
+                { 10, new int[] { 2, 34, 10, 3 } },
+                { 9, new int[] { 3, 30, 14, 4 } },
+                { 8, new int[] { 4, 27, 17, 5 } },
+                { 7, new int[] { 5, 24, 20, 6 } },
+                { 6, new int[] { 6, 20, 24, 7 } }
+            };
 
             return sgtin96_company_prefix_len_partitions;
         }
@@ -204,7 +201,7 @@ namespace BussinessLayer
             //}
             //return Zeroes + s;
 
-            return s.Length >= n ? s : new String(new char[n - s.Length]).Replace('\0', '0') + s;
+            return s.Length >= n ? s : new string(new char[n - s.Length]).Replace('\0', '0') + s;
 
         }
 
@@ -213,7 +210,7 @@ namespace BussinessLayer
         {
             // bin_epc is 96 bits, so need to use BitInt for hex conversion
             //return (new System.Numerics.BigInteger(bin)).ToString(HEX);
-            StringBuilder result = new StringBuilder(binary.Length / 8 + 1);
+            StringBuilder result = new StringBuilder((binary.Length / 8) + 1);
 
             // TODO: check all 1's or 0's... Will throw otherwise
 
@@ -227,21 +224,21 @@ namespace BussinessLayer
             for (int i = 0; i < binary.Length; i += 8)
             {
                 string eightBits = binary.Substring(i, 8);
-                result.AppendFormat("{0:X2}", Convert.ToByte(eightBits, 2));
+                _ = result.AppendFormat("{0:X2}", Convert.ToByte(eightBits, 2));
             }
 
             return result.ToString();
         }
 
 
-        private static String hexToBinary(String hex)
+        private static string hexToBinary(string hex)
         {
             // return new BigInteger(hex, HEX).toString(BIN);
             StringBuilder result = new StringBuilder();
             foreach (char c in hex)
             {
                 // This will crash for non-hex characters. You might want to handle that differently.
-                result.Append(hexCharacterToBinary[char.ToLower(c)]);
+                _ = result.Append(hexCharacterToBinary[char.ToLower(c)]);
             }
             return result.ToString();
         }
@@ -267,14 +264,14 @@ namespace BussinessLayer
         private static long? binaryToLong(string bin)
         {
             //return long.Parse(bin, BIN);
-            var reversedBits = bin.Reverse().ToArray();
-            var num = 0;
-            for (var power = 0; power < reversedBits.Count(); power++)
+            char[] reversedBits = bin.Reverse().ToArray();
+            int num = 0;
+            for (int power = 0; power < reversedBits.Count(); power++)
             {
-                var currentBit = reversedBits[power];
+                char currentBit = reversedBits[power];
                 if (currentBit == '1')
                 {
-                    var currentNum = (int)Math.Pow(2, power);
+                    int currentNum = (int)Math.Pow(2, power);
                     num += currentNum;
                 }
             }
@@ -286,14 +283,14 @@ namespace BussinessLayer
         private static int binaryToInt(string bin)
         {
             //return Integer.parseInt(bin, BIN);
-            var reversedBits = bin.Reverse().ToArray();
-            var num = 0;
-            for (var power = 0; power < reversedBits.Count(); power++)
+            char[] reversedBits = bin.Reverse().ToArray();
+            int num = 0;
+            for (int power = 0; power < reversedBits.Count(); power++)
             {
-                var currentBit = reversedBits[power];
+                char currentBit = reversedBits[power];
                 if (currentBit == '1')
                 {
-                    var currentNum = (int)Math.Pow(2, power);
+                    int currentNum = (int)Math.Pow(2, power);
                     num += currentNum;
                 }
             }
@@ -349,11 +346,11 @@ namespace BussinessLayer
                 throw new System.ArgumentException("GTIN must be 14 digits long");
             }
 
-            long? company_prefix = Convert.ToInt64(gtin14.Substring(1, (company_prefix_length)));
+            long? company_prefix = Convert.ToInt64(gtin14.Substring(1, company_prefix_length));
             long? item_reference_and_indicator = Convert.ToInt64(gtin14[0] + gtin14.Substring(company_prefix_length + 1, 13 - (company_prefix_length + 1)));
 
             string bin_filter_value = longToBinaryWithFill((long)filter_value, sgtin96_filter_value_bits);
-            string bin_partition_value = longToBinaryWithFill((long)partition_value, sgtin96_partition_value_bits);
+            string bin_partition_value = longToBinaryWithFill(partition_value, sgtin96_partition_value_bits);
             string bin_company_prefix = longToBinaryWithFill(company_prefix, company_prefix_bits);
             string bin_item_reference = longToBinaryWithFill(item_reference_and_indicator, item_reference_and_indicator_bits);
             string bin_serial_number = longToBinaryWithFill(serial_number, sgtin96_serial_number_bits);
@@ -450,11 +447,13 @@ namespace BussinessLayer
 
             long? serial_number = binaryToLong(binary.Substring(58));
 
-            Dictionary<string, string> rv = new Dictionary<string, string>();
-            rv["filter_value"] = filter_value.ToString();
-            rv["item_reference"] = item_reference_and_indicator;
-            rv["serial_number"] = serial_number.ToString();
-            rv["gtin14"] = gtin14;
+            Dictionary<string, string> rv = new Dictionary<string, string>
+            {
+                ["filter_value"] = filter_value.ToString(),
+                ["item_reference"] = item_reference_and_indicator,
+                ["serial_number"] = serial_number.ToString(),
+                ["gtin14"] = gtin14
+            };
 
             return rv;
         }

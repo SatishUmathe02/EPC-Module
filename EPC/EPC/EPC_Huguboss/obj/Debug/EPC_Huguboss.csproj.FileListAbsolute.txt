@@ -1,9 +1,0 @@
-C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Huguboss\bin\Debug\EPC_Huguboss.dll.config
-C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Huguboss\bin\Debug\EPC_Huguboss.dll
-C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Huguboss\bin\Debug\EPC_Huguboss.pdb
-C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Huguboss\bin\Debug\EntityFramework.dll
-C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Huguboss\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Huguboss\bin\Debug\EntityFramework.xml
-C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Huguboss\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Huguboss\obj\Debug\EPC_Huguboss.dll
-C:\Users\Satish.Umathe\OneDrive - R-Pac International Corp\SATISH\r-trac\Project-GIT\EPCModule\EPC\EPC\EPC_Huguboss\obj\Debug\EPC_Huguboss.pdb

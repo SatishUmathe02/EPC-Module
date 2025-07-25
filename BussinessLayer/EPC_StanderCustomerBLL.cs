@@ -1,10 +1,6 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.CommonDataModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BussinessLayer
 {
@@ -19,10 +15,9 @@ namespace BussinessLayer
                 //EPCLog ObjEPCLog = new EPCLog();
 
                 // Check GTIN 
-                Int64 result;
 
                 // Check Quantity 
-                if (!Int64.TryParse(EPC_Req.Quantity.ToString(), out result))
+                if (!long.TryParse(EPC_Req.Quantity.ToString(), out long result))
                 {
                     return GetError(103);
                 }
@@ -34,8 +29,8 @@ namespace BussinessLayer
 
                 try
                 {
-                    EPC_Req.Schema = EPC_Req.Schema == null ? "" : EPC_Req.Schema;
-                    EPC_Req.CustomerID = EPC_Req.CustomerID == null ? "" : EPC_Req.CustomerID;
+                    EPC_Req.Schema = EPC_Req.Schema ?? "";
+                    EPC_Req.CustomerID = EPC_Req.CustomerID ?? "";
 
                     if (EPC_Req.TransactionType == "Test")
                     {
@@ -55,7 +50,7 @@ namespace BussinessLayer
                     {
                         if (EPC_StanderCustomerDAL.CallEPCCustomerWise)
                         {
-                            
+
                             usp_GTIN_GetEPC_StanderCustomerALL_Result Obj = EPC_StanderCustomerDAL.GetEPCAll(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime), EPC_Req.FilterValue);
                             EPC_Res.EPCStart = Obj.EpcStart;
                             EPC_Res.EPCEnd = Obj.EpcEnd;
@@ -88,7 +83,7 @@ namespace BussinessLayer
                 catch (Exception Ex)
                 {
                     EPCDAL.SaveErrorFileResponse(Ex.ToString(), "GetEPC");
-                    InsertLog(Ex, "GetEPC");
+                    _ = InsertLog(Ex, "GetEPC");
                     EPC_Res = GetError(122);
                 }
 
@@ -96,7 +91,7 @@ namespace BussinessLayer
             catch (Exception ex)
             {
                 EPCDAL.SaveErrorFileResponse(ex.ToString(), "GetEPC_New");
-                InsertLog(ex, "GetEPC_New");
+                _ = InsertLog(ex, "GetEPC_New");
                 EPC_Res = GetError(122);
             }
 

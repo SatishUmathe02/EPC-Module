@@ -1,10 +1,8 @@
-﻿using System;
+﻿using DataAccessLayer;
+using DataAccessLayer.CommonDataModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using DataAccessLayer;
-using DataAccessLayer.CommonDataModels;
 
 namespace BussinessLayer
 {
@@ -26,7 +24,7 @@ namespace BussinessLayer
         public static List<EPCISDO> GetEPCIS_URN(string CustomerId)
         {
             List<EPCISDO> ObjList = new List<EPCISDO>();
-            var list = EPCISDAL.GetEPCIS_URN(CustomerId);
+            List<usp_EPCIS_GetEP_URN_Result> list = EPCISDAL.GetEPCIS_URN(CustomerId);
 
             ObjList = (from c in list
                        select new EPCISDO
@@ -36,10 +34,10 @@ namespace BussinessLayer
                            EPC_urn = c.EPCIS,
                            rpcDetailNumber = (long)c.DetailNumber,
                            SerailStart = (long)c.SerailStart,
-                           SerailEnd =(long)c.SerailEnd,
-                           Qty=c.Qty,
-                           EPC=c.EPC
-                           
+                           SerailEnd = c.SerailEnd,
+                           Qty = c.Qty,
+                           EPC = c.EPC
+
                        }).ToList();
 
 
@@ -49,22 +47,22 @@ namespace BussinessLayer
         {
             StringBuilder Objxml = new StringBuilder();
 
-            Objxml.Append("<EPCIS>");
-            Objxml.Append("<data>");
-            foreach (var item in ObjEPCIS.EPCISList)
+            _ = Objxml.Append("<EPCIS>");
+            _ = Objxml.Append("<data>");
+            foreach (EPCISDO item in ObjEPCIS.EPCISList)
             {
-                Objxml.Append("<Order>");
-                Objxml.Append("<CustomerId>" + item.CustomerId + "</CustomerId>");
-                Objxml.Append("<RPO>" + item.RPO + "</RPO>");
-                Objxml.Append("<DetailNumber>" + item.rpcDetailNumber + "</DetailNumber>");
-                Objxml.Append("<EPC_urn>" + item.EPC_urn + "</EPC_urn>");
-                Objxml.Append("<Remark>" + ObjEPCIS.Remark + "</Remark>");
-                Objxml.Append("<SerailStart>" + item.SerailStart + "</SerailStart>");
-                Objxml.Append("<SerailEnd>" + item.SerailEnd + "</SerailEnd>");
-                Objxml.Append("</Order>");
+                _ = Objxml.Append("<Order>");
+                _ = Objxml.Append("<CustomerId>" + item.CustomerId + "</CustomerId>");
+                _ = Objxml.Append("<RPO>" + item.RPO + "</RPO>");
+                _ = Objxml.Append("<DetailNumber>" + item.rpcDetailNumber + "</DetailNumber>");
+                _ = Objxml.Append("<EPC_urn>" + item.EPC_urn + "</EPC_urn>");
+                _ = Objxml.Append("<Remark>" + ObjEPCIS.Remark + "</Remark>");
+                _ = Objxml.Append("<SerailStart>" + item.SerailStart + "</SerailStart>");
+                _ = Objxml.Append("<SerailEnd>" + item.SerailEnd + "</SerailEnd>");
+                _ = Objxml.Append("</Order>");
             }
-            Objxml.Append("</data>");
-            Objxml.Append("</EPCIS>");
+            _ = Objxml.Append("</data>");
+            _ = Objxml.Append("</EPCIS>");
 
 
             return EPCISDAL.InsertEPCISLog(ObjEPCIS, Objxml.ToString());
@@ -73,7 +71,7 @@ namespace BussinessLayer
         public static List<EPCISDO> GetEPCIS_URN_RPO(string CustomerId, long RPO)
         {
             List<EPCISDO> ObjList = new List<EPCISDO>();
-            var list = EPCISDAL.GetEPCIS_URN_RPO(CustomerId, RPO);
+            List<usp_EPCIS_GetEPC_URN_RPO_Result> list = EPCISDAL.GetEPCIS_URN_RPO(CustomerId, RPO);
 
             ObjList = (from c in list
                        select new EPCISDO
@@ -83,7 +81,7 @@ namespace BussinessLayer
                            EPC_urn = c.EPCIS,
                            rpcDetailNumber = (long)c.DetailNumber,
                            SerailStart = (long)c.SerailStart,
-                           SerailEnd = (long)c.SerailEnd,
+                           SerailEnd = c.SerailEnd,
                            Qty = c.Qty,
                            EPC = c.EPC
 

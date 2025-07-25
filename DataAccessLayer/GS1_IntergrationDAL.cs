@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
@@ -18,7 +15,7 @@ namespace DataAccessLayer
                     objlist = db.usp_GS1_Customer(gtin14, CustomerId).FirstOrDefault();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -35,9 +32,9 @@ namespace DataAccessLayer
                     objlist = db.usp_GS1_Insert(gtin14, CustomerId, GS1Details).FirstOrDefault();
                 }
             }
-            catch(Exception ex)
+            catch (Exception)
             {
-               // throw new Exception(ex.Message);
+                // throw new Exception(ex.Message);
             }
             return objlist;
         }

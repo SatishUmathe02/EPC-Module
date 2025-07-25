@@ -1,11 +1,7 @@
 ﻿using BussinessLayer;
 using DataAccessLayer.CommonDataModels;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace WebApi.Controllers
@@ -86,10 +82,12 @@ namespace WebApi.Controllers
         public GS1Response Get_GS1_Service(string GTIN, string CustomerId)
         {
             GS1Response ObjGS1 = new GS1Response();
-            EPCRequest ObjEPC = new EPCRequest();
-            ObjEPC.GTIN = GTIN;
-            ObjEPC.CustomerID = CustomerId;
-           // var GS1_Response = GS1_IntergrationBLL.GS1_apiResponse_Restapi(ObjEPC);
+            EPCRequest ObjEPC = new EPCRequest
+            {
+                GTIN = GTIN,
+                CustomerID = CustomerId
+            };
+            // var GS1_Response = GS1_IntergrationBLL.GS1_apiResponse_Restapi(ObjEPC);
 
             try
             {

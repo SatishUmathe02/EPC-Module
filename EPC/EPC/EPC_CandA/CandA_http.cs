@@ -2,19 +2,16 @@
 using DataAccessLayer.CommonDataModels;
 using RestSharp;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace EPC_CandA
 {
     public class CandA_http
     {
-        private static string CandA_EmailIds;
-        private static string CandA_EmailId_CC;
+        private static readonly string CandA_EmailIds;
+        private static readonly string CandA_EmailId_CC;
         public static bool CandA_GSIM;
 
 
@@ -45,28 +42,21 @@ namespace EPC_CandA
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             ServicePointManager.Expect100Continue = false;
 
-            var clientepcLog = new RestClient(url);
-            clientepcLog.Timeout = -1;
-            var requestepcLog = new RestRequest(Method.POST);
-            requestepcLog.AddHeader("Content-Type", "application/json");
-            requestepcLog.AddHeader("Authorization", Authorization);
+            RestClient clientepcLog = new RestClient(url)
+            {
+                Timeout = -1
+            };
+            RestRequest requestepcLog = new RestRequest(Method.POST);
+            _ = requestepcLog.AddHeader("Content-Type", "application/json");
+            _ = requestepcLog.AddHeader("Authorization", Authorization);
             string Request = "{\n  \"gtin\": \"" + ObjEPC.GTIN + "\",\n  \"requestorId\": \"" + requestorId + "\",\n  \"amount\": " + Threshold + "\n}";
-            requestepcLog.AddParameter("application/json", Request, ParameterType.RequestBody);
+            _ = requestepcLog.AddParameter("application/json", Request, ParameterType.RequestBody);
             IRestResponse response = clientepcLog.Execute(requestepcLog);
 
             try
             {
 
-                if (response.StatusCode.ToString() == "OK")
-                {
-                    Response = response.Content;
-
-                }
-                else
-                {
-                    Response = response.Content == "" ? response.ErrorMessage : response.Content;
-
-                }
+                Response = response.StatusCode.ToString() == "OK" ? response.Content : response.Content == "" ? response.ErrorMessage : response.Content;
                 int StatusCode = Convert.ToInt32(response.StatusCode);
                 SendEmail(StatusCode, Response, ObjEPC.GTIN, Request, ServerEnvironment);
             }
@@ -86,24 +76,24 @@ namespace EPC_CandA
         {
             int code = Convert.ToInt32(StatusCode.ToString().Substring(0, 1));
             string Recipient = CandA_EmailIds;
-            string Subject = string.Empty;
             string varCC = CandA_EmailId_CC;
             string varBCC = ""; string varReplyTo = "";
             //string varAttachmentName = "";
 
             StringBuilder Body = new StringBuilder();
 
+            string Subject;
             switch (code)
             {
                 case 5:
                 case 4:
 
                     Subject = "r-pac: Error requesting serials on " + ServerEnvironment + " Server from GSIM " + StatusCode + " ";
-                    Body.Append("Event Time: " + DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssZ") + "");
-                    Body.Append("<br/><br/>");
-                    Body.Append("Error Code: " + StatusCode);
-                    Body.Append("<br/><br/>");
-                    Body.Append("Request: " + Request);
+                    _ = Body.Append("Event Time: " + DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssZ") + "");
+                    _ = Body.Append("<br/><br/>");
+                    _ = Body.Append("Error Code: " + StatusCode);
+                    _ = Body.Append("<br/><br/>");
+                    _ = Body.Append("Request: " + Request);
 
                     EPCDAL.InsertEmail_GS1(Recipient, varCC, varBCC, varReplyTo, Subject, Body.ToString(), 1, DateTime.Now);
                     break;
@@ -113,11 +103,11 @@ namespace EPC_CandA
                     varCC = "";
                     Subject = "r-pac: Error requesting serials on " + ServerEnvironment + " Server from GSIM " + StatusCode + " ";
 
-                    Body.Append("Event Time: " + DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssZ") + "");
-                    Body.Append("<br/><br/>");
-                    Body.Append("Error Code: " + StatusCode);
-                    Body.Append("<br/><br/>");
-                    Body.Append("Request: " + Request);
+                    _ = Body.Append("Event Time: " + DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssZ") + "");
+                    _ = Body.Append("<br/><br/>");
+                    _ = Body.Append("Error Code: " + StatusCode);
+                    _ = Body.Append("<br/><br/>");
+                    _ = Body.Append("Request: " + Request);
 
                     EPCDAL.InsertEmail_GS1(Recipient, varCC, varBCC, varReplyTo, Subject, Body.ToString(), 1, DateTime.Now);
                     break;

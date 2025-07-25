@@ -4,30 +4,26 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
-using System.Web.UI.WebControls;
 
 namespace EPC_GS1
 {
     public class GS1_http
     {
-        static string GS1_EmailIds = ConfigurationManager.AppSettings["GS1_EmailIds"].ToString();
+        private static readonly string GS1_EmailIds = ConfigurationManager.AppSettings["GS1_EmailIds"].ToString();
 
 
         public static bool GS1_NewVersion()
         {
-            return  ConfigurationManager.AppSettings["GS1_NewVersion"] == null ? false : Convert.ToBoolean(ConfigurationManager.AppSettings["GS1_NewVersion"].ToString());
+            return ConfigurationManager.AppSettings["GS1_NewVersion"] != null && Convert.ToBoolean(ConfigurationManager.AppSettings["GS1_NewVersion"].ToString());
 
         }
         public static async Task<string> GS1_apiResponse_Rest(EPCRequest ObjEPC)
         {
             string Response = string.Empty;
-            List<GS1> ObjGS1 = new List<GS1>();
+            _ = new List<GS1>();
 
 
             string GS1_api = ConfigurationManager.AppSettings["GS1_api"].ToString();
@@ -37,27 +33,20 @@ namespace EPC_GS1
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 
-            var url = GS1_api + "/" + ObjEPC.GTIN;
+            string url = GS1_api + "/" + ObjEPC.GTIN;
 
-            var client = new RestClient(url);
-            client.Timeout = -1;
-            var request = new RestRequest(Method.GET);
-            request.AddHeader(GS1_apiKeyHeader, GS1_apiKey);
+            RestClient client = new RestClient(url)
+            {
+                Timeout = -1
+            };
+            RestRequest request = new RestRequest(Method.GET);
+            _ = request.AddHeader(GS1_apiKeyHeader, GS1_apiKey);
             IRestResponse response = client.Execute(request);
 
             try
             {
 
-                if (response.StatusCode.ToString() == "OK")
-                {
-                    Response = response.Content;
-
-                }
-                else
-                {
-                    Response = response.Content == "" ? response.ErrorMessage : response.Content;
-
-                }
+                Response = response.StatusCode.ToString() == "OK" ? response.Content : response.Content == "" ? response.ErrorMessage : response.Content;
                 int StatusCode = Convert.ToInt32(response.StatusCode);
                 SendEmail(StatusCode, Response, ObjEPC.GTIN);
             }
@@ -78,7 +67,6 @@ namespace EPC_GS1
         {
             int code = Convert.ToInt32(StatusCode.ToString().Substring(0, 1));
             string Recipient = GS1_EmailIds;
-            string Subject = string.Empty;
             string varCC = "";
             string varBCC = ""; string varReplyTo = "";
             //string varAttachmentName = "";
@@ -90,8 +78,8 @@ namespace EPC_GS1
                 case 5:
                 case 4:
                     //varCC = "Satish.umathe@r-pac.com,Namrata.bhagat@r-pac.com";
-                    Subject = "r-pac: GS1 hub web service not reachable " + StatusCode + " for GTIN:" + GTIN + "";
-                    Body.Append(Response);
+                    string Subject = "r-pac: GS1 hub web service not reachable " + StatusCode + " for GTIN:" + GTIN + "";
+                    _ = Body.Append(Response);
                     EPCDAL.InsertEmail_GS1(Recipient, varCC, varBCC, varReplyTo, Subject, Body.ToString(), 1, DateTime.Now);
                     break;
 
@@ -104,23 +92,23 @@ namespace EPC_GS1
         {
 
             string Recipient = GS1_EmailIds;
-            string Subject = string.Empty;
             string varCC = "Satish.umathe@r-pac.com";
             string varBCC = ""; string varReplyTo = "";
             //string varAttachmentName = "";
 
             StringBuilder Body = new StringBuilder();
 
+            string Subject;
             switch (StatusCode)
             {
                 case 1:
                     Subject = "r-pac: GS1 Hub web service received an empty response for GTIN:" + GTIN + "";
-                    Body.Append(Response);
+                    _ = Body.Append(Response);
                     EPCDAL.InsertEmail_GS1(Recipient, varCC, varBCC, varReplyTo, Subject, Body.ToString(), 1, DateTime.Now);
                     break;
                 case 2:
                     Subject = "r-pac: GS1 Hub web service received a wrong Prefix for GTIN:" + GTIN + "";
-                    Body.Append(Response);
+                    _ = Body.Append(Response);
                     EPCDAL.InsertEmail_GS1(Recipient, varCC, varBCC, varReplyTo, Subject, Body.ToString(), 1, DateTime.Now);
                     break;
                 default:

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using BussinessLayer;
+﻿using BussinessLayer;
 using DataAccessLayer.CommonDataModels;
+using System.Collections.Generic;
+using System.Web.Http;
 
 namespace WebApi.Controllers
 {
@@ -47,7 +43,7 @@ namespace WebApi.Controllers
         [Route("api/apiEPCIS/GetEPCIS_URN_RPO")]
         public List<EPCISDO> GetEPCIS_URN_RPO(string CustomerId, long RPO)
         {
-            return EPCISBLL.GetEPCIS_URN_RPO(CustomerId,RPO);
+            return EPCISBLL.GetEPCIS_URN_RPO(CustomerId, RPO);
 
         }
         #endregion

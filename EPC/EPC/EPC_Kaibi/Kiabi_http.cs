@@ -3,11 +3,8 @@ using DataAccessLayer.CommonDataModels;
 using RestSharp;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Configuration;
-using System.Diagnostics;
 using System.Net;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +12,7 @@ namespace EPC_Kaibi
 {
     public class Kiabi_http
     {
-        private static string Kiabi_EmailIds;
+        private static readonly string Kiabi_EmailIds;
 
         static Kiabi_http()
         {
@@ -35,10 +32,10 @@ namespace EPC_Kaibi
             {
                 RestClient restClient = new RestClient(str1);
                 RestRequest restRequest = new RestRequest(Method.POST);
-                restRequest.AddHeader("content-type", "application/x-www-form-urlencoded");
+                _ = restRequest.AddHeader("content-type", "application/x-www-form-urlencoded");
                 NetworkCredential networkCredential = new NetworkCredential(ConfigurationManager.AppSettings["Kiabi_UserName"].ToString(), ConfigurationManager.AppSettings["Kiabi_Password"].ToString());
                 restRequest.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["Kiabi_UserName"].ToString(), ConfigurationManager.AppSettings["Kiabi_Password"].ToString());
-                restRequest.AddParameter("application/x-www-form-urlencoded", "grant_type=client_credentials&client_id=PrintProvider_PAC", ParameterType.RequestBody);
+                _ = restRequest.AddParameter("application/x-www-form-urlencoded", "grant_type=client_credentials&client_id=PrintProvider_PAC", ParameterType.RequestBody);
                 IRestResponse restResponse = restClient.Execute(restRequest);
                 if (restResponse.StatusCode.ToString() == "OK")
                 {
@@ -59,7 +56,7 @@ namespace EPC_Kaibi
         {
             string str;
             string empty = string.Empty;
-            List<GS1> gS1s = new List<GS1>();
+            _ = new List<GS1>();
             string str1 = ConfigurationManager.AppSettings["Kiabi_api"].ToString();
             string str2 = ConfigurationManager.AppSettings["Kiabi_apikey"].ToString();
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
@@ -71,17 +68,17 @@ namespace EPC_Kaibi
                     Timeout = -1
                 };
                 RestRequest restRequest = new RestRequest(Method.POST);
-                restRequest.AddHeader("Content-Type", "application/json");
-                restRequest.AddHeader("Accept", "application/json;charset=UTF-8");
-                restRequest.AddHeader("Authorization", string.Concat("Bearer ", authToken));
-                restRequest.AddHeader("x-apikey", str2);
-                restRequest.AddParameter("application/json", RequestBody, ParameterType.RequestBody);
+                _ = restRequest.AddHeader("Content-Type", "application/json");
+                _ = restRequest.AddHeader("Accept", "application/json;charset=UTF-8");
+                _ = restRequest.AddHeader("Authorization", string.Concat("Bearer ", authToken));
+                _ = restRequest.AddHeader("x-apikey", str2);
+                _ = restRequest.AddParameter("application/json", RequestBody, ParameterType.RequestBody);
                 IRestResponse restResponse = restClient.Execute(restRequest);
                 try
                 {
                     if (restResponse.StatusCode.ToString() != "OK")
                     {
-                        str = (restResponse.Content == "" ? restResponse.ErrorMessage : restResponse.Content);
+                        str = restResponse.Content == "" ? restResponse.ErrorMessage : restResponse.Content;
                         empty = str;
                     }
                     else
@@ -103,16 +100,15 @@ namespace EPC_Kaibi
         {
             int num = Convert.ToInt32(StatusCode.ToString().Substring(0, 1));
             string kiabiEmailIds = Kiabi_http.Kiabi_EmailIds;
-            string empty = string.Empty;
             string str = "";
             string str1 = "";
             string str2 = "";
             StringBuilder stringBuilder = new StringBuilder();
             if (num == 4 || num == 5)
             {
-                empty = string.Concat(new object[] { "r-pac: Kiabi web service not reachable ", StatusCode, " for GTIN:", GTIN }) ?? "";
-                stringBuilder.Append(Response);
-                EPCDAL.InsertEmail_GS1(kiabiEmailIds, str, str1, str2, empty, stringBuilder.ToString(), (long)1, DateTime.Now);
+                string empty = string.Concat(new object[] { "r-pac: Kiabi web service not reachable ", StatusCode, " for GTIN:", GTIN }) ?? "";
+                _ = stringBuilder.Append(Response);
+                EPCDAL.InsertEmail_GS1(kiabiEmailIds, str, str1, str2, empty, stringBuilder.ToString(), 1, DateTime.Now);
             }
         }
     }

@@ -4,8 +4,6 @@ using EPC_Kaibi;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 
 namespace BussinessLayer
 {
@@ -21,7 +19,7 @@ namespace BussinessLayer
             try
             {
 
-                if(string.IsNullOrEmpty(EPC_Req.CustomPara1))
+                if (string.IsNullOrEmpty(EPC_Req.CustomPara1))
                 {
                     uspGTINGetEPCKiabiRangeResult.Remark = "Customer Para is empty";
                     return uspGTINGetEPCKiabiRangeResult;
@@ -67,7 +65,7 @@ namespace BussinessLayer
                                 uspGTINGetEPCKiabiRangeResult = EPCDAL.GetEPC_Kiabi_Range(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
                             }
                         }
-                        catch (Exception exception)
+                        catch (Exception)
                         {
                             // uspGTINGetEPCKiabiRangeResult.Remark = "Error from Kiabi API:" + exception.ToString();
                             uspGTINGetEPCKiabiRangeResult.Remark = "Error from Kiabi API:" + empty;

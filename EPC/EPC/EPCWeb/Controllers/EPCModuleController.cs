@@ -7,9 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
@@ -20,36 +17,39 @@ namespace EPCWeb.Controllers
 
         public ActionResult EPCModule()
         {
-            EPCRequest ObjReq = new EPCRequest();
-            ObjReq.CustomerID = "C&A";
-            ObjReq.CustomerName = "C&A";
+            EPCRequest ObjReq = new EPCRequest
+            {
+                CustomerID = "C&A",
+                CustomerName = "C&A",
 
-            ObjReq.GTIN = "04047111987659";// "00123456789012";
-            ObjReq.Schema = "SGTIN-96";
-            ObjReq.Quantity = 10;
-            ObjReq.TransactionType = "New";
-            ObjReq.EPC = "";
-            ObjReq.Serial = 0;
-            ObjReq.RPO = 999999910;
-            ObjReq.DetailLineID = 999999910;
+                GTIN = "04047111987659",// "00123456789012";
+                Schema = "SGTIN-96",
+                Quantity = 10,
+                TransactionType = "New",
+                EPC = "",
+                Serial = 0,
+                RPO = 999999910,
+                DetailLineID = 999999910
+            };
             ObjReq.Serial = 0;
             ObjReq.CustomPara1 = "label-printer-3";
 
             ObjReq.Event = "";
 
-            var jsonReq = new JavaScriptSerializer().Serialize(ObjReq);
+            string jsonReq = new JavaScriptSerializer().Serialize(ObjReq);
 
             JToken parsedJson = JToken.Parse(jsonReq);
-            var beautified = parsedJson.ToString(Formatting.Indented);
+            string beautified = parsedJson.ToString(Formatting.Indented);
 
-            EPCModel Obj = new Models.EPCModel();
-
-            Obj.Request = beautified;
-            Obj.EPCRequest = ObjReq;
-            Obj.EPCResponse = new EPCResponse();
-            Obj.CustomerList = GetCustomerList();
-            Obj.EPCCounterList = new List<EPCCounter>();
-            Obj.GS1_Info = new List<GS1>();
+            EPCModel Obj = new Models.EPCModel
+            {
+                Request = beautified,
+                EPCRequest = ObjReq,
+                EPCResponse = new EPCResponse(),
+                CustomerList = GetCustomerList(),
+                EPCCounterList = new List<EPCCounter>(),
+                GS1_Info = new List<GS1>()
+            };
             //GetEPCCustomerCount();
 
             return View(Obj);
@@ -61,7 +61,7 @@ namespace EPCWeb.Controllers
             HttpResponseMessage Res = GlobalVariables.WebApiClient.GetAsync("api/apiEPC/GetEPCCustomer").Result;
             if (Res.IsSuccessStatusCode)
             {
-                var result = Res.Content.ReadAsStringAsync().Result;
+                string result = Res.Content.ReadAsStringAsync().Result;
                 List<EPCCustomer> resultList = JsonConvert.DeserializeObject<List<EPCCustomer>>(result);
 
                 ObjList = (from c in resultList
@@ -70,7 +70,7 @@ namespace EPCWeb.Controllers
                                Text = c.CustomerName,
                                Value = c.CustomerId
                            }).ToList();
-                    
+
             }
 
             TempData["CustomerList"] = ObjList;
@@ -82,8 +82,8 @@ namespace EPCWeb.Controllers
             HttpResponseMessage Res = GlobalVariables.WebApiClient.GetAsync("api/apiEPC/GetPing").Result;
             if (Res.IsSuccessStatusCode)
             {
-                var result = Res.Content.ReadAsStringAsync().Result;
-                result = JsonConvert.DeserializeObject<string>(result);
+                string result = Res.Content.ReadAsStringAsync().Result;
+                _ = JsonConvert.DeserializeObject<string>(result);
             }
         }
 
@@ -96,7 +96,7 @@ namespace EPCWeb.Controllers
                 if (string.IsNullOrEmpty(TestReport))
                 {
                     GetEPC(Obj);
-                                                            
+
                     if (Obj.EPCResponse.Remark == "Success")
                     {
                         Obj.EPCCounterList = GetEPCCounter_RPO_SerialNum(Obj.EPCResponse.GTIN, Obj.EPCRequest.RPO, Obj.EPCRequest.DetailLineID, Convert.ToInt64(Obj.EPCResponse.SerialStart), Convert.ToInt64(Obj.EPCResponse.SerialEnd));
@@ -111,18 +111,18 @@ namespace EPCWeb.Controllers
                 else
                 {
                     Obj.ListEPCResponse = EPCTestReport(Obj);
-                    
+
                     Obj.EPCResponse = Obj.ListEPCResponse.FirstOrDefault();
                     Obj.EPCCounterList = new List<EPCCounter>();
                     Obj.GS1_Info = new List<GS1>();
 
-                    var jsonReq = new JavaScriptSerializer().Serialize(Obj.ListEPCResponse);
+                    string jsonReq = new JavaScriptSerializer().Serialize(Obj.ListEPCResponse);
                     JToken parsedJson = JToken.Parse(jsonReq);
                     Obj.Response = parsedJson.ToString(Formatting.Indented);
                     ViewBag.Response = Obj.Response;
                 }
-                
-                
+
+
                 Obj.CustomerList = GetCustomerList();
 
             }
@@ -131,8 +131,8 @@ namespace EPCWeb.Controllers
                 Obj.Response = ex.ToString();
                 ViewBag.Response = ex.ToString();
             }
-           
-            
+
+
             return View("EPCModule", Obj);
         }
 
@@ -140,9 +140,9 @@ namespace EPCWeb.Controllers
         {
             try
             {
-                
+
                 Obj.EPCRequest = FilObject(Obj.EPCRequest);
-                var jsonReq = new JavaScriptSerializer().Serialize(Obj.EPCRequest);
+                string jsonReq = new JavaScriptSerializer().Serialize(Obj.EPCRequest);
                 JToken parsedJson = JToken.Parse(jsonReq);
                 Obj.Request = parsedJson.ToString(Formatting.Indented);
 
@@ -165,7 +165,7 @@ namespace EPCWeb.Controllers
                     Obj.EPCCounterList = GetEPCCounter_RPO_SerialNum(Obj.EPCRequest.GTIN, Obj.EPCRequest.RPO, Obj.EPCRequest.DetailLineID, Convert.ToInt64(Obj.EPCResponse.SerialStart), Convert.ToInt64(Obj.EPCResponse.SerialEnd));
                 }
 
-               GS1Response GS1Res  = GetGS1_Service(Obj.EPCRequest.GTIN, Obj.EPCRequest.CustomerID);
+                GS1Response GS1Res = GetGS1_Service(Obj.EPCRequest.GTIN, Obj.EPCRequest.CustomerID);
 
                 Obj.GS1_Info = GS1Res.GS1List;
                 int len = GS1Res.Error == null ? 0 : GS1Res.Error.Length;
@@ -174,36 +174,36 @@ namespace EPCWeb.Controllers
                     Obj.GS1_Error = GS1Res.Error;
                 }
             }
-           
+
 
             return View("EPCModule", Obj);
         }
 
-        
+
         public string GetJSON(string CustomerID, string GTIN, string Quantity, string RPO, string DetailLineID)
         {
-            List<SelectListItem> ObjList = new List<SelectListItem>();
+            _ = new List<SelectListItem>();
 
-            
+
 
             EPCRequest ObjReq = new EPCRequest();
-            
 
-            var jsonReq = new JavaScriptSerializer().Serialize(ObjReq);
+
+            string jsonReq = new JavaScriptSerializer().Serialize(ObjReq);
 
             JToken parsedJson = JToken.Parse(jsonReq);
-            var beautified = parsedJson.ToString(Formatting.Indented);
+            string beautified = parsedJson.ToString(Formatting.Indented);
             return beautified;
         }
 
         public EPCRequest FilObject(EPCRequest ObjReq)
         {
-            
+
             ObjReq.CustomerName = (from c in GetCustomerList()
                                    where c.Value == ObjReq.CustomerID
                                    select c.Text).FirstOrDefault();
 
-            
+
             ObjReq.Schema = "SGTIN-96";
             ObjReq.TransactionType = "New";
             ObjReq.EPC = "";
@@ -240,14 +240,14 @@ namespace EPCWeb.Controllers
 
 
 
-            HttpResponseMessage Res = new HttpResponseMessage();
+            _ = new HttpResponseMessage();
 
 
-            Res = GlobalVariables.WebApiClient.PostAsJsonAsync("api/apiEPC/GetEPC", ReqObj).Result;
+            HttpResponseMessage Res = GlobalVariables.WebApiClient.PostAsJsonAsync("api/apiEPC/GetEPC", ReqObj).Result;
 
             // Res = GlobalVariables.WebApiClient.PostAsJsonAsync("api/apiEPC/GetCA_SGTIN_Serial", ReqObj).Result;
 
-           // Res = GlobalVariables.WebApiClient.PostAsJsonAsync("api/apiEPC/GetEPC_StanderCustomer", ReqObj).Result;
+            // Res = GlobalVariables.WebApiClient.PostAsJsonAsync("api/apiEPC/GetEPC_StanderCustomer", ReqObj).Result;
 
             /*
             if (ReqObj.TransactionType == "New")
@@ -270,10 +270,10 @@ namespace EPCWeb.Controllers
             */
             if (Res.IsSuccessStatusCode)
             {
-                var result = Res.Content.ReadAsStringAsync().Result;
+                string result = Res.Content.ReadAsStringAsync().Result;
                 Obj.EPCResponse = JsonConvert.DeserializeObject<EPCResponse>(result);
 
-                var jsonReq = new JavaScriptSerializer().Serialize(Obj.EPCResponse);
+                string jsonReq = new JavaScriptSerializer().Serialize(Obj.EPCResponse);
                 JToken parsedJson = JToken.Parse(jsonReq);
                 Obj.Response = parsedJson.ToString(Formatting.Indented);
                 ViewBag.Response = Obj.Response;
@@ -282,21 +282,18 @@ namespace EPCWeb.Controllers
         }
 
         #region LOAD DATA
-        public async Task<ActionResult> LoadData()
+        public ActionResult LoadData()
         {
             // string page;
-            var draw = "";
-
-            int recordsTotal = 0;
-
+            string draw = "";
             List<EPCLog> Objepc = GetEpcLog();
 
             //total number of rows count     
-            recordsTotal = Objepc.Count();
+            int recordsTotal = Objepc.Count();
 
 
             //Paging     
-            var data = Objepc;// parse.Skip(skip).Take(pageSize).ToList();
+            List<EPCLog> data = Objepc;// parse.Skip(skip).Take(pageSize).ToList();
 
             //Returning Json Data    
             // return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data });
@@ -304,14 +301,14 @@ namespace EPCWeb.Controllers
             {
                 ContentEncoding = Encoding.Default,
                 ContentType = "application/json",
-                Data = new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data },
+                Data = new { draw, recordsFiltered = recordsTotal, recordsTotal, data },
                 JsonRequestBehavior = 0,
                 MaxJsonLength = int.MaxValue
             };
 
         }
         #endregion
-        
+
         #region EPC LOG
         public List<EPCLog> GetEpcLog()
         {
@@ -326,23 +323,20 @@ namespace EPCWeb.Controllers
             return ObjList;
         }
         #endregion
-        
+
         #region LOAD EPC SERIAL DATA
-        public async Task<ActionResult> LoadEPCSrialData()
+        public ActionResult LoadEPCSrialData()
         {
             // string page;
-            var draw = "";
-
-            int recordsTotal = 0;
-
+            string draw = "";
             List<EPCLog> Objepc = GetEpcSerail();
 
             //total number of rows count     
-            recordsTotal = Objepc.Count();
+            int recordsTotal = Objepc.Count();
 
 
             //Paging     
-            var data = Objepc;// parse.Skip(skip).Take(pageSize).ToList();
+            List<EPCLog> data = Objepc;// parse.Skip(skip).Take(pageSize).ToList();
 
             //Returning Json Data    
             // return Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data });
@@ -350,7 +344,7 @@ namespace EPCWeb.Controllers
             {
                 ContentEncoding = Encoding.Default,
                 ContentType = "application/json",
-                Data = new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data },
+                Data = new { draw, recordsFiltered = recordsTotal, recordsTotal, data },
                 JsonRequestBehavior = 0,
                 MaxJsonLength = int.MaxValue
             };
@@ -379,7 +373,7 @@ namespace EPCWeb.Controllers
             HttpResponseMessage Res = GlobalVariables.WebApiClient.GetAsync("api/apiEPC/GetCustomerCount").Result;
             if (Res.IsSuccessStatusCode)
             {
-                var result = Res.Content.ReadAsStringAsync().Result;
+                _ = Res.Content.ReadAsStringAsync().Result;
                 //result = JsonConvert.DeserializeObject<string>(result);
             }
         }
@@ -389,10 +383,10 @@ namespace EPCWeb.Controllers
         public List<EPCCounter> GetEPCCounter_RPO_SerialNum(string GTIN, long RPO, long DetailNo, long SerialStart, long SerialEnd)
         {
             List<EPCCounter> Objlist = new List<EPCCounter>();
-            HttpResponseMessage Res = GlobalVariables.WebApiClient.GetAsync("api/apiEPC/GetEPCCounter_RPO_SerialNum?GTIN="+ GTIN + "&RPO=" + RPO + "&DetailNo="+ DetailNo + "&SerialStart="+ SerialStart + "&SerialEnd="+ SerialEnd + "").Result;
+            HttpResponseMessage Res = GlobalVariables.WebApiClient.GetAsync("api/apiEPC/GetEPCCounter_RPO_SerialNum?GTIN=" + GTIN + "&RPO=" + RPO + "&DetailNo=" + DetailNo + "&SerialStart=" + SerialStart + "&SerialEnd=" + SerialEnd + "").Result;
             if (Res.IsSuccessStatusCode)
             {
-                var result = Res.Content.ReadAsStringAsync().Result;
+                string result = Res.Content.ReadAsStringAsync().Result;
                 Objlist = JsonConvert.DeserializeObject<List<EPCCounter>>(result);
             }
 
@@ -404,10 +398,10 @@ namespace EPCWeb.Controllers
         public GS1Response GetGS1_Service(string GTIN, string CustomerId)
         {
             GS1Response Objlist = new GS1Response();
-            HttpResponseMessage Res = GlobalVariables.WebApiClient.GetAsync("api/apiEPC/Get_GS1_Service?GTIN=" + GTIN + "&CustomerId="+ CustomerId + "").Result;
+            HttpResponseMessage Res = GlobalVariables.WebApiClient.GetAsync("api/apiEPC/Get_GS1_Service?GTIN=" + GTIN + "&CustomerId=" + CustomerId + "").Result;
             if (Res.IsSuccessStatusCode)
             {
-                var result = Res.Content.ReadAsStringAsync().Result;
+                string result = Res.Content.ReadAsStringAsync().Result;
                 Objlist = JsonConvert.DeserializeObject<GS1Response>(result);
             }
 
@@ -418,7 +412,7 @@ namespace EPCWeb.Controllers
         #region EPC TEST REPORT
         //public ActionResult GetEPCTestReport(EPCModel Obj)
         //{
-            
+
         //    try
         //    {
 
@@ -451,23 +445,21 @@ namespace EPCWeb.Controllers
             HttpResponseMessage Res = GlobalVariables.WebApiClient.GetAsync("api/apiEPC/GetEPCTestRequestParam").Result;
             if (Res.IsSuccessStatusCode)
             {
-                var result = Res.Content.ReadAsStringAsync().Result;
+                string result = Res.Content.ReadAsStringAsync().Result;
                 ObjReq = JsonConvert.DeserializeObject<List<EPCRequest>>(result);
             }
 
             for (int i = 0; i < ObjReq.Count(); i++)
             {
-                
+
                 ReqObj.GTIN = ObjReq[i].GTIN;
                 ReqObj.CustomerID = ObjReq[i].CustomerID;
                 ReqObj.CustomerName = ObjReq[i].CustomerName;
                 ReqObj.CustomPara1 = ObjReq[i].CustomPara1;
                 ReqObj.CustomPara2 = "Test EPC";
-                                
-                
-                HttpResponseMessage Res_EPC = new HttpResponseMessage();
-                Res_EPC = GlobalVariables.WebApiClient.PostAsJsonAsync("api/apiEPC/GetEPC", ReqObj).Result;
-                var result = Res_EPC.Content.ReadAsStringAsync().Result;
+                _ = new HttpResponseMessage();
+                HttpResponseMessage Res_EPC = GlobalVariables.WebApiClient.PostAsJsonAsync("api/apiEPC/GetEPC", ReqObj).Result;
+                string result = Res_EPC.Content.ReadAsStringAsync().Result;
                 ObjRes.Add(JsonConvert.DeserializeObject<EPCResponse>(result));
             }
 

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
@@ -17,7 +14,8 @@ namespace DataAccessLayer
                 {
                     objlist = (from lst in db.usp_GetTempeEPCDetails(RPO, DetailNumber) select lst).FirstOrDefault();
                 }
-            }catch(Exception EX)
+            }
+            catch (Exception)
             {
 
             }
@@ -25,19 +23,19 @@ namespace DataAccessLayer
         }
         public static void InsertJSON_EPCDeCode(string JsonRequest, string rfidRequestId, long RPO)
         {
-            
+
             using (EPC_DBEntities db = new EPC_DBEntities())
             {
-                db.usp_Tempe_EPC_InsertEPCLog_Decode(JsonRequest, rfidRequestId, RPO);
+                _ = db.usp_Tempe_EPC_InsertEPCLog_Decode(JsonRequest, rfidRequestId, RPO);
             }
-            
+
         }
         public static void InsertJSON_EPCLog(string JsonRequest, long RPO, string rfidRequestId)
         {
 
             using (EPC_DBEntities db = new EPC_DBEntities())
             {
-                db.usp_Tempe_EPC_InsertEPCLog(JsonRequest,RPO, rfidRequestId);
+                _ = db.usp_Tempe_EPC_InsertEPCLog(JsonRequest, RPO, rfidRequestId);
             }
 
         }

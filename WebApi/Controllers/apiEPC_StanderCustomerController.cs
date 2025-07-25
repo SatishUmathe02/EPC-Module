@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using BussinessLayer;
+using DataAccessLayer;
+using DataAccessLayer.CommonDataModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Web.Http;
-using DataAccessLayer.CommonDataModels;
-using BussinessLayer;
 using System.Threading.Tasks;
-using DataAccessLayer;
+using System.Web.Http;
 
 namespace WebApi.Controllers
 {
@@ -30,7 +30,7 @@ namespace WebApi.Controllers
                 }
                 else if (Request.TransactionType == "Test")
                 {
-                    ObjRes = await Run_GetEPC_StanderCustomer_Test(Request);
+                    ObjRes = Run_GetEPC_StanderCustomer_Test(Request);
                 }
 
                 string epc_res = JsonConvert.SerializeObject(ObjRes);
@@ -52,8 +52,8 @@ namespace WebApi.Controllers
 
             if (Request.Quantity <= 0)
             {
-                EPCResponse ObjRes = new EPCResponse();
-                return ObjRes = EPCBLL.GetError(123);
+                _ = new EPCResponse();
+                return _ = EPCBLL.GetError(123);
             }
 
             if (Request != null)
@@ -86,16 +86,15 @@ namespace WebApi.Controllers
                     {
                         List<GS1> ObjGS1 = new List<GS1>();
                         string GS1_Response = string.Empty;
-
                         try
                         {
                             // GS1_Response = GS1_IntergrationBLL.GS1_apiResponse_Restapi(Request);
                             // ObjGS1 = JsonConvert.DeserializeObject<List<GS1>>(GS1_Response);
-                             ObjGS1 = GS1_IntergrationBLL.GS1_apiResponse_Restapi(Request);
+                            ObjGS1 = GS1_IntergrationBLL.GS1_apiResponse_Restapi(Request);
 
 
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                             Request.GS1Prefix = "";
                         }
@@ -126,17 +125,19 @@ namespace WebApi.Controllers
                 #region EPC CALL
 
 
-                if ((Request.GS1Customer && Request.GS1apiRequired) && (string.IsNullOrEmpty(Request.GS1Prefix)))
+                if (Request.GS1Customer && Request.GS1apiRequired && string.IsNullOrEmpty(Request.GS1Prefix))
                 {
                     // show the error
-                    EPCResponse EPC_Res = new EPCResponse();
-                    EPC_Res.EPCStart = "";
-                    EPC_Res.EPCEnd = "";
-                    EPC_Res.SerialStart = "";
-                    EPC_Res.SerialEnd = "";
-                    EPC_Res.GTIN = "";
-                    EPC_Res.CustomerID = Request.CustomerID;
-                    EPC_Res.Remark = "The GTIN " + Request.GTIN + " included in this order does not exist in GS1 database. Please contact Customer Service to confirm GTIN:" + Request.GTIN;
+                    EPCResponse EPC_Res = new EPCResponse
+                    {
+                        EPCStart = "",
+                        EPCEnd = "",
+                        SerialStart = "",
+                        SerialEnd = "",
+                        GTIN = "",
+                        CustomerID = Request.CustomerID,
+                        Remark = "The GTIN " + Request.GTIN + " included in this order does not exist in GS1 database. Please contact Customer Service to confirm GTIN:" + Request.GTIN
+                    };
 
                     return EPC_Res;
                 }
@@ -152,14 +153,16 @@ namespace WebApi.Controllers
                     }
                     else
                     {
-                        EPCResponse EPC_Res = new EPCResponse();
-                        EPC_Res.EPCStart = "";
-                        EPC_Res.EPCEnd = "";
-                        EPC_Res.SerialStart = "";
-                        EPC_Res.SerialEnd = "";
-                        EPC_Res.GTIN = "";
-                        EPC_Res.CustomerID = Request.CustomerID;
-                        EPC_Res.Remark = "The Customer " + Request.CustomerID + " SP does not exist in EPC Module";
+                        EPCResponse EPC_Res = new EPCResponse
+                        {
+                            EPCStart = "",
+                            EPCEnd = "",
+                            SerialStart = "",
+                            SerialEnd = "",
+                            GTIN = "",
+                            CustomerID = Request.CustomerID,
+                            Remark = "The Customer " + Request.CustomerID + " SP does not exist in EPC Module"
+                        };
 
                         return EPC_Res;
                     }
@@ -176,28 +179,28 @@ namespace WebApi.Controllers
                 return EPCBLL.GetError(107);
             }
         }
-        private static async Task<EPCResponse> Run_GetEPC_StanderCustomer_Test(EPCRequest Request)
+        private static EPCResponse Run_GetEPC_StanderCustomer_Test(EPCRequest Request)
         {
 
             if (Request.Quantity <= 0)
             {
-                EPCResponse ObjRes = new EPCResponse();
-                return ObjRes = EPCBLL.GetError(123);
+                _ = new EPCResponse();
+                return _ = EPCBLL.GetError(123);
             }
 
             if (Request != null)
             {
 
                 //usp_GetStanderCustomerDetails_Result ObjEC = EPC_StanderCustomerBLL.GetStanderCustomer_Details(Request);
-                usp_GetStanderCustomerDetails_Result ObjEC = new usp_GetStanderCustomerDetails_Result();
-
-
-                ObjEC.CustmerId = Request.CustomerID;
-                ObjEC.SerialRange_Start = Request.Serial;
-                ObjEC.bitGS1 = Request.GS1Customer;
-                ObjEC.intFilterValue = Request.FilterValue;
-                ObjEC.bitUniqueCodeSerialization = Request.UniqueCodeSerialization;
-                ObjEC.GS1Prefix = Request.GS1Prefix;
+                usp_GetStanderCustomerDetails_Result ObjEC = new usp_GetStanderCustomerDetails_Result
+                {
+                    CustmerId = Request.CustomerID,
+                    SerialRange_Start = Request.Serial,
+                    bitGS1 = Request.GS1Customer,
+                    intFilterValue = Request.FilterValue,
+                    bitUniqueCodeSerialization = Request.UniqueCodeSerialization,
+                    GS1Prefix = Request.GS1Prefix
+                };
                 //ObjEC.GS1apiRequired = Convert.ToBoolean(Request.GS1Customer);
 
 
@@ -218,7 +221,6 @@ namespace WebApi.Controllers
                     {
                         List<GS1> ObjGS1 = new List<GS1>();
                         string GS1_Response = string.Empty;
-
                         try
                         {
                             // GS1_Response = GS1_IntergrationBLL.GS1_apiResponse_Restapi(Request);
@@ -227,7 +229,7 @@ namespace WebApi.Controllers
                             ObjGS1 = GS1_IntergrationBLL.GS1_apiResponse_Restapi(Request);
 
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
                             Request.GS1Prefix = "";
                         }
@@ -258,17 +260,19 @@ namespace WebApi.Controllers
                 #region EPC CALL
 
 
-                if ((Request.GS1Customer && Request.GS1apiRequired) && (string.IsNullOrEmpty(Request.GS1Prefix)))
+                if (Request.GS1Customer && Request.GS1apiRequired && string.IsNullOrEmpty(Request.GS1Prefix))
                 {
                     // show the error
-                    EPCResponse EPC_Res = new EPCResponse();
-                    EPC_Res.EPCStart = "";
-                    EPC_Res.EPCEnd = "";
-                    EPC_Res.SerialStart = "";
-                    EPC_Res.SerialEnd = "";
-                    EPC_Res.GTIN = "";
-                    EPC_Res.CustomerID = Request.CustomerID;
-                    EPC_Res.Remark = "The GTIN " + Request.GTIN + " included in this order does not exist in GS1 database. Please contact Customer Service to confirm GTIN:" + Request.GTIN;
+                    EPCResponse EPC_Res = new EPCResponse
+                    {
+                        EPCStart = "",
+                        EPCEnd = "",
+                        SerialStart = "",
+                        SerialEnd = "",
+                        GTIN = "",
+                        CustomerID = Request.CustomerID,
+                        Remark = "The GTIN " + Request.GTIN + " included in this order does not exist in GS1 database. Please contact Customer Service to confirm GTIN:" + Request.GTIN
+                    };
 
                     return EPC_Res;
                 }

@@ -17,10 +17,9 @@ namespace BussinessLayer
                 //EPCLog ObjEPCLog = new EPCLog();
 
                 // Check GTIN 
-                Int64 result;
 
                 // Check Quantity 
-                if (!Int64.TryParse(EPC_Req.Quantity.ToString(), out result))
+                if (!long.TryParse(EPC_Req.Quantity.ToString(), out long result))
                 {
                     return GetError(103);
                 }
@@ -32,8 +31,8 @@ namespace BussinessLayer
 
                 try
                 {
-                    EPC_Req.Schema = EPC_Req.Schema == null ? "" : EPC_Req.Schema;
-                    EPC_Req.CustomerID = EPC_Req.CustomerID == null ? "" : EPC_Req.CustomerID;
+                    EPC_Req.Schema = EPC_Req.Schema ?? "";
+                    EPC_Req.CustomerID = EPC_Req.CustomerID ?? "";
 
                     switch (EPC_Req.CustomerID)
                     {
@@ -45,7 +44,7 @@ namespace BussinessLayer
                             if (CandA_IntergrationBLL.CandA_GSIM)
                             {
                                 #region C&A GSIM 
-                                                              
+
                                 EPC_Res = CandA_IntergrationBLL.GetCA_SGTIN_Serial(EPC_Req);
 
                                 if (EPC_Res.Remark == "Quantity is available")
@@ -65,7 +64,7 @@ namespace BussinessLayer
                                 }
                                 else
                                 {
-                                   // EPC_Res.Remark = "";
+                                    // EPC_Res.Remark = "";
                                 }
 
                                 #endregion
@@ -73,7 +72,7 @@ namespace BussinessLayer
                             else
                             {
                                 #region C&A 
-                                                                
+
                                 usp_GTIN_GetEPC_Result Obj_CA = EPCDAL.GetEPC(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
                                 EPC_Res.EPCStart = Obj_CA.EpcStart;
                                 EPC_Res.EPCEnd = Obj_CA.EpcEnd;
@@ -100,7 +99,7 @@ namespace BussinessLayer
                             if (KiabiCount == 0)
                             {
                                 usp_GTIN_GetEPC_Kiabi_Result ePCKiabi = EPCDAL.GetEPC_Kiabi(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
-                                
+
                                 EPC_Res.EPCStart = ePCKiabi.EpcStart;
                                 EPC_Res.EPCEnd = ePCKiabi.EpcEnd;
                                 EPC_Res.SerialStart = Convert.ToString(ePCKiabi.SerialStart);
@@ -139,7 +138,7 @@ namespace BussinessLayer
                         case "Hugoboss":
                         case "HugoBoss":
 
-                            var Obj_HB = EPCDAL.GetEPC_HugoBoss(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
+                            usp_GTIN_GetEPC_HugoBoss_Result Obj_HB = EPCDAL.GetEPC_HugoBoss(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
 
                             EPC_Res.EPCStart = Obj_HB.EpcStart;
                             EPC_Res.EPCEnd = Obj_HB.EpcEnd;
@@ -188,7 +187,7 @@ namespace BussinessLayer
                 catch (Exception Ex)
                 {
                     EPCDAL.SaveErrorFileResponse(Ex.ToString(), "GetEPC");
-                    InsertLog(Ex, "GetEPC");
+                    _ = InsertLog(Ex, "GetEPC");
                     EPC_Res = GetError(122);
                 }
 
@@ -196,7 +195,7 @@ namespace BussinessLayer
             catch (Exception ex)
             {
                 EPCDAL.SaveErrorFileResponse(ex.ToString(), "GetEPC_New");
-                InsertLog(ex, "GetEPC_New");
+                _ = InsertLog(ex, "GetEPC_New");
                 EPC_Res = GetError(122);
             }
 
@@ -236,7 +235,7 @@ namespace BussinessLayer
                 catch (Exception Ex)
                 {
                     EPCDAL.SaveErrorFileResponse(Ex.ToString(), "GetEPCDetail");
-                    InsertLog(Ex, "GetEPCDetail");
+                    _ = InsertLog(Ex, "GetEPCDetail");
                     EPC_Res = null;
                 }
 
@@ -244,7 +243,7 @@ namespace BussinessLayer
             catch (Exception ex)
             {
                 EPCDAL.SaveErrorFileResponse(ex.ToString(), "GetEPCDetail");
-                InsertLog(ex, "GetEPCDetail");
+                _ = InsertLog(ex, "GetEPCDetail");
                 EPC_Res = null;
             }
 
@@ -260,8 +259,8 @@ namespace BussinessLayer
 
                 try
                 {
-                    EPC_Req.Schema = EPC_Req.Schema == null ? "" : EPC_Req.Schema;
-                    EPC_Req.CustomerID = EPC_Req.CustomerID == null ? "" : EPC_Req.CustomerID;
+                    EPC_Req.Schema = EPC_Req.Schema ?? "";
+                    EPC_Req.CustomerID = EPC_Req.CustomerID ?? "";
 
                     usp_GTIN_GetEPC_Customer_Result Obj = EPCDAL.GetEPC_Customer(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
 
@@ -280,7 +279,7 @@ namespace BussinessLayer
                 catch (Exception Ex)
                 {
                     EPCDAL.SaveErrorFileResponse(Ex.ToString(), "GetEPC");
-                    InsertLog(Ex, "GetEPC");
+                    _ = InsertLog(Ex, "GetEPC");
                     EPC_Res = GetError(122);
                 }
 
@@ -288,7 +287,7 @@ namespace BussinessLayer
             catch (Exception ex)
             {
                 EPCDAL.SaveErrorFileResponse(ex.ToString(), "GetEPC_New");
-                InsertLog(ex, "GetEPC_New");
+                _ = InsertLog(ex, "GetEPC_New");
                 EPC_Res = GetError(122);
             }
 
@@ -303,8 +302,8 @@ namespace BussinessLayer
             {
                 try
                 {
-                    EPC_Req.Schema = (EPC_Req.Schema == null ? "" : EPC_Req.Schema);
-                    EPC_Req.CustomerID = (EPC_Req.CustomerID == null ? "" : EPC_Req.CustomerID);
+                    EPC_Req.Schema = EPC_Req.Schema ?? "";
+                    EPC_Req.CustomerID = EPC_Req.CustomerID ?? "";
                     usp_GTIN_GetEPC_Customer_Tempe_Result ePCCustomerTempe = EPCDAL.GetEPC_Customer_Tempe(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
                     ePCResponse.EPCStart = ePCCustomerTempe.EpcStart;
                     ePCResponse.EPCEnd = ePCCustomerTempe.EpcEnd;
@@ -320,14 +319,14 @@ namespace BussinessLayer
                 catch (Exception exception)
                 {
                     EPCDAL.SaveErrorFileResponse(exception.ToString(), "GetEPC");
-                    EPCBLL.InsertLog(exception, "GetEPC");
+                    _ = EPCBLL.InsertLog(exception, "GetEPC");
                     ePCResponse = EPCBLL.GetError(122);
                 }
             }
             catch (Exception exception1)
             {
                 EPCDAL.SaveErrorFileResponse(exception1.ToString(), "GetEPC_New");
-                EPCBLL.InsertLog(exception1, "GetEPC_New");
+                _ = EPCBLL.InsertLog(exception1, "GetEPC_New");
                 ePCResponse = EPCBLL.GetError(122);
             }
             return ePCResponse;
@@ -362,8 +361,8 @@ namespace BussinessLayer
             {
                 try
                 {
-                    EPC_Req.Schema = (EPC_Req.Schema == null ? "" : EPC_Req.Schema);
-                    EPC_Req.CustomerID = (EPC_Req.CustomerID == null ? "" : EPC_Req.CustomerID);
+                    EPC_Req.Schema = EPC_Req.Schema ?? "";
+                    EPC_Req.CustomerID = EPC_Req.CustomerID ?? "";
                     usp_GTIN_GetEPC_Customer_MorellatoGroup_Result ePCCustomerTempe = EPCDAL.GetEPC_Customer_MorellatoGroup(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
                     ePCResponse.EPCStart = ePCCustomerTempe.EpcStart;
                     ePCResponse.EPCEnd = ePCCustomerTempe.EpcEnd;
@@ -379,14 +378,14 @@ namespace BussinessLayer
                 catch (Exception exception)
                 {
                     EPCDAL.SaveErrorFileResponse(exception.ToString(), "GetEPC");
-                    EPCBLL.InsertLog(exception, "GetEPC");
+                    _ = EPCBLL.InsertLog(exception, "GetEPC");
                     ePCResponse = EPCBLL.GetError(122);
                 }
             }
             catch (Exception exception1)
             {
                 EPCDAL.SaveErrorFileResponse(exception1.ToString(), "GetEPC_New");
-                EPCBLL.InsertLog(exception1, "GetEPC_New");
+                _ = EPCBLL.InsertLog(exception1, "GetEPC_New");
                 ePCResponse = EPCBLL.GetError(122);
             }
             return ePCResponse;
@@ -404,10 +403,6 @@ namespace BussinessLayer
             try
             {
                 EPC_Res.Quantity = EPC_Req.Quantity;
-                //EPCLog ObjEPCLog = new EPCLog();
-
-                // Check GTIN 
-                Int64 result;
                 //if (!Int64.TryParse(EPC_Req.GTIN, out result))
                 //{
                 //    return GetError(102);
@@ -441,8 +436,8 @@ namespace BussinessLayer
 
                 try
                 {
-                    EPC_Req.Schema = EPC_Req.Schema == null ? "" : EPC_Req.Schema;
-                    EPC_Req.CustomerID = EPC_Req.CustomerID == null ? "" : EPC_Req.CustomerID;
+                    EPC_Req.Schema = EPC_Req.Schema ?? "";
+                    EPC_Req.CustomerID = EPC_Req.CustomerID ?? "";
 
                     usp_GTIN_GetEPC_Result Obj = EPCDAL.GetEPC(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
 
@@ -482,13 +477,13 @@ namespace BussinessLayer
             try
             {
 
-                if (String.IsNullOrEmpty(EPC_Req.EPC))
+                if (string.IsNullOrEmpty(EPC_Req.EPC))
                 {
                     return GetError(109);
                 }
 
-                EPC_Req.Schema = EPC_Req.Schema == null ? "" : EPC_Req.Schema;
-                EPC_Req.CustomerID = EPC_Req.CustomerID == null ? "" : EPC_Req.CustomerID;
+                EPC_Req.Schema = EPC_Req.Schema ?? "";
+                EPC_Req.CustomerID = EPC_Req.CustomerID ?? "";
 
                 usp_GTIN_GetEPC_Result Obj = EPCDAL.GetEPC(EPC_Req.GTIN, EPC_Req.Quantity, EPC_Req.TransactionType, EPC_Req.Schema, EPC_Req.CustomerID, EPC_Req.CustomerName, EPC_Req.Event, EPC_Req.UserId, Convert.ToInt64(EPC_Req.Serial), EPC_Req.EPC, EPC_Req.RPO, EPC_Req.DetailLineID, EPC_Req.CustomPara1, EPC_Req.CustomPara2, EPC_Req.GS1Prefix, EPC_Req.PartitionValue, Convert.ToDateTime(EPC_Req.RequestStartTime));
 
@@ -504,7 +499,7 @@ namespace BussinessLayer
             }
             catch (Exception Ex)
             {
-                InsertLog(Ex, "GetEPC_Decode");
+                _ = InsertLog(Ex, "GetEPC_Decode");
                 return GetError(107);
             }
 

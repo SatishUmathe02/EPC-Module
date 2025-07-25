@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
@@ -29,7 +26,7 @@ namespace DataAccessLayer
                     objlist = (from lst in db.usp_GetStanderCustomerDetails(CustomerId, gtin) select lst).FirstOrDefault();
                 }
             }
-            catch (Exception EX)
+            catch (Exception)
             {
 
             }
@@ -54,7 +51,7 @@ namespace DataAccessLayer
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -82,7 +79,7 @@ namespace DataAccessLayer
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -99,16 +96,16 @@ namespace DataAccessLayer
             {
                 using (EPC_DBEntities db = new EPC_DBEntities())
                 {
-                    
+
                     int k = (int)(from lst1 in db.usp_CheckSPForStatnderCustomer(CustomerId) select lst1).ToList().FirstOrDefault();
 
-                    if(k>0)
+                    if (k > 0)
                     {
                         SPExit = true;
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 SPExit = false;
             }

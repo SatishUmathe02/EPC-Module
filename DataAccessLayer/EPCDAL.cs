@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
@@ -52,7 +50,7 @@ namespace DataAccessLayer
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 //using (EPC_DBEntities db = new EPC_DBEntities())
@@ -84,7 +82,7 @@ namespace DataAccessLayer
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 //using (EPC_DBEntities db = new EPC_DBEntities())
@@ -116,7 +114,7 @@ namespace DataAccessLayer
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
 
@@ -141,7 +139,7 @@ namespace DataAccessLayer
                         select lst1).ToList<usp_GTIN_GetEPC_Kiabi_Result>().FirstOrDefault<usp_GTIN_GetEPC_Kiabi_Result>();
                 }
             }
-            catch (Exception exception)
+            catch (Exception)
             {
             }
             return uspGTINGetEPCKiabiResult;
@@ -160,7 +158,7 @@ namespace DataAccessLayer
                         select lst1).ToList<usp_GTIN_GetEPC_Kiabi_Range_Result>().FirstOrDefault<usp_GTIN_GetEPC_Kiabi_Range_Result>();
                 }
             }
-            catch (Exception exception)
+            catch (Exception)
             {
             }
             return uspGTINGetEPCKiabiRangeResult;
@@ -186,7 +184,7 @@ namespace DataAccessLayer
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
 
@@ -203,7 +201,7 @@ namespace DataAccessLayer
 
             using (EPC_DBEntities db = new EPC_DBEntities())
             {
-                db.usp_AddErrorLog(Convert.ToString(objException.Source), Convert.ToString(objException.Message), Convert.ToString(System.Net.Dns.GetHostName()), Convert.ToString(objException.TargetSite), ("StackTrace : " + Convert.ToString(objException.StackTrace)), Convert.ToDateTime(System.DateTime.Now.ToString("yyyy/MM/dd HH:mm")), FileName);
+                _ = db.usp_AddErrorLog(Convert.ToString(objException.Source), Convert.ToString(objException.Message), Convert.ToString(System.Net.Dns.GetHostName()), Convert.ToString(objException.TargetSite), "StackTrace : " + Convert.ToString(objException.StackTrace), Convert.ToDateTime(System.DateTime.Now.ToString("yyyy/MM/dd HH:mm")), FileName);
             }
 
             return 0;
@@ -299,11 +297,11 @@ namespace DataAccessLayer
             {
                 using (EPC_DBEntities db = new EPC_DBEntities())
                 {
-                    db.usp_InsertEmailTrigger("RT", varRecipient, varCC, varBCC, varReplyTo, varSubject, varBody, "", bigIntCreatedById, dtCreatedOn);
+                    _ = db.usp_InsertEmailTrigger("RT", varRecipient, varCC, varBCC, varReplyTo, varSubject, varBody, "", bigIntCreatedById, dtCreatedOn);
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -317,11 +315,11 @@ namespace DataAccessLayer
             {
                 using (EPC_DBEntities db = new EPC_DBEntities())
                 {
-                    db.usp_InsertEmailTrigger_GS1("RT", varRecipient, varCC, varBCC, varReplyTo, varSubject, varBody, "", bigIntCreatedById, dtCreatedOn);
+                    _ = db.usp_InsertEmailTrigger_GS1("RT", varRecipient, varCC, varBCC, varReplyTo, varSubject, varBody, "", bigIntCreatedById, dtCreatedOn);
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -333,7 +331,7 @@ namespace DataAccessLayer
         {
             using (EPC_DBEntities db = new EPC_DBEntities())
             {
-                db.USP_GTIN_InsertEPCReqRes(CustomerId, RPO, DetailLineNo, Request, Response, URL, UserId, GTIN);
+                _ = db.USP_GTIN_InsertEPCReqRes(CustomerId, RPO, DetailLineNo, Request, Response, URL, UserId, GTIN);
             }
         }
         #endregion
@@ -372,7 +370,7 @@ namespace DataAccessLayer
 
             if (!Directory.Exists(path))
             {
-                Directory.CreateDirectory(path);
+                _ = Directory.CreateDirectory(path);
             }
             string file = DateTime.Now.ToString("dd-MMM-yyyy") + ".txt";
             path = Path.Combine(path, file);
@@ -422,7 +420,7 @@ namespace DataAccessLayer
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -450,7 +448,7 @@ namespace DataAccessLayer
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 //using (EPC_DBEntities db = new EPC_DBEntities())
@@ -490,7 +488,7 @@ namespace DataAccessLayer
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -508,7 +506,7 @@ namespace DataAccessLayer
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -516,17 +514,16 @@ namespace DataAccessLayer
         }
         public static void EPC_InsertEPCLog(string gtin14, long SerialStart, long SerialEnd, string Schema, string transaction, string EPCStart, string EPCEnd, long qty, string customerId, string customerName, string Event, long UserId, string EPC, long RPO, long DetailLineNo, string CustomPara1, string CustomPara2, DateTime EPCStartDateTime, string Remark)
         {
-
             try
             {
                 using (EPC_DBEntities db = new EPC_DBEntities())
                 {
 
-                    db.usp_EPC_InsertEPCLog(gtin14, SerialStart, SerialEnd, Schema, transaction, EPCStart, EPCEnd, RPO, DetailLineNo, CustomPara1, CustomPara2, qty, customerId, customerName, Event, UserId, EPCStartDateTime, Remark);
+                    _ = db.usp_EPC_InsertEPCLog(gtin14, SerialStart, SerialEnd, Schema, transaction, EPCStart, EPCEnd, RPO, DetailLineNo, CustomPara1, CustomPara2, qty, customerId, customerName, Event, UserId, EPCStartDateTime, Remark);
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -549,7 +546,7 @@ namespace DataAccessLayer
                         select lst1).ToList<usp_GTIN_GetEPC_Customer_Tempe_Result>().FirstOrDefault<usp_GTIN_GetEPC_Customer_Tempe_Result>();
                 }
             }
-            catch (Exception exception)
+            catch (Exception)
             {
             }
             return uspGTINGetEPCCustomerTempeResult;
@@ -563,7 +560,7 @@ namespace DataAccessLayer
         {
             using (EPC_DBEntities db = new EPC_DBEntities())
             {
-                db.USP_rtrac_InsertEPCReqRes(CustomerId, RPO, DetailLineNo, Request, Response, UserId);
+                _ = db.USP_rtrac_InsertEPCReqRes(CustomerId, RPO, DetailLineNo, Request, Response, UserId);
             }
         }
         #endregion
@@ -588,15 +585,15 @@ namespace DataAccessLayer
                 using (EPC_DBEntities db = new EPC_DBEntities())
                 {
 
-                    db.usp_Update_Access_Kill_Password(xml, CustomerId);
+                    _ = db.usp_Update_Access_Kill_Password(xml, CustomerId);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 using (EPC_DBEntities db = new EPC_DBEntities())
                 {
 
-                    db.usp_Update_Access_Kill_Password(xml, CustomerId);
+                    _ = db.usp_Update_Access_Kill_Password(xml, CustomerId);
                 }
             }
 
@@ -625,15 +622,15 @@ namespace DataAccessLayer
                 using (EPC_DBEntities db = new EPC_DBEntities())
                 {
 
-                    db.usp_Update_HexToBase64(xml, CustomerId);
+                    _ = db.usp_Update_HexToBase64(xml, CustomerId);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 using (EPC_DBEntities db = new EPC_DBEntities())
                 {
 
-                    db.usp_Update_HexToBase64(xml, CustomerId);
+                    _ = db.usp_Update_HexToBase64(xml, CustomerId);
                 }
             }
 
@@ -657,7 +654,7 @@ namespace DataAccessLayer
                         select lst1).ToList<usp_GTIN_GetEPC_Customer_MorellatoGroup_Result>().FirstOrDefault<usp_GTIN_GetEPC_Customer_MorellatoGroup_Result>();
                 }
             }
-            catch (Exception exception)
+            catch (Exception)
             {
             }
             return uspGTINGetEPCCustomerResult;

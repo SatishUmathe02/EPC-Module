@@ -1,12 +1,7 @@
-﻿using System;
+﻿using DataAccessLayer.CommonDataModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataAccessLayer.CommonDataModels;
-using TagDataTranslation;
-using DataAccessLayer;
-using Newtonsoft.Json;
 
 namespace BussinessLayer
 {
@@ -27,8 +22,7 @@ namespace BussinessLayer
 
         public EPCRequest HandleRequest(EPCRequest request)
         {
-            Action<EPCRequest> handler;
-            if (customerHandlers.TryGetValue(request.CustomerID.ToUpper(), out handler))
+            if (customerHandlers.TryGetValue(request.CustomerID.ToUpper(), out Action<EPCRequest> handler))
             {
                 handler(request);
             }
@@ -75,6 +69,6 @@ namespace BussinessLayer
             }
         }
     }
-        
+
 
 }

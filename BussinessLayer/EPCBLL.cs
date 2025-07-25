@@ -1,12 +1,9 @@
-﻿using System;
+﻿using DataAccessLayer;
+using DataAccessLayer.CommonDataModels;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DataAccessLayer.CommonDataModels;
-using TagDataTranslation;
-using DataAccessLayer;
-using Newtonsoft.Json;
 
 namespace BussinessLayer
 {
@@ -17,13 +14,15 @@ namespace BussinessLayer
 
         public static EPCResponse GetError(int Code)
         {
-            EPCResponse EPC_Res = new EPCResponse();
-            EPC_Res.EPCStart = string.Empty;
-            EPC_Res.EPCEnd = string.Empty;
-            EPC_Res.SerialStart = string.Empty;
-            EPC_Res.SerialEnd = string.Empty;
-            EPC_Res.GTIN = string.Empty;
-            EPC_Res.CustomerID = string.Empty;
+            EPCResponse EPC_Res = new EPCResponse
+            {
+                EPCStart = string.Empty,
+                EPCEnd = string.Empty,
+                SerialStart = string.Empty,
+                SerialEnd = string.Empty,
+                GTIN = string.Empty,
+                CustomerID = string.Empty
+            };
 
             switch (Code)
             {
@@ -130,7 +129,7 @@ namespace BussinessLayer
 
         public static List<EPCCustomer> GetEPCCustomer()
         {
-            var q = EPCDAL.EPC_Customer();
+            List<usp_GetEPCCustomer_TestingWeb_Result> q = EPCDAL.EPC_Customer();
 
             List<EPCCustomer> Objlist = new List<EPCCustomer>();
             if (q != null)
@@ -188,7 +187,7 @@ namespace BussinessLayer
 
                 EPCDAL.rtrac_InsertReqRes(ObjEPCReq.CustomerID, ObjEPCReq.RPO, ObjEPCReq.DetailLineID, epc_req, epc_res, ObjEPCReq.UserId);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -202,7 +201,7 @@ namespace BussinessLayer
         public static List<EPCLog> GetEPCSerialDetails()
         {
             List<EPCLog> Obj = new List<EPCLog>();
-            var log = EPCDAL.GetEPCSerial();
+            List<usp_GetEPCSerial_Result> log = EPCDAL.GetEPCSerial();
 
             if (log != null)
             {
@@ -215,7 +214,7 @@ namespace BussinessLayer
                                GTIN = c.varGTIN.ToString(),
                                Id = c.bigIntId,
                                SerialStart = c.bigIntSerialNoLastUsed,
-                               MaximumSerial = (long)c.bigIntMaximumSerial
+                               MaximumSerial = c.bigIntMaximumSerial
 
 
                            }).ToList();
@@ -228,7 +227,7 @@ namespace BussinessLayer
         public static List<EPCLog> GetEPCLog()
         {
             List<EPCLog> Obj = new List<EPCLog>();
-            var log = EPCDAL.GetEPCLog();
+            List<usp_GetEPCLog_Result> log = EPCDAL.GetEPCLog();
 
             if (log != null)
             {
@@ -261,7 +260,7 @@ namespace BussinessLayer
 
             try
             {
-                var epclist = EPCDAL.GetEPCCounter(RPO);
+                List<usp_GetEPCCounter_Result> epclist = EPCDAL.GetEPCCounter(RPO);
 
                 if (epclist != null)
                 {
@@ -293,7 +292,7 @@ namespace BussinessLayer
             }
             catch (Exception eX)
             {
-                EPCDAL.InsertLog(eX, "GetEPCCounter");
+                _ = EPCDAL.InsertLog(eX, "GetEPCCounter");
             }
             return Obj;
         }
@@ -309,7 +308,7 @@ namespace BussinessLayer
 
             try
             {
-                var epclist = EPCDAL.GetEPCCounter_RPO_SerialNum(GTIN, RPO, DetailNo, SerialStart, SerialEnd);
+                List<usp_GetEPCCounter_RPO_SerialNum_Result> epclist = EPCDAL.GetEPCCounter_RPO_SerialNum(GTIN, RPO, DetailNo, SerialStart, SerialEnd);
 
                 if (epclist != null)
                 {
@@ -341,7 +340,7 @@ namespace BussinessLayer
             }
             catch (Exception eX)
             {
-                EPCDAL.InsertLog(eX, "GetEPCCounter");
+                _ = EPCDAL.InsertLog(eX, "GetEPCCounter");
             }
             return Obj;
         }

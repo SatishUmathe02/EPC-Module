@@ -1,16 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using BussinessLayer;
+using DataAccessLayer.CommonDataModels;
+using EPCGerryWeber;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using DataAccessLayer.CommonDataModels;
-using BussinessLayer;
-using System.Web.Script.Serialization;
-using System.Web.Http.Cors;
 using System.Threading.Tasks;
-using EPCGerryWeber;
+using System.Web.Http;
 
 
 namespace WebApi.Controllers
@@ -25,13 +21,9 @@ namespace WebApi.Controllers
         public IHttpActionResult GetPing()
         {
             string Meg = "Successfully Connected The EPC Service";
-            var jsonResult = JsonConvert.SerializeObject(Meg);
+            string jsonResult = JsonConvert.SerializeObject(Meg);
 
-            if (jsonResult != null)
-            {
-                return Ok(jsonResult);
-            }
-            return NotFound();
+            return jsonResult != null ? Ok(jsonResult) : (IHttpActionResult)NotFound();
         }
 
         #endregion
@@ -56,7 +48,7 @@ namespace WebApi.Controllers
                 }
                 else if (Request.TransactionType == "Decode")
                 {
-                    ObjRes = await Run_GetEPCDecode(Request);
+                    ObjRes = Run_GetEPCDecode(Request);
                 }
 
                 Request.RequestEndTime = System.DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fff");
@@ -114,14 +106,7 @@ namespace WebApi.Controllers
                             if (reprintcount == 0)
                             {
                                 ObjRes = Transaction_New.GetEPC_Customer_Tempe(Request);
-                                if (ObjRes.Remark.Contains("No EPC in master table"))
-                                {
-                                    return HandleEPCGeneration_Temp(Request, ObjRes);
-                                }
-                                else
-                                {
-                                    return ObjRes;
-                                }
+                                return ObjRes.Remark.Contains("No EPC in master table") ? HandleEPCGeneration_Temp(Request, ObjRes) : ObjRes;
                             }
                             else
                             {
@@ -149,14 +134,7 @@ namespace WebApi.Controllers
                 case "MorellatoGroup":
 
                     int _reprintcount = EPCBLL.GetOnlyReprintEvent().Count(c => c.ToUpper() == Request.Event.ToUpper());
-                    if (_reprintcount == 0)
-                    {
-                        return Transaction_New.GetEPC_Customer_MorellatoGroup(Request);
-                    }
-                    else
-                    {
-                        return EPCBLL.GetError(126);
-                    }
+                    return _reprintcount == 0 ? Transaction_New.GetEPC_Customer_MorellatoGroup(Request) : EPCBLL.GetError(126);
 
                     break;
 
@@ -187,7 +165,7 @@ namespace WebApi.Controllers
                         }
                     }
 
-                    if ((Request.GS1Customer && Request.GS1apiRequired) && string.IsNullOrEmpty(Request.GS1Prefix))
+                    if (Request.GS1Customer && Request.GS1apiRequired && string.IsNullOrEmpty(Request.GS1Prefix))
                     {
                         return new EPCResponse
                         {
@@ -279,7 +257,7 @@ namespace WebApi.Controllers
                     if (!string.IsNullOrEmpty(Request.CustomPara1))
                     {
                         string Val = Request.CustomPara1.Split("#".ToArray()).LastOrDefault();
-                        if ((Val == "TI"))
+                        if (Val == "TI")
                         {
 
                             int reprintcount = (from c in EPCBLL.GetReprintEvent()
@@ -329,21 +307,14 @@ namespace WebApi.Controllers
 
                 if (Request.CustomerID == "ADL")
                 {
-                    if (!string.IsNullOrEmpty(Request.CustomPara1))
-                    {
-                        return EPCBLL_ADL.GetEPC_ADL(Request);
-                    }
-                    else
-                    {
-                        return EPCBLL.GetError(120);
-                    }
+                    return !string.IsNullOrEmpty(Request.CustomPara1) ? EPCBLL_ADL.GetEPC_ADL(Request) : EPCBLL.GetError(120);
 
                 }
                 #endregion
                 //if (Request.CustomerID == "GerryWeber")
                 //Here we are checking the item code for GW which they will get from our EPC (r-trac EPC)
 
-                if ((Request.CustomerID == "GerryWeber") && (Request.CustomPara1 != "Catalog") && (GWEPC.GerryWeber_APIColling()))
+                if ((Request.CustomerID == "GerryWeber") && (Request.CustomPara1 != "Catalog") && GWEPC.GerryWeber_APIColling())
                 {
                     EPCResponse ObjRes = Transaction_New_GWEPC.GetEPC_New(Request);
                     return ObjRes;
@@ -376,7 +347,7 @@ namespace WebApi.Controllers
                                 ObjGS1 = GS1_IntergrationBLL.GS1_apiResponse_Restapi(Request);
 
                             }
-                            catch (Exception ex)
+                            catch (Exception)
                             {
                                 Request.GS1Prefix = "";
                             }
@@ -404,17 +375,19 @@ namespace WebApi.Controllers
 
                     #region CALL EPC FROM DB 
 
-                    if ((Request.GS1Customer && Request.GS1apiRequired) && (string.IsNullOrEmpty(Request.GS1Prefix)))
+                    if (Request.GS1Customer && Request.GS1apiRequired && string.IsNullOrEmpty(Request.GS1Prefix))
                     {
                         // show the error
-                        EPCResponse EPC_Res = new EPCResponse();
-                        EPC_Res.EPCStart = "";
-                        EPC_Res.EPCEnd = "";
-                        EPC_Res.SerialStart = "";
-                        EPC_Res.SerialEnd = "";
-                        EPC_Res.GTIN = "";
-                        EPC_Res.CustomerID = Request.CustomerID;
-                        EPC_Res.Remark = "The GTIN " + Request.GTIN + " included in this order does not exist in GS1 database. Please contact Customer Service to confirm GTIN:" + Request.GTIN;
+                        EPCResponse EPC_Res = new EPCResponse
+                        {
+                            EPCStart = "",
+                            EPCEnd = "",
+                            SerialStart = "",
+                            SerialEnd = "",
+                            GTIN = "",
+                            CustomerID = Request.CustomerID,
+                            Remark = "The GTIN " + Request.GTIN + " included in this order does not exist in GS1 database. Please contact Customer Service to confirm GTIN:" + Request.GTIN
+                        };
 
                         return EPC_Res;
                     }
@@ -508,26 +481,26 @@ namespace WebApi.Controllers
 
         [HttpPost]
         [Route("api/apiEPC/GetEPCEncode")]
-        public async Task<IHttpActionResult> GetEPCEncode([FromBody] EPCRequest Request)
+        public IHttpActionResult GetEPCEncode([FromBody] EPCRequest Request)
         {
-            EPCResponse ObjRes = new EPCResponse();
+            _ = new EPCResponse();
 
             try
             {
                 Request.RequestStartTime = System.DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss.fff");
-                ObjRes = await Run_GetEPCEncode(Request);
+                EPCResponse ObjRes = Run_GetEPCEncode(Request);
 
                 return Ok(ObjRes);
             }
             catch (Exception ex)
             {
-                EPCBLL.InsertLog(ex, "api/apiEPC/GetEPCEncode");
+                _ = EPCBLL.InsertLog(ex, "api/apiEPC/GetEPCEncode");
                 return Ok(ex.ToString());
             }
 
         }
 
-        private static async Task<EPCResponse> Run_GetEPCEncode(EPCRequest Request)
+        private static EPCResponse Run_GetEPCEncode(EPCRequest Request)
         {
             //EPCRequest Obj = new EPCRequest();
 
@@ -549,28 +522,28 @@ namespace WebApi.Controllers
 
         [HttpPost]
         [Route("api/apiEPC/GetEPCDecode")]
-        public async Task<IHttpActionResult> GetEPCDecode([FromBody] EPCRequest Request)
+        public IHttpActionResult GetEPCDecode([FromBody] EPCRequest Request)
         {
-            EPCResponse ObjRes = new EPCResponse();
+            _ = new EPCResponse();
 
             try
             {
                 Request.RequestStartTime = System.DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss.fff");
-                ObjRes = await Run_GetEPCDecode(Request);
+                EPCResponse ObjRes = Run_GetEPCDecode(Request);
 
                 return Ok(ObjRes);
             }
             catch (Exception ex)
             {
-                EPCBLL.InsertLog(ex, "api/apiEPC/GetEPCDecode");
+                _ = EPCBLL.InsertLog(ex, "api/apiEPC/GetEPCDecode");
                 return Ok(ex.ToString());
             }
 
         }
 
-        private static async Task<EPCResponse> Run_GetEPCDecode(EPCRequest Request)
+        private static EPCResponse Run_GetEPCDecode(EPCRequest Request)
         {
-            EPCRequest Obj = new EPCRequest();
+            _ = new EPCRequest();
 
             //Obj = JsonConvert.DeserializeObject<EPCRequest>(Request);
 
@@ -590,14 +563,14 @@ namespace WebApi.Controllers
         #region C&A SGTIN Serial number
         [HttpPost]
         [Route("api/apiEPC/GetCA_SGTIN_Serial")]
-        public async Task<IHttpActionResult> GetCA_SGTIN_Serial([FromBody] EPCRequest Request)
+        public IHttpActionResult GetCA_SGTIN_Serial([FromBody] EPCRequest Request)
         {
-            EPCResponse ObjRes = new EPCResponse();
+            _ = new EPCResponse();
 
             try
             {
                 Request.RequestStartTime = System.DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss.fff");
-                ObjRes = await Run_SGTIN_Serial(Request);
+                EPCResponse ObjRes = Run_SGTIN_Serial(Request);
 
                 string epc_res = JsonConvert.SerializeObject(ObjRes);
                 EPCBLL.rtrac_EPCReqRes(Request, epc_res);
@@ -605,14 +578,14 @@ namespace WebApi.Controllers
             }
             catch (Exception ex)
             {
-                EPCBLL.InsertLog(ex, "api/apiEPC/GetCA_SGTIN_Serial");
+                _ = EPCBLL.InsertLog(ex, "api/apiEPC/GetCA_SGTIN_Serial");
                 return Ok(ex.ToString());
             }
 
         }
-        private static async Task<EPCResponse> Run_SGTIN_Serial(EPCRequest Request)
+        private static EPCResponse Run_SGTIN_Serial(EPCRequest Request)
         {
-            EPCRequest Obj = new EPCRequest();
+            _ = new EPCRequest();
 
 
             if (Request != null)

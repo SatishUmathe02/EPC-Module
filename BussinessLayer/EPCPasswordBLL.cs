@@ -2,17 +2,12 @@
 using DataAccessLayer.CommonDataModels;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Runtime.InteropServices;
-using System.Runtime.Remoting;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Xml;
-using System.Xml.Linq;
 
 namespace BussinessLayer
 {
@@ -24,7 +19,7 @@ namespace BussinessLayer
             bool flag = false;
             try
             {
-                var epclist = EPCDAL.GetEPCCounterFor_Moda_PWD(RPO, DetailNo);
+                List<usp_GetEPCCounterForModaPWD_Result> epclist = EPCDAL.GetEPCCounterFor_Moda_PWD(RPO, DetailNo);
 
                 StringBuilder xml = new StringBuilder();
                 if (epclist.Count == 0)
@@ -34,7 +29,7 @@ namespace BussinessLayer
 
                 if (epclist.Count > 0)
                 {
-                    xml.Append("<EPC>");
+                    _ = xml.Append("<EPC>");
                     /*
                     for (int i = 0; i < epclist.Count(); i++)
                     {
@@ -46,18 +41,18 @@ namespace BussinessLayer
                         xml.Append("</Password>");
                     }
                     */
-                    foreach (var item in epclist)
+                    foreach (usp_GetEPCCounterForModaPWD_Result item in epclist)
                     {
-                        xml.Append("<Password>");
-                        xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
-                        xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
-                        xml.Append("<EPC>" + item.EPC + "</EPC>");
-                        xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.AccHexKey) + "</AccesPwd>");
-                        xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.KillHexKey) + "</KillPwd>");
-                        xml.Append("</Password>");
+                        _ = xml.Append("<Password>");
+                        _ = xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
+                        _ = xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
+                        _ = xml.Append("<EPC>" + item.EPC + "</EPC>");
+                        _ = xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.AccHexKey) + "</AccesPwd>");
+                        _ = xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.KillHexKey) + "</KillPwd>");
+                        _ = xml.Append("</Password>");
                     }
-                    xml.Append("</EPC>");
-                    EPCPasswordDAL.UpdatePassword(xml.ToString());
+                    _ = xml.Append("</EPC>");
+                    _ = EPCPasswordDAL.UpdatePassword(xml.ToString());
                     flag = true;
 
                 }
@@ -66,7 +61,7 @@ namespace BussinessLayer
             {
                 EPCDAL.SaveErrorFileResponse(Ex.ToString(), "UpdatePassword_Moda");
                 flag = false;
-                EPCBLL.InsertLog(Ex, "UpdatePassword_Moda");
+                _ = EPCBLL.InsertLog(Ex, "UpdatePassword_Moda");
             }
 
             return flag;
@@ -78,7 +73,7 @@ namespace BussinessLayer
 
             try
             {
-                var epclist = EPCDAL.GetEPCCounterFor_MANGO_PWD(RPO, DetailNo);
+                List<usp_GetEPCCounterForMANGO_PWD_Result> epclist = EPCDAL.GetEPCCounterFor_MANGO_PWD(RPO, DetailNo);
 
                 StringBuilder xml = new StringBuilder();
 
@@ -88,7 +83,7 @@ namespace BussinessLayer
                 }
                 if (epclist.Count > 0)
                 {
-                    xml.Append("<EPC>");
+                    _ = xml.Append("<EPC>");
                     /*
                     for (int i = 0; i < epclist.Count(); i++)
                     {
@@ -99,18 +94,18 @@ namespace BussinessLayer
                         xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(epclist[i].EPC, epclist[i].KillHexKey) + "</KillPwd>");
                         xml.Append("</Password>");
                     }*/
-                    foreach (var item in epclist)
+                    foreach (usp_GetEPCCounterForMANGO_PWD_Result item in epclist)
                     {
-                        xml.Append("<Password>");
-                        xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
-                        xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
-                        xml.Append("<EPC>" + item.EPC + "</EPC>");
-                        xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.AccHexKey) + "</AccesPwd>");
-                        xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.KillHexKey) + "</KillPwd>");
-                        xml.Append("</Password>");
+                        _ = xml.Append("<Password>");
+                        _ = xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
+                        _ = xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
+                        _ = xml.Append("<EPC>" + item.EPC + "</EPC>");
+                        _ = xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.AccHexKey) + "</AccesPwd>");
+                        _ = xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.KillHexKey) + "</KillPwd>");
+                        _ = xml.Append("</Password>");
                     }
-                    xml.Append("</EPC>");
-                    EPCPasswordDAL.UpdatePassword_MANGO(xml.ToString());
+                    _ = xml.Append("</EPC>");
+                    _ = EPCPasswordDAL.UpdatePassword_MANGO(xml.ToString());
                     flag = true;
 
                 }
@@ -118,7 +113,7 @@ namespace BussinessLayer
             catch (Exception Ex)
             {
                 flag = false;
-                EPCBLL.InsertLog(Ex, "UpdatePassword_MANGO");
+                _ = EPCBLL.InsertLog(Ex, "UpdatePassword_MANGO");
             }
 
             return flag;
@@ -129,7 +124,7 @@ namespace BussinessLayer
             bool flag = false;
             try
             {
-                var epclist = EPCDAL.GetEPCCounterFor_AlvaroMoreno_PWD(RPO, DetailNo);
+                List<usp_GetEPCCounterForAlvaroMorenoPWD_Result> epclist = EPCDAL.GetEPCCounterFor_AlvaroMoreno_PWD(RPO, DetailNo);
 
                 StringBuilder xml = new StringBuilder();
                 if (epclist.Count == 0)
@@ -139,19 +134,19 @@ namespace BussinessLayer
 
                 if (epclist.Count > 0)
                 {
-                    xml.Append("<EPC>");
-                    foreach (var item in epclist)
+                    _ = xml.Append("<EPC>");
+                    foreach (usp_GetEPCCounterForAlvaroMorenoPWD_Result item in epclist)
                     {
-                        xml.Append("<Password>");
-                        xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
-                        xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
-                        xml.Append("<EPC>" + item.EPC + "</EPC>");
-                        xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.AccHexKey) + "</AccesPwd>");
-                        xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.KillHexKey) + "</KillPwd>");
-                        xml.Append("</Password>");
+                        _ = xml.Append("<Password>");
+                        _ = xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
+                        _ = xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
+                        _ = xml.Append("<EPC>" + item.EPC + "</EPC>");
+                        _ = xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.AccHexKey) + "</AccesPwd>");
+                        _ = xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.KillHexKey) + "</KillPwd>");
+                        _ = xml.Append("</Password>");
                     }
-                    xml.Append("</EPC>");
-                    EPCPasswordDAL.UpdatePassword(xml.ToString());
+                    _ = xml.Append("</EPC>");
+                    _ = EPCPasswordDAL.UpdatePassword(xml.ToString());
                     flag = true;
 
                 }
@@ -160,7 +155,7 @@ namespace BussinessLayer
             {
                 EPCDAL.SaveErrorFileResponse(Ex.ToString(), "UpdatePassword_Moda");
                 flag = false;
-                EPCBLL.InsertLog(Ex, "UpdatePassword_Moda");
+                _ = EPCBLL.InsertLog(Ex, "UpdatePassword_Moda");
             }
 
             return flag;
@@ -171,7 +166,7 @@ namespace BussinessLayer
             bool flag = false;
             try
             {
-                var epclist = EPCDAL.GetEPCCounterFor_Charanga_PWD(RPO, DetailNo);
+                List<usp_GetEPCCounterForCharangaPWD_Result> epclist = EPCDAL.GetEPCCounterFor_Charanga_PWD(RPO, DetailNo);
 
                 StringBuilder xml = new StringBuilder();
                 if (epclist.Count == 0)
@@ -181,19 +176,19 @@ namespace BussinessLayer
 
                 if (epclist.Count > 0)
                 {
-                    xml.Append("<EPC>");
-                    foreach (var item in epclist)
+                    _ = xml.Append("<EPC>");
+                    foreach (usp_GetEPCCounterForCharangaPWD_Result item in epclist)
                     {
-                        xml.Append("<Password>");
-                        xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
-                        xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
-                        xml.Append("<EPC>" + item.EPC + "</EPC>");
-                        xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.AccHexKey) + "</AccesPwd>");
-                        xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.KillHexKey) + "</KillPwd>");
-                        xml.Append("</Password>");
+                        _ = xml.Append("<Password>");
+                        _ = xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
+                        _ = xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
+                        _ = xml.Append("<EPC>" + item.EPC + "</EPC>");
+                        _ = xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.AccHexKey) + "</AccesPwd>");
+                        _ = xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.KillHexKey) + "</KillPwd>");
+                        _ = xml.Append("</Password>");
                     }
-                    xml.Append("</EPC>");
-                    EPCPasswordDAL.UpdatePassword(xml.ToString());
+                    _ = xml.Append("</EPC>");
+                    _ = EPCPasswordDAL.UpdatePassword(xml.ToString());
                     flag = true;
 
                 }
@@ -202,7 +197,7 @@ namespace BussinessLayer
             {
                 EPCDAL.SaveErrorFileResponse(Ex.ToString(), "UpdatePassword_Charanga");
                 flag = false;
-                EPCBLL.InsertLog(Ex, "UpdatePassword_Charanga");
+                _ = EPCBLL.InsertLog(Ex, "UpdatePassword_Charanga");
             }
 
             return flag;
@@ -214,7 +209,7 @@ namespace BussinessLayer
 
             try
             {
-                var epclist = EPCDAL.GetEPCCounterFor_TENDAM_PWD(RPO, DetailNo);
+                List<usp_GetEPCCounterForTENDAM_PWD_Result> epclist = EPCDAL.GetEPCCounterFor_TENDAM_PWD(RPO, DetailNo);
 
                 StringBuilder xml = new StringBuilder();
 
@@ -224,19 +219,19 @@ namespace BussinessLayer
                 }
                 if (epclist.Count > 0)
                 {
-                    xml.Append("<EPC>");
-                    foreach (var item in epclist)
+                    _ = xml.Append("<EPC>");
+                    foreach (usp_GetEPCCounterForTENDAM_PWD_Result item in epclist)
                     {
-                        xml.Append("<Password>");
-                        xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
-                        xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
-                        xml.Append("<EPC>" + item.EPC + "</EPC>");
-                        xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.AccHexKey) + "</AccesPwd>");
-                        xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.KillHexKey) + "</KillPwd>");
-                        xml.Append("</Password>");
+                        _ = xml.Append("<Password>");
+                        _ = xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
+                        _ = xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
+                        _ = xml.Append("<EPC>" + item.EPC + "</EPC>");
+                        _ = xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.AccHexKey) + "</AccesPwd>");
+                        _ = xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.KillHexKey) + "</KillPwd>");
+                        _ = xml.Append("</Password>");
                     }
-                    xml.Append("</EPC>");
-                    EPCPasswordDAL.UpdatePassword_TENDAM(xml.ToString());
+                    _ = xml.Append("</EPC>");
+                    _ = EPCPasswordDAL.UpdatePassword_TENDAM(xml.ToString());
                     flag = true;
 
                 }
@@ -244,7 +239,7 @@ namespace BussinessLayer
             catch (Exception Ex)
             {
                 flag = false;
-                EPCBLL.InsertLog(Ex, "UpdatePassword_TENDAM");
+                _ = EPCBLL.InsertLog(Ex, "UpdatePassword_TENDAM");
             }
 
             return flag;
@@ -259,7 +254,7 @@ namespace BussinessLayer
                 byte[] epc = HexStringToByteArray(stEpc);
                 byte[] key = HexStringToByteArray(stHexKey);
 
-                using (var hmacsha256 = new HMACSHA256(key))
+                using (HMACSHA256 hmacsha256 = new HMACSHA256(key))
                 {
                     byte[] hash = hmacsha256.ComputeHash(epc);
                     byte[] passwordBytes = new byte[4];
@@ -283,9 +278,9 @@ namespace BussinessLayer
         {
             try
             {
-                if (stHex.Length % 2 != 0)
-                    throw new Exception("The length of the hex needs to be pair.");
-                return Enumerable.Range(0, stHex.Length).Where(x => x % 2 == 0).Select(x => Convert.ToByte(stHex.Substring(x, 2), 16)).ToArray();
+                return stHex.Length % 2 != 0
+                    ? throw new Exception("The length of the hex needs to be pair.")
+                    : Enumerable.Range(0, stHex.Length).Where(x => x % 2 == 0).Select(x => Convert.ToByte(stHex.Substring(x, 2), 16)).ToArray();
             }
             catch (Exception ex)
             {
@@ -297,17 +292,16 @@ namespace BussinessLayer
         {
             try
             {
-                string fmt;
+                string fmt = bUpper ? "{0:X2}" : "{0:x2}";
 
                 //formato en mayúsculas o minúsculas
-                if (bUpper)
-                    fmt = "{0:X2}";
-                else
-                    fmt = "{0:x2}";
 
                 StringBuilder hex = new StringBuilder(ba.Length * 2);
                 foreach (byte b in ba)
-                    hex.AppendFormat(fmt, b);
+                {
+                    _ = hex.AppendFormat(fmt, b);
+                }
+
                 return hex.ToString();
             }
             //catch (ControledException)
@@ -330,7 +324,7 @@ namespace BussinessLayer
             bool flag = false;
             try
             {
-                var epclist = EPCPasswordDAL.GetEPCCounterFor_Kiabi_PWD(RPO, DetailNo);
+                List<usp_GetEPCCounterForKiabi_PWD_Result> epclist = EPCPasswordDAL.GetEPCCounterFor_Kiabi_PWD(RPO, DetailNo);
 
                 StringBuilder xml = new StringBuilder();
 
@@ -340,20 +334,20 @@ namespace BussinessLayer
                 }
                 if (epclist.Count > 0)
                 {
-                    xml.Append("<EPC>");
-                    foreach (var item in epclist)
+                    _ = xml.Append("<EPC>");
+                    foreach (usp_GetEPCCounterForKiabi_PWD_Result item in epclist)
                     {
-                        xml.Append("<Password>");
-                        xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
-                        xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
-                        xml.Append("<EPC>" + item.EPC + "</EPC>");
+                        _ = xml.Append("<Password>");
+                        _ = xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
+                        _ = xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
+                        _ = xml.Append("<EPC>" + item.EPC + "</EPC>");
                         string Pwd = PasswordGenerator_Kiabi(item.EPC);
-                        xml.Append("<AccesPwd>" + Pwd + "</AccesPwd>");
-                        xml.Append("<KillPwd>" + Pwd + "</KillPwd>");
-                        xml.Append("</Password>");
+                        _ = xml.Append("<AccesPwd>" + Pwd + "</AccesPwd>");
+                        _ = xml.Append("<KillPwd>" + Pwd + "</KillPwd>");
+                        _ = xml.Append("</Password>");
                     }
-                    xml.Append("</EPC>");
-                    EPCPasswordDAL.UpdatePassword_Kiabi(xml.ToString());
+                    _ = xml.Append("</EPC>");
+                    _ = EPCPasswordDAL.UpdatePassword_Kiabi(xml.ToString());
                     flag = true;
 
                 }
@@ -361,7 +355,7 @@ namespace BussinessLayer
             catch (Exception Ex)
             {
                 flag = false;
-                EPCBLL.InsertLog(Ex, "UpdatePassword_KIBAI");
+                _ = EPCBLL.InsertLog(Ex, "UpdatePassword_KIBAI");
             }
 
             return flag;
@@ -437,12 +431,12 @@ namespace BussinessLayer
 
 
         #region ACCESS PASSWORD
-       
+
         public static async Task<EPCResponse> UpdateAccessPassword(EPCRequest Request, EPCResponse Response)
         {
-            if(EPCPasswordBLL.CheckCustomerForAccessPassword(Request))
+            if (EPCPasswordBLL.CheckCustomerForAccessPassword(Request))
             {
-              bool  flag = await EPCPasswordBLL.UpdatePassword(Request.RPO, Request.DetailLineID, Request.CustomerID);
+                bool flag = await EPCPasswordBLL.UpdatePassword(Request.RPO, Request.DetailLineID, Request.CustomerID);
                 if (!flag)
                 {
                     Response = EPCBLL.GetError(122);
@@ -459,7 +453,7 @@ namespace BussinessLayer
                                        select c).ToList();
 
 
-            return ObjList.Count() == 0 ? false : true;
+            return ObjList.Count() != 0;
         }
 
         private static List<Customers> GetCustomerAccessPassord()
@@ -468,7 +462,6 @@ namespace BussinessLayer
             string xmlContent = HttpContext.Current.Server.MapPath("~/App_Data/CustomerSetting.xml");// ConfigurationManager.AppSettings["CustomerSetting"].ToString();
 
             List<Customers> ObjList = new List<Customers>();
-
             try
             {
 
@@ -479,14 +472,15 @@ namespace BussinessLayer
                 foreach (XmlNode customer in customerNodes)
                 {
 
-                    Customers Obj = new Customers();
+                    Customers Obj = new Customers
+                    {
+                        CustomerId = customer.Attributes["Id"].Value
+                    };
 
-                    Obj.CustomerId = customer.Attributes["Id"].Value;
-                   
                     ObjList.Add(Obj);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -500,7 +494,7 @@ namespace BussinessLayer
             bool flag = false;
             try
             {
-                var epclist = EPCDAL.GetEPCCounterForAccessKillPassword(RPO, DetailNo, CustomerId);
+                List<usp_GetEPCCounterForAccessKillPassword_Result> epclist = EPCDAL.GetEPCCounterForAccessKillPassword(RPO, DetailNo, CustomerId);
 
                 StringBuilder xml = new StringBuilder();
                 if (epclist.Count == 0)
@@ -510,19 +504,19 @@ namespace BussinessLayer
 
                 if (epclist.Count > 0)
                 {
-                    xml.Append("<EPC>");
-                    foreach (var item in epclist)
+                    _ = xml.Append("<EPC>");
+                    foreach (usp_GetEPCCounterForAccessKillPassword_Result item in epclist)
                     {
-                        xml.Append("<Password>");
-                        xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
-                        xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
-                        xml.Append("<EPC>" + item.EPC + "</EPC>");
-                        xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.AccHexKey) + "</AccesPwd>");
-                        xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.KillHexKey) + "</KillPwd>");
-                        xml.Append("</Password>");
+                        _ = xml.Append("<Password>");
+                        _ = xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
+                        _ = xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
+                        _ = xml.Append("<EPC>" + item.EPC + "</EPC>");
+                        _ = xml.Append("<AccesPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.AccHexKey) + "</AccesPwd>");
+                        _ = xml.Append("<KillPwd>" + HMACSHA256ToHexStringL8(item.EPC, item.KillHexKey) + "</KillPwd>");
+                        _ = xml.Append("</Password>");
                     }
-                    xml.Append("</EPC>");
-                    EPCDAL.UpdatePassword(xml.ToString(), CustomerId);
+                    _ = xml.Append("</EPC>");
+                    _ = EPCDAL.UpdatePassword(xml.ToString(), CustomerId);
                     flag = true;
 
                 }
@@ -531,7 +525,7 @@ namespace BussinessLayer
             {
                 EPCDAL.SaveErrorFileResponse(Ex.ToString(), "UpdatePassword");
                 flag = false;
-                EPCBLL.InsertLog(Ex, "UpdatePassword");
+                _ = EPCBLL.InsertLog(Ex, "UpdatePassword");
             }
 
             return flag;
@@ -563,7 +557,7 @@ namespace BussinessLayer
                                        select c).ToList();
 
 
-            return ObjList.Count() == 0 ? false : true;
+            return ObjList.Count() != 0;
         }
 
         private static List<Customers> GetCustomerHexToBase64()
@@ -572,7 +566,6 @@ namespace BussinessLayer
             string xmlContent = HttpContext.Current.Server.MapPath("~/App_Data/CustomerSetting.xml");// ConfigurationManager.AppSettings["CustomerSetting"].ToString();
 
             List<Customers> ObjList = new List<Customers>();
-
             try
             {
 
@@ -583,14 +576,15 @@ namespace BussinessLayer
                 foreach (XmlNode customer in customerNodes)
                 {
 
-                    Customers Obj = new Customers();
-
-                    Obj.CustomerId = customer.Attributes["Id"].Value;
+                    Customers Obj = new Customers
+                    {
+                        CustomerId = customer.Attributes["Id"].Value
+                    };
 
                     ObjList.Add(Obj);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -604,7 +598,7 @@ namespace BussinessLayer
             bool flag = false;
             try
             {
-                var epclist = EPCDAL.GetEPCCounterForHexToBase64(RPO, DetailNo, CustomerId);
+                List<usp_GetEPCCounterForHexToBase64_Result> epclist = EPCDAL.GetEPCCounterForHexToBase64(RPO, DetailNo, CustomerId);
 
                 StringBuilder xml = new StringBuilder();
                 if (epclist.Count == 0)
@@ -614,19 +608,19 @@ namespace BussinessLayer
 
                 if (epclist.Count > 0)
                 {
-                    xml.Append("<EPC>");
-                    foreach (var item in epclist)
+                    _ = xml.Append("<EPC>");
+                    foreach (usp_GetEPCCounterForHexToBase64_Result item in epclist)
                     {
-                        xml.Append("<Password>");
-                        xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
-                        xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
-                        xml.Append("<EPC>" + item.EPC + "</EPC>");
-                        xml.Append("<AccesPwd>" + HexStringToBase64(item.EPC) + "</AccesPwd>");
-                        xml.Append("<KillPwd></KillPwd>");
-                        xml.Append("</Password>");
+                        _ = xml.Append("<Password>");
+                        _ = xml.Append("<Id>" + Convert.ToString(item.bigintId) + "</Id>");
+                        _ = xml.Append("<RPO>" + Convert.ToString(item.bigIntRPO) + "</RPO>");
+                        _ = xml.Append("<EPC>" + item.EPC + "</EPC>");
+                        _ = xml.Append("<AccesPwd>" + HexStringToBase64(item.EPC) + "</AccesPwd>");
+                        _ = xml.Append("<KillPwd></KillPwd>");
+                        _ = xml.Append("</Password>");
                     }
-                    xml.Append("</EPC>");
-                    EPCDAL.UpdateHexToBase64(xml.ToString(), CustomerId);
+                    _ = xml.Append("</EPC>");
+                    _ = EPCDAL.UpdateHexToBase64(xml.ToString(), CustomerId);
                     flag = true;
 
                 }
@@ -635,7 +629,7 @@ namespace BussinessLayer
             {
                 EPCDAL.SaveErrorFileResponse(Ex.ToString(), "UpdatePassword");
                 flag = false;
-                EPCBLL.InsertLog(Ex, "UpdatePassword");
+                _ = EPCBLL.InsertLog(Ex, "UpdatePassword");
             }
 
             return flag;
@@ -646,13 +640,13 @@ namespace BussinessLayer
         {
             byte[] text = HexStringToHex(input);
             string _str = System.Convert.ToBase64String(text);
-                      
+
             return _str;
         }
 
         private static byte[] HexStringToHex(string inputhex)
         {
-            var resultantArray = new byte[inputhex.Length / 2];
+            byte[] resultantArray = new byte[inputhex.Length / 2];
             for (int i = 0; i < resultantArray.Length; i++)
             {
                 resultantArray[i] = System.Convert.ToByte(inputhex.Substring(i * 2, 2), 16);

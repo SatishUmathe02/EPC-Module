@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DataAccessLayer;
 using DataAccessLayer.CommonDataModels;
-using DataAccessLayer;
-using System.Net.Http;
-using System.Configuration;
-using System.Web;
-using System.Net;
 using EPC_GS1;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BussinessLayer
 {
@@ -19,7 +13,7 @@ namespace BussinessLayer
 
         public static EPCRequest IsCustomerGS1(EPCRequest ObjRequest)
         {
-            var list = GS1_IntergrationDAL.IsCustomerGS1(ObjRequest.GTIN, ObjRequest.CustomerID);
+            usp_GS1_Customer_Result list = GS1_IntergrationDAL.IsCustomerGS1(ObjRequest.GTIN, ObjRequest.CustomerID);
 
             ObjRequest.GS1Customer = Convert.ToBoolean(list.GS1Customer);
             ObjRequest.GS1apiRequired = Convert.ToBoolean(list.GS1apiRequired);
@@ -53,7 +47,7 @@ namespace BussinessLayer
                 ObjEPC.GS1Prefix = null;
                 if (chkPrefix)
                 {
-                    var result = GS1_IntergrationDAL.InsertGS1Details_GetPartitionValue(ObjEPC.GTIN, ObjEPC.CustomerID, GS1JSON);
+                    usp_GS1_Insert_Result result = GS1_IntergrationDAL.InsertGS1Details_GetPartitionValue(ObjEPC.GTIN, ObjEPC.CustomerID, GS1JSON);
 
                     if (result != null)
                     {
@@ -98,17 +92,10 @@ namespace BussinessLayer
 
         public static List<GS1> GS1_apiResponse_Restapi(EPCRequest ObjEPC)
         {
-            List<GS1> ObjGS1 = new List<GS1>();
+            _ = new List<GS1>();
             string GS1_Response = GS1_http.GS1_apiResponse_Rest(ObjEPC).Result;
 
-            if (GS1_http.GS1_NewVersion())
-            {
-                ObjGS1 = GS1_V4(GS1_Response);
-            }
-            else
-            {
-                ObjGS1 = JsonConvert.DeserializeObject<List<GS1>>(GS1_Response);
-            }
+            List<GS1> ObjGS1 = GS1_http.GS1_NewVersion() ? GS1_V4(GS1_Response) : JsonConvert.DeserializeObject<List<GS1>>(GS1_Response);
 
 
             return ObjGS1;
@@ -137,55 +124,55 @@ namespace BussinessLayer
                           {
                               Source = c.licensingMO.moName == null ? "" : c.licensingMO.moName.ToString(),
                               EntityGLN = c.licensingMO.moGLN == null ? "" : c.licensingMO.moGLN.ToString(),
-                              CompanyName = c.licenseeName == null ? "" : c.licenseeName,
-                              StreetAddress1 = c.address == null ? "" : (c.address.streetAddress == null ? "" : c.address.streetAddress.value),
-                              StreetAddress2 = c.address == null ? "" : (c.address.streetAddressLine2 == null ? "" : c.address.streetAddressLine2.value),
-                              StreetAddress3 = c.address == null ? "" : (c.address.streetAddressLine2 == null ? "" : c.address.streetAddressLine2.value),
+                              CompanyName = c.licenseeName ?? "",
+                              StreetAddress1 = c.address != null ? c.address.streetAddress == null ? "" : c.address.streetAddress.value : "",
+                              StreetAddress2 = c.address != null ? c.address.streetAddressLine2 == null ? "" : c.address.streetAddressLine2.value : "",
+                              StreetAddress3 = c.address != null ? c.address.streetAddressLine2 == null ? "" : c.address.streetAddressLine2.value : "",
                               ModifiedDate = Convert.ToString(dateUpdated),
-                              City = c.address == null ? "" : (c.address.addressLocality == null ? "" : c.address.addressLocality.value),
-                              StateProvince =c.address == null ? "" : ( c.address.addressRegion == null ? "" : c.address.addressRegion.value),
-                              ZipCode = c.address == null ? "" : (c.address.postalCode == null ? "" : c.address.postalCode),
-                              Country =c.address == null ? "" : ( c.address.countryCode == null ? "" : c.address.countryCode),
-                              GSRN = c.gsrn == null ? "" : c.gsrn,
-                              Prefixes = (new Prefixes()
+                              City = c.address != null ? c.address.addressLocality == null ? "" : c.address.addressLocality.value : "",
+                              StateProvince = c.address != null ? c.address.addressRegion == null ? "" : c.address.addressRegion.value : "",
+                              ZipCode = c.address != null ? c.address.postalCode ?? "" : "",
+                              Country = c.address != null ? c.address.countryCode ?? "" : "",
+                              GSRN = c.gsrn ?? "",
+                              Prefixes = new Prefixes()
                               {
-                                  UPCPrefix = c.upcCompanyPrefix == null ? "" : c.upcCompanyPrefix,
-                                  GS1Prefix = c.licenceKey == null ? "" : c.licenceKey,
-                                  PrefixStatus = c.licenceStatus == null ? "" : c.licenceStatus,
+                                  UPCPrefix = c.upcCompanyPrefix ?? "",
+                                  GS1Prefix = c.licenceKey ?? "",
+                                  PrefixStatus = c.licenceStatus ?? "",
                                   ModifiedDate = Convert.ToString(dateUpdated),
 
-                              }),
+                              },
 
 
                           }).ToList();
 
 
             }
-            catch (Exception extr)
+            catch (Exception)
             {
                 try
                 {
                     ObjGS1 = (from c in ObjGS1_V4
                               select new GS1
                               {
-                                  EntityGLN = c.licenseeGln == null ? "" : c.licenseeGln,
-                                  CompanyName = c.licenseeName == null ? "" : c.licenseeName,
-                                  ZipCode = c.address.postalCode == null ? "" : c.address.postalCode,
-                                  Country = c.address.countryCode == null ? "" : c.address.countryCode,
-                                  GSRN = c.gsrn == null ? "" : c.gsrn,
-                                  Prefixes = (new Prefixes()
+                                  EntityGLN = c.licenseeGln ?? "",
+                                  CompanyName = c.licenseeName ?? "",
+                                  ZipCode = c.address.postalCode ?? "",
+                                  Country = c.address.countryCode ?? "",
+                                  GSRN = c.gsrn ?? "",
+                                  Prefixes = new Prefixes()
                                   {
-                                      UPCPrefix = c.upcCompanyPrefix == null ? "" : c.upcCompanyPrefix,
-                                      GS1Prefix = c.licenceKey == null ? "" : c.licenceKey,
-                                      PrefixStatus = c.licenceStatus == null ? "" : c.licenceStatus,
+                                      UPCPrefix = c.upcCompanyPrefix ?? "",
+                                      GS1Prefix = c.licenceKey ?? "",
+                                      PrefixStatus = c.licenceStatus ?? "",
                                       ModifiedDate = Convert.ToString(c.dateUpdated),
 
-                                  }),
+                                  },
 
 
                               }).ToList();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
                 }

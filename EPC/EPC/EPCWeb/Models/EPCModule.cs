@@ -40,7 +40,7 @@ namespace EPCWeb.Models
 
         public bool EPC { get; set; }
         public bool CandA_SGTIN { get; set; }
-                
+
     }
 
     public class EPCRequest : EPCDO
@@ -48,7 +48,7 @@ namespace EPCWeb.Models
 
         public string Schema { get; set; }
         public string GTIN { get; set; }
-              
+
 
     }
     public class EPCResponse

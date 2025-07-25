@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
@@ -20,7 +17,7 @@ namespace DataAccessLayer
                     Obj = (from lst1 in db.usp_GTIN_GetEPC_GerryWeber(gtin14, qty, transaction, schema, customerId, customerName, Event, UserId, SerialStart, EPC, RPO, DetailLineNo, CustomPara1, CustomPara2, epcStart, epcend, Remark) select lst1).ToList().FirstOrDefault();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 using (EPC_DBEntities db = new EPC_DBEntities())
                 {
