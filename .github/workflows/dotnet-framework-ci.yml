@@ -30,4 +30,4 @@ jobs:
         run: nuget restore EPC/EPC/EPC.sln
 
       - name: Build Solution
-        run: msbuild EPC/EPC.sln /p:Configuration=Release /p:Platform="Any CPU"
+        run: msbuild EPC/EPC/EPC.sln /p:Configuration=Release /p:Platform="Any CPU"
