@@ -27,7 +27,7 @@ jobs:
         uses: NuGet/setup-nuget@v2
 
       - name: Restore NuGet Packages
-        run: nuget restore EPC/EPC.sln
+        run: nuget restore EPC/EPC/EPC.sln
 
       - name: Build Solution
         run: msbuild EPC/EPC.sln /p:Configuration=Release /p:Platform="Any CPU"
