@@ -5,6 +5,9 @@ using System.Web.Mvc;
 
 namespace EPCWeb.Models
 {
+    /// <summary>
+    /// EPCDO Object
+    /// </summary>
     public class EPCDO
     {
         public long UserId { get; set; }
