@@ -6,7 +6,7 @@ using System.Web.Mvc;
 namespace EPCWeb.Models
 {
     /// <summary>
-    /// EPCDO Object
+    ///  EPCDO Object
     /// </summary>
     public class EPCDO
     {

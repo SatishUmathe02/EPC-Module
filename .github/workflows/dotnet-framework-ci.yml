@@ -1,0 +1,33 @@
+name: .NET Framework CI
+
+on:
+  workflow_dispatch:
+  
+  push:
+    branches:
+      - dev
+      - test
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v2
+
+      - name: Restore NuGet Packages
+        run: nuget restore EPC/EPC/EPC.sln
+
+      - name: Build Solution
+        run: msbuild EPC/EPC/EPC.sln /p:Configuration=Release /p:Platform="Any CPU"
