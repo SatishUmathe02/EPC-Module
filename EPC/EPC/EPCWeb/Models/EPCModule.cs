@@ -6,12 +6,12 @@ using System.Web.Mvc;
 namespace EPCWeb.Models
 {
     /// <summary>
-    /// EPCDO Object
+    /// 
     /// </summary>
     public class EPCDO
     {
         public long UserId { get; set; }
-       // public string CustomerID { get; set; }
+        public string CustomerID { get; set; }
         public string CustomerName { get; set; }
         public string EPC { get; set; }
         public long Serial { get; set; }
